@@ -1,0 +1,50 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  line-height: 1.4;
+}
+@font-face {
+  font-family: "SfProDisplay";
+  src: local("SfProDisplay"),
+   url("./fonts/SFPRODISPLAYREGULAR.OTF") format("truetype");
+  font-family: "roboto";
+  src: local("roboto"),
+  url("./fonts/Roboto-Regular.ttf") format("truetype");
+}
+/* declare variables */
+:root{
+  --primary: #019EB2;
+  --box-shadow-light: 0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
+  --border-light-gray: 1px solid rgba(0, 0, 0, 0.38);
+  --border-raius-light: 4px;
+  --sf-pro-display: "SfProDisplay";
+  --black-clr: #000000;
+  --light-secondary: #FAFAFA;
+  --pink: #D0347E;
+  --roboto: "roboto";
+}
+/* global styling */
+.sf-font {
+  font-family: "SfProDisplay";
+ }
+.roboto-font {
+  font-family: "roboto";
+ }
+ .css-4x9czb-MuiButtonBase-root-MuiRadio-root.Mui-disabled {
+  color: black !important;
+}
+.css-j204z7-MuiFormControlLabel-root .MuiFormControlLabel-label.Mui-disabled {
+  color: black !important;
+}
+a{
+  text-decoration: none;
+}
+.page-section{
+  display: flex;
+  width: 100%;
+}
+.page-section .page-content{
+  padding: 2rem;
+  width: calc(100% - 57px);
+}
