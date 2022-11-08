@@ -1,12 +1,40 @@
 import React from 'react'
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { IconButton, Menu, MenuItem, Typography } from '@mui/material';
+import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
+import { logout } from '../features/login/loginSlice';
+import { useNavigate } from 'react-router-dom';
 const Header = () => {
+  const {loggedInUser, storeUserToken} = useSelector((store) => store.login)
+const navigate  = useDispatch()
+const dispatch  = useNavigate()
+  // console.log(loggedInUser);
+
+  const [auth, setAuth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleChange = (event) => {
+    setAuth(event.target.checked);
+  };
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+const handleLogout = () => {
+  localStorage.clear();
+  dispatch(logout())
+  navigate('/login')
+}
 
   return (
-    <AppBar position="sticky" sx={{alignItems: 'center', height: '60px', width: '100%'}}>
-    <Toolbar>
+    <AppBar position="sticky" sx={{alignItems:'center', height: '60px', width: '100%'}}>
+    <Toolbar sx={{justifyContent: storeUserToken ? 'space-between' : 'center', width: '100%'}}>
       {/* <IconButton
         size="large"
         edge="start"
@@ -20,7 +48,7 @@ const Header = () => {
         <img src="/images/Logo_orange.png" alt="reli-logo" />
       </Typography> */}
         <img src="/images/Logo_orange.png" alt="reli-logo" />
-      {/* {auth && (
+      {storeUserToken && (
         <div>
           <IconButton
             size="large"
@@ -29,8 +57,10 @@ const Header = () => {
             aria-haspopup="true"
             onClick={handleMenu}
             color="inherit"
+            sx={{borderRadius: '0'}}
           >
-            <AccountCircle />
+            <Typography>test</Typography>
+            <KeyboardArrowDownRoundedIcon />
           </IconButton>
           <Menu
             id="menu-appbar"
@@ -47,13 +77,15 @@ const Header = () => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>My account</MenuItem>
+            <MenuItem onClick={() => {
+              handleLogout();
+              handleClose()
+            }}>Logout</MenuItem>
           </Menu>
         </div>
-      )} */}
+      )}
     </Toolbar>
-  </AppBar>
+    </AppBar>
   )
 }
 

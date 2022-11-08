@@ -2,8 +2,10 @@ import Sidebar from "../../components/Sidebar";
 import BeardcrumNavigator from "../../components/BeardcrumNavigator";
 import { Box, Card, Typography } from "@mui/material";
 import services from "../../mock/services";
+import { useSelector } from "react-redux";
 
 const Services = () => {
+  const {isDrawerOpen} = useSelector((store) => store.login)
   const breadcrumbs = [
     <Typography key="3" color="text.primary" style={{
       fontStyle: 'normal',
@@ -18,7 +20,7 @@ const Services = () => {
   return (
     <div className="page-section">
       <Sidebar/>
-      <div className="page-content">
+      <Box className="page-content" sx={{width: isDrawerOpen ? `calc(100% - 240px)` : `calc(100% - 57px)`}}>
         <BeardcrumNavigator breadcrumbs={breadcrumbs}/>
         <Card variant="outlined" sx={{
           padding: '16px',
@@ -62,7 +64,7 @@ const Services = () => {
             
           </Box>
         </Card>
-      </div>
+      </Box>
     </div>
   );
 };

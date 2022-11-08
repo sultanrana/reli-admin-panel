@@ -46,5 +46,8 @@ a{
 }
 .page-section .page-content{
   padding: 2rem;
-  width: calc(100% - 57px);
+}
+
+.buttonsss{
+  margin-top: 30px;
 }

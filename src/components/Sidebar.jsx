@@ -15,6 +15,8 @@ import { styled } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import links from "../mock/sidebarLinks";
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useDispatch, useSelector } from "react-redux";
+import { setIsDrawerOpen } from "../features/login/loginSlice";
 
 const drawerWidth = 240;
 
@@ -56,13 +58,15 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 const Sidebar = () => {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(true);
+  // const [isDrawerOpen, setIsDrawerOpen] = useState(true);
+  const {isDrawerOpen} = useSelector((store) => store.login)
+  const dispatch  = useDispatch()
   const matches = useMediaQuery('(max-width:600px)');
   const handleDrawer = () => {
     if (isDrawerOpen) {
-      setIsDrawerOpen(false);
+      dispatch(setIsDrawerOpen(false));
     } else {
-      setIsDrawerOpen(true);
+      dispatch(setIsDrawerOpen(true));
     }
   };
 return (

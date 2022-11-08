@@ -1,16 +1,8 @@
-import { applyMiddleware, createStore } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import thunk from 'redux-thunk'
-import combineReducer from './reducers'
+import { configureStore } from '@reduxjs/toolkit';
+import loginReducer from './features/login/loginSlice'
 
-const initialState = {}
-
-const middleware = [thunk]
-
-const store = createStore(
-  combineReducer,
-  initialState,
-  composeWithDevTools(applyMiddleware(...middleware))
-)
-
-export default store
+export const store = configureStore({
+  reducer: {
+    login: loginReducer,
+  },
+});
