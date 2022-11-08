@@ -26,11 +26,11 @@ const dispatch  = useNavigate()
   const handleClose = () => {
     setAnchorEl(null);
   };
-const handleLogout = () => {
-  localStorage.clear();
-  dispatch(logout())
-  navigate('/login')
-}
+// const handleLogout = () => {
+//   // localStorage.clear();
+//   // dispatch(logout())
+//   navigate('/login')
+// }
 
   return (
     <AppBar position="sticky" sx={{alignItems:'center', height: '60px', width: '100%'}}>
@@ -77,10 +77,7 @@ const handleLogout = () => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={() => {
-              handleLogout();
-              handleClose()
-            }}>Logout</MenuItem>
+            <MenuItem><a href='/login' style={{color: 'black'}}>Logout</a> </MenuItem>
           </Menu>
         </div>
       )}

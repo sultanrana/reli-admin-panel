@@ -128,6 +128,7 @@ const SetPassword = () => {
             variant="outlined"
           >
             <OutlinedInput
+              type="password"
               name="newPassword"
               id="outlined-adornment-newPassword"
               onChange={formik.handleChange}

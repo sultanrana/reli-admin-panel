@@ -18,7 +18,6 @@ const loginSlice = createSlice({
             state.storeUserToken = true
         },
         logout: (state) => {
-            state.loggedInUser = {}
             state.storeUserToken = false
         },
         emptyToken: (state, action) => {
