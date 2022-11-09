@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    baseUrl: 'http://54.85.165.176:3000/admin/users',
+    baseUrl: 'http://34.236.149.254:3000/admin/users',
     code: 0,
     errorMessage: '',
     storeUserToken: false,
