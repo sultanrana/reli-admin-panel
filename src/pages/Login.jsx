@@ -19,7 +19,7 @@ import { loginUser, responseCode, showError } from "../features/login/loginSlice
 import AlertMessage from "../components/AlertMessage";
 import Header from "../components/Header";
 const Login = () => {
-  const { baseUrl, code } = useSelector((store) => store.login)
+  const { baseUrl, code, storeUserToken } = useSelector((store) => store.login)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showEmailIcon, setShowEmailIcon] = useState(false);
@@ -63,6 +63,7 @@ const Login = () => {
     dispatch(loginUser(userData))
     navigate('/services')
   }
+
   return (
     <>
       <Header/>

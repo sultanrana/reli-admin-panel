@@ -23,15 +23,17 @@ import { loginUser, responseCode, showError } from "../features/login/loginSlice
 import {Formik, Form, Field, ErrorMessage} from 'formik'
 import AlertMessage from "../components/AlertMessage";
 import Header from "../components/Header";
+import RadioButtonUncheckedRoundedIcon from '@mui/icons-material/RadioButtonUncheckedRounded';
+import RadioButtonCheckedRoundedIcon from '@mui/icons-material/RadioButtonCheckedRounded';
 const SetPassword = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {baseUrl, code} = useSelector((store) => store.login)
   const [showPasswordIcon, setShowPasswordIcon] = useState(false);
   const [radioDisabled] = React.useState(true);
-  const [capital_letter, setCapitalLetter] = useState(null);
-  const [lower_letter, setLowerLetter] = useState(null);
-  const [symbol, setSymbol] = useState(null);
+  const [capital_letter, setCapitalLetter] = useState(false);
+  const [lower_letter, setLowerLetter] = useState(false);
+  const [symbol, setSymbol] = useState(false);
   const [isError, setIsError] = useState(false);
   const textBlack = {
     color: "black",
@@ -54,6 +56,7 @@ const SetPassword = () => {
         dispatch(showError(response.data.message))
         navigate('/login')
       } catch (error) {
+        console.log(error);
         setIsError(false)
         dispatch(responseCode(error.response.data.code))
         dispatch(showError(error.response.data.message))
@@ -61,16 +64,26 @@ const SetPassword = () => {
     },
     validate: (values) => {
       let errors = {};
-      var i = 0;
-      var character='';
       if (!values.newPassword) {
         errors.newPassword = "Password is required";
       }
-      // if(/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(values.newPassword)){
-      //   // setSymbol('symbol');
-      //   errors.newPassword = "Symbol added";
-      //   console.log(values.newPassword);
-      // }
+      // check Spacial character
+      if(!/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(values.newPassword)){
+        setSymbol(false);
+      }else{
+        setSymbol(true);
+      }
+      // check lower character 
+      if(/[A-Z]/.test(values.newPassword)){
+        setCapitalLetter(true)
+      }else{
+        setCapitalLetter(false)
+      }
+      if(/[a-z]/.test(values.newPassword)){
+        setLowerLetter(true)
+      }else{
+        setLowerLetter(false)
+      }
       return errors;
     },
   });
@@ -124,7 +137,7 @@ const SetPassword = () => {
             <AlertMessage color="error"/>
             ) : null}
           <FormControl
-            sx={{ mb: 5, width: "100%", height: "54px" }}
+            sx={{ mb: 5, width: "100%", height: "54px"}}
             variant="outlined"
           >
             <OutlinedInput
@@ -162,51 +175,36 @@ const SetPassword = () => {
           <FormControl sx={{ width: "100%", ml: "25px", mb: "30px" }}>
             <FormLabel
               id="demo-radio-buttons-group-label"
-              style={{ textAlign: "start", color: "#000000" }}
+              style={{ textAlign: "start", color: "#000000", marginBottom: '10px' }}
             >
               Requirements
             </FormLabel>
-            
-            <RadioGroup
-              aria-labelledby="demo1-radio-buttons-group-label"
-              defaultValue={capital_letter}
-              name="radio-buttons-group"
-            >
-              <FormControlLabel
-                value="capital_letter"
-                disabled={radioDisabled}
-                classes={textBlack}
-                control={<Radio />}
-                label="Capital letter"
-              />
-            </RadioGroup>
-            <RadioGroup
-              aria-labelledby="demo2-radio-buttons-group-label"
-              defaultValue="lowercase_letter"
-              name="radio-buttons-group"
-            >
-              <FormControlLabel
-                value="lowercase_letter"
-                disabled={radioDisabled}
-                control={<Radio />}
-                color="black"
-                label="Lowercase letter"
-              />
-            </RadioGroup>
-            <RadioGroup
-              aria-labelledby="demo3-radio-buttons-group-label"
-              defaultValue={symbol}
-              name="radio-buttons-group"
-            >
-              <FormControlLabel
-                value="symbol"
-                disabled={radioDisabled}
-                control={<Radio />}
-                label="Symbol"
-              />
-            </RadioGroup>
+            <Box sx={{display: 'flex', gap: '.8rem', alignItems: 'center', mb: 1}}>
+              {capital_letter ? (
+              <RadioButtonCheckedRoundedIcon/>
+              ) : (
+                <RadioButtonUncheckedRoundedIcon/>
+              )}
+              <Box>Capital letter</Box>
+            </Box>
+            <Box sx={{display: 'flex', gap: '.8rem', alignItems: 'center', mb: 1}}>
+              {lower_letter ? (
+                <RadioButtonCheckedRoundedIcon/>
+              ) : (
+              <RadioButtonUncheckedRoundedIcon/>
+              )}
+              <Box>Lower letter</Box>
+            </Box>
+            <Box sx={{display: 'flex', gap: '.8rem', alignItems: 'center', mb: 1}}>
+              {symbol ? (
+                <RadioButtonCheckedRoundedIcon/>
+              ) : (
+                <RadioButtonUncheckedRoundedIcon/>
+              )}
+              <Box>Symbol</Box>
+            </Box>
           </FormControl>
-          <Button type="submit"
+          <Button type={ capital_letter && lower_letter && symbol? 'submit' : 'button'} 
             sx={{ width: "100%", minHeight: "36px", mb: "30px" }}
             variant="contained"
             color="primary"

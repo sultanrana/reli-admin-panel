@@ -1,4 +1,4 @@
-import { Box, Table, TableContainer, Typography, IconButton, Button } from '@mui/material';
+import { Box, Table, TableContainer, Typography, IconButton } from '@mui/material';
 import React from 'react'
 import BeardcrumNavigator from '../../components/BeardcrumNavigator'
 import Sidebar from '../../components/Sidebar'
@@ -14,31 +14,37 @@ import { styled } from '@mui/material/styles';
 import ModeRoundedIcon from '@mui/icons-material/ModeRounded';
 import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
 import { useSelector } from 'react-redux';
+import TableLink from '../../components/TableLink';
 const columns = [
-  { id: 'productId', label: 'Product ID', minWidth: 100 },
-  { id: 'jobType', label: 'Job Type', minWidth: 100 },
-  { id: 'color', label: 'Color', minWidth: 100 },
-  { id: 'grid', label: 'Grid', minWidth: 150 },
-  { id: 'openType', label: 'Open Type', minWidth: 150 },
-  { id: 'temeredGlass', label: 'Temered Glass(Fire)', minWidth: 100 },
-  { id: 'privacy', label: 'Privacy', minWidth: 100 },
-  { id: 'safetyGlass', label: 'Safety Glass', minWidth: 150 },
-  { id: 'dimensionClass', label: 'Dimension Class', minWidth: 100 },
-  { id: 'pricePerSqInch', label: 'Price Per Square Inch', minWidth: 150 },
+  { id: 'company', label: 'Company', minWidth: 100, fontWeight: '600' },
+  { id: 'representative', label: 'Representative', minWidth: 100, fontWeight: '600' },
+  { id: 'representativeNumber', label: 'Representative Number', minWidth: 100, fontWeight: '600' },
+  { id: 'representativeEmail', label: 'Representative Email', minWidth: 150, fontWeight: '600' },
+  { id: 'numberOfUsers', label: 'Number of Users', minWidth: 150, fontWeight: '600' },
+  { id: 'projectsOpen', label: 'Projects Open', minWidth: 100, fontWeight: '600' },
+  { id: 'projectsCompleted', label: 'Projects Completed', minWidth: 100, fontWeight: '600' },
+  { id: 'dateLastActive', label: 'Date Last Active', minWidth: 150, fontWeight: '600' },
+  { id: 'status', label: 'Status', minWidth: 100 },
 ];
 
-function createData(productId, jobType, color, grid, openType, temeredGlass, privacy, safetyGlass, dimensionClass, pricePerSqInch) {
-  return { productId, jobType, color, grid, openType, temeredGlass, privacy, safetyGlass, dimensionClass, pricePerSqInch};
+function createData(company, representative, representativeNumber, representativeEmail, numberOfUsers, projectsOpen, projectsCompleted, dateLastActive, status) {
+  return { company, representative, representativeNumber, representativeEmail, numberOfUsers, projectsOpen, projectsCompleted, dateLastActive, status};
 }
 
 const rows = [
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000`),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", "$125.000"),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", "$125.000"),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", "$125.000"),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", "$125.000"),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", "$125.000"),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", "$125.000"),
+  createData(<TableLink text="Construction Company"/>, "John Smith", "555-555-5555", "johnsmith@tepia.co", "20", "10", "15", "05/09/22 12:00:00AM PT", "status", `Enabled`),
+  createData("Construction company", "John Smith", "555-555-5555", "johnsmith@tepia.co", "20", "10", "15", "05/09/22 12:00:00AM PT", "status", `Enabled`),
+  createData("Construction company", "John Smith", "555-555-5555", "johnsmith@tepia.co", "20", "10", "15", "05/09/22 12:00:00AM PT", "status", `Enabled`),
+  createData("Construction company", "John Smith", "555-555-5555", "johnsmith@tepia.co", "20", "10", "15", "05/09/22 12:00:00AM PT", "status", `Enabled`),
+  createData("Construction company", "John Smith", "555-555-5555", "johnsmith@tepia.co", "20", "10", "15", "05/09/22 12:00:00AM PT", "status", `Enabled`),
+  createData("Construction company", "John Smith", "555-555-5555", "johnsmith@tepia.co", "20", "10", "15", "05/09/22 12:00:00AM PT", "status", `Enabled`),
+  createData("Construction company", "John Smith", "555-555-5555", "johnsmith@tepia.co", "20", "10", "15", "05/09/22 12:00:00AM PT", "status", `Enabled`),
+  createData("Construction company", "John Smith", "555-555-5555", "johnsmith@tepia.co", "20", "10", "15", "05/09/22 12:00:00AM PT", "status", `Enabled`),
+  createData("Construction company", "John Smith", "555-555-5555", "johnsmith@tepia.co", "20", "10", "15", "05/09/22 12:00:00AM PT", "status", `Enabled`),
+  createData("Construction company", "John Smith", "555-555-5555", "johnsmith@tepia.co", "20", "10", "15", "05/09/22 12:00:00AM PT", "status", `Enabled`),
+  createData("Construction company", "John Smith", "555-555-5555", "johnsmith@tepia.co", "20", "10", "15", "05/09/22 12:00:00AM PT", "status", `Enabled`),
+  createData("Construction company", "John Smith", "555-555-5555", "johnsmith@tepia.co", "20", "10", "15", "05/09/22 12:00:00AM PT", "status", `Enabled`),
+  createData("Construction company", "John Smith", "555-555-5555", "johnsmith@tepia.co", "20", "10", "15", "05/09/22 12:00:00AM PT", "status", `Enabled`),
 ];
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -60,7 +66,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
       backgroundColor: '#ddd',
     },
   }));
-const ServiceProducts = () => {
+const Companies = () => {
   const {isDrawerOpen} = useSelector((store) => store.login)
 const breadcrumbs = [
     <Typography key="3" color="text.primary" style={{
@@ -70,19 +76,9 @@ const breadcrumbs = [
         lineHeight: '36px',
         color: '#000000'
     }}>
-        Windows
-    </Typography>,
-    <Typography key="3" color="text.primary" style={{
-        fontStyle: 'normal',
-        fontWeight: '400',
-        fontSize: '34px',
-        lineHeight: '36px',
-        color: '#000000'
-    }}>
-        Products
-    </Typography>,
+        Companies
+    </Typography>
 ];
-console.log(window.location.pathname);
 const [page, setPage] = React.useState(0);
 const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -102,22 +98,7 @@ const handleChangeRowsPerPage = (event) => {
     <div className="page-section">
       <Sidebar/>
       <Box className="page-content" sx={{width: isDrawerOpen ? `calc(100% - 240px)` : `calc(100% - 57px)`}}>
-        <Box sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          mb: 3
-        }}>
-          <BeardcrumNavigator breadcrumbs={breadcrumbs ? breadcrumbs : "Beardcrums"}/>
-          <Box component="div" sx={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '1rem'
-          }}>
-            <Button variant="outlined" className="bc-btn-outline" color="primary">Export csv</Button>
-            <Button variant="outlined" className="bc-btn-outline" color="primary">Import csv</Button>
-          </Box>
-        </Box>
+        <BeardcrumNavigator breadcrumbs={breadcrumbs ? breadcrumbs : "Beardcrums"}/>
         <Box component="div" sx={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -134,14 +115,14 @@ const handleChangeRowsPerPage = (event) => {
         </Box>
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
             <TableContainer>
-                <Table stickyHeader aria-label="sticky table">
+                <Table stickyHeader aria-label="sticky table" sx={{}}>
                 <TableHead>
                     <StyledTableRow>
                     {columns.map((column) => (
                         <StyledTableCell
                         key={column.id}
                         align={column.align}
-                        style={{ minWidth: column.minWidth }}
+                        style={{ minWidth: column.minWidth, fontWeight: column.fontWeight }}
                         >
                         {column.label}
                         </StyledTableCell>
@@ -185,4 +166,4 @@ const handleChangeRowsPerPage = (event) => {
   )
 }
 
-export default ServiceProducts
+export default Companies

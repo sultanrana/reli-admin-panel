@@ -59,7 +59,7 @@ const dispatch  = useNavigate()
             color="inherit"
             sx={{borderRadius: '0'}}
           >
-            <Typography>test</Typography>
+            <Typography>{loggedInUser.data.userData.firstName}</Typography>
             <KeyboardArrowDownRoundedIcon />
           </IconButton>
           <Menu

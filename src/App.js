@@ -12,8 +12,15 @@ import ServiceProducts from "./pages/Services/ServiceProducts";
 import { Provider } from "react-redux";
 import {store} from './store'
 import Layout from "./components/Layout";
+import { useEffect } from "react";
+import RequireAuth from "./components/RequireAuth";
+import Products from "./pages/projects/Projects";
+import Customers from "./pages/customers/Customers";
+import Companies from "./pages/companies/Companies";
+import Transactions from "./pages/transactions/Transactions";
+import Coupons from "./pages/coupons/Coupons";
+import AdminPortalUser from "./pages/admin-portal-user/AdminPortalUser";
 function App() {
-
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
@@ -21,13 +28,19 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout  />} >
-              <Route exact path="/services" element={<Services/>} />
-              <Route exact path="/companies" element={<ServiceProducts />} />
+              <Route path="/services" element={<Services/>} />
+              <Route path="/services/:serviceName" element={<ServiceProducts/>} />
+              <Route path="/companies" element={<Companies />} />
+              <Route path="/customers" element={<Customers />} />
+              <Route path="/projects" element={<Products />} />
+              <Route path="/transactions" element={<Transactions />} />
+              <Route path="/coupons" element={<Coupons />} />
+              <Route path="/admin-portal-user" element={<AdminPortalUser />} />
             </Route>
               <Route path="/forgot-password" element={<Forgot />} />
               <Route path="/confirm-password" element={<Confirmation />} />
               <Route path="/set-password" element={<SetPassword />} />
-              <Route path="/login" element={<Login  />} />
+              <Route path="/login" element={<Login />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

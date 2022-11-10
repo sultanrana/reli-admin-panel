@@ -6,8 +6,8 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 export default function BeardcrumNavigator(props) {
 const {breadcrumbs} = props;
   return (
-    <Stack spacing={2} mb={3}>
-      <Breadcrumbs separator={<NavigateNextIcon fontSize="large" sx={{color: '#000000'}}/>} aria-label="breadcrumb">
+    <Stack spacing={2}>
+      <Breadcrumbs separator={<NavigateNextIcon fontSize="large" sx={{color: '#000000', textTransform: 'capitalize'}}/>} aria-label="breadcrumb">
         {breadcrumbs}
       </Breadcrumbs>
     </Stack>

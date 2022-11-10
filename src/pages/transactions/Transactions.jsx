@@ -1,4 +1,4 @@
-import { Box, Table, TableContainer, Typography, IconButton, Button } from '@mui/material';
+import { Box, Table, TableContainer, Typography, IconButton } from '@mui/material';
 import React from 'react'
 import BeardcrumNavigator from '../../components/BeardcrumNavigator'
 import Sidebar from '../../components/Sidebar'
@@ -60,7 +60,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
       backgroundColor: '#ddd',
     },
   }));
-const ServiceProducts = () => {
+const Transactions = () => {
   const {isDrawerOpen} = useSelector((store) => store.login)
 const breadcrumbs = [
     <Typography key="3" color="text.primary" style={{
@@ -70,19 +70,9 @@ const breadcrumbs = [
         lineHeight: '36px',
         color: '#000000'
     }}>
-        Windows
-    </Typography>,
-    <Typography key="3" color="text.primary" style={{
-        fontStyle: 'normal',
-        fontWeight: '400',
-        fontSize: '34px',
-        lineHeight: '36px',
-        color: '#000000'
-    }}>
-        Products
-    </Typography>,
+        Transactions
+    </Typography>
 ];
-console.log(window.location.pathname);
 const [page, setPage] = React.useState(0);
 const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -102,22 +92,7 @@ const handleChangeRowsPerPage = (event) => {
     <div className="page-section">
       <Sidebar/>
       <Box className="page-content" sx={{width: isDrawerOpen ? `calc(100% - 240px)` : `calc(100% - 57px)`}}>
-        <Box sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          mb: 3
-        }}>
-          <BeardcrumNavigator breadcrumbs={breadcrumbs ? breadcrumbs : "Beardcrums"}/>
-          <Box component="div" sx={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '1rem'
-          }}>
-            <Button variant="outlined" className="bc-btn-outline" color="primary">Export csv</Button>
-            <Button variant="outlined" className="bc-btn-outline" color="primary">Import csv</Button>
-          </Box>
-        </Box>
+        <BeardcrumNavigator breadcrumbs={breadcrumbs ? breadcrumbs : "Beardcrums"}/>
         <Box component="div" sx={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -133,8 +108,8 @@ const handleChangeRowsPerPage = (event) => {
           </IconButton>
         </Box>
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-            <TableContainer>
-                <Table stickyHeader aria-label="sticky table">
+            <TableContainer sx={{ maxHeight: 440,}}>
+                <Table stickyHeader aria-label="sticky table" sx={{}}>
                 <TableHead>
                     <StyledTableRow>
                     {columns.map((column) => (
@@ -185,4 +160,4 @@ const handleChangeRowsPerPage = (event) => {
   )
 }
 
-export default ServiceProducts
+export default Transactions

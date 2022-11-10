@@ -51,3 +51,41 @@ a{
 .buttonsss{
   margin-top: 30px;
 }
+.search-input{
+  width: 100%; 
+  margin-right: 12px; 
+  height: 100%; 
+  border: none; 
+  outline: none;
+  font-family: var(--roboto);
+  font-size: 17px;
+  font-weight: 400;
+}
+.search-input::placeholder{
+  color: #ddd;
+}
+.bc-btn-outline{
+  border: 1px solid #ddd !important;
+  font-family: var(--roboto);
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  line-height: 16px !important;
+  text-align: center !important;
+  letter-spacing: 1.25px !important;
+  text-transform: uppercase !important;
+  color: var(--primary);
+  background: white;
+  height: 45px !important;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+.bc-btn-outline:hover{
+  background-color: var(--primary) !important;
+  color: white;
+}
+.tableLink{
+  color: #2196f3;
+  font-weight: 500;
+  text-decoration: underline;
+  cursor: pointer;
+}

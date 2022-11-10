@@ -8,6 +8,7 @@ import Header from './Header'
 
 const Layout = () => {
     const {storeUserToken} = useSelector((store) => store.login)
+    console.log(storeUserToken);
   return (
     <>
     {storeUserToken ? (
@@ -19,8 +20,7 @@ const Layout = () => {
         <>
             <Navigate to={'/login'}  replace/>
         </>
-    )}
-        
+    )}     
     </>
   )
 }
