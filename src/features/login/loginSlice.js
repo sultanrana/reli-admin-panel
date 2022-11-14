@@ -6,7 +6,9 @@ const initialState = {
     errorMessage: '',
     storeUserToken: false,
     loggedInUser: {},
-    isDrawerOpen: true
+    isDrawerOpen: true,
+    isAddCompanyModal: false,
+    isEditCompanyModal: false,
 };
 
 const loginSlice = createSlice({
@@ -32,11 +34,24 @@ const loginSlice = createSlice({
         setIsDrawerOpen: (state, action) => {
             state.isDrawerOpen = action.payload
         },
-        
+        handleAddCompanyModal: (state, action) => {
+            if(state.isAddCompanyModal){
+                state.isAddCompanyModal = false
+            }else{
+                state.isAddCompanyModal = true
+            }
+        },
+        handleEditCompanyModal: (state, action) => {
+            if(state.isEditCompanyModal){
+                state.isEditCompanyModal = false
+            }else{
+                state.isEditCompanyModal = true
+            }
+        }
     }
 })
 
 // console.log(loginSlice);
-export const { loginUser, setError, logout, emptyToken, showError, responseCode, setIsDrawerOpen } = loginSlice.actions;
+export const { loginUser, setError, logout, emptyToken, showError, responseCode, setIsDrawerOpen, handleAddCompanyModal, handleEditCompanyModal } = loginSlice.actions;
 
 export default loginSlice.reducer;

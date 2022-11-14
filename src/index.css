@@ -89,3 +89,81 @@ a{
   text-decoration: underline;
   cursor: pointer;
 }
+.tab_btns{
+}
+.tab_btns > button{
+  border: 1px solid #ddd !important;
+}
+.tab_btns > button.active{
+  text-decoration: none !important;
+  background-color: rgba(1, 158, 178, 0.04) !important;
+}
+
+.tab_btns button:first-child {
+  border-bottom-right-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+}
+.tab_btns button:nth-child(2){
+  border-radius: 0px !important;
+}
+.tab_btns button:last-child {
+  border-bottom-left-radius: 0px !important;
+  border-top-left-radius: 0px !important;
+}
+.variable-input-require{
+  font-family: var(--roboto);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+  color: rgba(0, 0, 0, 0.6);
+  margin-left: 1.7rem;
+  margin-top: .7rem;
+}
+.about_body{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.about_body .about_img_circle{
+  width: 174px;
+  height: 174px;
+  border-radius: 50%;
+  background: #C4C4C4;
+}
+.about_body .about_body_card{
+  flex: 1;
+  background: #E8E8E8;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  min-width: 260px;
+}
+.about_body_card .company_info h4{
+  font-size: 24px;
+  color: #000000;
+  text-decoration: underline;
+  text-transform: capitalize;
+  letter-spacing: 0.15px;
+}
+.company_info .info_para{
+  letter-spacing: 0.15px;
+  font-size: 20px;
+  color: #000000;
+}
+.company_info .enabled{
+  color:#1FBAD2;
+  font-size: 20px;
+  letter-spacing: 0.15px;
+
+}
+.available_service_card{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.4rem;
+  padding: 16px;
+  background: #E8E8E8;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2);
+}

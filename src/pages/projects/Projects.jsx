@@ -1,4 +1,4 @@
-import { Box, Table, TableContainer, Typography, IconButton } from '@mui/material';
+import { Box, Table, TableContainer, Typography, IconButton, Button } from '@mui/material';
 import React from 'react'
 import BeardcrumNavigator from '../../components/BeardcrumNavigator'
 import Sidebar from '../../components/Sidebar'
@@ -14,31 +14,42 @@ import { styled } from '@mui/material/styles';
 import ModeRoundedIcon from '@mui/icons-material/ModeRounded';
 import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
 import { useSelector } from 'react-redux';
+import TableLink from '../../components/TableLink';
 const columns = [
-  { id: 'productId', label: 'Product ID', minWidth: 100 },
-  { id: 'jobType', label: 'Job Type', minWidth: 100 },
-  { id: 'color', label: 'Color', minWidth: 100 },
-  { id: 'grid', label: 'Grid', minWidth: 150 },
-  { id: 'openType', label: 'Open Type', minWidth: 150 },
-  { id: 'temeredGlass', label: 'Temered Glass(Fire)', minWidth: 100 },
-  { id: 'privacy', label: 'Privacy', minWidth: 100 },
-  { id: 'safetyGlass', label: 'Safety Glass', minWidth: 150 },
-  { id: 'dimensionClass', label: 'Dimension Class', minWidth: 100 },
-  { id: 'pricePerSqInch', label: 'Price Per Square Inch', minWidth: 150 },
+  { id: 'projectId', label: 'Project ID', minWidth: 150, fontWeight: '600' },
+  { id: 'customers', label: 'Customers', minWidth: 150, fontWeight: '600' },
+  { id: 'serviceType', label: 'ServiceType', minWidth: 140, fontWeight: '600' },
+  { id: 'company', label: 'Company', minWidth: 100, fontWeight: '600' },
+  { id: 'workersAssigned', label: 'Workers Assigned', minWidth: 100, fontWeight: '600' },
+  { id: 'city', label: 'City', minWidth: 100, fontWeight: '600' },
+  { id: 'state', label: 'State', minWidth: 100, fontWeight: '600' },  
+  { id: 'zip', label: 'Zip', minWidth: 100, fontWeight: '600' },
+  { id: 'dateOrdered', label: 'Date Ordered', minWidth: 200, fontWeight: '600' },
+  { id: 'dateScheduled', label: 'Date Scheduled', minWidth: 200, fontWeight: '600' },
+  { id: 'dateCompleted', label: 'Date Completed', minWidth: 200, fontWeight: '600' },
+  { id: 'totalPaidByCustomer', label: 'Total Paid by Customer', minWidth: 200, fontWeight: '600' },
+  { id: 'refundToCustomer', label: 'Refund To Customer', minWidth: 200, fontWeight: '600' },
+  { id: 'paidToContractor', label: 'Paid to Contractor', minWidth: 200, fontWeight: '600' },
+  { id: 'status', label: 'status', minWidth: 200, fontWeight: '600' },
+  { id: 'lastStatusUpdate', label: 'Last Status Update', minWidth: 200, fontWeight: '600' },
 ];
 
-function createData(productId, jobType, color, grid, openType, temeredGlass, privacy, safetyGlass, dimensionClass, pricePerSqInch) {
-  return { productId, jobType, color, grid, openType, temeredGlass, privacy, safetyGlass, dimensionClass, pricePerSqInch};
+function createData(projectId, customers, serviceType, company, workersAssigned, city, state, zip, dateOrdered, dateScheduled, dateCompleted, totalPaidByCustomer, refundToCustomer, paidToContractor, status, lastStatusUpdate) {
+  return { projectId, customers, serviceType, company, workersAssigned, city, state, zip, dateOrdered, dateScheduled, dateCompleted, totalPaidByCustomer, refundToCustomer, paidToContractor, status, lastStatusUpdate};
 }
 
 const rows = [
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000`),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", "$125.000"),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", "$125.000"),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", "$125.000"),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", "$125.000"),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", "$125.000"),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", "$125.000"),
+  createData(<TableLink text="PROJ58549"/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT"),
+  createData(<TableLink text="PROJ58549"/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT"),
+  createData(<TableLink text="PROJ58549"/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT"),
+  createData(<TableLink text="PROJ58549"/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT"),
+  createData(<TableLink text="PROJ58549"/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT"),
+  createData(<TableLink text="PROJ58549"/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT"),
+  createData(<TableLink text="PROJ58549"/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT"),
+  createData(<TableLink text="PROJ58549"/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT"),
+  createData(<TableLink text="PROJ58549"/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT"),
+  createData(<TableLink text="PROJ58549"/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT"),
+  createData(<TableLink text="PROJ58549"/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT"),
 ];
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -91,8 +102,22 @@ const handleChangeRowsPerPage = (event) => {
   return (
     <div className="page-section">
       <Sidebar/>
-      <Box className="page-content" sx={{width: isDrawerOpen ? `calc(100% - 240px)` : `calc(100% - 57px)`}}>
-        <BeardcrumNavigator breadcrumbs={breadcrumbs ? breadcrumbs : "Beardcrums"}/>
+      <Box className="page-content" sx={{width: isDrawerOpen ? `calc(100% - 240px)` : `calc(100% - 57px)`, overflow: "hidden"}}>
+      <Box sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          mb: 3
+        }}>
+          <BeardcrumNavigator breadcrumbs={breadcrumbs ? breadcrumbs : "Beardcrums"}/>
+          <Box component="div" sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem'
+          }}>
+            <Button variant="outlined" className="bc-btn-outline" color="primary">Export csv</Button>
+          </Box>
+        </Box>
         <Box component="div" sx={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -103,9 +128,9 @@ const handleChangeRowsPerPage = (event) => {
           <Box component="div">
               <SearchBox/>
           </Box>
-          <IconButton aria-label="filter-icon" size="large">
+          {/* <IconButton aria-label="filter-icon" size="large">
             <FilterListRoundedIcon />
-          </IconButton>
+          </IconButton> */}
         </Box>
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
             <TableContainer sx={{ maxHeight: 440,}}>

@@ -78,6 +78,7 @@ const Services = () => {
                       display: "flex",
                       flexDirection: "column",
                       alignItems: "center",
+                      height: '200px'
                     }}
                   >
                     <img src={service.src} alt="" style={{ width: "" }} />

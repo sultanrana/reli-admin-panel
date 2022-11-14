@@ -20,6 +20,8 @@ import Companies from "./pages/companies/Companies";
 import Transactions from "./pages/transactions/Transactions";
 import Coupons from "./pages/coupons/Coupons";
 import AdminPortalUser from "./pages/admin-portal-user/AdminPortalUser";
+import CompanyInfo from "./pages/companies/CompanyInfo";
+import SystemVariables from "./pages/system-variables/SystemVariables";
 function App() {
   return (
     <Provider store={store}>
@@ -27,15 +29,17 @@ function App() {
         <CssBaseline />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Layout  />} >
+            <Route path="/" element={<Layout />} >
               <Route path="/services" element={<Services/>} />
               <Route path="/services/:serviceName" element={<ServiceProducts/>} />
               <Route path="/companies" element={<Companies />} />
+              <Route path="/companies/:companyInfo" element={<CompanyInfo />} />
               <Route path="/customers" element={<Customers />} />
               <Route path="/projects" element={<Products />} />
               <Route path="/transactions" element={<Transactions />} />
               <Route path="/coupons" element={<Coupons />} />
               <Route path="/admin-portal-user" element={<AdminPortalUser />} />
+              <Route path="/system-variables" element={<SystemVariables />} />
             </Route>
               <Route path="/forgot-password" element={<Forgot />} />
               <Route path="/confirm-password" element={<Confirmation />} />

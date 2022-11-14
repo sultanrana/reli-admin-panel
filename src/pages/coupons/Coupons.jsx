@@ -1,4 +1,4 @@
-import { Box, Table, TableContainer, Typography, IconButton } from '@mui/material';
+import { Box, Table, TableContainer, Typography, IconButton, Button } from '@mui/material';
 import React from 'react'
 import BeardcrumNavigator from '../../components/BeardcrumNavigator'
 import Sidebar from '../../components/Sidebar'
@@ -14,31 +14,30 @@ import { styled } from '@mui/material/styles';
 import ModeRoundedIcon from '@mui/icons-material/ModeRounded';
 import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
 import { useSelector } from 'react-redux';
+import TableLink from '../../components/TableLink';
+import TableActions from '../../components/TableActions';
 const columns = [
-  { id: 'productId', label: 'Product ID', minWidth: 100 },
-  { id: 'jobType', label: 'Job Type', minWidth: 100 },
-  { id: 'color', label: 'Color', minWidth: 100 },
-  { id: 'grid', label: 'Grid', minWidth: 150 },
-  { id: 'openType', label: 'Open Type', minWidth: 150 },
-  { id: 'temeredGlass', label: 'Temered Glass(Fire)', minWidth: 100 },
-  { id: 'privacy', label: 'Privacy', minWidth: 100 },
-  { id: 'safetyGlass', label: 'Safety Glass', minWidth: 150 },
-  { id: 'dimensionClass', label: 'Dimension Class', minWidth: 100 },
-  { id: 'pricePerSqInch', label: 'Price Per Square Inch', minWidth: 150 },
+  { id: "name", label: "Name", minWidth: 150, fontWeight: '600' },
+  { id: "description", label: "Description", minWidth: 300, fontWeight: '600' },
+  { id: "service", label: "Service", minWidth: 100, fontWeight: '600' },
+  { id: "code", label: "Code", minWidth: 150, fontWeight: '600' },
+  { id: "enabled", label: "Enabled", minWidth: 80, fontWeight: '600' },
+  { id: "actions", label: "Actions", minWidth: 150, fontWeight: '600' },
 ];
 
-function createData(productId, jobType, color, grid, openType, temeredGlass, privacy, safetyGlass, dimensionClass, pricePerSqInch) {
-  return { productId, jobType, color, grid, openType, temeredGlass, privacy, safetyGlass, dimensionClass, pricePerSqInch};
+function createData(name, description, service, code, enabled, actions) {
+  return { name, description, service, code, enabled, actions };
 }
 
 const rows = [
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000`),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", "$125.000"),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", "$125.000"),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", "$125.000"),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", "$125.000"),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", "$125.000"),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", "$125.000"),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    "ASDF4874KL039",
+    "Y",
+    <TableActions/> 
+  ),
 ];
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -91,24 +90,24 @@ const handleChangeRowsPerPage = (event) => {
   return (
     <div className="page-section">
       <Sidebar/>
-      <Box className="page-content" sx={{width: isDrawerOpen ? `calc(100% - 240px)` : `calc(100% - 57px)`}}>
-        <BeardcrumNavigator breadcrumbs={breadcrumbs ? breadcrumbs : "Beardcrums"}/>
-        <Box component="div" sx={{
+      <Box className="page-content" sx={{width: isDrawerOpen ? `calc(100% - 240px)` : `calc(100% - 57px)`, overflow: "hidden"}}>
+      <Box sx={{
           display: 'flex',
           justifyContent: 'space-between',
-          flexWrap: 'wrap',
           alignItems: 'center',
-          mb: 3,
+          mb: 3
         }}>
-          <Box component="div">
-              <SearchBox/>
+          <BeardcrumNavigator breadcrumbs={breadcrumbs ? breadcrumbs : "Beardcrums"}/>
+          <Box component="div" sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem'
+          }}>
+            <Button variant="outlined" className="bc-btn-outline" color="primary">Add Coupon</Button>
           </Box>
-          <IconButton aria-label="filter-icon" size="large">
-            <FilterListRoundedIcon />
-          </IconButton>
         </Box>
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-            <TableContainer sx={{ maxHeight: 440,}}>
+            <TableContainer>
                 <Table stickyHeader aria-label="sticky table" sx={{}}>
                 <TableHead>
                     <StyledTableRow>
@@ -116,7 +115,7 @@ const handleChangeRowsPerPage = (event) => {
                         <StyledTableCell
                         key={column.id}
                         align={column.align}
-                        style={{ minWidth: column.minWidth }}
+                        style={{ minWidth: column.minWidth, fontWeight: column.fontWeight }}
                         >
                         {column.label}
                         </StyledTableCell>

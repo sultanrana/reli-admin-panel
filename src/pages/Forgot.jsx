@@ -14,7 +14,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios'
-import { responseCode, showError, showSuccess } from "../features/login/loginSlice";
+import { responseCode, showError } from "../features/login/loginSlice";
 import AlertMessage from "../components/AlertMessage";
 import Header from "../components/Header";
 const Forgot = () => {
