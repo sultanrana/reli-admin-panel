@@ -22,6 +22,9 @@ import Coupons from "./pages/coupons/Coupons";
 import AdminPortalUser from "./pages/admin-portal-user/AdminPortalUser";
 import CompanyInfo from "./pages/companies/CompanyInfo";
 import SystemVariables from "./pages/system-variables/SystemVariables";
+import CustomerDetails from "./pages/customers/CustomerDetails";
+import Projects from "./pages/projects/Projects";
+import ProjectDetails from "./pages/projects/ProjectDetails";
 function App() {
   return (
     <Provider store={store}>
@@ -35,7 +38,9 @@ function App() {
               <Route path="/companies" element={<Companies />} />
               <Route path="/companies/:companyInfo" element={<CompanyInfo />} />
               <Route path="/customers" element={<Customers />} />
-              <Route path="/projects" element={<Products />} />
+              <Route path="/customers/:companyDetail" element={<CustomerDetails />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/projects/:projectDetail" element={<ProjectDetails />} />
               <Route path="/transactions" element={<Transactions />} />
               <Route path="/coupons" element={<Coupons />} />
               <Route path="/admin-portal-user" element={<AdminPortalUser />} />

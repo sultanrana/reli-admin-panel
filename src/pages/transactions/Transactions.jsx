@@ -22,6 +22,7 @@ import ModeRoundedIcon from "@mui/icons-material/ModeRounded";
 import FilterListRoundedIcon from "@mui/icons-material/FilterListRounded";
 import { useSelector } from "react-redux";
 import TableLink from "../../components/TableLink";
+import TableActions from "../../components/TableActions";
 const columns = [
   {
     id: "transactionId",
@@ -47,7 +48,8 @@ const columns = [
   { id: "completed", label: "Completed", minWidth: 100, fontWeight: "600" },
   { id: "amount", label: "Amount", minWidth: 100, fontWeight: "600" },
   { id: "couponCode", label: "CouponCode", minWidth: 100, fontWeight: "600" },
-  { id: "couponValue", label: "CouponValue", minWidth: 100, fontWeight: "600" },
+  { id: "couponValue", label: "CouponValue", minWidth: 100, fontWeight: "600" },  
+  { id: "actions", label: "Actions", minWidth: 150, fontWeight: '600' },
 ];
 
 function createData(
@@ -65,7 +67,8 @@ function createData(
   completed,
   amount,
   couponCode,
-  couponValue
+  couponValue,
+  actions
 ) {
   return {
     transactionId,
@@ -83,6 +86,7 @@ function createData(
     amount,
     couponCode,
     couponValue,
+    actions,
   };
 }
 
@@ -103,8 +107,7 @@ const rows = [
     "$250.00",
     "05/01/22",
     "$250.00",
-    "N/A",
-    "N/A"
+    <TableActions/>
   ),
 ];
 const StyledTableCell = styled(TableCell)(({ theme }) => ({

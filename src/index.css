@@ -31,12 +31,6 @@
 .roboto-font {
   font-family: "roboto";
  }
- .css-4x9czb-MuiButtonBase-root-MuiRadio-root.Mui-disabled {
-  color: black !important;
-}
-.css-j204z7-MuiFormControlLabel-root .MuiFormControlLabel-label.Mui-disabled {
-  color: black !important;
-}
 a{
   text-decoration: none;
 }
@@ -166,4 +160,60 @@ a{
   padding: 16px;
   background: #E8E8E8;
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2);
+}
+.available-services{
+  padding-left: 3rem;
+}
+.addImg{
+  width: 85px;
+  height: 85px;
+  background-color: #C4C4C4;
+  border-radius: 50%;
+  display: block;
+  cursor: pointer;
+  overflow: hidden;
+}
+.group{
+  
+}
+.group{
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  max-width: 270px;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}
+.group .btn_label{
+  font-family: var(--roboto);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #000000;
+}
+.group .btn_group button{
+  padding: 10px 20px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  color: #979797;
+  background-color: transparent;
+  border: 1px solid #ddd;
+  width: 112px;
+  cursor: pointer;
+  transition: all .4s ease;
+}
+.group .btn_group button:first-child{
+  border-radius: 100px 0px 0px 100px;
+}
+.group .btn_group button:last-child{
+  border-radius: 0px 100px 100px 0px;
+}
+.group .btn_group button.active{
+  background: #FDECDF;
+  border: 1px solid #FDAA63;
+  color: #000000;
 }

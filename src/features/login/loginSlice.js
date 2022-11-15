@@ -9,6 +9,8 @@ const initialState = {
     isDrawerOpen: true,
     isAddCompanyModal: false,
     isEditCompanyModal: false,
+    isAddUserModal: false,
+    isEditCustomerModal: false,
 };
 
 const loginSlice = createSlice({
@@ -47,11 +49,25 @@ const loginSlice = createSlice({
             }else{
                 state.isEditCompanyModal = true
             }
+        },
+        handleAddUserModal: (state, action) => {
+            if(state.isAddUserModal){
+                state.isAddUserModal = false
+            }else{
+                state.isAddUserModal = true
+            }
+        },
+        handleEditCustomerModal: (state, action) => {
+            if(state.isEditCustomerModal){
+                state.isEditCustomerModal = false
+            }else{
+                state.isEditCustomerModal = true
+            }
         }
     }
 })
 
 // console.log(loginSlice);
-export const { loginUser, setError, logout, emptyToken, showError, responseCode, setIsDrawerOpen, handleAddCompanyModal, handleEditCompanyModal } = loginSlice.actions;
+export const { loginUser, setError, logout, emptyToken, showError, responseCode, setIsDrawerOpen, handleAddCompanyModal, handleEditCompanyModal, handleAddUserModal, handleEditCustomerModal } = loginSlice.actions;
 
 export default loginSlice.reducer;

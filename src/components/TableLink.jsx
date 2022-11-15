@@ -1,11 +1,10 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const TableLink = (props) => {
-    const {text} = props
-    const navigate = useNavigate()
+  const {text, route} = props
   return (
-    <div className='tableLink' onClick={() => navigate('/companies/companyInfo')}>{text}</div>
+    <Link to={route} className='tableLink'>{text}</Link>
   )
 }
 

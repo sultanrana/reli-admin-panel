@@ -19,63 +19,10 @@ import { useState } from 'react';
 import TableActions from '../../components/TableActions';
 import OverView from './OverView';
 import EditCompany from './EditCompany';
-// user info
-const userInfoColumns = [
-  { id: 'name', label: 'Name', minWidth: 150, fontWeight: '600' },
-  { id: 'email', label: 'Email', minWidth: 150, fontWeight: '600' },
-  { id: 'phone', label: 'Phone', minWidth: 150, fontWeight: '600' },
-  { id: 'status', label: 'Status', minWidth: 80, fontWeight: '600' },
-  { id: 'approvedByReli', label: 'Approved by Reli', minWidth: 120, fontWeight: '600' },
-  { id: 'type', label: 'Type', minWidth: 100, fontWeight: '600' },
-  { id: 'lastActive', label: 'Last Active', minWidth: 200, fontWeight: '600' },
-  { id: 'actions', label: 'Actions', minWidth: 130, fontWeight: '600' },
-];
-// user info
-function createDataUserInfo(name, email, phone, status, approvedByReli, type, lastActive, actions) {
-  return { name, email, phone, status, approvedByReli, type, lastActive, actions };
-}
-// user info
-const userInfoRows = [
-  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <TableActions/>),
-  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <TableActions/>),
-  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <TableActions/>),
-  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <TableActions/>),
-  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <TableActions/>),
-  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <TableActions/>),
-  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <TableActions/>),
-  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <TableActions/>),
-  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <TableActions/>),
-];
-// transaction
-const transactionColumns = [
-  { id: 'projectId', label: 'Project ID', minWidth: 150, fontWeight: '600' },
-  { id: 'customer', label: 'Customer', minWidth: 150, fontWeight: '600' },
-  { id: 'serviceType', label: 'Service Type', minWidth: 150, fontWeight: '600' },
-  { id: 'paymentType', label: 'PaymentType', minWidth: 80, fontWeight: '600' },
-  { id: 'scheduled', label: 'Scheduled', minWidth: 120, fontWeight: '600' },
-  { id: 'completed', label: 'Completed', minWidth: 100, fontWeight: '600' },
-  { id: 'projectStatus', label: 'Project Status', minWidth: 200, fontWeight: '600' },
-  { id: 'paidByCustomer', label: 'Paid by Customer', minWidth: 200, fontWeight: '600' },
-  { id: 'paidToCustomer', label: 'Paid to Customer', minWidth: 200, fontWeight: '600' },
-  { id: 'dueToContractor', label: 'Due to Contractor', minWidth: 200, fontWeight: '600' },
-  { id: 'actions', label: 'Actions', minWidth: 130, fontWeight: '600' },
-];
-// transaction
-function createDataTransaction(projectId, customer, serviceType, paymentType, scheduled, completed, projectStatus, paidByCustomer, paidToCustomer, dueToContractor, actions) {
-  return { projectId, customer, serviceType, paymentType, scheduled, completed, projectStatus, paidByCustomer, paidToCustomer, dueToContractor, actions };
-}
-// transaction
-const transactionRows = [
-  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <TableActions/>),
-  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <TableActions/>),
-  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <TableActions/>),
-  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <TableActions/>),
-  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <TableActions/>),
-  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <TableActions/>),
-  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <TableActions/>),
-  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <TableActions/>),
-  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <TableActions/>),
-];
+import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
+import UserInfo from './UserInfo';
+import Transaction from './Transaction';
+import AddUserModal from './AddUserModal';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.gray,
@@ -97,7 +44,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
   }));
 const CompanyInfo = () => {
-const {isDrawerOpen, isEditCompanyModal} = useSelector((store) => store.login)
+const {isDrawerOpen, addUserModal} = useSelector((store) => store.login)
 const [tab, setTab] = useState('overview');
 const breadcrumbs = [
     <Typography key="3" color="text.primary" style={{
@@ -107,7 +54,7 @@ const breadcrumbs = [
         lineHeight: '36px',
         color: '#000000'
     }}>
-        Company Info Page
+        Comapny Name
     </Typography>
 ];
 const [page, setPage] = React.useState(0);
@@ -129,7 +76,7 @@ const handleChangeRowsPerPage = (event) => {
     <div className="page-section">
       <Sidebar/>
       <Box className="page-content" sx={{width: isDrawerOpen ? `calc(100% - 240px)` : `calc(100% - 57px)`, overflow: "hidden"}}>
-      <Box sx={{
+        <Box sx={{
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
@@ -152,142 +99,12 @@ const handleChangeRowsPerPage = (event) => {
          <OverView/>
         ): null}
         {tab === "userInfo" ? (
-          <>
-            <Box component="div" sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              mb: 3,
-            }}>
-              <Box component="div">
-                  <SearchBox/>
-              </Box>
-              {/* <IconButton aria-label="filter-icon" size="large">
-                <FilterListRoundedIcon />
-              </IconButton> */}
-            </Box>
-            <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                <TableContainer>
-                    <Table stickyHeader aria-label="sticky table" sx={{}}>
-                    <TableHead>
-                        <StyledTableRow>
-                        {userInfoColumns.map((column) => (
-                            <StyledTableCell
-                            key={column.id}
-                            align={column.align}
-                            style={{ minWidth: column.minWidth, fontWeight: column.fontWeight }}
-                            >
-                            {column.label}
-                            </StyledTableCell>
-                        ))}
-                        </StyledTableRow>
-                    </TableHead>
-                    <TableBody>
-                        {userInfoRows
-                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                        .map((row) => {
-                            return (
-                            <StyledTableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                {userInfoColumns.map((column) => {
-                                const value = row[column.id];
-                                return (
-                                    <StyledTableCell key={column.id} align={column.align}>
-                                    {column.format && typeof value === 'number'
-                                        ? column.format(value)
-                                        : value}
-                                    </StyledTableCell>
-                                );
-                                })}
-                            </StyledTableRow>
-                            );
-                        })}
-                    </TableBody>
-                    </Table>
-                </TableContainer>
-                <TablePagination
-                    rowsPerPageOptions={[10, 25, 100]}
-                    component="div"
-                    count={userInfoRows.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                />
-            </Paper>
-          </>
+          <UserInfo/>
         ): null}
         {tab === "transaction" ? (
-          <>
-            <Box component="div" sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              mb: 3,
-            }}>
-              <Box component="div">
-                  <SearchBox/>
-              </Box>
-              {/* <IconButton aria-label="filter-icon" size="large">
-                <FilterListRoundedIcon />
-              </IconButton> */}
-            </Box>
-            <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-              <TableContainer>
-                  <Table stickyHeader aria-label="sticky table" sx={{}}>
-                  <TableHead>
-                      <StyledTableRow>
-                      {transactionColumns.map((column) => (
-                          <StyledTableCell
-                          key={column.id}
-                          align={column.align}
-                          style={{ minWidth: column.minWidth, fontWeight: column.fontWeight }}
-                          >
-                          {column.label}
-                          </StyledTableCell>
-                      ))}
-                      </StyledTableRow>
-                  </TableHead>
-                  <TableBody>
-                      {transactionRows
-                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                      .map((row) => {
-                          return (
-                          <StyledTableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                              {transactionColumns.map((column) => {
-                              const value = row[column.id];
-                              return (
-                                  <StyledTableCell key={column.id} align={column.align}>
-                                  {column.format && typeof value === 'number'
-                                      ? column.format(value)
-                                      : value}
-                                  </StyledTableCell>
-                              );
-                              })}
-                          </StyledTableRow>
-                          );
-                      })}
-                  </TableBody>
-                  </Table>
-              </TableContainer>
-              <TablePagination
-                  rowsPerPageOptions={[10, 25, 100]}
-                  component="div"
-                  count={transactionRows.length}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  onPageChange={handleChangePage}
-                  onRowsPerPageChange={handleChangeRowsPerPage}
-              />
-            </Paper>
-          </>
-          
-        ): null}
-        
-        
-      </Box>
-      
+          <Transaction/>
+        ): null}  
+      </Box> 
     </div>
   )
 }
