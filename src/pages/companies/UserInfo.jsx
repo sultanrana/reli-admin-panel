@@ -11,7 +11,7 @@ import { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
 import TableLink from '../../components/TableLink';
 import { useState } from 'react';
-import TableActions from '../../components/TableActions';
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import AddUserModal from './AddUserModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleAddUserModal } from '../../features/login/loginSlice';
@@ -32,15 +32,222 @@ function createDataUserInfo(name, email, phone, status, approvedByReli, type, la
 }
 // user info
 const userInfoRows = [
-  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <TableActions/>),
-  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <TableActions/>),
-  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <TableActions/>),
-  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <TableActions/>),
-  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <TableActions/>),
-  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <TableActions/>),
-  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <TableActions/>),
-  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <TableActions/>),
-  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <TableActions/>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataUserInfo("John Smith",<TableLink text="johnsmith@gmail.com"/>, <TableLink text="979-4493-2332"/>, "Enabled", "TRUE","Admin", "04/05/22 12:00:00AM PT", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
 ];
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {

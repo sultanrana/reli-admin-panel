@@ -57,6 +57,7 @@ const handleAccountType = () => {
     <Dialog
     open={isAddUserModal}
     scroll='body'
+    onClose={() => dispatch(handleAddUserModal())}
     aria-describedby="scroll-dialog-description"
   >
     <DialogTitle id="scroll-dialog-title" sx={{ 

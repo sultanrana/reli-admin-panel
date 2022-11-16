@@ -90,7 +90,7 @@ return (
       <Box component="div" role="presentation">
       <List>
         {links.map((link, index) => (
-          <Link to={link.route} style={{ color: window.location.pathname == link.route ? "#D0347E" : "#000000" }} >
+          <Link to={link.route} style={{ color: window.location.href.indexOf(link.route) > -1 ? "#D0347E" : "#000000" }} >
               <ListItem disablePadding sx={{ display: "block" }} key={index} >
                 <ListItemButton
                   sx={{

@@ -18,11 +18,14 @@ import TableRow from "@mui/material/TableRow";
 import SearchBox from "../../components/SearchBox";
 import { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
-import ModeRoundedIcon from "@mui/icons-material/ModeRounded";
 import FilterListRoundedIcon from "@mui/icons-material/FilterListRounded";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import TableLink from "../../components/TableLink";
-import TableActions from "../../components/TableActions";
+import ModeRoundedIcon from '@mui/icons-material/ModeRounded';
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import { handleAddAdminPortalUserModal, handleEditAdminPortalUserModal } from "../../features/login/loginSlice";
+import AddAdminPortalUser from "./AddAdminPortalUser";
+import EditAdminPortalUser from "./EditAdminPortalUser";
 const columns = [
   { id: "name", label: "Name", minWidth: 100, fontWeight: '600' },
   { id: "email", label: "Email", minWidth: 100, fontWeight: '600' },
@@ -36,16 +39,7 @@ function createData(name, email, role, status, lastActive, actions) {
   return { name, email, role, status, lastActive, actions };
 }
 
-const rows = [
-  createData(
-    <TableLink text="John Jenkins" />,
-    <TableLink text="johnsmith@.co" />,
-    "Admin",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <TableActions/> 
-  ),
-];
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.gray,
@@ -67,7 +61,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 const AdminPortalUser = () => {
-  const { isDrawerOpen } = useSelector((store) => store.login);
+  const { isDrawerOpen, isAddAdminPortalUserModal, isEditAdminPortalUserModal } = useSelector((store) => store.login);
+  const dispatch = useDispatch()
   const breadcrumbs = [
     <Typography
       key="3"
@@ -82,6 +77,566 @@ const AdminPortalUser = () => {
     >
       Admin Portal User
     </Typography>,
+  ];
+  const rows = [
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
+    createData(
+      <TableLink text="John Jenkins" />,
+      <TableLink text="johnsmith@.co" />,
+      "Admin",
+      "Active",
+      "05/09/22 12:00:00AM PT",
+      <div style={{ 
+        display: 'flex',
+        gap: '10px'
+    }}>
+        <IconButton>
+            <DeleteRoundedIcon/>
+        </IconButton>
+        <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+            <ModeRoundedIcon/>
+        </IconButton>
+    </div>
+    ),
   ];
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -129,6 +684,14 @@ const AdminPortalUser = () => {
               color="primary"
             >
               Export csv
+            </Button>
+            <Button
+              variant="outlined"
+              className="bc-btn-outline"
+              color="primary"
+              onClick={() => dispatch(handleAddAdminPortalUserModal())}
+            >
+              Add User
             </Button>
           </Box>
         </Box>
@@ -206,6 +769,12 @@ const AdminPortalUser = () => {
           />
         </Paper>
       </Box>
+      {isAddAdminPortalUserModal ? (
+        <AddAdminPortalUser/>
+      ) : null}
+      {isEditAdminPortalUserModal ? (
+        <EditAdminPortalUser/>
+      ) : null}
     </div>
   );
 };

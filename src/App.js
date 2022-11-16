@@ -25,6 +25,12 @@ import SystemVariables from "./pages/system-variables/SystemVariables";
 import CustomerDetails from "./pages/customers/CustomerDetails";
 import Projects from "./pages/projects/Projects";
 import ProjectDetails from "./pages/projects/ProjectDetails";
+import AddCoupon from "./pages/coupons/AddCoupon";
+import CouponLayout from "./pages/coupons/CouponLayout";
+import EditCoupon from "./pages/coupons/EditCoupon";
+
+
+
 function App() {
   return (
     <Provider store={store}>
@@ -42,7 +48,11 @@ function App() {
               <Route path="/projects" element={<Projects />} />
               <Route path="/projects/:projectDetail" element={<ProjectDetails />} />
               <Route path="/transactions" element={<Transactions />} />
-              <Route path="/coupons" element={<Coupons />} />
+              <Route path="/coupons" element={<CouponLayout />}>
+                <Route path="" element={<Coupons />} />
+                <Route path="addCoupon" element={<AddCoupon/>} />
+                <Route path="editCoupon" element={<EditCoupon/>} />
+              </Route>
               <Route path="/admin-portal-user" element={<AdminPortalUser />} />
               <Route path="/system-variables" element={<SystemVariables />} />
             </Route>

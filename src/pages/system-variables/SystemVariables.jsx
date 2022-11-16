@@ -12,15 +12,61 @@ import Sidebar from "../../components/Sidebar";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import BeardcrumNavigator from "../../components/BeardcrumNavigator";
 const SystemVariables = () => {
 const theme = useTheme()
 const {isDrawerOpen} = useSelector((store) => store.login)
 const matches = useMediaQuery('(max-width:600px)')
-console.log(matches);
+const breadcrumbs = [
+    <Typography
+      key="3"
+      color="text.primary"
+      style={{
+        fontStyle: "normal",
+        fontWeight: "400",
+        fontSize: "34px",
+        lineHeight: "36px",
+        color: "#000000",
+      }}
+    >
+      Companies
+    </Typography>,
+  ];
   return (
     <div className="page-section">
       <Sidebar/>
         <Box className="page-content" sx={{width: isDrawerOpen ? `calc(100% - 240px)` : `calc(100% - 57px)`, overflow: "hidden"}}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap",
+            gap: "1rem",
+            mb: 3,
+          }}
+        >
+          <BeardcrumNavigator
+            breadcrumbs={breadcrumbs ? breadcrumbs : "Beardcrums"}
+          />
+          <Box
+            component="div"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
+            }}
+          >
+            <Button
+              variant="outlined"
+              className="bc-btn-outline"
+              color="primary"
+            >
+              Export csv
+            </Button>
+          </Box>
+        </Box>
+
             <Box component="div" sx={{ py: 4, px: matches? 2: 8, backgroundColor: '#F7F7F7'}}>
                 <form>
                     <Box component="div" sx={{display: 'flex', gap: '4rem', flexWrap: 'wrap', width: '100%', mb: 15}}>
@@ -153,6 +199,10 @@ console.log(matches);
                             />
                             <div className="variable-input-require">This is applied to each Interior Door</div>
                         </div>
+                        
+                    </Box>
+                    <Box sx={{display: 'flex', justifyContent: 'end'}}>
+                        <Button variant="contained">save</Button>
                     </Box>
                 </form>
             </Box>

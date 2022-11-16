@@ -24,6 +24,9 @@
   --pink: #D0347E;
   --roboto: "roboto";
 }
+.navActive{
+  color: var(--pink) !important;
+}
 /* global styling */
 .sf-font {
   font-family: "SfProDisplay";

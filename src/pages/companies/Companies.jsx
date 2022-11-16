@@ -19,7 +19,7 @@ import SearchBox from "../../components/SearchBox";
 import { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
 import ModeRoundedIcon from "@mui/icons-material/ModeRounded";
-import FilterListRoundedIcon from "@mui/icons-material/FilterListRounded";
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import { useDispatch, useSelector } from "react-redux";
 import TableLink from "../../components/TableLink";
 import AddCompany from "./AddCompany";
@@ -69,7 +69,8 @@ const columns = [
     minWidth: 150,
     fontWeight: "600",
   },
-  { id: "status", label: "Status", minWidth: 100 },
+  { id: "status", label: "Status", fontWeight: "600", minWidth: 100 },
+  { id: "actions", label: "Actions", fontWeight: "600", minWidth: 150 },
 ];
 
 function createData(
@@ -81,7 +82,8 @@ function createData(
   projectsOpen,
   projectsCompleted,
   dateLastActive,
-  status
+  status,
+  actions
 ) {
   return {
     company,
@@ -93,6 +95,7 @@ function createData(
     projectsCompleted,
     dateLastActive,
     status,
+    actions
   };
 }
 
@@ -106,7 +109,18 @@ const rows = [
     "10",
     "15",
     "05/09/22 12:00:00AM PT",
-    "Enabled"
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
   ),
   createData(
     <TableLink text="Construction Company" route="company-detail" />,
@@ -117,7 +131,18 @@ const rows = [
     "10",
     "15",
     "05/09/22 12:00:00AM PT",
-    "Enabled"
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
   ),
   createData(
     <TableLink text="Construction Company" route="company-detail" />,
@@ -128,7 +153,18 @@ const rows = [
     "10",
     "15",
     "05/09/22 12:00:00AM PT",
-    "Enabled"
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
   ),
   createData(
     <TableLink text="Construction Company" route="company-detail" />,
@@ -139,7 +175,18 @@ const rows = [
     "10",
     "15",
     "05/09/22 12:00:00AM PT",
-    "Enabled"
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
   ),
   createData(
     <TableLink text="Construction Company" route="company-detail" />,
@@ -150,7 +197,18 @@ const rows = [
     "10",
     "15",
     "05/09/22 12:00:00AM PT",
-    "Enabled"
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
   ),
   createData(
     <TableLink text="Construction Company" route="company-detail" />,
@@ -161,7 +219,18 @@ const rows = [
     "10",
     "15",
     "05/09/22 12:00:00AM PT",
-    "Enabled"
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
   ),
   createData(
     <TableLink text="Construction Company" route="company-detail" />,
@@ -172,7 +241,18 @@ const rows = [
     "10",
     "15",
     "05/09/22 12:00:00AM PT",
-    "Enabled"
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
   ),
   createData(
     <TableLink text="Construction Company" route="company-detail" />,
@@ -183,7 +263,18 @@ const rows = [
     "10",
     "15",
     "05/09/22 12:00:00AM PT",
-    "Enabled"
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
   ),
   createData(
     <TableLink text="Construction Company" route="company-detail" />,
@@ -194,7 +285,18 @@ const rows = [
     "10",
     "15",
     "05/09/22 12:00:00AM PT",
-    "Enabled"
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
   ),
   createData(
     <TableLink text="Construction Company" route="company-detail" />,
@@ -205,7 +307,18 @@ const rows = [
     "10",
     "15",
     "05/09/22 12:00:00AM PT",
-    "Enabled"
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
   ),
   createData(
     <TableLink text="Construction Company" route="company-detail" />,
@@ -216,7 +329,458 @@ const rows = [
     "10",
     "15",
     "05/09/22 12:00:00AM PT",
-    "Enabled"
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="Construction Company" route="company-detail" />,
+    "John Smith",
+    <TableLink text="555-555-5555" route="company-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="company-detail" />,
+    "20",
+    "10",
+    "15",
+    "05/09/22 12:00:00AM PT",
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="Construction Company" route="company-detail" />,
+    "John Smith",
+    <TableLink text="555-555-5555" route="company-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="company-detail" />,
+    "20",
+    "10",
+    "15",
+    "05/09/22 12:00:00AM PT",
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="Construction Company" route="company-detail" />,
+    "John Smith",
+    <TableLink text="555-555-5555" route="company-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="company-detail" />,
+    "20",
+    "10",
+    "15",
+    "05/09/22 12:00:00AM PT",
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="Construction Company" route="company-detail" />,
+    "John Smith",
+    <TableLink text="555-555-5555" route="company-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="company-detail" />,
+    "20",
+    "10",
+    "15",
+    "05/09/22 12:00:00AM PT",
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="Construction Company" route="company-detail" />,
+    "John Smith",
+    <TableLink text="555-555-5555" route="company-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="company-detail" />,
+    "20",
+    "10",
+    "15",
+    "05/09/22 12:00:00AM PT",
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="Construction Company" route="company-detail" />,
+    "John Smith",
+    <TableLink text="555-555-5555" route="company-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="company-detail" />,
+    "20",
+    "10",
+    "15",
+    "05/09/22 12:00:00AM PT",
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="Construction Company" route="company-detail" />,
+    "John Smith",
+    <TableLink text="555-555-5555" route="company-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="company-detail" />,
+    "20",
+    "10",
+    "15",
+    "05/09/22 12:00:00AM PT",
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="Construction Company" route="company-detail" />,
+    "John Smith",
+    <TableLink text="555-555-5555" route="company-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="company-detail" />,
+    "20",
+    "10",
+    "15",
+    "05/09/22 12:00:00AM PT",
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="Construction Company" route="company-detail" />,
+    "John Smith",
+    <TableLink text="555-555-5555" route="company-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="company-detail" />,
+    "20",
+    "10",
+    "15",
+    "05/09/22 12:00:00AM PT",
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="Construction Company" route="company-detail" />,
+    "John Smith",
+    <TableLink text="555-555-5555" route="company-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="company-detail" />,
+    "20",
+    "10",
+    "15",
+    "05/09/22 12:00:00AM PT",
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="Construction Company" route="company-detail" />,
+    "John Smith",
+    <TableLink text="555-555-5555" route="company-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="company-detail" />,
+    "20",
+    "10",
+    "15",
+    "05/09/22 12:00:00AM PT",
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="Construction Company" route="company-detail" />,
+    "John Smith",
+    <TableLink text="555-555-5555" route="company-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="company-detail" />,
+    "20",
+    "10",
+    "15",
+    "05/09/22 12:00:00AM PT",
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="Construction Company" route="company-detail" />,
+    "John Smith",
+    <TableLink text="555-555-5555" route="company-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="company-detail" />,
+    "20",
+    "10",
+    "15",
+    "05/09/22 12:00:00AM PT",
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="Construction Company" route="company-detail" />,
+    "John Smith",
+    <TableLink text="555-555-5555" route="company-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="company-detail" />,
+    "20",
+    "10",
+    "15",
+    "05/09/22 12:00:00AM PT",
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="Construction Company" route="company-detail" />,
+    "John Smith",
+    <TableLink text="555-555-5555" route="company-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="company-detail" />,
+    "20",
+    "10",
+    "15",
+    "05/09/22 12:00:00AM PT",
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="Construction Company" route="company-detail" />,
+    "John Smith",
+    <TableLink text="555-555-5555" route="company-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="company-detail" />,
+    "20",
+    "10",
+    "15",
+    "05/09/22 12:00:00AM PT",
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="Construction Company" route="company-detail" />,
+    "John Smith",
+    <TableLink text="555-555-5555" route="company-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="company-detail" />,
+    "20",
+    "10",
+    "15",
+    "05/09/22 12:00:00AM PT",
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="Construction Company" route="company-detail" />,
+    "John Smith",
+    <TableLink text="555-555-5555" route="company-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="company-detail" />,
+    "20",
+    "10",
+    "15",
+    "05/09/22 12:00:00AM PT",
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="Construction Company" route="company-detail" />,
+    "John Smith",
+    <TableLink text="555-555-5555" route="company-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="company-detail" />,
+    "20",
+    "10",
+    "15",
+    "05/09/22 12:00:00AM PT",
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="Construction Company" route="company-detail" />,
+    "John Smith",
+    <TableLink text="555-555-5555" route="company-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="company-detail" />,
+    "20",
+    "10",
+    "15",
+    "05/09/22 12:00:00AM PT",
+    "Enabled",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
   ),
 ];
 const StyledTableCell = styled(TableCell)(({ theme }) => ({

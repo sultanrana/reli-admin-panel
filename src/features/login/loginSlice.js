@@ -11,6 +11,10 @@ const initialState = {
     isEditCompanyModal: false,
     isAddUserModal: false,
     isEditCustomerModal: false,
+    isAddAdminPortalUserModal: false,
+    isEditAdminPortalUserModal: false,
+    isDeleteModal: false,
+
 };
 
 const loginSlice = createSlice({
@@ -63,11 +67,32 @@ const loginSlice = createSlice({
             }else{
                 state.isEditCustomerModal = true
             }
+        },
+        handleAddAdminPortalUserModal: (state, action) => {
+            if(state.isAddAdminPortalUserModal){
+                state.isAddAdminPortalUserModal = false
+            }else{
+                state.isAddAdminPortalUserModal = true
+            }
+        },
+        handleEditAdminPortalUserModal: (state, action) => {
+            if(state.isEditAdminPortalUserModal){
+                state.isEditAdminPortalUserModal = false
+            }else{
+                state.isEditAdminPortalUserModal = true
+            }
+        },
+        handleDeleteModal: (state, action) => {
+            if(state.isDeleteModal){
+                state.isDeleteModal = false
+            }else{
+                state.isDeleteModal = true
+            }
         }
     }
 })
 
 // console.log(loginSlice);
-export const { loginUser, setError, logout, emptyToken, showError, responseCode, setIsDrawerOpen, handleAddCompanyModal, handleEditCompanyModal, handleAddUserModal, handleEditCustomerModal } = loginSlice.actions;
+export const { loginUser, setError, logout, emptyToken, showError, responseCode, setIsDrawerOpen, handleAddCompanyModal, handleEditCompanyModal, handleAddUserModal, handleEditCustomerModal, handleAddAdminPortalUserModal, handleEditAdminPortalUserModal, handleDeleteModal } = loginSlice.actions;
 
 export default loginSlice.reducer;

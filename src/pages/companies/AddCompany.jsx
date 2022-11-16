@@ -41,6 +41,7 @@ const clearImgRef = () => {
     <Dialog
     open={isAddCompanyModal}
     scroll='body'
+    onClose={() => dispatch(handleAddCompanyModal())}
     aria-describedby="scroll-dialog-description"
   >
     <DialogTitle id="scroll-dialog-title" sx={{ 

@@ -11,7 +11,7 @@ import { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
 import TableLink from '../../components/TableLink';
 import { useState } from 'react';
-import TableActions from '../../components/TableActions';
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 // transaction
 const transactionColumns = [
   { id: 'projectId', label: 'Project ID', minWidth: 150, fontWeight: '600' },
@@ -32,15 +32,214 @@ function createDataTransaction(projectId, customer, serviceType, paymentType, sc
 }
 // transaction
 const transactionRows = [
-  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <TableActions/>),
-  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <TableActions/>),
-  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <TableActions/>),
-  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <TableActions/>),
-  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <TableActions/>),
-  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <TableActions/>),
-  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <TableActions/>),
-  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <TableActions/>),
-  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <TableActions/>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
+  createDataTransaction(<TableLink text="PROJ0238C033"/>, <TableLink text="John Smith" />, "Windows", "Labor", "04/27/22", "04/27/22", "Completed", "$750.00", "--", "$250.00", <div style={{ 
+    display: 'flex',
+    gap: '10px'
+}}>
+    <IconButton>
+        <DeleteRoundedIcon/>
+    </IconButton>
+</div>),
 ];
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {

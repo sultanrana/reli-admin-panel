@@ -19,6 +19,7 @@ import SearchBox from "../../components/SearchBox";
 import { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
 import ModeRoundedIcon from "@mui/icons-material/ModeRounded";
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import FilterListRoundedIcon from "@mui/icons-material/FilterListRounded";
 import { useSelector } from "react-redux";
 import TableLink from "../../components/TableLink";
@@ -107,7 +108,614 @@ const rows = [
     "$250.00",
     "05/01/22",
     "$250.00",
-    <TableActions/>
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    "TRO859454",
+    <TableLink text="PROJ58549" />,
+    <TableLink text="John Jenkins" />,
+    "Cutomers",
+    "Door",
+    "Customer Payment",
+    "Costa Mesa",
+    "SA",
+    "55555",
+    "04/15/22",
+    "05/01/22",
+    "05/01/22",
+    "$250.00",
+    "05/01/22",
+    "$250.00",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
   ),
 ];
 const StyledTableCell = styled(TableCell)(({ theme }) => ({

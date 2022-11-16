@@ -12,10 +12,14 @@ import SearchBox from '../../components/SearchBox';
 import { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
 import ModeRoundedIcon from '@mui/icons-material/ModeRounded';
-import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
-import { useSelector } from 'react-redux';
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import { useDispatch, useSelector } from 'react-redux';
 import TableLink from '../../components/TableLink';
 import TableActions from '../../components/TableActions';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import DeleteModal from '../../components/DeleteModal';
+import { handleDeleteModal } from '../../features/login/loginSlice';
 const columns = [
   { id: "name", label: "Name", minWidth: 150, fontWeight: '600' },
   { id: "description", label: "Description", minWidth: 300, fontWeight: '600' },
@@ -29,16 +33,7 @@ function createData(name, description, service, code, enabled, actions) {
   return { name, description, service, code, enabled, actions };
 }
 
-const rows = [
-  createData(
-    <TableLink text="John Jenkins" />,
-    "Save 25% off on your next repair",
-    "Window",
-    "ASDF4874KL039",
-    "Y",
-    <TableActions/> 
-  ),
-];
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.gray,
@@ -60,7 +55,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
   }));
 const Coupons = () => {
-  const {isDrawerOpen} = useSelector((store) => store.login)
+  const dispatch = useDispatch()
+const {isDrawerOpen, isDeleteModal} = useSelector((store) => store.login)
+const navigate = useNavigate()
 const breadcrumbs = [
     <Typography key="3" color="text.primary" style={{
         fontStyle: 'normal',
@@ -71,6 +68,26 @@ const breadcrumbs = [
     }}>
         Coupons
     </Typography>
+];
+const rows = [
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    "ASDF4870KB089",
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
 ];
 const [page, setPage] = React.useState(0);
 const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -103,9 +120,9 @@ const handleChangeRowsPerPage = (event) => {
             alignItems: 'center',
             gap: '1rem'
           }}>
-            <Button variant="outlined" className="bc-btn-outline" color="primary">Add Coupon</Button>
+            <Button variant="outlined" className="bc-btn-outline" color="primary" onClick={() => navigate('addCoupon')} >Add Coupon</Button>
           </Box>
-        </Box>
+      </Box>
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
             <TableContainer>
                 <Table stickyHeader aria-label="sticky table" sx={{}}>
@@ -155,6 +172,11 @@ const handleChangeRowsPerPage = (event) => {
             />
         </Paper>
       </Box>
+
+      {isDeleteModal? (
+        <DeleteModal/>
+      ): null}
+
     </div>
   )
 }

@@ -18,6 +18,7 @@ import TableRow from "@mui/material/TableRow";
 import SearchBox from "../../components/SearchBox";
 import { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import ModeRoundedIcon from "@mui/icons-material/ModeRounded";
 import FilterListRoundedIcon from "@mui/icons-material/FilterListRounded";
 import { useSelector } from "react-redux";
@@ -52,6 +53,7 @@ const columns = [
   },
   { id: "status", label: "Status", minWidth: 100, fontWeight: "600" },
   { id: "lastActive", label: "Last Active", minWidth: 200, fontWeight: "600" },
+  { id: "actions", label: "Actions", minWidth: 150, fontWeight: "600" },
 ];
 
 function createData(
@@ -63,7 +65,8 @@ function createData(
   completedProjects,
   totalPurchases,
   status,
-  lastActive
+  lastActive,
+  actions
 ) {
   return {
     name,
@@ -75,6 +78,7 @@ function createData(
     totalPurchases,
     status,
     lastActive,
+    actions
   };
 }
 
@@ -88,7 +92,490 @@ const rows = [
     "5",
     "$1,250.00",
     "Active",
-    "05/09/22 12:00:00AM PT"
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Smith" route="customer-detail" />,
+    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+    <TableLink text="051-555-5555" route="customer-detail" />,
+    "2",
+    "5",
+    "5",
+    "$1,250.00",
+    "Active",
+    "05/09/22 12:00:00AM PT",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton>
+          <DeleteRoundedIcon/>
+      </IconButton>
+  </div>
   ),
 ];
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -195,7 +682,7 @@ const Customers = () => {
           </IconButton> */}
         </Box>
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
-          <TableContainer sx={{ maxHeight: 440 }}>
+          <TableContainer>
             <Table stickyHeader aria-label="sticky table" sx={{}}>
               <TableHead>
                 <StyledTableRow>
