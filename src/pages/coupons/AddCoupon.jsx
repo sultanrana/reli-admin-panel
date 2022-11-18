@@ -91,7 +91,7 @@ const handlePickImage = (e) => {
                   id="coupon-name"
                   label="Coupon Name"
                   variant="outlined" 
-                  defaultValue="Windows Repair"
+                  defaultValue=""
                 />
                 <TextField sx={{
                   width: '100%',
@@ -101,7 +101,7 @@ const handlePickImage = (e) => {
                   id="coupon-description-static"
                   label="Coupon Description"
                   multiline
-                  defaultValue="Save 25% on your next repair"
+                  defaultValue=""
                   rows={10}
                   variant="outlined"
                 />
@@ -111,7 +111,7 @@ const handlePickImage = (e) => {
                     labelId="service-label"
                     id="service"
                     label="Service"
-                    defaultValue="windows"
+                    defaultValue=""
                   >
                     <MenuItem value='windows'>Windows</MenuItem>
                     <MenuItem value="slidingGlassDoor">Sliging Glass Doors</MenuItem>
@@ -134,7 +134,7 @@ const handlePickImage = (e) => {
                   id="coupon-code"
                   label="Coupon Code"
                   variant="outlined" 
-                  defaultValue="HFD8639JDK377"
+                  defaultValue=""
                 />
               </CouponInnerBox>
               <CouponInnerBox sx={{alignItems: 'center', minHeight: '482px', justifyContent: 'center'}}>

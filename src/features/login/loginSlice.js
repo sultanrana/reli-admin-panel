@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     baseUrl: 'http://34.236.149.254/api/admin/users',
@@ -14,9 +14,10 @@ const initialState = {
     isAddAdminPortalUserModal: false,
     isEditAdminPortalUserModal: false,
     isDeleteModal: false,
-
 };
+export const login = createAsyncThunk('login/login', () => {
 
+})
 const loginSlice = createSlice({
     name: 'login',
     initialState,
@@ -88,7 +89,10 @@ const loginSlice = createSlice({
             }else{
                 state.isDeleteModal = true
             }
-        }
+        },
+    },
+    extraReducers:{
+        
     }
 })
 

@@ -2,6 +2,9 @@ import {TextField, Box,} from '@mui/material';
 import SearchComponent from "react-material-ui-searchbar";
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 const SearchBox = () => {
+  const handleSearch = e => {
+    console.log(e.target.value);
+  }
   return (
         <>
           {/* <SearchComponent sx={{
@@ -29,7 +32,7 @@ const SearchBox = () => {
               width: '16%',
               marginLeft: '6px'
             }}/>
-            <input type="text" placeholder='Search' className='search-input' />
+            <input type="text" placeholder='Search' className='search-input' onChange={handleSearch} />
         </Box>
         </>
 

@@ -91,6 +91,9 @@ const ReAssignRemove = styled(Button)(({theme}) => ({
   color: '#FFFFFF',
   textTransform: 'uppercase'
 }))
+const StyledTableCell = styled(TableCell)(({theme}) => ({
+
+}))
 
 
 const ProjectDetails = () => {
@@ -113,7 +116,6 @@ const breadcrumbs = [
   </Typography>,
 ];
 const [isReschedule, setIsReschedule] = useState(false);
-const [isRefund, setIsRefund] = useState(false);
 const [isReassign, setIsReassign] = useState(false);
 const handleRescheduleModal = () => {
   if(isReschedule){

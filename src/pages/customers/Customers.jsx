@@ -15,14 +15,19 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import SearchBox from "../../components/SearchBox";
 import { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
-import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
-import ModeRoundedIcon from "@mui/icons-material/ModeRounded";
-import FilterListRoundedIcon from "@mui/icons-material/FilterListRounded";
 import { useSelector } from "react-redux";
-import TableLink from "../../components/TableLink";
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { RowingSharp } from "@mui/icons-material";
+
+
+
+
+
+
 const columns = [
   { id: "name", label: "Name", minWidth: 150, fontWeight: "600" },
   { id: "email", label: "Email", minWidth: 150, fontWeight: "600" },
@@ -82,501 +87,70 @@ function createData(
   };
 }
 
-const rows = [
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
-  createData(
-    <TableLink text="John Smith" route="customer-detail" />,
-    <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
-    <TableLink text="051-555-5555" route="customer-detail" />,
-    "2",
-    "5",
-    "5",
-    "$1,250.00",
-    "Active",
-    "05/09/22 12:00:00AM PT",
-    <div style={{ 
-      display: 'flex',
-      gap: '10px'
-  }}>
-      <IconButton>
-          <DeleteRoundedIcon/>
-      </IconButton>
-  </div>
-  ),
+// var rows = [
+//   createData(
+//     "malik",
+//     <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+//     <TableLink text="051-555-5555" route="customer-detail" />,
+//     "2",
+//     "5",
+//     "5",
+//     "$1,250.00",
+//     "Active",
+//     "05/09/22 12:00:00AM PT",
+//     <div style={{ 
+//       display: 'flex',
+//       gap: '10px'
+//   }}>
+//       <IconButton>
+//           <DeleteRoundedIcon/>
+//       </IconButton>
+//   </div>
+//   ),
+//   createData(
+//     "bieee",
+//     <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+//     <TableLink text="051-555-5555" route="customer-detail" />,
+//     "2",
+//     "5",
+//     "5",
+//     "$1,250.00",
+//     "Active",
+//     "05/09/22 12:00:00AM PT",
+//     <div style={{ 
+//       display: 'flex',
+//       gap: '10px'
+//   }}>
+//       <IconButton>
+//           <DeleteRoundedIcon/>
+//       </IconButton>
+//   </div>
+//   ),
+//   createData(
+//     "hi",
+//     <TableLink text="johnsmith@tepia.co" route="customer-detail"  />,
+//     <TableLink text="051-555-5555" route="customer-detail" />,
+//     "2",
+//     "5",
+//     "5",
+//     "$1,250.00",
+//     "Active",
+//     "05/09/22 12:00:00AM PT",
+//     <div style={{ 
+//       display: 'flex',
+//       gap: '10px'
+//   }}>
+//       <IconButton>
+//           <DeleteRoundedIcon/>
+//       </IconButton>
+//   </div>
+//   ),
+// ];
+var customerRows = [
+  {name: 'Malik Azhar Abbas', email : 'malik@gmail.com', phone: '555-555-5555', numberOfProperties: 1, openProjects: 3, completedProjects: 5, totalPurchases: '$1,250.00', status: 'Active', lastActive: '05/09/22 12:00:00AM PT'},
+  {name: 'Shahroz javed', email : 'shahroz@gmail.com', phone: '555-555-5555', numberOfProperties: 1, openProjects: 3, completedProjects: 5, totalPurchases: '$1,250.00', status: 'Active', lastActive: '05/09/22 12:00:00AM PT'},
+  {name: 'bilal', email : 'bilal@gmail.com', phone: '555-555-5555', numberOfProperties: 1, openProjects: 3, completedProjects: 5, totalPurchases: '$1,250.00', status: 'Active', lastActive: '05/09/22 12:00:00AM PT'},
+  {name: 'umar', email : 'umar@gmail.com', phone: '555-555-5555', numberOfProperties: 1, openProjects: 3, completedProjects: 5, totalPurchases: '$1,250.00', status: 'Active', lastActive: '05/09/22 12:00:00AM PT'},
 ];
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -598,6 +172,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     backgroundColor: "#ddd",
   },
 }));
+
+const TableLink = styled('span')(({theme}) => ({
+  color: '#2196f3',
+  fontWeight: '500',
+  textDecoration: 'underline',
+  cursor: 'pointer'
+}))
+
 const Customers = () => {
   const { isDrawerOpen } = useSelector((store) => store.login);
   const breadcrumbs = [
@@ -615,9 +197,11 @@ const Customers = () => {
       Customers
     </Typography>,
   ];
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
+const navigate = useNavigate()
+const [page, setPage] = React.useState(0);
+const [rowsPerPage, setRowsPerPage] = React.useState(10);
+const [searchValue, setSearchValue] = useState('');
+const [rows, setRows] = useState(customerRows);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -626,6 +210,18 @@ const Customers = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  const handleSearch = (searchedValue) => {
+    setSearchValue(searchedValue)
+    const filteredRows = customerRows.filter((row) => {
+      return row.name.toLowerCase().includes(searchedValue.toLowerCase());
+    });
+    if(filteredRows.length > 0){
+      setRows(filteredRows)
+    }else{
+      setRows(customerRows)
+    }
+  }
+  
 
   return (
     <div className="page-section">
@@ -675,7 +271,24 @@ const Customers = () => {
           }}
         >
           <Box component="div">
-            <SearchBox />
+            {/* <SearchBox /> */}
+            <Box sx={{
+            background: '#FFFFFF',
+            boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+            borderRadius: '33px',
+            height: 50,
+            display: 'flex',
+            alignItems: 'center',
+            maxWidth: '245px',
+            border: '1px solid #ddd',
+            overflow: 'hidden'
+        }}>
+            <SearchRoundedIcon sx={{
+              width: '16%',
+              marginLeft: '6px'
+            }}/>
+            <input type="text" value={searchValue} placeholder='Search' className='search-input' onChange={(e) =>  handleSearch(e.target.value)} />
+        </Box>
           </Box>
           {/* <IconButton aria-label="filter-icon" size="large">
             <FilterListRoundedIcon />
@@ -686,47 +299,69 @@ const Customers = () => {
             <Table stickyHeader aria-label="sticky table" sx={{}}>
               <TableHead>
                 <StyledTableRow>
-                  {columns.map((column) => (
-                    <StyledTableCell
-                      key={column.id}
-                      align={column.align}
-                      style={{
-                        minWidth: column.minWidth,
-                        fontWeight: column.fontWeight,
-                      }}
-                    >
-                      {column.label}
+                    <StyledTableCell sx={{minWidth: 150}}>
+                      Name
                     </StyledTableCell>
-                  ))}
+                    <StyledTableCell sx={{minWidth: 150}}>
+                      Email
+                    </StyledTableCell>
+                    <StyledTableCell sx={{minWidth: 150}}>
+                      Phone
+                    </StyledTableCell>
+                    <StyledTableCell sx={{minWidth: 150}}>
+                      Number of Properties
+                    </StyledTableCell>
+                    <StyledTableCell sx={{minWidth: 150}}>
+                      Open Projects
+                    </StyledTableCell>
+                    <StyledTableCell sx={{minWidth: 150}}>
+                      Completed Projects
+                    </StyledTableCell>
+                    <StyledTableCell sx={{minWidth: 150}}>
+                      Total Purchases
+                    </StyledTableCell>
+                    <StyledTableCell sx={{minWidth: 150}}>
+                      Status
+                    </StyledTableCell>
+                    <StyledTableCell sx={{minWidth: 150}}>
+                      Last Active
+                    </StyledTableCell>
                 </StyledTableRow>
               </TableHead>
               <TableBody>
-                {rows
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => {
-                    return (
-                      <StyledTableRow
-                        hover
-                        role="checkbox"
-                        tabIndex={-1}
-                        key={row.code}
-                      >
-                        {columns.map((column) => {
-                          const value = row[column.id];
-                          return (
-                            <StyledTableCell
-                              key={column.id}
-                              align={column.align}
-                            >
-                              {column.format && typeof value === "number"
-                                ? column.format(value)
-                                : value}
-                            </StyledTableCell>
-                          );
-                        })}
-                      </StyledTableRow>
-                    );
-                  })}
+                {rows.map((row) => (
+                  <StyledTableRow key={row.name}>
+                    <StyledTableCell sx={{minWidth: 150}}>
+                      <TableLink onClick={() => navigate('customer-detail')}>
+                        {row.name}
+                      </TableLink>
+                    </StyledTableCell>
+                    <StyledTableCell sx={{minWidth: 150}}>
+                      {row.email}
+                    </StyledTableCell>
+                    <StyledTableCell sx={{minWidth: 150}}>
+                      {row.phone}
+                    </StyledTableCell>
+                    <StyledTableCell sx={{minWidth: 150}}>
+                      {row.numberOfProperties}
+                    </StyledTableCell>
+                    <StyledTableCell sx={{minWidth: 150}}>
+                      {row.openProjects}
+                    </StyledTableCell>
+                    <StyledTableCell sx={{minWidth: 150}}>
+                      {row.completedProjects}
+                    </StyledTableCell>
+                    <StyledTableCell sx={{minWidth: 150}}>
+                      {row.totalPurchases}
+                    </StyledTableCell>
+                    <StyledTableCell sx={{minWidth: 150}}>
+                      {row.status}
+                    </StyledTableCell>
+                    <StyledTableCell sx={{minWidth: 150}}>
+                      {row.lastActive}
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
               </TableBody>
             </Table>
           </TableContainer>

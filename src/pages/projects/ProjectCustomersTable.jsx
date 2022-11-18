@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Paper from '@mui/material/Paper';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,7 +7,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
-import { Box, Button, Card, IconButton, Table, TableContainer, Typography,} from '@mui/material';
+import { Box, Button, Card, IconButton, TextField, Table, TableContainer, Typography, DialogContentText, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import TableLink from '../../components/TableLink';
 import TableActions from '../../components/TableActions';
 
@@ -27,15 +27,6 @@ const activeProjectColumns = [
     return { transactionType, processed, couponCode, couponValue, amount, status, actions };
   }
   // active project
-  const activeProjectrows = [
-    createData( "Initial Payment", "04/30/22", "20percentoff","$220.00", "$1,100.00", "Paid", <Button variant='contained'>refund</Button>),
-    createData( "Initial Payment", "04/30/22", "20percentoff","$220.00", "$1,100.00", "Paid", <Button variant='contained'>refund</Button>),
-    createData( "Initial Payment", "04/30/22", "20percentoff","$220.00", "$1,100.00", "Paid", <Button variant='contained' disabled>refund</Button>),
-    createData( "Initial Payment", "04/30/22", "20percentoff","$220.00", "$1,100.00", "Paid", <Button variant='contained'>refund</Button>),
-    createData( "Initial Payment", "04/30/22", "20percentoff","$220.00", "$1,100.00", "Paid", <Button variant='contained'>refund</Button>),
-  ];
-  
-
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.gray,
@@ -56,10 +47,35 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
       backgroundColor: '#ddd',
     },
   }));
+
+const RefundContainer = styled(TableContainer)(({theme}) => ({
+  padding: '1rem',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1rem',
+  [theme.breakpoints.down('md')] : {
+    width: '100%',
+  }, 
+  [theme.breakpoints.up('md')] : {
+    width: '475px',
+  }, 
+}))
+const StyledTextField = styled(TextField)(({theme}) => ({
+  height: '54px',
+  marginBottom: '7rem',
+  [theme.breakpoints.down('md')]: {
+    width: '100%'
+  },
+  [theme.breakpoints.up('md')]: {
+    width: '304px'
+  },
+}))
+
+
 const ProjectCustomersTable = () => {
 const [page, setPage] = React.useState(0);
 const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
+const [isRefund, setIsRefund] = useState(false);
 const handleChangePage = (event, newPage) => {
     setPage(newPage);
 };
@@ -68,6 +84,18 @@ const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
 };
+const handleRefundModal = () => {
+  if(isRefund){
+    setIsRefund(false)
+  }else{
+    setIsRefund(true)
+  }
+}
+
+const activeProjectrows = [
+  createData( "Initial Payment", "04/30/22", "20percentoff","$220.00", "$1,100.00", "Paid", <Button variant='contained' onClick={handleRefundModal}>refund</Button>),
+];
+
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden', mb: 3 }}>
           <TableContainer>
@@ -116,6 +144,99 @@ const handleChangeRowsPerPage = (event) => {
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
           /> */}
+
+            {isRefund ? (
+            <Dialog
+                open={isRefund}
+                scroll='body'
+                onClose={handleRefundModal}
+                aria-describedby="scroll-dialog-description"
+              >
+                <DialogTitle id="scroll-dialog-title" sx={{ 
+                    p: 1,
+                    fontStyle: 'normal',
+                    fontWeight: '400',
+                    fontSize: '24px',
+                    lineHeight: '24px',
+                    letterSpacing: '0.18px',
+                    color: '#000000'
+                }}>Refund</DialogTitle>
+                <DialogContent
+                    sx={{
+                        p: 0
+                    }}
+                >
+                  <DialogContentText
+                    id="scroll-dialog-description"
+                    tabIndex={-1}
+                  >
+                  <RefundContainer>
+                    <Typography sx={{
+                      fontWeight: '600',
+                      fontSize: '14px',
+                      color: '#000000',
+                    }}>
+                      Window PROJ94382
+                    </Typography>
+                    <Paper sx={{ width: '100%', overflow: 'hidden'}}>
+                      <TableContainer>
+                          <Table stickyHeader aria-label="sticky table" sx={{}}>
+                          <TableHead>
+                              <StyledTableRow>
+                                  <StyledTableCell sx={{fontSize: '12px', fontWeight: '600'}}>
+                                    Transaction Type
+                                  </StyledTableCell>
+                                  <StyledTableCell sx={{fontSize: '12px', fontWeight: '600'}}>
+                                    Date
+                                  </StyledTableCell>
+                                  <StyledTableCell sx={{fontSize: '12px', fontWeight: '600'}}>
+                                    Amount
+                                  </StyledTableCell>
+                                  <StyledTableCell sx={{fontSize: '12px', fontWeight: '600'}}>
+                                    Status
+                                  </StyledTableCell>
+                              </StyledTableRow>
+                          </TableHead>
+                          <TableBody>
+                                  <TableRow>
+                                      <StyledTableCell>
+                                        Initial Payment
+                                      </StyledTableCell>
+                                      <StyledTableCell>
+                                        04/30/22
+                                      </StyledTableCell>
+                                      <StyledTableCell>
+                                        $1,100.00
+                                      </StyledTableCell>
+                                      <StyledTableCell>
+                                        Paid
+                                      </StyledTableCell>
+                                  </TableRow>
+                          </TableBody>
+                          </Table>
+                      </TableContainer>
+                    </Paper>
+                    <StyledTextField 
+                        sx={{width: '100%',}}
+                        id="amount"
+                        label="Amount"
+                        variant="outlined" 
+                        defaultValue="$1,100.00"
+                        helperText="Max available for refund"
+                    />
+                  </RefundContainer>
+                    
+                  
+                  
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button variant='outlined' onClick={handleRefundModal}>Cancel</Button>
+                  <Button variant='contained' onClick={handleRefundModal}>Save Changes</Button>
+                </DialogActions>
+            </Dialog>
+              
+            ) : null}
       </Paper>
   )
 }

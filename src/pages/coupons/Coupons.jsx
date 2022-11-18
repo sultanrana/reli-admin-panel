@@ -20,6 +20,8 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import DeleteModal from '../../components/DeleteModal';
 import { handleDeleteModal } from '../../features/login/loginSlice';
+import {setIsLoading} from '../../features/loading/loadingSlice';
+import Loading from '../../components/Loading';
 const columns = [
   { id: "name", label: "Name", minWidth: 150, fontWeight: '600' },
   { id: "description", label: "Description", minWidth: 300, fontWeight: '600' },
@@ -55,8 +57,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
   }));
 const Coupons = () => {
-  const dispatch = useDispatch()
+const dispatch = useDispatch()
 const {isDrawerOpen, isDeleteModal} = useSelector((store) => store.login)
+const {isLoading} = useSelector((store) => store.loading)
 const navigate = useNavigate()
 const breadcrumbs = [
     <Typography key="3" color="text.primary" style={{
@@ -69,12 +72,554 @@ const breadcrumbs = [
         Coupons
     </Typography>
 ];
+const myRnId = () => parseInt(Date.now() * Math.random());
+
 const rows = [
   createData(
     <TableLink text="John Jenkins" />,
     "Save 25% off on your next repair",
     "Window",
-    "ASDF4870KB089",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
+    "Y",
+    <div style={{ 
+      display: 'flex',
+      gap: '10px'
+  }}>
+      <IconButton onClick={() => dispatch(handleDeleteModal())}>
+          <DeleteRoundedIcon/>
+      </IconButton>
+      <IconButton onClick={() => navigate('editCoupon')}>
+          <ModeRoundedIcon/>
+      </IconButton>
+  </div>
+  ),
+  createData(
+    <TableLink text="John Jenkins" />,
+    "Save 25% off on your next repair",
+    "Window",
+    myRnId,
     "Y",
     <div style={{ 
       display: 'flex',
@@ -102,7 +647,11 @@ const handleChangeRowsPerPage = (event) => {
 };
 
 
-
+if(isLoading){
+    return (
+        <Loading/>
+    )
+}
 
   return (
     <div className="page-section">
