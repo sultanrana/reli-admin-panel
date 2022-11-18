@@ -24,21 +24,243 @@ const activeProjectColumns = [
   { id: 'serviceType', label: 'Service Type', minWidth: 170, fontWeight: '600' },
   { id: 'scheduled', label: 'Scheduled', minWidth: 150, fontWeight: '600' },
   { id: 'amount', label: 'Amount', minWidth: 100, fontWeight: '600' },
-  { id: 'actions', label: 'Actions', minWidth: 160, fontWeight: '600' },
+  // { id: 'actions', label: 'Actions', minWidth: 160, fontWeight: '600' },
 ];
 // active project
-function createData(projectId, projectStatus, customer, serviceType, scheduled, amount, actions) {
-  return { projectId, projectStatus, customer, serviceType, scheduled, amount, actions };
+function createData(projectId, projectStatus, customer, serviceType, scheduled, amount,
+  //  actions
+   ) {
+  return { projectId, projectStatus, customer, serviceType, scheduled, amount,
+    //  actions 
+    };
 }
 // active project
 const activeProjectrows = [
-  createData(<TableLink text="PROJ58549"/>, "Unassigned", <TableLink text="John Smith"/>,"Windows", "N/A", "$250.00", <TableActions/>),
-  createData(<TableLink text="PROJ58549"/>, "Unassigned", <TableLink text="John Smith"/>,"Windows", "N/A", "$250.00", <TableActions/>),
-  createData(<TableLink text="PROJ58549"/>, "Unassigned", <TableLink text="John Smith"/>,"Windows", "N/A", "$250.00", <TableActions/>),
-  createData(<TableLink text="PROJ58549"/>, "Unassigned", <TableLink text="John Smith"/>,"Windows", "N/A", "$250.00", <TableActions/>),
-  createData(<TableLink text="PROJ58549"/>, "Unassigned", <TableLink text="John Smith"/>,"Windows", "N/A", "$250.00", <TableActions/>),
-  createData(<TableLink text="PROJ58549"/>, "Unassigned", <TableLink text="John Smith"/>,"Windows", "N/A", "$250.00", <TableActions/>),
-  createData(<TableLink text="PROJ58549"/>, "Unassigned", <TableLink text="John Smith"/>,"Windows", "N/A", "$250.00", <TableActions/>),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
+  createData(
+  <TableLink text="PROJ58549"/>,
+   "Unassigned",
+    <TableLink text="John Smith"/>,
+    "Windows", 
+    "N/A", 
+    "$250.00",
+    // <TableActions/>
+  ),
 ];
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -135,7 +357,7 @@ const handleChangeRowsPerPage = (event) => {
           </Typography>
         {services.map((service) => {
               return (
-                <Link to={service.route}>
+                <Box>
                   <Card
                     key={service.id}
                     {...services}
@@ -169,7 +391,7 @@ const handleChangeRowsPerPage = (event) => {
                       {service.title}
                     </Typography>
                   </Card>
-                </Link>
+                </Box>
               );
             })}
         </div>

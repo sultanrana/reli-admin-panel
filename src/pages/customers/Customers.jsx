@@ -299,31 +299,31 @@ const [rows, setRows] = useState(customerRows);
             <Table stickyHeader aria-label="sticky table" sx={{}}>
               <TableHead>
                 <StyledTableRow>
-                    <StyledTableCell sx={{minWidth: 150}}>
+                    <StyledTableCell sx={{minWidth: 150, fontWeight: '600'}}>
                       Name
                     </StyledTableCell>
-                    <StyledTableCell sx={{minWidth: 150}}>
+                    <StyledTableCell sx={{minWidth: 150, fontWeight: '600'}}>
                       Email
                     </StyledTableCell>
-                    <StyledTableCell sx={{minWidth: 150}}>
+                    <StyledTableCell sx={{minWidth: 150, fontWeight: '600'}}>
                       Phone
                     </StyledTableCell>
-                    <StyledTableCell sx={{minWidth: 150}}>
+                    <StyledTableCell sx={{minWidth: 150, fontWeight: '600'}}>
                       Number of Properties
                     </StyledTableCell>
-                    <StyledTableCell sx={{minWidth: 150}}>
+                    <StyledTableCell sx={{minWidth: 150, fontWeight: '600'}}>
                       Open Projects
                     </StyledTableCell>
-                    <StyledTableCell sx={{minWidth: 150}}>
+                    <StyledTableCell sx={{minWidth: 150, fontWeight: '600'}}>
                       Completed Projects
                     </StyledTableCell>
-                    <StyledTableCell sx={{minWidth: 150}}>
+                    <StyledTableCell sx={{minWidth: 150, fontWeight: '600'}}>
                       Total Purchases
                     </StyledTableCell>
-                    <StyledTableCell sx={{minWidth: 150}}>
+                    <StyledTableCell sx={{minWidth: 150, fontWeight: '600'}}>
                       Status
                     </StyledTableCell>
-                    <StyledTableCell sx={{minWidth: 150}}>
+                    <StyledTableCell sx={{minWidth: 150, fontWeight: '600'}}>
                       Last Active
                     </StyledTableCell>
                 </StyledTableRow>

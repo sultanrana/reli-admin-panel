@@ -31,7 +31,14 @@ const CouponInnerBox = styled(Box)(({theme}) => ({
     flex: '1'
   },
 }))
-
+const CouponButton = styled(Button)(({theme}) => ({
+  [theme.breakpoints.down('md')]: {
+    width: '100%',
+  },
+  [theme.breakpoints.up('md')]: {
+    width: '345px',
+  },
+}))
 const EditCoupon = () => {
 const {isDrawerOpen} = useSelector((store) => store.login)
 const breadcrumbs = [
@@ -152,6 +159,7 @@ const handlePickImage = (e) => {
                 </Typography>
               </CouponInnerBox>
             </Box>
+            <CouponButton variant='contained'>Save</CouponButton>
         </CouponCard>
       </Box>
     </div>  

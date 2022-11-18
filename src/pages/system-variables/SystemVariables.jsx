@@ -29,7 +29,7 @@ const breadcrumbs = [
         color: "#000000",
       }}
     >
-      Companies
+      System Variables
     </Typography>,
   ];
   return (
@@ -69,7 +69,7 @@ const breadcrumbs = [
 
             <Box component="div" sx={{ py: 4, px: matches? 2: 8, backgroundColor: '#F7F7F7'}}>
                 <form>
-                    <Box component="div" sx={{display: 'flex', gap: '4rem', flexWrap: 'wrap', width: '100%', mb: 15}}>
+                    <Box component="div" sx={{display: 'flex', gap: '4rem', flexWrap: 'wrap', width: '100%', mb: 7}}>
                         <div style={{width : matches? '100%' : 'auto'}}>
                             <TextField
                                 required

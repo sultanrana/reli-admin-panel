@@ -33,27 +33,231 @@ const columns = [
   { id: 'paidToContractor', label: 'Paid to Contractor', minWidth: 200, fontWeight: '600' },
   { id: 'status', label: 'status', minWidth: 200, fontWeight: '600' },
   { id: 'lastStatusUpdate', label: 'Last Status Update', minWidth: 200, fontWeight: '600' },
-  { id: 'actions', label: 'Actions', minWidth: 150, fontWeight: '600' },
+  // { id: 'actions', label: 'Actions', minWidth: 150, fontWeight: '600' },
 ];
 
-function createData(projectId, customers, serviceType, company, workersAssigned, city, state, zip, dateOrdered, dateScheduled, dateCompleted, totalPaidByCustomer, refundToCustomer, paidToContractor, status, lastStatusUpdate, actions) {
-  return { projectId, customers, serviceType, company, workersAssigned, city, state, zip, dateOrdered, dateScheduled, dateCompleted, totalPaidByCustomer, refundToCustomer, paidToContractor, status, lastStatusUpdate, actions};
+function createData(projectId, customers, serviceType, company, workersAssigned, city, state, zip, dateOrdered, dateScheduled, dateCompleted, totalPaidByCustomer, refundToCustomer, paidToContractor, status, lastStatusUpdate,
+  //  actions
+  ) {
+  return { projectId, customers, serviceType, company, workersAssigned, city, state, zip, dateOrdered, dateScheduled, dateCompleted, totalPaidByCustomer, refundToCustomer, paidToContractor, status, lastStatusUpdate,
+    //  actions
+    };
 }
 
 const rows = [
-  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT", <TableActions/>),
-  createData(<TableLink text="PROJ58549"/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT", <TableActions/>),
-  createData(<TableLink text="PROJ58549"/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT", <TableActions/>),
-  createData(<TableLink text="PROJ58549"/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT", <TableActions/>),
-  createData(<TableLink text="PROJ58549"/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT", <TableActions/>),
-  createData(<TableLink text="PROJ58549"/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT", <TableActions/>),
-  createData(<TableLink text="PROJ58549"/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT", <TableActions/>),
-  createData(<TableLink text="PROJ58549"/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT", <TableActions/>),
-  createData(<TableLink text="PROJ58549"/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT", <TableActions/>),
-  createData(<TableLink text="PROJ58549"/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT", <TableActions/>),
-  createData(<TableLink text="PROJ58549"/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT", <TableActions/>),
-  createData(<TableLink text="PROJ58549"/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT", <TableActions/>),
-  createData(<TableLink text="PROJ58549"/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT", <TableActions/>),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
+  createData(<TableLink text="PROJ58549" route='project-detail'/>, <TableLink text="John Jenkins"/>, "Windows", <TableLink text="Construction Co"/>, "2", "Costa Mesa", "SA", "55555", "04/15/22", "05/01/22", "05/01/22", "$250.00", "--", "$250.00", "Completed", "05/09/22 12:00:00AM PT",
+  //  <TableActions/>
+   ),
 ];
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -137,7 +341,7 @@ const handleChangeRowsPerPage = (event) => {
           </IconButton> */}
         </Box>
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-            <TableContainer sx={{ maxHeight: 440,}}>
+            <TableContainer>
                 <Table stickyHeader aria-label="sticky table" sx={{}}>
                 <TableHead>
                     <StyledTableRow>
@@ -145,7 +349,7 @@ const handleChangeRowsPerPage = (event) => {
                         <StyledTableCell
                         key={column.id}
                         align={column.align}
-                        style={{ minWidth: column.minWidth }}
+                        style={{ minWidth: column.minWidth, fontWeight: column.fontWeight }}
                         >
                         {column.label}
                         </StyledTableCell>
