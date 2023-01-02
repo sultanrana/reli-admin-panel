@@ -6,6 +6,7 @@ import {
   Table,
   TableContainer,
   Typography,
+  TextField
 } from "@mui/material";
 import React from "react";
 import Paper from "@mui/material/Paper";
@@ -621,6 +622,57 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     backgroundColor: "#ddd",
   },
 }));
+const ActivityLogBox = styled(Box)(({theme}) => ({
+  background: '#FFFFFF',
+  padding: '6px',
+  boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)',
+  [theme.breakpoints.down('md')]: {
+    width: '100%',
+    marginTop: '0px',
+  },
+  [theme.breakpoints.up('md')]: {
+    width: '300px',
+    marginTop: '-30px'
+  },
+}))
+const ActivityLogText = styled(Typography)(({theme}) => ({
+  fontSize: '14px',
+  fontWeight: '600',
+  textTransform: 'capitalize',
+  letterSpacing: '0.25px'
+}))
+const PostBox = styled(Box)(({theme}) => ({
+  padding: '4px 8px',
+  display: 'flex',
+  flexDirection: 'column',
+  background: '#FFFFFF',
+  boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)'
+
+}))
+const PostSearch = styled(Box)(({theme}) => ({
+  display: 'flex',
+}))
+const PostSearchInput = styled(TextField)(({theme}) => ({
+  height: '100%',
+  widht: 'calc(100% - 60px)',
+}))
+const PostSearchButton = styled(Button)(({theme}) => ({
+  background: '#019EB2',
+  borderRadius: '4px',
+  marginTop: '5.2px',
+  marginLeft: '-3px'
+}))
+const AboutCard = styled(Box)(({theme}) => ({
+  [theme.breakpoints.down('md')] : {
+    width: '100%'
+  },
+  [theme.breakpoints.up('md')] : {
+    width: 'calc(100% - 317px)',
+  },
+  
+}))
+
+
 const CustomerDetails = () => {
   const { isEditCustomerModal, isDrawerOpen } = useSelector(
     (store) => store.login
@@ -675,60 +727,130 @@ const CustomerDetails = () => {
               breadcrumbs={breadcrumbs ? breadcrumbs : "Beardcrums"}
             />
           </Box>
-          <Card
-            sx={{
-              background: "#F7F7F7",
-              boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-              p: 2,
-            }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <Typography variant="h4">About</Typography>
-              <IconButton
-                color="black"
-                size="large"
-                onClick={() => dispatch(handleEditCustomerModal())}
-              >
-                <ModeRoundedIcon />
-              </IconButton>
-            </Box>
-            <div className="about_body">
-              <div className="about_img_circle"></div>
-              <div className="about_body_card">
-                <div className="company_info">
-                  <h4>Josh Johnson</h4>
-                  <p
-                    className="info_para"
-                    style={{
-                      marginBottom: "8px",
-                    }}
-                  >
-                    joshj@tepia.co
-                  </p>
-                  <p
-                    className="info_para"
-                    style={{
-                      marginBottom: "8px",
-                    }}
-                  >
-                    949-234-4432
-                  </p>
-                  <p className="enabled">Enabled</p>
-                </div>
-              </div>
-            </div>
-          </Card>
+          <Box sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'start',
+            flexWrap: 'wrap',
+            gap: '1rem'
+          }}>
 
-          <Typography variant="h5" sx={{ mt: 3 }}>
-            Properties
-          </Typography>
-          <Box component="div">
-            <PropertiesTable />
+            <AboutCard>
+              <Card
+                sx={{
+                  background: "#F7F7F7",
+                  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                  p: 2,
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Typography variant="h4">About</Typography>
+                  <IconButton
+                    color="black"
+                    size="large"
+                    onClick={() => dispatch(handleEditCustomerModal())}
+                  >
+                    <ModeRoundedIcon />
+                  </IconButton>
+                </Box>
+                <div className="about_body">
+                  <div className="about_img_circle"></div>
+                  <div className="about_body_card">
+                    <div className="company_info">
+                      <h4>Josh Johnson</h4>
+                      <p
+                        className="info_para"
+                        style={{
+                          marginBottom: "8px",
+                        }}
+                      >
+                        joshj@tepia.co
+                      </p>
+                      <p
+                        className="info_para"
+                        style={{
+                          marginBottom: "8px",
+                        }}
+                      >
+                        949-234-4432
+                      </p>
+                      <p className="enabled">Enabled</p>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+
+              <Typography variant="h5" sx={{ mt: 3 }}>
+                Properties
+              </Typography>
+              <Box component="div">
+                <PropertiesTable />
+              </Box>
+            </AboutCard>
+            <ActivityLogBox>
+            <ActivityLogText>
+              Activity log
+            </ActivityLogText>
+              <Box sx={{display: 'flex', flexDirection: 'column', gap: '10px', my: 1}}>
+                <PostBox>
+                  <ActivityLogText sx={{fontWeight: '500', color: 'rgba(0, 0, 0, 0.6)'}}>
+                    Title
+                  </ActivityLogText>
+                  <ActivityLogText>
+                    Message
+                  </ActivityLogText>
+                  <ActivityLogText sx={{ fontSize: '10px', fontWeight: '500', color: 'rgba(0, 0, 0, 0.6)'}} >
+                    Timestamp
+                  </ActivityLogText>
+                </PostBox>
+                <PostBox>
+                  <ActivityLogText sx={{fontWeight: '500', color: 'rgba(0, 0, 0, 0.6)'}}>
+                    Title
+                  </ActivityLogText>
+                  <ActivityLogText>
+                    Message
+                  </ActivityLogText>
+                  <ActivityLogText sx={{ fontSize: '10px', fontWeight: '500', color: 'rgba(0, 0, 0, 0.6)'}} >
+                    Timestamp
+                  </ActivityLogText>
+                </PostBox>
+                <PostBox>
+                  <ActivityLogText sx={{fontWeight: '500', color: 'rgba(0, 0, 0, 0.6)'}}>
+                    Title
+                  </ActivityLogText>
+                  <ActivityLogText>
+                    Message
+                  </ActivityLogText>
+                  <ActivityLogText sx={{ fontSize: '10px', fontWeight: '500', color: 'rgba(0, 0, 0, 0.6)'}} >
+                    Timestamp
+                  </ActivityLogText>
+                </PostBox>
+                <PostBox>
+                  <ActivityLogText sx={{fontWeight: '500', color: 'rgba(0, 0, 0, 0.6)'}}>
+                    Title
+                  </ActivityLogText>
+                  <ActivityLogText>
+                    Message
+                  </ActivityLogText>
+                  <ActivityLogText sx={{ fontSize: '10px', fontWeight: '500', color: 'rgba(0, 0, 0, 0.6)'}} >
+                    Timestamp
+                  </ActivityLogText>
+                </PostBox>
+                <PostSearch>
+                  <PostSearchInput
+                    defaultValue="Add note here"
+                  ></PostSearchInput>
+                  <PostSearchButton variant='contained'>Post</PostSearchButton>
+                </PostSearch>
+              </Box>
+            </ActivityLogBox>
+
+
           </Box>
 
           <Typography variant="h5" sx={{ mt: 3 }}>

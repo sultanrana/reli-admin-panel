@@ -20,9 +20,11 @@ import TableActions from '../../components/TableActions';
 import OverView from './OverView';
 import EditCompany from './EditCompany';
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
+import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import UserInfo from './UserInfo';
 import Transaction from './Transaction';
 import AddUserModal from './AddUserModal';
+import { Link, useNavigate } from 'react-router-dom';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.gray,
@@ -44,6 +46,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
   }));
 const CompanyInfo = () => {
+const navigate = useNavigate();
 const {isDrawerOpen, addUserModal} = useSelector((store) => store.login)
 const [tab, setTab] = useState('overview');
 const breadcrumbs = [
@@ -54,7 +57,7 @@ const breadcrumbs = [
         lineHeight: '36px',
         color: '#000000'
     }}>
-        Comapny Name
+        <Link to={'/companies'} style={{'textDecoration': 'none', 'color' : 'black'}}><ArrowBackIosRoundedIcon style={{'marginRight': '1rem', 'cursor' : 'pointer'}} /></Link> Company Name
     </Typography>
 ];
 const [page, setPage] = React.useState(0);

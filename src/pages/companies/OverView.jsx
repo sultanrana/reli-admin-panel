@@ -16,7 +16,6 @@ import { Link } from 'react-router-dom';
 import { handleEditCompanyModal } from '../../features/login/loginSlice';
 import EditCompany from './EditCompany';
 import { useDispatch, useSelector } from 'react-redux';
-import { fontSize, fontWeight } from '@mui/system';
 // active project
 const activeProjectColumns = [
   { id: 'projectId', label: 'Project ID', minWidth: 100, fontWeight: '600' },
@@ -316,7 +315,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   }))
   const PostSearchInput = styled(TextField)(({theme}) => ({
     height: '100%',
-    widht: 'calc(100% - 60px)',
+    width: 'calc(100% - 60px)',
   }))
   const PostSearchButton = styled(Button)(({theme}) => ({
     background: '#019EB2',

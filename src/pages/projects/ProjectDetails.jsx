@@ -17,7 +17,7 @@ import OpenInNewRoundedIcon from '@mui/icons-material/OpenInNewRounded';
 import ProjectContractsTable from './ProjectContractsTable';
 import ProjectCustomersTable from './ProjectCustomersTable';
 import ProjectAccountingBreakdown from './ProjectAccountingBreakdown';
-
+import {ActivityLogBox, ActivityLogText, PostSearch, PostBox, PostSearchInput, PostSearchButton, AboutCard} from '../../components/styles/ActivityBox.styles'
 
 const OuterGrid = styled(Grid)(({ theme }) => ({
   display: 'flex',
@@ -94,7 +94,17 @@ const ReAssignRemove = styled(Button)(({theme}) => ({
 const StyledTableCell = styled(TableCell)(({theme}) => ({
 
 }))
-
+const StatusBoxes = styled(Box)(({theme}) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  flexWrap: 'wrap',
+  alignItems: 'center',
+  background: '#FFFFFF',
+  gap: '4px',
+  padding: '8px 0',
+  boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)',
+  flex: '146px 1'
+}))
 
 const ProjectDetails = () => {
 const {isDrawerOpen} = useSelector((store) => store.login)
@@ -148,461 +158,483 @@ const handleReassignModal = () => {
               breadcrumbs={breadcrumbs ? breadcrumbs : "Beardcrums"}
             />
         </Box>
-        <Card sx={{
-            background: '#F7F7F7',
-            boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-            p: 2,
-            mb: 4
-            }}>
-            <Typography variant='h4'>Project Status: Scheduled</Typography>
-            <Box component="div" sx={{
-              display: 'flex',
-              alignItems: 'flex-start',
-              flexWrap: 'wrap',
-              gap: '10px',
-              my: 2
-            }}>
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'start',
+          flexWrap: 'wrap',
+          gap: '1rem'
+        }}>
+          <AboutCard>
+            <Card sx={{
+                background: '#F7F7F7',
+                boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                p: 2,
+                mb: 4
+                }}>
+                <Typography variant='h4'>Project Status: Scheduled</Typography>
                 <Box component="div" sx={{
                   display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  background: '#FFFFFF',
-                  gap: '4px',
-                  py: '8px',
-                  boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)',
-                  minWidth: '160px'
+                  alignItems: 'flex-start',
+                  flexWrap: 'wrap',
+                  gap: '10px',
+                  my: 2
                 }}>
+                    <StatusBoxes>
+                        <Typography sx={{
+                          display: 'block',
+                          fontWeight: '400',
+                          fontSize: '14px',
+                          lineHeight: '20px',
+                          letterSpacing: '0.25px',
+                          color: 'rgba(0, 0, 0, 0.87)'
+                        }}>04/06/22</Typography>
+                        <Typography sx={{
+                          display: 'block',
+                          fontWeight: '400',
+                          fontSize: '10px',
+                          lineHeight: '20px',
+                          letterSpacing: '0.25px',
+                          color: 'rgba(0, 0, 0, 0.87)'
+                        }}>1:02 pm PT</Typography>
+                        <Typography sx={{
+                          display: 'block',
+                          fontWeight: '400',
+                          fontSize: '16px',
+                          lineHeight: '20px',
+                          letterSpacing: '0.25px',
+                          color: 'rgba(0, 0, 0, 0.87)'
+                        }}>Posted</Typography>
+                    </StatusBoxes>
+                    <StatusBoxes>
+                        <Typography sx={{
+                          display: 'block',
+                          fontWeight: '400',
+                          fontSize: '14px',
+                          lineHeight: '20px',
+                          letterSpacing: '0.25px',
+                          color: 'rgba(0, 0, 0, 0.87)'
+                        }}>04/06/22</Typography>
+                        <Typography sx={{
+                          display: 'block',
+                          fontWeight: '400',
+                          fontSize: '10px',
+                          lineHeight: '20px',
+                          letterSpacing: '0.25px',
+                          color: 'rgba(0, 0, 0, 0.87)'
+                        }}>1:02 pm PT</Typography>
+                        <Typography sx={{
+                          display: 'block',
+                          fontWeight: '400',
+                          fontSize: '16px',
+                          lineHeight: '20px',
+                          letterSpacing: '0.25px',
+                          color: 'rgba(0, 0, 0, 0.87)'
+                        }}>Claimed</Typography>
+                    </StatusBoxes>
+                    <StatusBoxes>
+                        <Typography sx={{
+                          display: 'block',
+                          fontWeight: '400',
+                          fontSize: '14px',
+                          lineHeight: '20px',
+                          letterSpacing: '0.25px',
+                          color: 'rgba(0, 0, 0, 0.87)'
+                        }}>04/06/22</Typography>
+                        <Typography sx={{
+                          display: 'block',
+                          fontWeight: '400',
+                          fontSize: '10px',
+                          lineHeight: '20px',
+                          letterSpacing: '0.25px',
+                          color: 'rgba(0, 0, 0, 0.87)'
+                        }}>1:02 pm PT</Typography>
+                        <Typography sx={{
+                          display: 'block',
+                          fontWeight: '400',
+                          fontSize: '16px',
+                          lineHeight: '20px',
+                          letterSpacing: '0.25px',
+                          color: 'rgba(0, 0, 0, 0.87)'
+                        }}>Scheduled</Typography>
+                        <Button variant='outlined' onClick={handleRescheduleModal}>Reschedule</Button>
+                    </StatusBoxes>
+                    <StatusBoxes>
+                        <Typography sx={{
+                          display: 'block',
+                          fontWeight: '400',
+                          fontSize: '14px',
+                          lineHeight: '20px',
+                          letterSpacing: '0.25px',
+                          color: 'rgba(0, 0, 0, 0.87)'
+                        }}>--</Typography>
+                        <Typography sx={{
+                          display: 'block',
+                          fontWeight: '400',
+                          fontSize: '10px',
+                          lineHeight: '20px',
+                          letterSpacing: '0.25px',
+                          color: 'rgba(0, 0, 0, 0.87)'
+                        }}>--</Typography>
+                        <Typography sx={{
+                          display: 'block',
+                          fontWeight: '400',
+                          fontSize: '16px',
+                          lineHeight: '20px',
+                          letterSpacing: '0.25px',
+                          color: 'rgba(0, 0, 0, 0.87)'
+                        }}>Materials Ordered</Typography>
+                    </StatusBoxes>
+                    <StatusBoxes>
+                        <Typography sx={{
+                          display: 'block',
+                          fontWeight: '400',
+                          fontSize: '14px',
+                          lineHeight: '20px',
+                          letterSpacing: '0.25px',
+                          color: 'rgba(0, 0, 0, 0.87)'
+                        }}>--</Typography>
+                        <Typography sx={{
+                          display: 'block',
+                          fontWeight: '400',
+                          fontSize: '10px',
+                          lineHeight: '20px',
+                          letterSpacing: '0.25px',
+                          color: 'rgba(0, 0, 0, 0.87)'
+                        }}>--</Typography>
+                        <Typography sx={{
+                          display: 'block',
+                          fontWeight: '400',
+                          fontSize: '16px',
+                          lineHeight: '20px',
+                          letterSpacing: '0.25px',
+                          color: 'rgba(0, 0, 0, 0.87)'
+                        }}>Completed</Typography>
+                    </StatusBoxes>
+                </Box>
+                <Box sx={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  alignItems: 'center',
+                  padding: '16px',
+                  gap: '11px',
+                  background: '#E8E8E8',
+                  boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)'
+                }}>
+                  <Typography sx={{
+                    fontStyle: 'normal',
+                    fontWeight: '500',
+                    fontSize: '20px',
+                    lineHeight: '24px',            
+                    letterSpacing: '0.15px',
+                    textDecoration: 'underline',
+                    color: '#000000',
+                  }}>
+                    Project Cancelation:
+                  </Typography>
+                  <Button variant='outlined'>Cancel Project</Button>
+                </Box>
+            </Card>
+            <Card sx={{
+              background: '#F7F7F7',
+              boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+              p: 2,
+              mb: 4,
+              }}>
+              <Typography variant='h4' sx={{mb: 2}}>Customer Data</Typography>
+              <Box sx={{
+                display: 'flex',
+                gap: '8px',
+                flexWrap: 'wrap',
+              }}>
+                <Box component="div" sx={{
+                  background: '#E8E8E8',
+                  boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)',
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  flexDirection: 'column',
+                  padding: '0 16px 16px 16px',
+                  gap: '8px',
+                  flex: '1',
+                }}>
+                  <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'end',
+                  }}>
                     <Typography sx={{
-                      display: 'block',
-                      fontWeight: '400',
-                      fontSize: '14px',
-                      lineHeight: '20px',
-                      letterSpacing: '0.25px',
-                      color: 'rgba(0, 0, 0, 0.87)'
-                    }}>04/06/22</Typography>
-                    <Typography sx={{
-                      display: 'block',
-                      fontWeight: '400',
-                      fontSize: '10px',
-                      lineHeight: '20px',
-                      letterSpacing: '0.25px',
-                      color: 'rgba(0, 0, 0, 0.87)'
-                    }}>1:02 pm PT</Typography>
-                    <Typography sx={{
-                      display: 'block',
-                      fontWeight: '400',
-                      fontSize: '16px',
-                      lineHeight: '20px',
-                      letterSpacing: '0.25px',
-                      color: 'rgba(0, 0, 0, 0.87)'
-                    }}>Posted</Typography>
+                      fontWeight: '500',
+                      fontSize: '20px',
+                      lineHeight: '24px',
+                      letterSpacing: '0.15px',
+                      textDecoration: 'underline'
+                    }}>
+                      Customer:
+                    </Typography>
+                    <IconButton>
+                      <OpenInNewRoundedIcon/>
+                    </IconButton>
+                  </Box>
+                  <Typography sx={{
+                    fontWeight: '500',
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    letterSpacing: '0.15px',
+                  }}>
+                    Josh Johnson
+                  </Typography>
+                  <Typography sx={{
+                    fontWeight: '500',
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    letterSpacing: '0.15px',
+                  }}>
+                    joshj@tepia.co
+                  </Typography>
+                  <Typography sx={{
+                    fontWeight: '500',
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    letterSpacing: '0.15px',
+                  }}>
+                    949-343-5434
+                  </Typography>
                 </Box>
                 <Box component="div" sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  background: '#FFFFFF',
-                  gap: '4px',
-                  py: '8px',
+                  background: '#E8E8E8',
                   boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)',
-                  minWidth: '160px'
-                }}>
-                    <Typography sx={{
-                      display: 'block',
-                      fontWeight: '400',
-                      fontSize: '14px',
-                      lineHeight: '20px',
-                      letterSpacing: '0.25px',
-                      color: 'rgba(0, 0, 0, 0.87)'
-                    }}>04/06/22</Typography>
-                    <Typography sx={{
-                      display: 'block',
-                      fontWeight: '400',
-                      fontSize: '10px',
-                      lineHeight: '20px',
-                      letterSpacing: '0.25px',
-                      color: 'rgba(0, 0, 0, 0.87)'
-                    }}>1:02 pm PT</Typography>
-                    <Typography sx={{
-                      display: 'block',
-                      fontWeight: '400',
-                      fontSize: '16px',
-                      lineHeight: '20px',
-                      letterSpacing: '0.25px',
-                      color: 'rgba(0, 0, 0, 0.87)'
-                    }}>Claimed</Typography>
-                </Box>
-                <Box component="div" sx={{
                   display: 'flex',
+                  flexWrap: 'wrap',
                   flexDirection: 'column',
-                  alignItems: 'center',
-                  background: '#FFFFFF',
-                  gap: '4px',
-                  py: '8px',
-                  boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)',
-                  minWidth: '160px'
+                  padding: '16px 16px 16px 16px',
+                  gap: '8px',
+                  flex: '1',
                 }}>
+                  <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                  }}>
                     <Typography sx={{
-                      display: 'block',
-                      fontWeight: '400',
-                      fontSize: '14px',
-                      lineHeight: '20px',
-                      letterSpacing: '0.25px',
-                      color: 'rgba(0, 0, 0, 0.87)'
-                    }}>04/06/22</Typography>
-                    <Typography sx={{
-                      display: 'block',
-                      fontWeight: '400',
-                      fontSize: '10px',
-                      lineHeight: '20px',
-                      letterSpacing: '0.25px',
-                      color: 'rgba(0, 0, 0, 0.87)'
-                    }}>1:02 pm PT</Typography>
-                    <Typography sx={{
-                      display: 'block',
-                      fontWeight: '400',
-                      fontSize: '16px',
-                      lineHeight: '20px',
-                      letterSpacing: '0.25px',
-                      color: 'rgba(0, 0, 0, 0.87)'
-                    }}>Scheduled</Typography>
-                    <Button variant='outlined' onClick={handleRescheduleModal}>Reschedule</Button>
+                      fontWeight: '500',
+                      fontSize: '20px',
+                      lineHeight: '24px',
+                      letterSpacing: '0.15px',
+                      textDecoration: 'underline'
+                    }}>
+                      Property:
+                    </Typography>
+                  </Box>
+                  <Typography sx={{
+                    fontWeight: '500',
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    letterSpacing: '0.15px',
+                  }}>
+                    Josh Johnson
+                  </Typography>
+                  <Typography sx={{
+                    fontWeight: '500',
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    letterSpacing: '0.15px',
+                  }}>
+                    joshj@tepia.co
+                  </Typography>
+                  <Typography sx={{
+                    fontWeight: '500',
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    letterSpacing: '0.15px',
+                  }}>
+                    949-343-5434
+                  </Typography>
                 </Box>
-                <Box component="div" sx={{
+              </Box>
+            </Card>
+            <Card sx={{
+              background: '#F7F7F7',
+              boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+              p: 2,
+              mb: 4,
+              }}>
+                <Box sx={{
                   display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  background: '#FFFFFF',
-                  gap: '4px',
-                  py: '8px',
-                  boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)',
-                  minWidth: '160px'
-                }}>
-                    <Typography sx={{
-                      display: 'block',
-                      fontWeight: '400',
-                      fontSize: '14px',
-                      lineHeight: '20px',
-                      letterSpacing: '0.25px',
-                      color: 'rgba(0, 0, 0, 0.87)'
-                    }}>--</Typography>
-                    <Typography sx={{
-                      display: 'block',
-                      fontWeight: '400',
-                      fontSize: '10px',
-                      lineHeight: '20px',
-                      letterSpacing: '0.25px',
-                      color: 'rgba(0, 0, 0, 0.87)'
-                    }}>--</Typography>
-                    <Typography sx={{
-                      display: 'block',
-                      fontWeight: '400',
-                      fontSize: '16px',
-                      lineHeight: '20px',
-                      letterSpacing: '0.25px',
-                      color: 'rgba(0, 0, 0, 0.87)'
-                    }}>Materials Ordered</Typography>
-                </Box>
-                <Box component="div" sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  background: '#FFFFFF',
-                  gap: '4px',
-                  py: '8px',
-                  boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)',
-                  minWidth: '160px'
-                }}>
-                    <Typography sx={{
-                      display: 'block',
-                      fontWeight: '400',
-                      fontSize: '14px',
-                      lineHeight: '20px',
-                      letterSpacing: '0.25px',
-                      color: 'rgba(0, 0, 0, 0.87)'
-                    }}>--</Typography>
-                    <Typography sx={{
-                      display: 'block',
-                      fontWeight: '400',
-                      fontSize: '10px',
-                      lineHeight: '20px',
-                      letterSpacing: '0.25px',
-                      color: 'rgba(0, 0, 0, 0.87)'
-                    }}>--</Typography>
-                    <Typography sx={{
-                      display: 'block',
-                      fontWeight: '400',
-                      fontSize: '16px',
-                      lineHeight: '20px',
-                      letterSpacing: '0.25px',
-                      color: 'rgba(0, 0, 0, 0.87)'
-                    }}>Completed</Typography>
-                </Box>
+                  justifyContent: 'space-between',
 
-            </Box>
-            <Box sx={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              padding: '16px',
-              gap: '11px',
-              background: '#E8E8E8',
-              boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)'
-            }}>
-              <Typography sx={{
-                fontStyle: 'normal',
-                fontWeight: '500',
-                fontSize: '20px',
-                lineHeight: '24px',            
-                letterSpacing: '0.15px',
-                textDecoration: 'underline',
-                color: '#000000',
-              }}>
-                Project Cancelation:
-              </Typography>
-              <Button variant='outlined'>Cancel Project</Button>
-            </Box>
-        </Card>
-        <Card sx={{
-          background: '#F7F7F7',
-          boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-          p: 2,
-          mb: 4,
-          }}>
-          <Typography variant='h4' sx={{mb: 2}}>Customer Data</Typography>
-          <Box sx={{
-            display: 'flex',
-            gap: '8px',
-            flexWrap: 'wrap',
-          }}>
-            <Box component="div" sx={{
-              background: '#E8E8E8',
-              boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)',
-              display: 'flex',
-              flexWrap: 'wrap',
-              flexDirection: 'column',
-              padding: '0 16px 16px 16px',
-              gap: '8px',
-              flex: '1',
-            }}>
+                }}>
+                  <Typography variant='h4' sx={{mb: 2}}>Acme Inc.</Typography>
+                  <Box>
+                    <IconButton sx={{mr: 2}}>
+                      <OpenInNewRoundedIcon/>
+                    </IconButton>
+                    <Button variant='contained' onClick={handleReassignModal}>Reassign</Button>
+                  </Box>
+                </Box>
               <Box sx={{
                 display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'end',
+                gap: '8px',
+                flexWrap: 'wrap',
               }}>
-                <Typography sx={{
-                  fontWeight: '500',
-                  fontSize: '20px',
-                  lineHeight: '24px',
-                  letterSpacing: '0.15px',
-                  textDecoration: 'underline'
+                <Box component="div" sx={{
+                  background: '#E8E8E8',
+                  boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)',
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  flexDirection: 'column',
+                  padding: '16px 16px 16px 16px',
+                  gap: '8px',
+                  flex: '1',
                 }}>
-                  Customer:
-                </Typography>
-                <IconButton>
-                  <OpenInNewRoundedIcon/>
-                </IconButton>
-              </Box>
-              <Typography sx={{
-                fontWeight: '500',
-                fontSize: '20px',
-                lineHeight: '24px',
-                letterSpacing: '0.15px',
-              }}>
-                Josh Johnson
-              </Typography>
-              <Typography sx={{
-                fontWeight: '500',
-                fontSize: '20px',
-                lineHeight: '24px',
-                letterSpacing: '0.15px',
-              }}>
-                joshj@tepia.co
-              </Typography>
-              <Typography sx={{
-                fontWeight: '500',
-                fontSize: '20px',
-                lineHeight: '24px',
-                letterSpacing: '0.15px',
-              }}>
-                949-343-5434
-              </Typography>
-            </Box>
-            <Box component="div" sx={{
-              background: '#E8E8E8',
-              boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)',
-              display: 'flex',
-              flexWrap: 'wrap',
-              flexDirection: 'column',
-              padding: '16px 16px 16px 16px',
-              gap: '8px',
-              flex: '1',
-            }}>
-              <Box sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-              }}>
-                <Typography sx={{
-                  fontWeight: '500',
-                  fontSize: '20px',
-                  lineHeight: '24px',
-                  letterSpacing: '0.15px',
-                  textDecoration: 'underline'
+                  <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                  }}>
+                    <Typography sx={{
+                      fontWeight: '500',
+                      fontSize: '20px',
+                      lineHeight: '24px',
+                      letterSpacing: '0.15px',
+                      textDecoration: 'underline'
+                    }}>
+                      Primary Contract:
+                    </Typography>
+                  </Box>
+                  <Typography sx={{
+                    fontWeight: '500',
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    letterSpacing: '0.15px',
+                  }}>
+                    Josh Johnson
+                  </Typography>
+                  <Typography sx={{
+                    fontWeight: '500',
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    letterSpacing: '0.15px',
+                  }}>
+                    joshj@tepia.co
+                  </Typography>
+                  <Typography sx={{
+                    fontWeight: '500',
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    letterSpacing: '0.15px',
+                  }}>
+                    949-343-5434
+                  </Typography>
+                </Box>
+                <Box component="div" sx={{
+                  background: '#E8E8E8',
+                  boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)',
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  flexDirection: 'column',
+                  padding: '16px 16px 16px 16px',
+                  gap: '8px',
+                  flex: '1',
                 }}>
-                  Property:
-                </Typography>
+                  <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                  }}>
+                    <Typography sx={{
+                      fontWeight: '500',
+                      fontSize: '20px',
+                      lineHeight: '24px',
+                      letterSpacing: '0.15px',
+                      textDecoration: 'underline'
+                    }}>
+                      Staff Assigned:
+                    </Typography>
+                  </Box>
+                  <Typography sx={{
+                    fontWeight: '500',
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    letterSpacing: '0.15px',
+                  }}>
+                    Josh Johnson
+                  </Typography>
+                  <Typography sx={{
+                    fontWeight: '500',
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    letterSpacing: '0.15px',
+                  }}>
+                    joshj@tepia.co
+                  </Typography>
+                  <Typography sx={{
+                    fontWeight: '500',
+                    fontSize: '20px',
+                    lineHeight: '24px',
+                    letterSpacing: '0.15px',
+                  }}>
+                    949-343-5434
+                  </Typography>
+                </Box>
               </Box>
-              <Typography sx={{
-                fontWeight: '500',
-                fontSize: '20px',
-                lineHeight: '24px',
-                letterSpacing: '0.15px',
-              }}>
-                Josh Johnson
-              </Typography>
-              <Typography sx={{
-                fontWeight: '500',
-                fontSize: '20px',
-                lineHeight: '24px',
-                letterSpacing: '0.15px',
-              }}>
-                joshj@tepia.co
-              </Typography>
-              <Typography sx={{
-                fontWeight: '500',
-                fontSize: '20px',
-                lineHeight: '24px',
-                letterSpacing: '0.15px',
-              }}>
-                949-343-5434
-              </Typography>
+            </Card>
+          </AboutCard>
+          <ActivityLogBox>
+            <ActivityLogText>
+              Activity log
+            </ActivityLogText>
+            <Box sx={{display: 'flex', flexDirection: 'column', gap: '10px', my: 1}}>
+              <PostBox>
+                <ActivityLogText sx={{fontWeight: '500', color: 'rgba(0, 0, 0, 0.6)'}}>
+                  Title
+                </ActivityLogText>
+                <ActivityLogText>
+                  Message
+                </ActivityLogText>
+                <ActivityLogText sx={{ fontSize: '10px', fontWeight: '500', color: 'rgba(0, 0, 0, 0.6)'}} >
+                  Timestamp
+                </ActivityLogText>
+              </PostBox>
+              <PostBox>
+                <ActivityLogText sx={{fontWeight: '500', color: 'rgba(0, 0, 0, 0.6)'}}>
+                  Title
+                </ActivityLogText>
+                <ActivityLogText>
+                  Message
+                </ActivityLogText>
+                <ActivityLogText sx={{ fontSize: '10px', fontWeight: '500', color: 'rgba(0, 0, 0, 0.6)'}} >
+                  Timestamp
+                </ActivityLogText>
+              </PostBox>
+              <PostBox>
+                <ActivityLogText sx={{fontWeight: '500', color: 'rgba(0, 0, 0, 0.6)'}}>
+                  Title
+                </ActivityLogText>
+                <ActivityLogText>
+                  Message
+                </ActivityLogText>
+                <ActivityLogText sx={{ fontSize: '10px', fontWeight: '500', color: 'rgba(0, 0, 0, 0.6)'}} >
+                  Timestamp
+                </ActivityLogText>
+              </PostBox>
+              <PostBox>
+                <ActivityLogText sx={{fontWeight: '500', color: 'rgba(0, 0, 0, 0.6)'}}>
+                  Title
+                </ActivityLogText>
+                <ActivityLogText>
+                  Message
+                </ActivityLogText>
+                <ActivityLogText sx={{ fontSize: '10px', fontWeight: '500', color: 'rgba(0, 0, 0, 0.6)'}} >
+                  Timestamp
+                </ActivityLogText>
+              </PostBox>
+              <PostSearch>
+                <PostSearchInput
+                  defaultValue="Add note here"
+                ></PostSearchInput>
+                <PostSearchButton variant='contained'>Post</PostSearchButton>
+              </PostSearch>
             </Box>
-          </Box>
-        </Card>
-        <Card sx={{
-          background: '#F7F7F7',
-          boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-          p: 2,
-          mb: 4,
-          }}>
-            <Box sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
+          </ActivityLogBox>
+        </Box>
 
-            }}>
-              <Typography variant='h4' sx={{mb: 2}}>Acme Inc.</Typography>
-              <Box>
-                <IconButton sx={{mr: 2}}>
-                  <OpenInNewRoundedIcon/>
-                </IconButton>
-                <Button variant='contained' onClick={handleReassignModal}>Reassign</Button>
-              </Box>
-            </Box>
-          <Box sx={{
-            display: 'flex',
-            gap: '8px',
-            flexWrap: 'wrap',
-          }}>
-            <Box component="div" sx={{
-              background: '#E8E8E8',
-              boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)',
-              display: 'flex',
-              flexWrap: 'wrap',
-              flexDirection: 'column',
-              padding: '16px 16px 16px 16px',
-              gap: '8px',
-              flex: '1',
-            }}>
-              <Box sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-              }}>
-                <Typography sx={{
-                  fontWeight: '500',
-                  fontSize: '20px',
-                  lineHeight: '24px',
-                  letterSpacing: '0.15px',
-                  textDecoration: 'underline'
-                }}>
-                  Primary Contract:
-                </Typography>
-              </Box>
-              <Typography sx={{
-                fontWeight: '500',
-                fontSize: '20px',
-                lineHeight: '24px',
-                letterSpacing: '0.15px',
-              }}>
-                Josh Johnson
-              </Typography>
-              <Typography sx={{
-                fontWeight: '500',
-                fontSize: '20px',
-                lineHeight: '24px',
-                letterSpacing: '0.15px',
-              }}>
-                joshj@tepia.co
-              </Typography>
-              <Typography sx={{
-                fontWeight: '500',
-                fontSize: '20px',
-                lineHeight: '24px',
-                letterSpacing: '0.15px',
-              }}>
-                949-343-5434
-              </Typography>
-            </Box>
-            <Box component="div" sx={{
-              background: '#E8E8E8',
-              boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)',
-              display: 'flex',
-              flexWrap: 'wrap',
-              flexDirection: 'column',
-              padding: '16px 16px 16px 16px',
-              gap: '8px',
-              flex: '1',
-            }}>
-              <Box sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-              }}>
-                <Typography sx={{
-                  fontWeight: '500',
-                  fontSize: '20px',
-                  lineHeight: '24px',
-                  letterSpacing: '0.15px',
-                  textDecoration: 'underline'
-                }}>
-                  Staff Assigned:
-                </Typography>
-              </Box>
-              <Typography sx={{
-                fontWeight: '500',
-                fontSize: '20px',
-                lineHeight: '24px',
-                letterSpacing: '0.15px',
-              }}>
-                Josh Johnson
-              </Typography>
-              <Typography sx={{
-                fontWeight: '500',
-                fontSize: '20px',
-                lineHeight: '24px',
-                letterSpacing: '0.15px',
-              }}>
-                joshj@tepia.co
-              </Typography>
-              <Typography sx={{
-                fontWeight: '500',
-                fontSize: '20px',
-                lineHeight: '24px',
-                letterSpacing: '0.15px',
-              }}>
-                949-343-5434
-              </Typography>
-            </Box>
-          </Box>
-        </Card>
         <Card sx={{
           background: '#F7F7F7',
           boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
