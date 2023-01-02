@@ -25,7 +25,7 @@ const ProjectAccountingBreakdown = () => {
                     Order Materials Cost
                 </Typography>
                 <Box component='span' sx={{
-                    background: '#FFB460',
+                    background: '#F8E5D0',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
@@ -50,7 +50,7 @@ const ProjectAccountingBreakdown = () => {
                     Order Materials Cost
                 </Typography>
                 <Box component='span' sx={{
-                    background: '#FFB460',
+                    background: '#F8E5D0',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
@@ -75,7 +75,7 @@ const ProjectAccountingBreakdown = () => {
                     Order Materials Cost
                 </Typography>
                 <Box component='span' sx={{
-                    background: '#FFB460',
+                    background: '#F8E5D0',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
@@ -100,7 +100,7 @@ const ProjectAccountingBreakdown = () => {
                     Order Materials Cost
                 </Typography>
                 <Box component='span' sx={{
-                    background: '#FFB460',
+                    background: '#F8E5D0',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
@@ -126,7 +126,7 @@ const ProjectAccountingBreakdown = () => {
                     Order Materials Cost
                 </Typography>
                 <Box component='span' sx={{
-                    background: '#FFB460',
+                    background: '#F8E5D0',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
@@ -141,6 +141,7 @@ const ProjectAccountingBreakdown = () => {
                     </Box>
                 </Box>
             </Box>
+
             <Box sx={{
                 display: 'flex',
                 justifyContent: 'space-between',
@@ -151,58 +152,7 @@ const ProjectAccountingBreakdown = () => {
                     Order Materials Cost
                 </Typography>
                 <Box component='span' sx={{
-                    background: '#B4DDD5',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    width: '130px',
-                    px: 1
-                }}>
-                    <Box>
-                        $
-                    </Box>
-                    <Box>
-                        624.00
-                    </Box>
-                </Box>
-            </Box>
-            <Box sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                width: '100%',
-                borderBottom: '1px solid #979797',
-                mb: 3
-            }}>
-                <Typography>
-                    Order Materials Cost
-                </Typography>
-                <Box component='span' sx={{
-                    background: '#B4DDD5',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    width: '130px',
-                    px: 1
-                }}>
-                    <Box>
-                        $
-                    </Box>
-                    <Box>
-                        624.00
-                    </Box>
-                </Box>
-            </Box>
-            <Box sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                width: '100%',
-                borderBottom: '1px solid #979797',
-            }}>
-                <Typography>
-                    Order Materials Cost
-                </Typography>
-                <Box component='span' sx={{
-                    background: '#C9F7FF',
+                    background: '#D2E2F1',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
@@ -228,57 +178,7 @@ const ProjectAccountingBreakdown = () => {
                     Order Materials Cost
                 </Typography>
                 <Box component='span' sx={{
-                    background: '#C9F7FF',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    width: '130px',
-                    px: 1
-                }}>
-                    <Box>
-                        $
-                    </Box>
-                    <Box>
-                        624.00
-                    </Box>
-                </Box>
-            </Box>
-            <Box sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                width: '100%',
-                borderBottom: '1px solid #979797'
-            }}>
-                <Typography>
-                    Order Materials Cost
-                </Typography>
-                <Box component='span' sx={{
-                    background: '#FFB460',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    width: '130px',
-                    px: 1
-                }}>
-                    <Box>
-                        $
-                    </Box>
-                    <Box>
-                        624.00
-                    </Box>
-                </Box>
-            </Box>
-            <Box sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                width: '100%',
-                borderBottom: '1px solid #979797'
-            }}>
-                <Typography>
-                    Order Materials Cost
-                </Typography>
-                <Box component='span' sx={{
-                    background: '#FFB460',
+                    background: '#D2E2F1',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
@@ -303,7 +203,160 @@ const ProjectAccountingBreakdown = () => {
                     Order Materials Cost
                 </Typography>
                 <Box component='span' sx={{
-                    background: '#FFB460',
+                    background: '#C4C4C4',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    width: '130px',
+                    px: 1
+                }}>
+                    <Box>
+                        $
+                    </Box>
+                    <Box>
+                        624.00
+                    </Box>
+                </Box>
+            </Box>
+            <Box sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                width: '100%',
+                borderBottom: '1px solid #979797',
+                mb: 3
+            }}>
+                <Typography>
+                    Order Materials Cost
+                </Typography>
+                <Box component='span' sx={{
+                    background: '#C4C4C4',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    width: '130px',
+                    px: 1
+                }}>
+                    <Box>
+                        $
+                    </Box>
+                    <Box>
+                        624.00
+                    </Box>
+                </Box>
+            </Box>
+
+            <Box sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                width: '100%',
+                borderBottom: '1px solid #979797',
+            }}>
+                <Typography>
+                    Order Materials Cost
+                </Typography>
+                <Box component='span' sx={{
+                    background: '#DCE9D5',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    width: '130px',
+                    px: 1
+                }}>
+                    <Box>
+                        $
+                    </Box>
+                    <Box>
+                        624.00
+                    </Box>
+                </Box>
+            </Box>
+            <Box sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                width: '100%',
+                borderBottom: '1px solid #979797',
+                mb: 3
+            }}>
+                <Typography>
+                    Order Materials Cost
+                </Typography>
+                <Box component='span' sx={{
+                    background: '#DCE9D5',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    width: '130px',
+                    px: 1
+                }}>
+                    <Box>
+                        $
+                    </Box>
+                    <Box>
+                        624.00
+                    </Box>
+                </Box>
+            </Box>
+            <Box sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                width: '100%',
+                borderBottom: '1px solid #979797'
+            }}>
+                <Typography>
+                    Order Materials Cost
+                </Typography>
+                <Box component='span' sx={{
+                    background: '#F8E5D0',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    width: '130px',
+                    px: 1
+                }}>
+                    <Box>
+                        $
+                    </Box>
+                    <Box>
+                        624.00
+                    </Box>
+                </Box>
+            </Box>
+            <Box sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                width: '100%',
+                borderBottom: '1px solid #979797'
+            }}>
+                <Typography>
+                    Order Materials Cost
+                </Typography>
+                <Box component='span' sx={{
+                    background: '#F8E5D0',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    width: '130px',
+                    px: 1
+                }}>
+                    <Box>
+                        $
+                    </Box>
+                    <Box>
+                        624.00
+                    </Box>
+                </Box>
+            </Box>
+            <Box sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                width: '100%',
+                borderBottom: '1px solid #979797',
+            }}>
+                <Typography>
+                    Order Materials Cost
+                </Typography>
+                <Box component='span' sx={{
+                    background: '#F8E5D0',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
