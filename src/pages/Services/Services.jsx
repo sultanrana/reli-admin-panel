@@ -66,10 +66,8 @@ const Services = () => {
           >
             {services.map((service) => {
               return (
-                <Link to={service.route}>
+                <Link to={service.route} key={service.id}>
                   <Card
-                    key={service.id}
-                    {...services}
                     sx={{
                       boxShadow:
                         "0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)",

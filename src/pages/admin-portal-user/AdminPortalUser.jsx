@@ -26,11 +26,14 @@ import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import { handleAddAdminPortalUserModal, handleEditAdminPortalUserModal } from "../../features/login/loginSlice";
 import AddAdminPortalUser from "./AddAdminPortalUser";
 import EditAdminPortalUser from "./EditAdminPortalUser";
+import { useEffect } from "react";
+import { getPortalUser } from "../../features/admin-portal-user/adminPortalUserSlice";
+import Loading from "../../components/Loading";
 const columns = [
-  { id: "name", label: "Name", minWidth: 100, fontWeight: '600' },
+  { id: "firstName", label: "Name", minWidth: 100, fontWeight: '600' },
   { id: "email", label: "Email", minWidth: 100, fontWeight: '600' },
-  { id: "role", label: "Role", minWidth: 100, fontWeight: '600' },
-  { id: "status", label: "Status", minWidth: 150, fontWeight: '600' },
+  { id: "userType", label: "Role", minWidth: 100, fontWeight: '600' },
+  { id: "statusBit", label: "Status", minWidth: 150, fontWeight: '600' },
   { id: "lastActive", label: "Last Active", minWidth: 150, fontWeight: '600' },
   // { id: "actions", label: "Actions", minWidth: 150, fontWeight: '600' },
 ];
@@ -66,6 +69,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 const AdminPortalUser = () => {
   const { isDrawerOpen, isAddAdminPortalUserModal, isEditAdminPortalUserModal } = useSelector((store) => store.login);
+  const {portalUsers, isLoading} = useSelector((store) => store.adminPortalUser);
   const dispatch = useDispatch()
   const breadcrumbs = [
     <Typography
@@ -1086,6 +1090,18 @@ const AdminPortalUser = () => {
     setPage(0);
   };
 
+
+
+  useEffect(() => {
+    dispatch(getPortalUser());
+  }, [])
+
+  if(isLoading){
+    return (
+        <Loading/>
+    )
+  }
+
   return (
     <div className="page-section">
       <Sidebar />
@@ -1165,15 +1181,15 @@ const AdminPortalUser = () => {
                 </StyledTableRow>
               </TableHead>
               <TableBody>
-                {rows
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                {portalUsers.data
+                  ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
                     return (
                       <StyledTableRow
                         hover
                         role="checkbox"
                         tabIndex={-1}
-                        key={row.code}
+                        key={row.id}
                       >
                         {columns.map((column) => {
                           const value = row[column.id];
@@ -1182,9 +1198,10 @@ const AdminPortalUser = () => {
                               key={column.id}
                               align={column.align}
                             >
-                              {column.format && typeof value === "number"
+                              {/* {column.format && typeof value === "number"
                                 ? column.format(value)
-                                : value}
+                                : value} */}
+                                {typeof value === 'boolean' ? (value === true ? 'Enaled' : 'Disabled') : value}
                             </StyledTableCell>
                           );
                         })}

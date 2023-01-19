@@ -44,7 +44,7 @@ function App() {
               <Route path="/companies" element={<Companies />} />
               <Route path="/companies/:companyInfo" element={<CompanyInfo />} />
               <Route path="/customers" element={<Customers />} />
-              <Route path="/customers/:companyDetail" element={<CustomerDetails />} />
+              <Route path="/customers/:customerid" element={<CustomerDetails />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/projects/:projectDetail" element={<ProjectDetails />} />
               <Route path="/transactions" element={<Transactions />} />

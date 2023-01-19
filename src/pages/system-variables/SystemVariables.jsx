@@ -7,16 +7,63 @@ import {
     OutlinedInput,
     Typography,
   } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Sidebar from "../../components/Sidebar";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import BeardcrumNavigator from "../../components/BeardcrumNavigator";
+import { ErrorMessage, useFormik } from "formik";
+import * as Yup from 'yup';
+import { useEffect } from "react";
+import { getVariables, updateVariable } from "../../features/system-variables/systemVariableSlice";
+import { useState } from "react";
+import Loading from "../../components/Loading";
+
+
+
+
+
 const SystemVariables = () => {
-const theme = useTheme()
-const {isDrawerOpen} = useSelector((store) => store.login)
-const matches = useMediaQuery('(max-width:600px)')
+const theme = useTheme();
+const dispatch = useDispatch();
+const {isDrawerOpen} = useSelector((store) => store.login);
+const {variables, isLoading} = useSelector((store) => store.systemVariable);
+const matches = useMediaQuery('(max-width:600px)');
+const [variableDetials, setVariableDetials] = useState(JSON.parse(localStorage.getItem('variableDetials')));
+
+useEffect(() => {
+    dispatch(getVariables());
+},[])
+
+
+const validationSchema = Yup.object({
+    reliPortion: Yup.string().required(),
+    materialSurcharge: Yup.string().required(),
+    windowsPermitFee: Yup.string().required(),
+    windowsDeliveryFee: Yup.string().required(),
+    slidingGlassDoorPermitFee: Yup.string().required(),
+    slidingGlassDoorDeliveryFee: Yup.string().required(),
+    interiorDoorPermitFee: Yup.string().required(),
+});
+const formik = useFormik({
+    initialValues: {
+      reliPortion: variableDetials?.data?.reliPortion,
+      materialSurcharge: variableDetials?.data?.materialSurcharge,
+      windowsPermitFee: variableDetials?.data?.windowsPermitFee,
+      windowsDeliveryFee: variableDetials?.data?.windowsDeliveryFee,
+      slidingGlassDoorPermitFee: variableDetials?.data?.slidingGlassDoorPermitFee,
+      slidingGlassDoorDeliveryFee: variableDetials?.data?.slidingGlassDoorDeliveryFee,
+      interiorDoorPermitFee: variableDetials?.data?.interiorDoorPermitFee,
+    },
+    onSubmit: (values) => {
+      dispatch(updateVariable(values));
+      console.log(values);
+    },
+    validationSchema
+  });
+
+
 const breadcrumbs = [
     <Typography
       key="3"
@@ -32,6 +79,12 @@ const breadcrumbs = [
       System Variables
     </Typography>,
   ];
+
+  if(isLoading){
+    return (
+        <Loading/>
+    )
+}
   return (
     <div className="page-section">
       <Sidebar/>
@@ -68,14 +121,16 @@ const breadcrumbs = [
         </Box>
 
             <Box component="div" sx={{ py: 4, px: matches? 2: 8, backgroundColor: '#F7F7F7'}}>
-                <form>
+                <form onSubmit={formik.handleSubmit}>
                     <Box component="div" sx={{display: 'flex', gap: '4rem', flexWrap: 'wrap', width: '100%', mb: 7}}>
                         <div style={{width : matches? '100%' : 'auto'}}>
                             <TextField
-                                required
-                                id="outlined-reli-portion"
+                                id="reliPortion"
+                                name="reliPortion"
                                 label="Reli Portion"
-                                defaultValue="20.00%"
+                                {...formik.getFieldProps('reliPortion')}
+                                error = {Boolean(formik.errors.reliPortion) && Boolean(formik.touched.reliPortion)}
+                                helperText = {Boolean(formik.touched.reliPortion) && formik.errors.reliPortion}
                                 sx={{
                                     width: matches? '100%': '400px',
                                 }}
@@ -84,11 +139,12 @@ const breadcrumbs = [
                         </div>
                         <div style={{width : matches? '100%' : 'auto'}}>
                             <TextField
-                                required
-                                id="outlined-materials-surcharge"
+                                id="materialSurcharge"
+                                name="materialSurcharge"
                                 label="Materials Surcharge"
-                                defaultValue="12.00%"
-                                name="materials-surcharge"
+                                {...formik.getFieldProps('materialSurcharge')}
+                                error = {Boolean(formik.errors.materialSurcharge) && Boolean(formik.touched.materialSurcharge)}
+                                helperText = {Boolean(formik.touched.materialSurcharge) && formik.errors.materialSurcharge}
                                 sx={{
                                     width: matches? '100%': '400px',
                                 }}
@@ -110,11 +166,12 @@ const breadcrumbs = [
                     <Box component="div" sx={{display: 'flex', gap: '4rem', flexWrap: 'wrap', width: '100%', mb: 5}}>
                         <div style={{width : matches? '100%' : 'auto'}}>
                             <TextField
-                                required
-                                id="outlined-permit-fee"
+                                id="windowsPermitFee"
+                                name="windowsPermitFee"
                                 label="Permit Fee"
-                                defaultValue="$50.00"
-                                name="permit-fee"
+                                {...formik.getFieldProps('windowsPermitFee')}
+                                error = {Boolean(formik.errors.windowsPermitFee) && Boolean(formik.touched.windowsPermitFee)}
+                                helperText = {Boolean(formik.touched.windowsPermitFee) && formik.errors.windowsPermitFee}
                                 sx={{
                                     width: matches? '100%': '400px',
                                 }}
@@ -124,10 +181,12 @@ const breadcrumbs = [
                         <div style={{width : matches? '100%' : 'auto'}}>
                             <TextField
                                 required
-                                id="outlined-delivery-fee"
+                                id="windowsDeliveryFee"
+                                name="windowsDeliveryFee"
                                 label="Delivery Fee"
-                                defaultValue="$150.00"
-                                name="delivery-fee"
+                                {...formik.getFieldProps('windowsDeliveryFee')}
+                                error = {Boolean(formik.errors.windowsDeliveryFee) && Boolean(formik.touched.windowsDeliveryFee)}
+                                helperText = {Boolean(formik.touched.windowsDeliveryFee) && formik.errors.windowsDeliveryFee}
                                 sx={{
                                     width: matches? '100%': '400px',
                                 }}
@@ -149,11 +208,12 @@ const breadcrumbs = [
                     <Box component="div" sx={{display: 'flex', gap: '4rem', flexWrap: 'wrap', width: '100%', mb: 5}}>
                         <div style={{width : matches? '100%' : 'auto'}}>
                             <TextField
-                                required
-                                id="outlined-permit-fee"
+                                id="slidingGlassDoorPermitFee"
+                                name="slidingGlassDoorPermitFee"
                                 label="Permit Fee"
-                                defaultValue="$50.00"
-                                name="permit-fee"
+                                {...formik.getFieldProps('slidingGlassDoorPermitFee')}
+                                error = {Boolean(formik.errors.slidingGlassDoorPermitFee) && Boolean(formik.touched.slidingGlassDoorPermitFee)}
+                                helperText = {Boolean(formik.touched.slidingGlassDoorPermitFee) && formik.errors.slidingGlassDoorPermitFee}
                                 sx={{
                                     width: matches? '100%': '400px',
                                 }}
@@ -162,11 +222,12 @@ const breadcrumbs = [
                         </div>
                         <div style={{width : matches? '100%' : 'auto'}}>
                             <TextField
-                                required
-                                id="outlined-delivery-fee"
+                                id="slidingGlassDoorDeliveryFee"
+                                name="slidingGlassDoorDeliveryFee"
                                 label="Delivery Fee"
-                                defaultValue="$150.00"
-                                name="delivery-fee"
+                                {...formik.getFieldProps('slidingGlassDoorDeliveryFee')}
+                                error = {Boolean(formik.errors.slidingGlassDoorDeliveryFee) && Boolean(formik.touched.slidingGlassDoorDeliveryFee)}
+                                helperText = {Boolean(formik.touched.slidingGlassDoorDeliveryFee) && formik.errors.slidingGlassDoorDeliveryFee}
                                 sx={{
                                     width: matches? '100%': '400px',
                                 }}
@@ -188,11 +249,12 @@ const breadcrumbs = [
                     <Box component="div" sx={{display: 'flex', gap: '4rem', flexWrap: 'wrap', justifyContent: matches?'end': 'start', width: '100%', mb: 5}}>
                         <div style={{width : matches? '100%' : 'auto'}}>
                             <TextField
-                                required
-                                id="outlined-permit-fee"
+                                id="interiorDoorPermitFee"
+                                name="interiorDoorPermitFee"
                                 label="Permit Fee"
-                                defaultValue="$50.00"
-                                name="permit-fee"
+                                {...formik.getFieldProps('interiorDoorPermitFee')}
+                                error = {Boolean(formik.errors.interiorDoorPermitFee) && Boolean(formik.touched.interiorDoorPermitFee)}
+                                helperText = {Boolean(formik.touched.interiorDoorPermitFee) && formik.errors.interiorDoorPermitFee}
                                 sx={{
                                     width: matches? '100%': '400px',
                                 }}
@@ -202,7 +264,7 @@ const breadcrumbs = [
                         
                     </Box>
                     <Box sx={{display: 'flex', justifyContent: 'end'}}>
-                        <Button variant="contained">save</Button>
+                        <Button type="submit" variant="contained">save</Button>
                     </Box>
                 </form>
             </Box>

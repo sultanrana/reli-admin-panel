@@ -12,6 +12,8 @@ import { Box, Card, IconButton, Table, TableContainer, Typography,} from '@mui/m
 import TableLink from '../../components/TableLink';
 import TableActions from '../../components/TableActions';
 import DonutSmallRoundedIcon from '@mui/icons-material/DonutSmallRounded';
+import { useEffect } from 'react';
+import Loading from '../../components/Loading';
 // active project
 const activeProjectColumns = [
     { id: 'projectId', label: 'Project ID', minWidth: 100, fontWeight: '600' },
@@ -60,9 +62,10 @@ const activeProjectColumns = [
 
 
 
-const PropertiesTable = () => {
-const {isEditCompanyModal,} = useSelector((store) => store.login)
-const dispatch = useDispatch()
+const PropertiesTable = (props) => {
+const {isEditCompanyModal,} = useSelector((store) => store.login);
+const {customerDetail,} = useSelector((store) => store.customer);
+const dispatch = useDispatch();
 const [page, setPage] = React.useState(0);
 const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -74,6 +77,17 @@ const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
 };
+
+
+
+
+if(customerDetail === undefined || customerDetail == {}){
+      return (
+            <Loading/>
+      )
+}
+
+
   return (
     <>
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -111,129 +125,48 @@ const handleChangeRowsPerPage = (event) => {
                   </StyledTableRow>
               </TableHead>
               <TableBody>
-                      <StyledTableRow hover role="checkbox">
-                              <StyledTableCell>
-                                    <DonutSmallRoundedIcon />
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    Home
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    1234 House St
-                              </StyledTableCell>
-                              <StyledTableCell>
+                  {props.properties?.map((property) => {
+                        console.log(property);
+                        return (
+                              <StyledTableRow hover role="checkbox" key={property._id}>
+                                    <StyledTableCell>
+                                          <DonutSmallRoundedIcon />
+                                    </StyledTableCell>
                                     
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    Costa Mesa
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    2
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    Yes
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    CA
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    55555
-                              </StyledTableCell>
-                      </StyledTableRow>
-                      <StyledTableRow hover role="checkbox">
-                              <StyledTableCell>
-                                    <DonutSmallRoundedIcon />
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    Home
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    1234 House St
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    Costa Mesa
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    2
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    Yes
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    CA
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    55555
-                              </StyledTableCell>
-                      </StyledTableRow>
-                      <StyledTableRow hover role="checkbox">
-                              <StyledTableCell>
-                                    <DonutSmallRoundedIcon />
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    Home
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    1234 House St
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    Costa Mesa
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    2
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    Yes
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    CA
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    55555
-                              </StyledTableCell>
-                      </StyledTableRow>
-                      <StyledTableRow hover role="checkbox">
-                              <StyledTableCell>
-                                    <DonutSmallRoundedIcon />
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    Home
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    1234 House St
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    Costa Mesa
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    2
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    Yes
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    CA
-                              </StyledTableCell>
-                              <StyledTableCell>
-                                    55555
-                              </StyledTableCell>
-                      </StyledTableRow>
+                                    <StyledTableCell>
+                                          {property.name}
+                                    </StyledTableCell>
+                                    <StyledTableCell>
+                                          {property.addressOne}
+                                    </StyledTableCell>
+                                    <StyledTableCell>
+                                          {property.addressTwo}    
+                                    </StyledTableCell>
+                                    <StyledTableCell>
+                                          {property.city}
+                                    </StyledTableCell>
+                                    <StyledTableCell>
+                                          {property.floors}
+                                    </StyledTableCell>
+                                    <StyledTableCell>
+                                          {Boolean(property.basement) ? 'Yes' : 'No'}
+                                    </StyledTableCell>
+                                    <StyledTableCell>
+                                          {property.state}
+                                    </StyledTableCell>
+                                    <StyledTableCell>
+                                          {property.zipCode}
+                                    </StyledTableCell>
+                              </StyledTableRow>
+                        )
+                  })}
               </TableBody>
               </Table>
           </TableContainer>
           <TablePagination
               rowsPerPageOptions={[10, 25, 100]}
               component="div"
-              count={activeProjectrows.length}
+              count={props.properties?.length || 0}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}

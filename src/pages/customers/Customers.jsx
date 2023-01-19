@@ -6,7 +6,7 @@ import {
   IconButton,
   Button,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import BeardcrumNavigator from "../../components/BeardcrumNavigator";
 import Sidebar from "../../components/Sidebar";
 import Paper from "@mui/material/Paper";
@@ -17,11 +17,13 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { RowingSharp } from "@mui/icons-material";
+import Loading from "../../components/Loading";
+import { getCutomers } from "../../features/customer/customerSlice";
 
 
 
@@ -199,8 +201,10 @@ const Customers = () => {
   ];
 const navigate = useNavigate()
 const [page, setPage] = React.useState(0);
+const {isLoading, customers} = useSelector((store) => store.customer)
 const [rowsPerPage, setRowsPerPage] = React.useState(10);
 const [searchValue, setSearchValue] = useState('');
+const dispatch = useDispatch();
 const [rows, setRows] = useState(customerRows);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -220,6 +224,16 @@ const [rows, setRows] = useState(customerRows);
     }else{
       setRows(customerRows)
     }
+  }
+
+  useEffect(() => {
+    dispatch(getCutomers());
+  }, [])
+
+  if(isLoading){
+    return (
+        <Loading/>
+    )
   }
   
 
@@ -329,36 +343,36 @@ const [rows, setRows] = useState(customerRows);
                 </StyledTableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
-                  <StyledTableRow key={row.name}>
+                {customers.data?.map((row) => (
+                  <StyledTableRow key={row.id}>
                     <StyledTableCell sx={{minWidth: 150}}>
-                      <TableLink onClick={() => navigate('customer-detail')}>
-                        {row.name}
+                      <TableLink onClick={() => navigate(row.id)}>
+                        {row.firstName +' ' + row.lastName}
                       </TableLink>
                     </StyledTableCell>
                     <StyledTableCell sx={{minWidth: 150}}>
                       {row.email}
                     </StyledTableCell>
                     <StyledTableCell sx={{minWidth: 150}}>
-                      {row.phone}
+                      {row.phoneNumber}
                     </StyledTableCell>
                     <StyledTableCell sx={{minWidth: 150}}>
                       {row.numberOfProperties}
                     </StyledTableCell>
                     <StyledTableCell sx={{minWidth: 150}}>
-                      {row.openProjects}
+                      {row.numberOfOpenProjects}
                     </StyledTableCell>
                     <StyledTableCell sx={{minWidth: 150}}>
-                      {row.completedProjects}
+                      {row.numberOfCompletedProjects}
                     </StyledTableCell>
                     <StyledTableCell sx={{minWidth: 150}}>
                       {row.totalPurchases}
                     </StyledTableCell>
                     <StyledTableCell sx={{minWidth: 150}}>
-                      {row.status}
+                      {(Boolean(row.statusBit) === true ) ? 'Enabled' : 'Disabled' }
                     </StyledTableCell>
                     <StyledTableCell sx={{minWidth: 150}}>
-                      {row.lastActive}
+                      {row.lastLoginAt}
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
@@ -368,7 +382,7 @@ const [rows, setRows] = useState(customerRows);
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={rows.length}
+            count={customers.data?.length || 0}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

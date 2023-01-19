@@ -8,7 +8,7 @@ import {
   Typography,
   TextField
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -27,16 +27,19 @@ import Sidebar from "../../components/Sidebar";
 import PropertiesTable from "./PropertiesTable";
 import EditCustomer from "./EditCustomer";
 import BeardcrumNavigator from "../../components/BeardcrumNavigator";
+import { useParams } from "react-router-dom";
+import { getCutomerDetail } from "../../features/customer/customerSlice";
+import Loading from "../../components/Loading";
 // active project
 const activeProjectColumns = [
-  { id: "projectId", label: "Project ID", minWidth: 100, fontWeight: "600" },
+  { id: "_id", label: "Project ID", minWidth: 100, fontWeight: "600" },
   {
-    id: "projectStatus",
+    id: "orderStatus",
     label: "Project Status",
     minWidth: 100,
     fontWeight: "600",
   },
-  { id: "customer", label: "Customer", minWidth: 100, fontWeight: "600" },
+  { id: "name", label: "Customer", minWidth: 100, fontWeight: "600" },
   {
     id: "serviceType",
     label: "Service Type",
@@ -44,7 +47,7 @@ const activeProjectColumns = [
     fontWeight: "600",
   },
   { id: "scheduled", label: "Scheduled", minWidth: 150, fontWeight: "600" },
-  { id: "amount", label: "Amount", minWidth: 100, fontWeight: "600" },
+  { id: "totalAmount", label: "Amount", minWidth: 100, fontWeight: "600" },
   // { id: "actions", label: "Actions", minWidth: 160, fontWeight: "600" },
 ];
 // active project
@@ -673,11 +676,16 @@ const AboutCard = styled(Box)(({theme}) => ({
 }))
 
 
+
+
 const CustomerDetails = () => {
+  const param = useParams();
+  const dispatch = useDispatch();
+
   const { isEditCustomerModal, isDrawerOpen } = useSelector(
     (store) => store.login
   );
-  const dispatch = useDispatch();
+  const {isLoading, customerDetail} = useSelector((store) => store.customer);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -689,6 +697,16 @@ const CustomerDetails = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+
+
+
+  useEffect(() => {
+    console.log(param.customerid);
+    dispatch(getCutomerDetail(param.customerid))
+  }, []);
+
+
   const breadcrumbs = [
     <Typography
       key="3"
@@ -704,6 +722,13 @@ const CustomerDetails = () => {
       Customer Details
     </Typography>,
   ];
+
+  if(isLoading){
+    return (
+        <Loading/>
+    )
+  }
+
   return (
     <>
       <div className="page-section">
@@ -759,17 +784,17 @@ const CustomerDetails = () => {
                   </IconButton>
                 </Box>
                 <div className="about_body">
-                  <div className="about_img_circle"></div>
+                  <div className="about_img_circle" style={{background: (customerDetail.data?.profileImage ?`url('https://images.pexels.com/photos/14932984/pexels-photo-14932984.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load')`: '#C4C4C4')}}></div>
                   <div className="about_body_card">
                     <div className="company_info">
-                      <h4>Josh Johnson</h4>
+                      <h4>{customerDetail.data?.firstName + ' ' + customerDetail.data?.lastName}</h4>
                       <p
                         className="info_para"
                         style={{
                           marginBottom: "8px",
                         }}
                       >
-                        joshj@tepia.co
+                        {customerDetail.data?.email}
                       </p>
                       <p
                         className="info_para"
@@ -777,9 +802,9 @@ const CustomerDetails = () => {
                           marginBottom: "8px",
                         }}
                       >
-                        949-234-4432
+                        {customerDetail.data?.phoneNumber}
                       </p>
-                      <p className="enabled">Enabled</p>
+                      <p className={Boolean(customerDetail.data?.statusBit) ? 'enabled' : 'disabled' }>{Boolean(customerDetail.data?.statusBit) ? 'Enabled' : 'Disabled' }</p>
                     </div>
                   </div>
                 </div>
@@ -789,7 +814,7 @@ const CustomerDetails = () => {
                 Properties
               </Typography>
               <Box component="div">
-                <PropertiesTable />
+                <PropertiesTable properties={customerDetail.data?.properties}/>
               </Box>
             </AboutCard>
             <ActivityLogBox>
@@ -876,15 +901,15 @@ const CustomerDetails = () => {
                   </StyledTableRow>
                 </TableHead>
                 <TableBody>
-                  {activeProjectrows
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row) => {
+                  {customerDetail.data?.orders
+                    ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row,index) => {
                       return (
                         <StyledTableRow
                           hover
                           role="checkbox"
                           tabIndex={-1}
-                          key={row.code}
+                          key={'malik'+ index}
                         >
                           {activeProjectColumns.map((column) => {
                             const value = row[column.id];
@@ -908,7 +933,7 @@ const CustomerDetails = () => {
             <TablePagination
               rowsPerPageOptions={[10, 25, 100]}
               component="div"
-              count={activeProjectrows.length}
+              count={customerDetail.data?.orders.length || 0}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}

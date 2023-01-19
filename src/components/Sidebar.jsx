@@ -89,34 +89,36 @@ return (
     >
       <Box component="div" role="presentation">
       <List>
-        {links.map((link, index) => (
-          <Link to={link.route} style={{ color: window.location.href.indexOf(link.route) > -1 ? "#D0347E" : "#000000" }} >
-              <ListItem disablePadding sx={{ display: "block" }} key={index} >
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: isDrawerOpen ? "initial" : "center",
-                    px: 2.5,
-                  }}
-                >
-                  <ListItemIcon
+        {links.map((link, index) => {
+          return (
+            <Link to={link.route} key={index} style={{ color: window.location.href.indexOf(link.route) > -1 ? "#D0347E" : "#000000" }} >
+                <ListItem disablePadding sx={{ display: "block" }}  >
+                  <ListItemButton
                     sx={{
-                      minWidth: 0,
-                      mr: isDrawerOpen ? 3 : "auto",
-                      justifyContent: "center",
-                      color: "#000000",
+                      minHeight: 48,
+                      justifyContent: isDrawerOpen ? "initial" : "center",
+                      px: 2.5,
                     }}
                   >
-                    {link.icon}
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={link.text}
-                    sx={{ opacity: isDrawerOpen ? 1 : 0 }}
-                  />
-                </ListItemButton>
-              </ListItem>
-          </Link>
-        ))}
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: isDrawerOpen ? 3 : "auto",
+                        justifyContent: "center",
+                        color: "#000000",
+                      }}
+                    >
+                      {link.icon}
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={link.text}
+                      sx={{ opacity: isDrawerOpen ? 1 : 0 }}
+                    />
+                  </ListItemButton>
+                </ListItem>
+            </Link>
+          )
+        })}
         </List>
       </Box>
       <Button

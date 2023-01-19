@@ -4,7 +4,7 @@ const initialState = {
     baseUrl: 'http://34.236.149.254/api/admin/users',
     code: 0,
     errorMessage: '',
-    storeUserToken: false,
+    storeUserToken: localStorage.getItem('token')? true: false,
     loggedInUser: {},
     isDrawerOpen: true,
     isAddCompanyModal: false,

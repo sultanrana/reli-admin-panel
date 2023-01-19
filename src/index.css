@@ -128,6 +128,7 @@ a{
   height: 174px;
   border-radius: 50%;
   background: #C4C4C4;
+  background-size: cover !important;
 }
 .about_body .about_body_card{
   flex: 1;
@@ -152,7 +153,11 @@ a{
   color:#1FBAD2;
   font-size: 20px;
   letter-spacing: 0.15px;
-
+}
+.company_info .disabled{
+  color:#D0347E;
+  font-size: 20px;
+  letter-spacing: 0.15px;
 }
 .available_service_card{
   display: flex;

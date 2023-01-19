@@ -60,6 +60,7 @@ const Login = () => {
     console.log(userData);
     const token = userData.data.token;
     localStorage.setItem('token', token)
+    console.log(token);
     dispatch(loginUser(userData))
     navigate('/services')
   }
