@@ -1088,7 +1088,7 @@ const AdminPortalUser = () => {
   const [searchValue, setSearchValue] = React.useState('');
   const [alertDialog, setAlertDialog] = React.useState(false);
   const portalUserData = JSON.parse(localStorage.getItem('portalUsers'));
-  const [rows, setRows] = React.useState(portalUserData?.data);
+  const [rows, setRows] = React.useState(portalUserData?.data? portalUserData?.data : portalUsers?.data);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };

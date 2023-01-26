@@ -30,7 +30,8 @@ const dispatch = useDispatch();
 const {isDrawerOpen} = useSelector((store) => store.login);
 const {variables, isLoading} = useSelector((store) => store.systemVariable);
 const matches = useMediaQuery('(max-width:600px)');
-const [variableDetials, setVariableDetials] = useState(JSON.parse(localStorage.getItem('variableDetials')));
+const variablesData = JSON.parse(localStorage.getItem('variableDetials'));
+const [variableDetials, setVariableDetials] = useState(variablesData? variablesData : variables);
 
 useEffect(() => {
     dispatch(getVariables());

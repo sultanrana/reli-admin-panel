@@ -201,7 +201,7 @@ const [rowsPerPage, setRowsPerPage] = React.useState(10);
 const [searchValue, setSearchValue] = useState('');
 const dispatch = useDispatch();
 const customersData = JSON.parse(localStorage.getItem('customers'));
-const [rows, setRows] = useState(customersData?.data);
+const [rows, setRows] = useState(customersData?.data? customersData?.data: customers?.data);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
