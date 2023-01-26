@@ -19,6 +19,7 @@
     "npm": "^8.19.3",
     "react": "^18.2.0",
     "react-axios": "^2.0.6",
+    "react-csv": "^2.2.2",
     "react-dom": "^18.2.0",
     "react-material-ui-searchbar": "^1.0.4",
     "react-redux": "^8.0.5",

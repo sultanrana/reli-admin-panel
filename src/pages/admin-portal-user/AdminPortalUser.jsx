@@ -32,7 +32,7 @@ import { adminPortalUserResponseClr, getPortalUser } from "../../features/admin-
 import Loading from "../../components/Loading";
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import CloseIcon from '@mui/icons-material/Close';
-
+import { CSVLink, CSVDownload } from "react-csv";
 
 const columns = [
   { id: "firstName", label: "Name", minWidth: 100, fontWeight: '600' },
@@ -1153,13 +1153,15 @@ const AdminPortalUser = () => {
               gap: "1rem",
             }}
           >
-            <Button
-              variant="outlined"
-              className="bc-btn-outline"
-              color="primary"
-            >
-              Export csv
-            </Button>
+            <CSVLink data={portalUsers?.data}>
+              <Button
+                variant="outlined"
+                className="bc-btn-outline"
+                color="primary"
+              >
+                  Export csv
+              </Button>
+            </CSVLink>
             <Button
               variant="outlined"
               className="bc-btn-outline"

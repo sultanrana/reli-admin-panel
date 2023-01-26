@@ -27,6 +27,8 @@ import { TroubleshootOutlined } from "@mui/icons-material";
 import { handleAddCompanyModal } from "../../features/login/loginSlice";
 import { useEffect } from "react";
 import { getCompanies } from "../../features/companies/companySlice";
+import { CSVLink, CSVDownload } from "react-csv";
+
 const columns = [
   { id: "companyName", label: "Company", minWidth: 100, fontWeight: "600" },
   {
@@ -217,13 +219,15 @@ const Companies = () => {
               gap: "1rem",
             }}
           >
-            <Button
-              variant="outlined"
-              className="bc-btn-outline"
-              color="primary"
-            >
-              Export csv
-            </Button>
+            <CSVLink data={list?.data}>
+              <Button
+                variant="outlined"
+                className="bc-btn-outline"
+                color="primary"
+              >
+                Export csv
+              </Button>
+            </CSVLink>
             <Button
               variant="outlined"
               className="bc-btn-outline"

@@ -25,7 +25,7 @@ import { RowingSharp } from "@mui/icons-material";
 import Loading from "../../components/Loading";
 import { getCutomers } from "../../features/customer/customerSlice";
 import moment from "moment/moment";
-
+import { CSVLink, CSVDownload } from "react-csv";
 
 
 
@@ -270,13 +270,15 @@ const [rows, setRows] = useState(customersData?.data? customersData?.data: custo
               gap: "1rem",
             }}
           >
-            <Button
-              variant="outlined"
-              className="bc-btn-outline"
-              color="primary"
-            >
-              Export csv
-            </Button>
+            <CSVLink data={customers?.data}>
+              <Button
+                variant="outlined"
+                className="bc-btn-outline"
+                color="primary"
+              >
+                Export csv
+              </Button>
+            </CSVLink>
           </Box>
         </Box>
         <Box
