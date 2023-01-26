@@ -24,6 +24,7 @@ import { useNavigate } from "react-router-dom";
 import { RowingSharp } from "@mui/icons-material";
 import Loading from "../../components/Loading";
 import { getCutomers } from "../../features/customer/customerSlice";
+import moment from "moment/moment";
 
 
 
@@ -148,12 +149,6 @@ function createData(
 //   </div>
 //   ),
 // ];
-var customerRows = [
-  {name: 'Malik Azhar Abbas', email : 'malik@gmail.com', phone: '555-555-5555', numberOfProperties: 1, openProjects: 3, completedProjects: 5, totalPurchases: '$1,250.00', status: 'Active', lastActive: '05/09/22 12:00:00AM PT'},
-  {name: 'Shahroz javed', email : 'shahroz@gmail.com', phone: '555-555-5555', numberOfProperties: 1, openProjects: 3, completedProjects: 5, totalPurchases: '$1,250.00', status: 'Active', lastActive: '05/09/22 12:00:00AM PT'},
-  {name: 'bilal', email : 'bilal@gmail.com', phone: '555-555-5555', numberOfProperties: 1, openProjects: 3, completedProjects: 5, totalPurchases: '$1,250.00', status: 'Active', lastActive: '05/09/22 12:00:00AM PT'},
-  {name: 'umar', email : 'umar@gmail.com', phone: '555-555-5555', numberOfProperties: 1, openProjects: 3, completedProjects: 5, totalPurchases: '$1,250.00', status: 'Active', lastActive: '05/09/22 12:00:00AM PT'},
-];
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.gray,
@@ -205,7 +200,8 @@ const {isLoading, customers} = useSelector((store) => store.customer)
 const [rowsPerPage, setRowsPerPage] = React.useState(10);
 const [searchValue, setSearchValue] = useState('');
 const dispatch = useDispatch();
-const [rows, setRows] = useState(customerRows);
+const customersData = JSON.parse(localStorage.getItem('customers'));
+const [rows, setRows] = useState(customersData?.data);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -216,13 +212,22 @@ const [rows, setRows] = useState(customerRows);
   };
   const handleSearch = (searchedValue) => {
     setSearchValue(searchedValue)
-    const filteredRows = customerRows.filter((row) => {
-      return row.name.toLowerCase().includes(searchedValue.toLowerCase());
+    const filteredRows = rows?.filter((row) => {
+      if(row.firstName)
+        return row.firstName.toLowerCase().includes(searchedValue.toLowerCase());
+      else if(row.lastName)
+        return row.lastName.toLowerCase().includes(searchedValue.toLowerCase());
+      else if(row.email)
+        return row.email.toLowerCase().includes(searchedValue.toLowerCase());
+      else if(row.phoneNumber)
+        return row.phoneNumber.toString().toLowerCase().includes(searchedValue.toLowerCase());
+      
     });
-    if(filteredRows.length > 0){
+    // console.log(filteredRows, searchedValue);
+    if(searchedValue != '' && filteredRows.length > 0){
       setRows(filteredRows)
     }else{
-      setRows(customerRows)
+      setRows(customers.data)
     }
   }
 
@@ -337,13 +342,13 @@ const [rows, setRows] = useState(customerRows);
                     <StyledTableCell sx={{minWidth: 150, fontWeight: '600'}}>
                       Status
                     </StyledTableCell>
-                    <StyledTableCell sx={{minWidth: 150, fontWeight: '600'}}>
+                    <StyledTableCell sx={{minWidth: 200, fontWeight: '600'}}>
                       Last Active
                     </StyledTableCell>
                 </StyledTableRow>
               </TableHead>
               <TableBody>
-                {customers.data?.map((row) => (
+                {rows?.map((row) => (
                   <StyledTableRow key={row.id}>
                     <StyledTableCell sx={{minWidth: 150}}>
                       <TableLink onClick={() => navigate(row.id)}>
@@ -366,13 +371,13 @@ const [rows, setRows] = useState(customerRows);
                       {row.numberOfCompletedProjects}
                     </StyledTableCell>
                     <StyledTableCell sx={{minWidth: 150}}>
-                      {row.totalPurchases}
+                      {'$'+row.totalPurchases.toFixed(2)}
                     </StyledTableCell>
                     <StyledTableCell sx={{minWidth: 150}}>
                       {(Boolean(row.statusBit) === true ) ? 'Enabled' : 'Disabled' }
                     </StyledTableCell>
-                    <StyledTableCell sx={{minWidth: 150}}>
-                      {row.lastLoginAt}
+                    <StyledTableCell sx={{minWidth: 200}}>
+                      {moment(row.lastLoginAt).format('DD/MM/YY hh:mm:ss A')}
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
@@ -382,7 +387,7 @@ const [rows, setRows] = useState(customerRows);
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={customers.data?.length || 0}
+            count={rows?.length || 0}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

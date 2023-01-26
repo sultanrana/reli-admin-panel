@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import React, { useEffect } from "react";
 import Paper from "@mui/material/Paper";
+import Alert  from "@mui/material/Alert";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
@@ -28,8 +29,9 @@ import PropertiesTable from "./PropertiesTable";
 import EditCustomer from "./EditCustomer";
 import BeardcrumNavigator from "../../components/BeardcrumNavigator";
 import { useParams } from "react-router-dom";
-import { getCutomerDetail } from "../../features/customer/customerSlice";
+import { customerResponseClr, getCutomerDetail } from "../../features/customer/customerSlice";
 import Loading from "../../components/Loading";
+import CloseIcon from '@mui/icons-material/Close';
 // active project
 const activeProjectColumns = [
   { id: "_id", label: "Project ID", minWidth: 100, fontWeight: "600" },
@@ -685,9 +687,11 @@ const CustomerDetails = () => {
   const { isEditCustomerModal, isDrawerOpen } = useSelector(
     (store) => store.login
   );
-  const {isLoading, customerDetail} = useSelector((store) => store.customer);
+  const {isLoading, customerDetail, alert, responseStatus, responseMsg} = useSelector((store) => store.customer);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const [alertDialog, setAlertDialog] = React.useState(false);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -702,8 +706,8 @@ const CustomerDetails = () => {
 
 
   useEffect(() => {
-    console.log(param.customerid);
-    dispatch(getCutomerDetail(param.customerid))
+    dispatch(getCutomerDetail(param.customerid));
+    setAlertDialog(alert);
   }, []);
 
 
@@ -752,6 +756,8 @@ const CustomerDetails = () => {
               breadcrumbs={breadcrumbs ? breadcrumbs : "Beardcrums"}
             />
           </Box>
+          <Box>
+          </Box>
           <Box sx={{
             display: 'flex',
             flexDirection: 'row',
@@ -759,6 +765,28 @@ const CustomerDetails = () => {
             flexWrap: 'wrap',
             gap: '1rem'
           }}>
+             {
+              alert ? (
+                <Alert 
+                  severity={responseStatus}
+                  color={responseStatus} 
+                  sx={{mb: 3, width: '100%'}}
+                  action={
+                    <IconButton
+                      aria-label="close"
+                      color="inherit"
+                      size="small"
+                      onClick={() => {
+                        dispatch(customerResponseClr(false));
+                        setAlertDialog(false)
+                      }}
+                    >
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                >{responseMsg}</Alert>
+              ) : null
+            }
 
             <AboutCard>
               <Card
@@ -909,7 +937,7 @@ const CustomerDetails = () => {
                           hover
                           role="checkbox"
                           tabIndex={-1}
-                          key={'malik'+ index}
+                          key={'key'+ index}
                         >
                           {activeProjectColumns.map((column) => {
                             const value = row[column.id];

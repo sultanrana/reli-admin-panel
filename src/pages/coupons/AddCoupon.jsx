@@ -232,7 +232,7 @@ if(isLoading){
                       
                       </Box>
                       <CouponButton disabled={!dirty || !isValid} type='submit' variant='contained'>Save</CouponButton>
-                    </CouponCard>
+                  </CouponCard>
                 </Form>
               )}
             </Formik>

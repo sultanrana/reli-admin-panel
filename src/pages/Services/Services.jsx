@@ -1,12 +1,23 @@
 import Sidebar from "../../components/Sidebar";
 import BeardcrumNavigator from "../../components/BeardcrumNavigator";
 import { Box, Card, Typography } from "@mui/material";
-import services from "../../mock/services";
-import { useSelector } from "react-redux";
+// import services from "../../mock/services";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { getServices } from "../../features/services/serviceSlice";
+import Loading from "../../components/Loading";
 
 const Services = () => {
   const { isDrawerOpen } = useSelector((store) => store.login);
+  const { services, isLoading } = useSelector((store) => store.service);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getServices());
+  }, [])
+
+
   const breadcrumbs = [
     <Typography
       key="3"
@@ -22,6 +33,15 @@ const Services = () => {
       Services
     </Typography>,
   ];
+
+
+  if(isLoading){
+    return (
+      <Loading/>
+    )
+  }
+
+
   return (
     <div className="page-section">
       <Sidebar />
@@ -64,9 +84,9 @@ const Services = () => {
               padding: "16px",
             }}
           >
-            {services.map((service) => {
+            {services.data?.map((service) => {
               return (
-                <Link to={service.route} key={service.id}>
+                <Link to={service.id} key={service.id} {...service}>
                   <Card
                     sx={{
                       boxShadow:
@@ -79,7 +99,7 @@ const Services = () => {
                       height: '200px'
                     }}
                   >
-                    <img src={service.src} alt="" style={{ width: "" }} />
+                    <img src="/images/service1.png" alt="" style={{ width: "" }} />
                     <Typography
                       variant="h3"
                       component="h1"
@@ -95,7 +115,7 @@ const Services = () => {
                         width: "172px",
                       }}
                     >
-                      {service.title}
+                      {service.name}
                     </Typography>
                   </Card>
                 </Link>

@@ -13,7 +13,7 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import BeardcrumNavigator from "../../components/BeardcrumNavigator";
-import { ErrorMessage, useFormik } from "formik";
+import { useFormik } from "formik";
 import * as Yup from 'yup';
 import { useEffect } from "react";
 import { getVariables, updateVariable } from "../../features/system-variables/systemVariableSlice";
@@ -61,7 +61,7 @@ const formik = useFormik({
       console.log(values);
     },
     validationSchema
-  });
+});
 
 
 const breadcrumbs = [

@@ -25,10 +25,12 @@ import TableLink from "../../components/TableLink";
 import AddCompany from "./AddCompany";
 import { TroubleshootOutlined } from "@mui/icons-material";
 import { handleAddCompanyModal } from "../../features/login/loginSlice";
+import { useEffect } from "react";
+import { getCompanies } from "../../features/companies/companySlice";
 const columns = [
-  { id: "company", label: "Company", minWidth: 100, fontWeight: "600" },
+  { id: "companyName", label: "Company", minWidth: 100, fontWeight: "600" },
   {
-    id: "representative",
+    id: "representativeName",
     label: "Representative",
     minWidth: 100,
     fontWeight: "600",
@@ -69,7 +71,7 @@ const columns = [
     minWidth: 150,
     fontWeight: "600",
   },
-  { id: "status", label: "Status", fontWeight: "600", minWidth: 100 },
+  { id: "companyStatus", label: "Status", fontWeight: "600", textTransform: 'capitalize', minWidth: 100 },
   // { id: "actions", label: "Actions", fontWeight: "600", minWidth: 150 },
 ];
 
@@ -147,6 +149,7 @@ const Companies = () => {
   const { isDrawerOpen, isAddCompanyModal } = useSelector(
     (store) => store.login
   );
+  const { list } = useSelector((store) => store.company);
   const dispatch = useDispatch();
   const breadcrumbs = [
     <Typography
@@ -174,6 +177,15 @@ const Companies = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  useEffect(() => {
+    dispatch(getCompanies());
+  }, [])
+
+
+
+
+
   return (
     <div className="page-section">
       <Sidebar />
@@ -260,10 +272,9 @@ const Companies = () => {
                 </StyledTableRow>
               </TableHead>
               <TableBody>
-                {rows
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                {list.data
+                  ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
-                    console.log(row.code);
                     return (
                       <StyledTableRow
                         hover
@@ -277,6 +288,7 @@ const Companies = () => {
                             <StyledTableCell
                               key={column.id}
                               align={column.align}
+                              sx={{textTransform : column.textTransform}}
                             >
                               {column.format && typeof value === "number"
                                 ? column.format(value)
@@ -293,7 +305,7 @@ const Companies = () => {
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={rows.length}
+            count={list.data?.length ? list.data?.length : 0}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

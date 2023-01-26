@@ -126,7 +126,6 @@ if(customerDetail === undefined || customerDetail == {}){
               </TableHead>
               <TableBody>
                   {props.properties?.map((property) => {
-                        console.log(property);
                         return (
                               <StyledTableRow hover role="checkbox" key={property._id}>
                                     <StyledTableCell>

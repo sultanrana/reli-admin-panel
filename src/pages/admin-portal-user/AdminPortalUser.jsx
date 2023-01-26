@@ -5,6 +5,7 @@ import {
   Typography,
   IconButton,
   Button,
+  Alert,
 } from "@mui/material";
 import React from "react";
 import BeardcrumNavigator from "../../components/BeardcrumNavigator";
@@ -27,8 +28,12 @@ import { handleAddAdminPortalUserModal, handleEditAdminPortalUserModal } from ".
 import AddAdminPortalUser from "./AddAdminPortalUser";
 import EditAdminPortalUser from "./EditAdminPortalUser";
 import { useEffect } from "react";
-import { getPortalUser } from "../../features/admin-portal-user/adminPortalUserSlice";
+import { adminPortalUserResponseClr, getPortalUser } from "../../features/admin-portal-user/adminPortalUserSlice";
 import Loading from "../../components/Loading";
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import CloseIcon from '@mui/icons-material/Close';
+
+
 const columns = [
   { id: "firstName", label: "Name", minWidth: 100, fontWeight: '600' },
   { id: "email", label: "Email", minWidth: 100, fontWeight: '600' },
@@ -69,7 +74,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 const AdminPortalUser = () => {
   const { isDrawerOpen, isAddAdminPortalUserModal, isEditAdminPortalUserModal } = useSelector((store) => store.login);
-  const {portalUsers, isLoading} = useSelector((store) => store.adminPortalUser);
+  const {portalUsers, isLoading, responseStatus, responseMsg, alert} = useSelector((store) => store.adminPortalUser);
   const dispatch = useDispatch()
   const breadcrumbs = [
     <Typography
@@ -86,1001 +91,1004 @@ const AdminPortalUser = () => {
       Admin Portal User
     </Typography>,
   ];
-  const rows = [
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-    createData(
-      <TableLink text="John Jenkins" />,
-      <TableLink text="johnsmith@.co" />,
-      "Admin",
-      "Active",
-      "05/09/22 12:00:00AM PT",
-    //   <div style={{ 
-    //     display: 'flex',
-    //     gap: '10px'
-    // }}>
-    //     <IconButton>
-    //         <DeleteRoundedIcon/>
-    //     </IconButton>
-    //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
-    //         <ModeRoundedIcon/>
-    //     </IconButton>
-    // </div>
-    ),
-  ];
+  // const rows = [
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  //   createData(
+  //     <TableLink text="John Jenkins" />,
+  //     <TableLink text="johnsmith@.co" />,
+  //     "Admin",
+  //     "Active",
+  //     "05/09/22 12:00:00AM PT",
+  //   //   <div style={{ 
+  //   //     display: 'flex',
+  //   //     gap: '10px'
+  //   // }}>
+  //   //     <IconButton>
+  //   //         <DeleteRoundedIcon/>
+  //   //     </IconButton>
+  //   //     <IconButton onClick={() => dispatch(handleEditAdminPortalUserModal())}>
+  //   //         <ModeRoundedIcon/>
+  //   //     </IconButton>
+  //   // </div>
+  //   ),
+  // ];
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
+  const [searchValue, setSearchValue] = React.useState('');
+  const [alertDialog, setAlertDialog] = React.useState(false);
+  const portalUserData = JSON.parse(localStorage.getItem('portalUsers'));
+  const [rows, setRows] = React.useState(portalUserData?.data);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -1091,10 +1099,25 @@ const AdminPortalUser = () => {
   };
 
 
+  const handleSearch = (searchedValue) => {
+    setSearchValue(searchedValue)
+    const filteredRows = rows?.filter((row) => {
+        return row.firstName.toLowerCase().includes(searchedValue.toLowerCase());
+      
+    });
+    console.log(filteredRows, searchedValue);
+    if(searchedValue !='' && filteredRows.length > 0){
+      setRows(filteredRows);
+      setPage(0);
+    }else{
+      setRows(portalUsers.data)
+    }
+  }
 
   useEffect(() => {
     dispatch(getPortalUser());
-  }, [])
+    setAlertDialog(alert);
+  }, [alert, dispatch]);
 
   if(isLoading){
     return (
@@ -1158,11 +1181,52 @@ const AdminPortalUser = () => {
           }}
         >
           <Box component="div">
-            <SearchBox />
+            {/* <SearchBox /> */}
+            <Box sx={{
+            background: '#FFFFFF',
+            boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+            borderRadius: '33px',
+            height: 50,
+            display: 'flex',
+            alignItems: 'center',
+            maxWidth: '245px',
+            border: '1px solid #ddd',
+            overflow: 'hidden'
+        }}>
+            <SearchRoundedIcon sx={{
+              width: '16%',
+              marginLeft: '6px'
+            }}/>
+            <input type="text" value={searchValue} placeholder='Search' className='search-input' onChange={(e) =>  handleSearch(e.target.value)} />
+        </Box>
           </Box>
           {/* <IconButton aria-label="filter-icon" size="large">
             <FilterListRoundedIcon />
           </IconButton> */}
+        </Box>
+        <Box sx={{width: '100%'}}>
+        {
+              alert ? (
+                <Alert 
+                  severity={responseStatus}
+                  color={responseStatus} 
+                  sx={{mb: 3, width: '100%'}}
+                  action={
+                    <IconButton
+                      aria-label="close"
+                      color="inherit"
+                      size="small"
+                      onClick={() => {
+                        dispatch(adminPortalUserResponseClr(false));
+                        setAlertDialog(false)
+                      }}
+                    >
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                >{responseMsg}</Alert>
+              ) : null
+            }
         </Box>
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <TableContainer>
@@ -1181,8 +1245,7 @@ const AdminPortalUser = () => {
                 </StyledTableRow>
               </TableHead>
               <TableBody>
-                {portalUsers.data
-                  ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                {rows?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
                     return (
                       <StyledTableRow
@@ -1214,7 +1277,7 @@ const AdminPortalUser = () => {
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={rows.length}
+            count={rows ? rows.length : 0}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
