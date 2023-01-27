@@ -28,6 +28,7 @@ import { handleAddCompanyModal } from "../../features/login/loginSlice";
 import { useEffect } from "react";
 import { getCompanies } from "../../features/companies/companySlice";
 import { CSVLink, CSVDownload } from "react-csv";
+import Loading from '../../components/Loading'
 
 const columns = [
   { id: "companyName", label: "Company", minWidth: 100, fontWeight: "600" },
@@ -151,7 +152,7 @@ const Companies = () => {
   const { isDrawerOpen, isAddCompanyModal } = useSelector(
     (store) => store.login
   );
-  const { list } = useSelector((store) => store.company);
+  const { list, isLoading } = useSelector((store) => store.company);
   const dispatch = useDispatch();
   const breadcrumbs = [
     <Typography
@@ -185,7 +186,11 @@ const Companies = () => {
   }, [])
 
 
-
+if(isLoading){
+  return (
+    <Loading/>
+  )
+}
 
 
   return (
@@ -219,7 +224,7 @@ const Companies = () => {
               gap: "1rem",
             }}
           >
-            <CSVLink data={list?.data}>
+            <CSVLink data={list.data ? list.data : 'No data available yet'}>
               <Button
                 variant="outlined"
                 className="bc-btn-outline"

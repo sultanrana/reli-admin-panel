@@ -1088,7 +1088,7 @@ const AdminPortalUser = () => {
   const [searchValue, setSearchValue] = React.useState('');
   const [alertDialog, setAlertDialog] = React.useState(false);
   const portalUserData = JSON.parse(localStorage.getItem('portalUsers'));
-  const [rows, setRows] = React.useState(portalUserData?.data? portalUserData?.data : portalUsers?.data);
+  const [rows, setRows] = React.useState();
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -1117,7 +1117,7 @@ const AdminPortalUser = () => {
   useEffect(() => {
     dispatch(getPortalUser());
     setAlertDialog(alert);
-  }, [alert, dispatch]);
+  }, [alert]);
 
   if(isLoading){
     return (
@@ -1153,13 +1153,13 @@ const AdminPortalUser = () => {
               gap: "1rem",
             }}
           >
-            <CSVLink data={portalUsers?.data}>
+            <CSVLink data={portalUsers.data ? portalUsers.data : "No data available yet."}>
               <Button
                 variant="outlined"
                 className="bc-btn-outline"
                 color="primary"
               >
-                  Export csv
+                Export csv
               </Button>
             </CSVLink>
             <Button
@@ -1247,7 +1247,7 @@ const AdminPortalUser = () => {
                 </StyledTableRow>
               </TableHead>
               <TableBody>
-                {rows?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                {portalUsers.data?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
                     return (
                       <StyledTableRow
@@ -1279,7 +1279,7 @@ const AdminPortalUser = () => {
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={rows ? rows.length : 0}
+            count={portalUsers.data ? portalUsers.data.length : 0}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

@@ -201,7 +201,7 @@ const [rowsPerPage, setRowsPerPage] = React.useState(10);
 const [searchValue, setSearchValue] = useState('');
 const dispatch = useDispatch();
 const customersData = JSON.parse(localStorage.getItem('customers'));
-const [rows, setRows] = useState(customersData?.data? customersData?.data: customers?.data);
+const [rows, setRows] = useState();
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -270,7 +270,7 @@ const [rows, setRows] = useState(customersData?.data? customersData?.data: custo
               gap: "1rem",
             }}
           >
-            <CSVLink data={customers?.data}>
+            <CSVLink data={customers.data ? customers.data : "No data available yet"}>
               <Button
                 variant="outlined"
                 className="bc-btn-outline"
@@ -350,7 +350,7 @@ const [rows, setRows] = useState(customersData?.data? customersData?.data: custo
                 </StyledTableRow>
               </TableHead>
               <TableBody>
-                {rows?.map((row) => (
+                {customers.data?.map((row) => (
                   <StyledTableRow key={row.id}>
                     <StyledTableCell sx={{minWidth: 150}}>
                       <TableLink onClick={() => navigate(row.id)}>
@@ -389,7 +389,7 @@ const [rows, setRows] = useState(customersData?.data? customersData?.data: custo
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={rows?.length || 0}
+            count={customers.data?.length || 0}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
