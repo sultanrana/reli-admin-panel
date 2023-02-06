@@ -212,23 +212,23 @@ const [rows, setRows] = useState();
   };
   const handleSearch = (searchedValue) => {
     setSearchValue(searchedValue)
-    const filteredRows = rows?.filter((row) => {
-      if(row.firstName)
-        return row.firstName.toLowerCase().includes(searchedValue.toLowerCase());
-      else if(row.lastName)
-        return row.lastName.toLowerCase().includes(searchedValue.toLowerCase());
-      else if(row.email)
-        return row.email.toLowerCase().includes(searchedValue.toLowerCase());
-      else if(row.phoneNumber)
-        return row.phoneNumber.toString().toLowerCase().includes(searchedValue.toLowerCase());
+    // const filteredRows = rows?.filter((row) => {
+    //   if(row.firstName)
+    //     return row.firstName.toLowerCase().includes(searchedValue.toLowerCase());
+    //   else if(row.lastName)
+    //     return row.lastName.toLowerCase().includes(searchedValue.toLowerCase());
+    //   else if(row.email)
+    //     return row.email.toLowerCase().includes(searchedValue.toLowerCase());
+    //   else if(row.phoneNumber)
+    //     return row.phoneNumber.toString().toLowerCase().includes(searchedValue.toLowerCase());
       
-    });
-    // console.log(filteredRows, searchedValue);
-    if(searchedValue != '' && filteredRows.length > 0){
-      setRows(filteredRows)
-    }else{
-      setRows(customers.data)
-    }
+    // });
+    // // console.log(filteredRows, searchedValue);
+    // if(searchedValue != '' && filteredRows.length > 0){
+    //   setRows(filteredRows)
+    // }else{
+    //   setRows(customers.data)
+    // }
   }
 
   useEffect(() => {
@@ -350,7 +350,7 @@ const [rows, setRows] = useState();
                 </StyledTableRow>
               </TableHead>
               <TableBody>
-                {customers.data?.map((row) => (
+                {customers.data?.filter((data) => data.firstName.toLowerCase().includes(searchValue) || data.lastName.toLowerCase().includes(searchValue) || data.email.toLowerCase().includes(searchValue) || data.email.includes(searchValue))?.map((row) => (
                   <StyledTableRow key={row.id}>
                     <StyledTableCell sx={{minWidth: 150}}>
                       <TableLink onClick={() => navigate(row.id)}>

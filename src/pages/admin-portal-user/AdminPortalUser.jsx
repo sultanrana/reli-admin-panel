@@ -1101,17 +1101,17 @@ const AdminPortalUser = () => {
 
   const handleSearch = (searchedValue) => {
     setSearchValue(searchedValue)
-    const filteredRows = rows?.filter((row) => {
-        return row.firstName.toLowerCase().includes(searchedValue.toLowerCase());
+    // const filteredRows = rows?.filter((row) => {
+    //     return row.firstName.toLowerCase().includes(searchedValue.toLowerCase());
       
-    });
-    console.log(filteredRows, searchedValue);
-    if(searchedValue !='' && filteredRows.length > 0){
-      setRows(filteredRows);
-      setPage(0);
-    }else{
-      setRows(portalUsers.data)
-    }
+    // });
+    // console.log(filteredRows, searchedValue);
+    // if(searchedValue !='' && filteredRows.length > 0){
+    //   setRows(filteredRows);
+    //   setPage(0);
+    // }else{
+    //   setRows(portalUsers.data)
+    // }
   }
 
   useEffect(() => {
@@ -1247,7 +1247,7 @@ const AdminPortalUser = () => {
                 </StyledTableRow>
               </TableHead>
               <TableBody>
-                {portalUsers.data?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                {portalUsers.data?.filter((data) => data.firstName.toLowerCase().includes(searchValue) || data.email.toLowerCase().includes(searchValue))?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
                     return (
                       <StyledTableRow

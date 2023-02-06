@@ -29,6 +29,11 @@ import { useEffect } from "react";
 import { getCompanies } from "../../features/companies/companySlice";
 import { CSVLink, CSVDownload } from "react-csv";
 import Loading from '../../components/Loading'
+import Alert  from "@mui/material/Alert";
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import { companyResponseClr } from "../../features/companies/companySlice";
+import CloseIcon from '@mui/icons-material/Close';
+
 
 const columns = [
   { id: "companyName", label: "Company", minWidth: 100, fontWeight: "600" },
@@ -152,8 +157,10 @@ const Companies = () => {
   const { isDrawerOpen, isAddCompanyModal } = useSelector(
     (store) => store.login
   );
-  const { list, isLoading } = useSelector((store) => store.company);
+  const { list, isLoading, alert, responseStatus, responseMsg } = useSelector((store) => store.company);
   const dispatch = useDispatch();
+  const [alertDialog, setAlertDialog] = React.useState(false);
+  const [searchValue, setSearchValue] = React.useState('');
   const breadcrumbs = [
     <Typography
       key="3"
@@ -181,9 +188,30 @@ const Companies = () => {
     setPage(0);
   };
 
+  const handleSearch = (searchedValue) => {
+    setSearchValue(searchedValue)
+    // const filteredRows = rows?.filter((row) => {
+    //   if(row.firstName)
+    //     return row.firstName.toLowerCase().includes(searchedValue.toLowerCase());
+    //   else if(row.lastName)
+    //     return row.lastName.toLowerCase().includes(searchedValue.toLowerCase());
+    //   else if(row.email)
+    //     return row.email.toLowerCase().includes(searchedValue.toLowerCase());
+    //   else if(row.phoneNumber)
+    //     return row.phoneNumber.toString().toLowerCase().includes(searchedValue.toLowerCase());
+      
+    // });
+    // // console.log(filteredRows, searchedValue);
+    // if(searchedValue != '' && filteredRows.length > 0){
+    //   setRows(filteredRows)
+    // }else{
+    //   setRows(customers.data)
+    // }
+  }
+
   useEffect(() => {
     dispatch(getCompanies());
-  }, [])
+  }, [alert])
 
 
 if(isLoading){
@@ -244,6 +272,29 @@ if(isLoading){
           </Box>
         </Box>
 
+        {
+              alert ? (
+                <Alert 
+                  severity={responseStatus}
+                  color={responseStatus} 
+                  sx={{mb: 3, width: '100%'}}
+                  action={
+                    <IconButton
+                      aria-label="close"
+                      color="inherit"
+                      size="small"
+                      onClick={() => {
+                        dispatch(companyResponseClr(false));
+                        setAlertDialog(false)
+                      }}
+                    >
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                >{responseMsg}</Alert>
+              ) : null
+            }
+
         <Box
           component="div"
           sx={{
@@ -255,7 +306,24 @@ if(isLoading){
           }}
         >
           <Box component="div">
-            <SearchBox />
+            {/* <SearchBox /> */}
+            <Box sx={{
+            background: '#FFFFFF',
+            boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+            borderRadius: '33px',
+            height: 50,
+            display: 'flex',
+            alignItems: 'center',
+            maxWidth: '245px',
+            border: '1px solid #ddd',
+            overflow: 'hidden'
+        }}>
+            <SearchRoundedIcon sx={{
+              width: '16%',
+              marginLeft: '6px'
+            }}/>
+            <input type="text" value={searchValue} placeholder='Search' className='search-input' onChange={(e) =>  handleSearch(e.target.value.toLowerCase())} />
+        </Box>
           </Box>
           {/* <IconButton aria-label="filter-icon" size="large">
             <FilterListRoundedIcon />
@@ -281,7 +349,7 @@ if(isLoading){
                 </StyledTableRow>
               </TableHead>
               <TableBody>
-                {list.data
+                {list.data?.filter((data) => data.companyName.toLowerCase().includes(searchValue) || data.representativeNumber.toLowerCase().includes(searchValue) || data.representativeEmail.toLowerCase().includes(searchValue))
                   ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
                     return (
@@ -299,9 +367,11 @@ if(isLoading){
                               align={column.align}
                               sx={{textTransform : column.textTransform}}
                             >
-                              {column.format && typeof value === "number"
-                                ? column.format(value)
-                                : value}
+                              {column.id === 'companyName'? (
+                                <TableLink text={value} route={row._id} />
+                              ): column.id === 'representativeNumber'? (<TableLink text={value} route={row._id} />) : column.id === 'representativeEmail'? (<TableLink text={value} route={row._id} />) : ( column.format && typeof value === "number"
+                              ? column.format(value)
+                              : value) }
                             </StyledTableCell>
                           );
                         })}
