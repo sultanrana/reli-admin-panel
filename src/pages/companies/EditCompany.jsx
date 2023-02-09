@@ -10,11 +10,22 @@ import { handleEditCompanyModal } from '../../features/login/loginSlice';
 import { FormControl, InputLabel, MenuItem, Select, TextField, Box, Container, IconButton, Typography, FormControlLabel, Checkbox, } from '@mui/material';
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import { Field, FieldArray, Form, Formik } from 'formik';
+import { object } from 'yup';
+import * as Yup from "yup";
+import { useEffect } from 'react';
+import { getServices } from '../../features/services/serviceSlice';
+import { useParams } from 'react-router-dom';
+import { updateCompany } from '../../features/companies/companySlice';
+
+
 
 const EditCompany = (props) => {
-
 const{isEditCompanyModal} = useSelector((store) => store.login)
+const{companyDetail} = useSelector((store) => store.company)
+const{services} = useSelector((store) => store.service)
 const dispatch = useDispatch();
+const param = useParams();
 const [status, setStatus] = React.useState('pending');
 const [windowChecked, setWindowChecked] = React.useState(false);
 const [slidingGlassDoorChecked, setSlidingGlassDoorChecked] = React.useState(false);
@@ -35,6 +46,26 @@ const handleAddImg = (e) => {
 const clearImgRef = () => {
     imgRef.current.src = '/images/circle-gray.png';
 }
+function capitalizeFirstLetter(str) {
+    // converting first letter to uppercase
+    const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
+    return capitalized;
+}
+
+const initialValues ={
+    companyStatus: companyDetail?.data.companyStatus ? companyDetail?.data.companyStatus : '',
+    companyName: companyDetail?.data.companyName ? companyDetail?.data.companyName : '',
+    distanceWillingTravel: companyDetail?.data.distanceWillingTravel ? companyDetail?.data.distanceWillingTravel : '',
+    representativeName: companyDetail?.data.representativeName ? companyDetail?.data.representativeName : '',
+    representativeNumber: companyDetail?.data.representativeNumber ? companyDetail?.data.representativeNumber : '',
+    representativeEmail: companyDetail?.data.representativeEmail ? companyDetail?.data.representativeEmail : '',
+}
+
+useEffect(() => {
+    dispatch(getServices());
+}, [])
+
+
   return (
     <Dialog
     open={isEditCompanyModal}
@@ -70,165 +101,166 @@ const clearImgRef = () => {
             </IconButton>
         </Box>
     </Box>
-    <DialogContent
-        sx={{
-            p: 0
+    <Formik
+        initialValues={initialValues} 
+        onSubmit={(values, formikHelpers) => {
+            if (imgInput.current.files[0]) {
+                values.image = imgInput.current.files[0];
+            }
+            values.id = param.companyid;
+            dispatch(updateCompany(values));
+            dispatch(handleEditCompanyModal());
+            console.log("form values: ", values);
         }}
+        validationSchema= {object({
+            companyName: Yup.string().required(),
+            representativeName: Yup.string().required(),
+            representativeEmail: Yup.string().required(),
+        })}
     >
-      <DialogContentText
-        id="scroll-dialog-description"
-        tabIndex={-1}
-      >
-        <Container maxWidth='xs'>
-            
-            <FormControl fullWidth sx={{
-                mt: 4, mb: 4
-            }}>
-                <InputLabel id="status-select-label">Company status</InputLabel>
-                <Select
-                    labelId="status-select-label"
-                    id="status-simple-select"
-                    value={status}
-                    label="Company status"
-                    onChange={handleChange}
-                >
-                    <MenuItem value="pending">Pending</MenuItem>
-                    <MenuItem value="completed">Completed</MenuItem>
-                </Select>
-            </FormControl>
-            <TextField 
-                sx={{width: '100%', mb: 4}}
-                id="name-basic"
-                label="Company Name"
-                variant="outlined" 
-                defaultValue="Construction Co"
-            />
-            <TextField 
-                sx={{width: '100%', mb: 4}}
-                id="line-1-basic"
-                label="Address Line 1"
-                variant="outlined" 
-                defaultValue="132, Western Ave"
-            />
-            <TextField 
-                sx={{width: '100%', mb: 4}}
-                id="line-2-basic"
-                label="Address Line 2"
-                variant="outlined" 
-                defaultValue="132, Western Ave"
-            />
-            <FormControl fullWidth sx={{ mb: 4 }}>
-                <InputLabel id="status-select-label">Distance willing to travel (in miles)</InputLabel>
-                <Select
-                    labelId="status-select-label"
-                    id="status-simple-select"
-                    value={status}
-                    label="Distance willing to travel (in miles)"
-                    onChange={handleChange}
-                >
-                    <MenuItem value="pending">100m</MenuItem>
-                    <MenuItem value="completed">200m</MenuItem>
-                </Select>
-            </FormControl>
-            <TextField 
-                sx={{width: '100%', mb: 4}}
-                id="representative-name-basic"
-                label="Representative Name"
-                variant="outlined" 
-                defaultValue="John Smith"
-            />
-            <TextField 
-                sx={{width: '100%', mb: 4}}
-                id="representative-role-basic"
-                label="Representative Role"
-                variant="outlined" 
-                defaultValue="HR"
-            />
-            <TextField 
-                sx={{width: '100%', mb: 4}}
-                id="number-basic"
-                label="Representative Number"
-                variant="outlined" 
-                defaultValue="555-555-5555"
-            />
-            <TextField 
-                sx={{width: '100%', mb: 4}}
-                id="email-basic"
-                label="Representative Email"
-                variant="outlined" 
-                defaultValue="johnsmith@tepia.co"
-            />
-            <Box sx={{ pl: 5}}>
-                <Typography
+        {({errors, touched, isValid, dirty}) => (
+            <Form>
+                <DialogContent
                     sx={{
-                        fontSize: '17px',
-                        fontWeight: '600',
-                        textTransform: 'capitalize',
-                        color: '#000000',
-                        textDecoration: 'underline'
+                        p: 0
                     }}
                 >
-                    Services Available
-                </Typography>
-                <Box>
-                    <FormControlLabel
-                    sx={{
-                        color: '#000000',
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        width: '250px'
-                    }}
-                        value="Windows"
-                        control={<Checkbox 
-                            color="black"
-                            checked={windowChecked}
-                            onChange={(e) => setWindowChecked(e.target.checked)}
-                        />}
-                        label="Windows:"
-                        labelPlacement="start"
-                    />
-                    <FormControlLabel
-                    sx={{
-                        color: '#000000',
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        width: '250px'
-                    }}
-                        value="Sliding Glass Doors"
-                        control={<Checkbox 
-                            color="black"
-                            checked={slidingGlassDoorChecked}
-                            onChange={(e) => setSlidingGlassDoorChecked(e.target.checked)}
-                        />}
-                        label="Sliding Glass Doors:"
-                        labelPlacement="start"
-                    />
-                    <FormControlLabel
-                    sx={{
-                        color: '#000000',
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        width: '250px'
-                    }}
-                        value="Interior Doors"
-                        control={<Checkbox 
-                            color="black"
-                            checked={interiorDoorChecked}
-                            onChange={(e) => setInteriorDoorChecked(e.target.checked)}
-                        />}
-                        label="Interior Doors:"
-                        labelPlacement="start"
-                    />
-                </Box>
-            </Box>
-        </Container>
-       
-      </DialogContentText>
-    </DialogContent>
-    <DialogActions>
-      <Button variant='outlined' onClick={() => dispatch(handleEditCompanyModal())}>Cancel</Button>
-      <Button variant='contained' onClick={() => dispatch(handleEditCompanyModal())}>Save</Button>
-    </DialogActions>
+               <DialogContentText
+                    component={'div'}
+                    id="scroll-dialog-description"
+                    tabIndex={-1}
+                >
+                    <Container maxWidth='xs'>
+                        <FormControl fullWidth sx={{
+                            mt: 4, mb: 4
+                        }}>
+                            <InputLabel id="companyStatus">Company status</InputLabel>
+                            <Field as={Select}
+                                labelId="companyStatus"
+                                id="companyStatus"
+                                name="companyStatus"
+                                label="Company status"
+                                error = {Boolean(errors.companyStatus) && Boolean(touched.companyStatus)}
+                                helperText = {Boolean(touched.companyStatus) && errors.companyStatus}
+                            >
+                                <MenuItem value="enable">Enable</MenuItem>
+                                <MenuItem value="disable">Disable</MenuItem>
+                            </Field>
+                        </FormControl>
+                        <Field as={TextField} 
+                            sx={{width: '100%', mb: 4}}
+                            id="companyName"
+                            name="companyName"
+                            label="Company Name"
+                            variant="outlined" 
+                            error = {Boolean(errors.companyName) && Boolean(touched.companyName)}
+                            helperText = {Boolean(touched.companyName) && errors.companyName}
+                        />
+                        <Field as={TextField}  
+                            sx={{width: '100%', mb: 4}}
+                            id="addressOne"
+                            name="addressOne"
+                            label="Address Line 1"
+                            variant="outlined"
+                            error = {Boolean(errors.addressOne) && Boolean(touched.addressOne)}
+                            helperText = {Boolean(touched.addressOne) && errors.addressOne}
+                        />
+                        <Field as={TextField}
+                            sx={{width: '100%', mb: 4}}
+                            id="addressTwo"
+                            name="addressTwo"
+                            label="Address Line 2"
+                            variant="outlined" 
+                            error = {Boolean(errors.addressTwo) && Boolean(touched.addressTwo)}
+                            helperText = {Boolean(touched.addressTwo) && errors.addressTwo}
+                        />
+                        <FormControl fullWidth sx={{ mb: 4 }}>
+                            <InputLabel id="distanceWillingTravel">Distance willing to travel (in miles)</InputLabel>
+                            <Field as={Select}
+                                labelId="distanceWillingTravel"
+                                id="distanceWillingTravel"
+                                name="distanceWillingTravel"
+                                label="Distance willing to travel (in miles)"
+                                error = {Boolean(errors.distanceWillingTravel) && Boolean(touched.distanceWillingTravel)}
+                                helperText = {Boolean(touched.distanceWillingTravel) && errors.distanceWillingTravel}
+                            >
+                                <MenuItem value="100m">100m</MenuItem>
+                                <MenuItem value="200m">200m</MenuItem>
+                            </Field>
+                        </FormControl>
+                        <Field as={TextField} 
+                            sx={{width: '100%', mb: 4}}
+                            id="representativeName"
+                            name="representativeName"
+                            label="Representative Name"
+                            variant="outlined" 
+                            error = {Boolean(errors.representativeName) && Boolean(touched.representativeName)}
+                            helperText = {Boolean(touched.representativeName) && errors.representativeName}
+                        />
+                        <Field as={TextField} 
+                            sx={{width: '100%', mb: 4}}
+                            id="representativeNumber"
+                            name="representativeNumber"
+                            label="Representative Number"
+                            variant="outlined" 
+                            error = {Boolean(errors.representativeNumber) && Boolean(touched.representativeNumber)}
+                            helperText = {Boolean(touched.representativeNumber) && errors.representativeNumber}
+                        />
+                        <Field as ={TextField} 
+                            sx={{width: '100%', mb: 4}}
+                            id="representativeEmail"
+                            name="representativeEmail"
+                            label="Representative Email"
+                            variant="outlined" 
+                            error = {Boolean(errors.representativeEmail) && Boolean(touched.representativeEmail)}
+                            helperText = {Boolean(touched.representativeEmail) && errors.representativeEmail}
+                        />
+                        <Box sx={{ pl: 5}}>
+                            <Typography
+                                sx={{
+                                    fontSize: '17px',
+                                    fontWeight: '600',
+                                    textTransform: 'capitalize',
+                                    color: '#000000',
+                                    textDecoration: 'underline'
+                                }}
+                            >
+                                Services Available
+                            </Typography>
+                            <Box>
+                                {services.data?.map((service) => {
+                                    return (
+                                        <FieldArray as={FormControlLabel}
+                                        key={service.id}
+                                        name="services"
+                                        value={service.name}
+                                        label={capitalizeFirstLetter(service.name)+ ':'}
+                                        labelPlacement="start"
+                                        sx={{
+                                            color: '#000000',
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                            width: '250px'
+                                        }}
+                                        control={<Checkbox color="black"/>}
+                                        // checked={values.services.includes(service.name)}
+                                        />
+                                    )
+                                } )}
+                            </Box>
+                        </Box>
+                    </Container>
+                
+                </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                <Button variant='outlined' onClick={() => dispatch(handleEditCompanyModal())}>Cancel</Button>
+                {/* <Button variant='contained' onClick={() => dispatch(handleEditCompanyModal())}>Save</Button> */}
+                <Button disabled={!dirty || !isValid} type='submit' variant='contained'>Save</Button>
+                </DialogActions>
+            </Form>
+        )}
+    </Formik>
   </Dialog>
   );
 }

@@ -10,9 +10,17 @@ import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRound
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { useRef } from 'react';
 import { useState } from 'react';
+import { Field, Form, Formik } from 'formik';
+import { object } from 'yup';
+import * as Yup from "yup";
+import { addUser, getUsers } from '../../features/userInfo/userInfoSlice';
+import { useNavigate, useParams } from 'react-router-dom';
 const AddUserModal = () => {
 const {isAddUserModal} = useSelector((store) => store.login)
-const dispatch = useDispatch()
+const {companyDetail} = useSelector((store) => store.company)
+const dispatch = useDispatch();
+const navigate = useNavigate();
+const param = useParams();
 const [approvedByReli, setApprovedByReli] = useState(false)
 const [status, setStatus] = useState(false)
 const [accountType, setAccountType] = useState(false)
@@ -52,6 +60,14 @@ const handleAccountType = () => {
         setAccountType(true)
     }
 }
+const initialValues = {
+    name: '',
+    email: '',
+    phone: '',
+}
+
+
+
   return (
     <>
     <Dialog
@@ -95,70 +111,116 @@ const handleAccountType = () => {
             letterSpacing: '0.4px',
             color: '#000000'
         }}>
-            Company Name: Construction Co 
+            Company Name: {companyDetail?.data?.companyName} 
         </Typography>
     </Box>
-    <DialogContent
-        sx={{
-            p: 0
+    <Formik
+        initialValues={initialValues} 
+        onSubmit={(values, formikHelpers) => {
+            values.company = param.companyid;
+            values.status = status;
+            values.accountType = accountType;
+            if(imgInput.current.files[0]){
+                values.image = imgInput.current.files[0];
+            }
+            dispatch(addUser(values));
+            dispatch(handleAddUserModal());
+            dispatch(getUsers(param.companyid));
         }}
+        validationSchema= {object({
+            name: Yup.string().required('Name is required.'),
+            email: Yup.string().required('Email is required.'),
+            phone: Yup.string().required('Phone is required.'),
+        })}
     >
-      <DialogContentText
-        id="scroll-dialog-description"
-        tabIndex={-1}
-      >
-        <Container maxWidth='xs'>
-            <TextField 
-                sx={{width: '100%', mb: 4, mt: 5}}
-                id="name-basic"
-                label="Name"
-                variant="outlined" 
-                defaultValue="Input text"
-            />
-            <TextField 
-                sx={{width: '100%', mb: 4}}
-                id="email-basic"
-                label="Email"
-                variant="outlined" 
-                defaultValue="Input text"
-            />
-            <TextField 
-                sx={{width: '100%', mb: 4}}
-                id="phone-basic"
-                label="Label"
-                variant="outlined" 
-                defaultValue="Input text"
-            />
-            <div className="group">
-                <p className="btn_label">Approved by Reli</p>
-                <div className="btn_group">
-                    <button className={approvedByReli? '': 'active'} onClick={handleApprovedByReli}>false</button>
-                    <button className={approvedByReli? 'active' : ''} onClick={handleApprovedByReli}>true</button>
-                </div>
-            </div>
-            <div className="group">
-                <p className="btn_label">Status</p>
-                <div className="btn_group">
-                    <button className={status? '': 'active'} onClick={handleStatus}>Enabled</button>
-                    <button className={status? 'active' : ''} onClick={handleStatus}>Disabled</button>
-                </div>
-            </div>
-            <div className="group">
-                <p className="btn_label">Account Type</p>
-                <div className="btn_group">
-                    <button className={accountType? '': 'active'} onClick={handleAccountType}>Staff</button>
-                    <button className={accountType? 'active' : ''} onClick={handleAccountType}>Admin</button>
-                </div>
-            </div>
-            
-        </Container>
-       
-      </DialogContentText>
-    </DialogContent>
-    <DialogActions>
-      <Button variant='outlined' onClick={() => dispatch(handleAddUserModal())}>Cancel</Button>
-      <Button variant='contained' onClick={() => dispatch(handleAddUserModal())}>Save</Button>
-    </DialogActions>
+        {({errors, touched, isValid, dirty}) => (
+            <Form>
+                <DialogContent
+                    sx={{
+                        p: 0    
+                    }}
+                >
+                <DialogContentText 
+                    component={'div'}
+                    id="scroll-dialog-description"
+                    tabIndex={-1}
+                >
+                    <Container maxWidth='xs'>
+                        <Field as={TextField} 
+                            sx={{width: '100%', mb: 4, mt: 5}}
+                            id="name"
+                            name="name"
+                            label="Name"
+                            variant="outlined" 
+                            error = {Boolean(errors.name) && Boolean(touched.name)}
+                            helperText = {Boolean(touched.name) && errors.name}
+                        />
+                        <Field as={TextField}  
+                            sx={{width: '100%', mb: 4}}
+                            id="email"
+                            name="email"
+                            label="Email"
+                            variant="outlined" 
+                            error = {Boolean(errors.email) && Boolean(touched.email)}
+                            helperText = {Boolean(touched.email) && errors.email}
+                        />
+                        <Field as={TextField}  
+                            sx={{width: '100%', mb: 4}}
+                            id="phone"
+                            name="phone"
+                            label="Phone"
+                            variant="outlined" 
+                            error = {Boolean(errors.phone) && Boolean(touched.phone)}
+                            helperText = {Boolean(touched.phone) && errors.phone}
+                        />
+                        <FormControl fullWidth sx={{ mb: 4 }}>
+                            <InputLabel id="approvedByReli">Approved by Reli</InputLabel>
+                            <Field as={Select}
+                                labelId="approvedByReli"
+                                id="approvedByReli"
+                                name="approvedByReli"
+                                label="Approved by Reli"
+                                error = {Boolean(errors.approvedByReli) && Boolean(touched.approvedByReli)}
+                                helperText = {Boolean(touched.approvedByReli) && errors.approvedByReli}
+                            >
+                                <MenuItem value='true'>Active</MenuItem>
+                                <MenuItem value='false'>Pending</MenuItem>
+                            </Field>
+                        </FormControl>
+                        {/* <div className="group">
+                            <p className="btn_label">Approved by Reli</p>
+                            <div className="btn_group">
+                                <button type="button" className={approvedByReli? '': 'active'} onClick={handleApprovedByReli}>false</button>
+                                <button type="button" className={approvedByReli? 'active' : ''} onClick={handleApprovedByReli}>true</button>
+                            </div>
+                        </div> */}
+                        <div className="group">
+                            <p className="btn_label">Status</p>
+                            <div className="btn_group">
+                                <button type="button" className={status? 'active' : ''} onClick={handleStatus}>Enabled</button>
+                                <button type="button" className={status? '': 'active'} onClick={handleStatus}>Disabled</button>
+                            </div>
+                        </div>
+                        <div className="group">
+                            <p className="btn_label">Account Type</p>
+                            <div className="btn_group">
+                                <button type="button" className={accountType? '': 'active'} onClick={handleAccountType}>Staff</button>
+                                <button type="button" className={accountType? 'active' : ''} onClick={handleAccountType}>Admin</button>
+                            </div>
+                        </div>
+                        
+                    </Container>
+                
+                </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                <Button variant='outlined' onClick={() => dispatch(handleAddUserModal())}>Cancel</Button>
+                {/* <Button variant='contained' onClick={() => dispatch(handleAddUserModal())}>Save</Button> */}
+                <Button disabled={!dirty || !isValid} type='submit' variant='contained'>Save</Button>
+                </DialogActions>
+            </Form>
+        )}
+    </Formik>
   </Dialog>
     </>
   )

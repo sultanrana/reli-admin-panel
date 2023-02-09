@@ -1,5 +1,5 @@
 import { Box, Card, IconButton, Button, Table, TableContainer, TextField, Typography, InputBase} from '@mui/material';
-import React from 'react'
+import React, { useEffect } from 'react'
 import Paper from '@mui/material/Paper';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -11,11 +11,15 @@ import { styled } from '@mui/material/styles';
 import TableLink from '../../components/TableLink';
 import TableActions from '../../components/TableActions';
 import ModeRoundedIcon from '@mui/icons-material/ModeRounded';
-import services from '../../mock/services';
-import { Link } from 'react-router-dom';
+// import services from '../../mock/services';
+import { Link, useParams } from 'react-router-dom';
 import { handleEditCompanyModal } from '../../features/login/loginSlice';
 import EditCompany from './EditCompany';
 import { useDispatch, useSelector } from 'react-redux';
+import Loading from '../../components/Loading';
+import { companyResponseClr, singleCompanyDetail } from '../../features/companies/companySlice';
+import Alert  from "@mui/material/Alert";
+import CloseIcon from '@mui/icons-material/Close';
 // active project
 const activeProjectColumns = [
   { id: 'projectId', label: 'Project ID', minWidth: 100, fontWeight: '600' },
@@ -332,11 +336,14 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
     
   }))
-const OverView = () => {
+const OverView = ({data}) => {
 const {isEditCompanyModal} = useSelector((store) => store.login)
-const dispatch = useDispatch()
+const {isLoading, alert, responseStatus, responseMsg} = useSelector((store) => store.company)
+const dispatch = useDispatch();
+const param = useParams();
 const [page, setPage] = React.useState(0);
 const [rowsPerPage, setRowsPerPage] = React.useState(10);
+const [alertDialog, setAlertDialog] = React.useState(false);
 
 const handleChangePage = (event, newPage) => {
   setPage(newPage);
@@ -346,8 +353,40 @@ const handleChangeRowsPerPage = (event) => {
   setRowsPerPage(+event.target.value);
   setPage(0);
 };
+
+useEffect(() => {
+  dispatch(singleCompanyDetail(param.companyid))
+},[alert])
+
+if(isLoading){
+  return (
+    <Loading/>
+  )
+}
   return (
     <>
+      {
+              alert ? (
+                <Alert 
+                  severity={responseStatus}
+                  color={responseStatus} 
+                  sx={{mb: 3, width: '100%'}}
+                  action={
+                    <IconButton
+                      aria-label="close"
+                      color="inherit"
+                      size="small"
+                      onClick={() => {
+                        dispatch(companyResponseClr(false));
+                        setAlertDialog(false)
+                      }}
+                    >
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                >{responseMsg}</Alert>
+              ) : null
+            }
       <Box sx={{
         display: 'flex',
         flexDirection: 'row',
@@ -370,7 +409,7 @@ const handleChangeRowsPerPage = (event) => {
             </IconButton>
           </Box>
           <div className='about_body'>
-            <div className="about_img_circle">
+            <div className="about_img_circle" style={{background: (data?.image?`url('https://images.pexels.com/photos/14932984/pexels-photo-14932984.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load')`: '#C4C4C4')}}>
 
             </div>
             <div className="about_body_card">
@@ -378,13 +417,12 @@ const handleChangeRowsPerPage = (event) => {
                 <h4>Construction Co</h4>
                 <p className="info_para" style={{
                   marginBottom: '8px'
-                }}>Travel Distance: 100 miles</p>
+                }}>Travel Distance: {data?.distanceWillingTravel? data.distanceWillingTravel : '0'} miles</p>
                 <p className="info_para" style={{
                   marginBottom: '8px'
-                }}>1234 Business Dr.
-                City, ST 55555</p>
+                }}>{data?.addressOne? data.addressOne: ''}, {data?.addressTwo? data.addressTwo: ''}</p>
 
-                <p className='enabled'>Enabled</p>
+                <p className={data?.companyStatus? 'enabled' : 'disabled'}>{data?.companyStatus? 'Enabled' : 'Disabled'}</p>
               </div>
             </div>
             <div className="about_body_card">
@@ -394,13 +432,13 @@ const handleChangeRowsPerPage = (event) => {
                 }}>Primary Representative:</h4>
                 <p className="info_para" style={{
                   marginBottom: '8px'
-                }}>Joel Masters</p>
+                }}>{data?.representativeName? data?.representativeName : ''}</p>
                 <p className="info_para" style={{
                   marginBottom: '8px'
-                }}>joel@tepia.co</p>
+                }}>{data?.representativeEmail? data?.representativeEmail : ''}</p>
                 <p className="info_para" style={{
                   marginBottom: '8px'
-                }}>949-333-5000</p>
+                }}>{data?.representativeNumber? data?.representativeNumber : ''}</p>
               </div>
             </div>
           </div>
@@ -411,12 +449,12 @@ const handleChangeRowsPerPage = (event) => {
             }}>
                 Available Services
             </Typography>
-          {services.map((service) => {
+          {data?.services?.map((service, index) => {
                 return (
                   <Box>
                     <Card
-                      key={service.id}
-                      {...services}
+                      key={index+'key'}
+                      {...data?.services}
                       sx={{
                         boxShadow:
                           "0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)",
@@ -428,7 +466,7 @@ const handleChangeRowsPerPage = (event) => {
                         height: '200px'
                       }}
                     >
-                      <img src={service.src} alt="" style={{ width: "" }} />
+                      <img src={service === 'window' ? "/images/service1.png": service === 'door' ? '/images/service2.png': service === 'slidingGlassDoor' ? '/images/service3.png' : null} alt="" style={{ width: "" }} />
                       <Typography
                         variant="h3"
                         component="h1"
@@ -444,7 +482,7 @@ const handleChangeRowsPerPage = (event) => {
                           width: "172px",
                         }}
                       >
-                        {service.title}
+                        {service}
                       </Typography>
                     </Card>
                   </Box>
@@ -540,7 +578,7 @@ const handleChangeRowsPerPage = (event) => {
                           {activeProjectColumns.map((column) => {
                           const value = row[column.id];
                           return (
-                              <StyledTableCell key={column.id} align={column.align}>
+                              <StyledTableCell key={column.id+ 'OverView'} align={column.align}>
                               {column.format && typeof value === 'number'
                                   ? column.format(value)
                                   : value}

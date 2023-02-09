@@ -7,6 +7,7 @@ import adminPortalUserReducer from './features/admin-portal-user/adminPortalUser
 import customerReducer from './features/customer/customerSlice'
 import serviceReducer from './features/services/serviceSlice'
 import companyReducer from './features/companies/companySlice'
+import userInfoReducer from './features/userInfo/userInfoSlice'
 
 export const store = configureStore({
   reducer: {
@@ -18,5 +19,6 @@ export const store = configureStore({
     customer: customerReducer,
     service: serviceReducer,
     company: companyReducer,
+    userInfo: userInfoReducer,
   },
 });

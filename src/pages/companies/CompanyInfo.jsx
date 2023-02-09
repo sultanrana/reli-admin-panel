@@ -1,5 +1,5 @@
 import { Box, Table, TableContainer, Typography, IconButton, Button, ButtonGroup } from '@mui/material';
-import React from 'react'
+import React, { useEffect } from 'react'
 import BeardcrumNavigator from '../../components/BeardcrumNavigator'
 import Sidebar from '../../components/Sidebar'
 import Paper from '@mui/material/Paper';
@@ -13,7 +13,7 @@ import { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
 import ModeRoundedIcon from '@mui/icons-material/ModeRounded';
 import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TableLink from '../../components/TableLink';
 import { useState } from 'react';
 import TableActions from '../../components/TableActions';
@@ -24,7 +24,9 @@ import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import UserInfo from './UserInfo';
 import Transaction from './Transaction';
 import AddUserModal from './AddUserModal';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import {  singleCompanyDetail } from '../../features/companies/companySlice';
+import Loading from '../../components/Loading';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.gray,
@@ -47,7 +49,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   }));
 const CompanyInfo = () => {
 const navigate = useNavigate();
+const dispatch = useDispatch();
+const param = useParams();
 const {isDrawerOpen, addUserModal} = useSelector((store) => store.login)
+const {alert, isLoading, responseStatus, responseMsg, companyDetail} = useSelector((store) => store.company)
 const [tab, setTab] = useState('overview');
 const breadcrumbs = [
     <Typography key="3" color="text.primary" style={{
@@ -72,8 +77,15 @@ const handleChangeRowsPerPage = (event) => {
   setPage(0);
 };
 
+useEffect(() => {
+  dispatch(singleCompanyDetail(param.companyid));
+}, [])
 
-
+if(isLoading){
+  return (
+    <Loading/>
+  )
+}
 
   return (
     <div className="page-section">
@@ -100,7 +112,7 @@ const handleChangeRowsPerPage = (event) => {
         </Box>
 
         {tab === "overview" ? (
-         <OverView/>
+         <OverView data={companyDetail.data}/>
         ): null}
         {tab === "userInfo" ? (
           <UserInfo/>

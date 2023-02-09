@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IconButton, Menu, MenuItem, Typography } from '@mui/material';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import { logout } from '../features/login/loginSlice';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 const Header = () => {
   const {loggedInUser, storeUserToken} = useSelector((store) => store.login)
 const navigate  = useDispatch()
@@ -26,11 +26,11 @@ const dispatch  = useNavigate()
   const handleClose = () => {
     setAnchorEl(null);
   };
-// const handleLogout = () => {
-//   // localStorage.clear();
-//   // dispatch(logout())
-//   navigate('/login')
-// }
+const handleLogout = () => {
+  localStorage.clear();
+  dispatch(logout());
+  navigate('/login');
+}
 
   return (
     <AppBar position="sticky" sx={{alignItems:'center', height: '60px', width: '100%'}}>
@@ -77,7 +77,7 @@ const dispatch  = useNavigate()
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem><a href='/login' style={{color: 'black'}}>Logout</a> </MenuItem>
+            <MenuItem><Link onClick={() => handleLogout()} style={{color: 'black'}}>Logout</Link> </MenuItem>
           </Menu>
         </div>
       )}
