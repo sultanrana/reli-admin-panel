@@ -8,6 +8,8 @@ import customerReducer from './features/customer/customerSlice'
 import serviceReducer from './features/services/serviceSlice'
 import companyReducer from './features/companies/companySlice'
 import userInfoReducer from './features/userInfo/userInfoSlice'
+import transactionReducer from './features/transactions/transactionSlice'
+import projectReducer from './features/projects/projectSlice'
 
 export const store = configureStore({
   reducer: {
@@ -20,5 +22,7 @@ export const store = configureStore({
     service: serviceReducer,
     company: companyReducer,
     userInfo: userInfoReducer,
+    transaction: transactionReducer,
+    project: projectReducer,
   },
 });

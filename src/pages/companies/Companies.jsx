@@ -368,8 +368,8 @@ if(isLoading){
                               sx={{textTransform : column.textTransform}}
                             >
                               {column.id === 'companyName'? (
-                                <TableLink text={value} route={row._id} />
-                              ): column.id === 'representativeNumber'? (<TableLink text={value} route={row._id} />) : column.id === 'representativeEmail'? (<TableLink text={value} route={row._id} />) : ( column.format && typeof value === "number"
+                                <TableLink text={value} route={row.id} />
+                              ): column.id === 'representativeNumber'? (<TableLink text={value} route={row.id} />) : column.id === 'representativeEmail'? (<TableLink text={value} route={row.id} />) : ( column.format && typeof value === "number"
                               ? column.format(value)
                               : value) }
                             </StyledTableCell>

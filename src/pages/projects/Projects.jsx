@@ -1,5 +1,5 @@
 import { Box, Table, TableContainer, Typography, IconButton, Button } from '@mui/material';
-import React from 'react'
+import React, { useEffect } from 'react'
 import BeardcrumNavigator from '../../components/BeardcrumNavigator'
 import Sidebar from '../../components/Sidebar'
 import Paper from '@mui/material/Paper';
@@ -13,12 +13,17 @@ import { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
 import ModeRoundedIcon from '@mui/icons-material/ModeRounded';
 import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TableLink from '../../components/TableLink';
 import TableActions from '../../components/TableActions'
+import { getProjects } from '../../features/projects/projectSlice';
+import Loading from '../../components/Loading';
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import { CSVLink } from 'react-csv';
+
 const columns = [
-  { id: 'projectId', label: 'Project ID', minWidth: 150, fontWeight: '600' },
-  { id: 'customers', label: 'Customers', minWidth: 150, fontWeight: '600' },
+  { id: '_id', label: 'Project ID', minWidth: 150, fontWeight: '600' },
+  { id: 'name', label: 'Customers', minWidth: 150, fontWeight: '600' },
   { id: 'serviceType', label: 'ServiceType', minWidth: 140, fontWeight: '600' },
   { id: 'company', label: 'Company', minWidth: 100, fontWeight: '600' },
   { id: 'workersAssigned', label: 'Workers Assigned', minWidth: 100, fontWeight: '600' },
@@ -280,7 +285,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
   }));
 const Projects = () => {
+  const dispatch = useDispatch();
   const {isDrawerOpen} = useSelector((store) => store.login)
+  const { isLoading, projects} = useSelector((store) => store.project)
 const breadcrumbs = [
     <Typography key="3" color="text.primary" style={{
         fontStyle: 'normal',
@@ -292,6 +299,7 @@ const breadcrumbs = [
         Projects
     </Typography>
 ];
+const [searchValue, setSearchValue] = React.useState('');
 const [page, setPage] = React.useState(0);
 const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -305,6 +313,36 @@ const handleChangeRowsPerPage = (event) => {
 };
 
 
+useEffect(() => {
+  dispatch(getProjects());
+}, []);
+
+const handleSearch = (searchedValue) => {
+  setSearchValue(searchedValue)
+  // const filteredRows = rows?.filter((row) => {
+  //   if(row.firstName)
+  //     return row.firstName.toLowerCase().includes(searchedValue.toLowerCase());
+  //   else if(row.lastName)
+  //     return row.lastName.toLowerCase().includes(searchedValue.toLowerCase());
+  //   else if(row.email)
+  //     return row.email.toLowerCase().includes(searchedValue.toLowerCase());
+  //   else if(row.phoneNumber)
+  //     return row.phoneNumber.toString().toLowerCase().includes(searchedValue.toLowerCase());
+    
+  // });
+  // // console.log(filteredRows, searchedValue);
+  // if(searchedValue != '' && filteredRows.length > 0){
+  //   setRows(filteredRows)
+  // }else{
+  //   setRows(customers.data)
+  // }
+}
+
+if(isLoading){
+  return (
+    <Loading/>
+  )
+}
 
 
   return (
@@ -323,7 +361,9 @@ const handleChangeRowsPerPage = (event) => {
             alignItems: 'center',
             gap: '1rem'
           }}>
-            <Button variant="outlined" className="bc-btn-outline" color="primary">Export csv</Button>
+            <CSVLink data={projects.data ? projects.data : 'No data available yet'}>
+              <Button variant="outlined" className="bc-btn-outline" color="primary">Export csv</Button>
+            </CSVLink>
           </Box>
         </Box>
         <Box component="div" sx={{
@@ -334,7 +374,24 @@ const handleChangeRowsPerPage = (event) => {
           mb: 3,
         }}>
           <Box component="div">
-              <SearchBox/>
+              {/* <SearchBox/> */}
+              <Box sx={{
+            background: '#FFFFFF',
+            boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+            borderRadius: '33px',
+            height: 50,
+            display: 'flex',
+            alignItems: 'center',
+            maxWidth: '245px',
+            border: '1px solid #ddd',
+            overflow: 'hidden'
+        }}>
+            <SearchRoundedIcon sx={{
+              width: '16%',
+              marginLeft: '6px'
+            }}/>
+            <input type="text" value={searchValue} placeholder='Search' className='search-input' onChange={(e) =>  handleSearch(e.target.value.toLowerCase())} />
+        </Box>
           </Box>
           {/* <IconButton aria-label="filter-icon" size="large">
             <FilterListRoundedIcon />
@@ -357,18 +414,28 @@ const handleChangeRowsPerPage = (event) => {
                     </StyledTableRow>
                 </TableHead>
                 <TableBody>
-                    {rows
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    {projects.data?.filter((data) => data.name.toLowerCase().includes(searchValue))
+                    ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
                         return (
-                        <StyledTableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                        <StyledTableRow hover role="checkbox" tabIndex={-1} key={parseInt(Date.now() * Math.random())}>
                             {columns.map((column) => {
                             const value = row[column.id];
                             return (
                                 <StyledTableCell key={column.id} align={column.align}>
-                                {column.format && typeof value === 'number'
+                                {(column.id === '_id') ? (
+                                    <TableLink text={value} route={row._id} />
+                                  ) : (column.id === 'name') ? (
+                                    <TableLink text={value} route={`/customers/` + row.user} />
+                                  ) : (column.id === 'serviceType') ?(
+                                    row.orderdetails.map((service, index) => {
+                                      return (
+                                        service.serviceName + (row.orderdetails.length - 1 === index ? '' : ', ')
+                                      )
+                                    })
+                                  ) : (column.format && typeof value === 'number'
                                     ? column.format(value)
-                                    : value}
+                                    : value)}
                                 </StyledTableCell>
                             );
                             })}
@@ -381,7 +448,7 @@ const handleChangeRowsPerPage = (event) => {
             <TablePagination
                 rowsPerPageOptions={[10, 25, 100]}
                 component="div"
-                count={rows.length}
+                count={projects.data?.length ? projects.data?.length : 0}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
