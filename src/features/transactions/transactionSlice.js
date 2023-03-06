@@ -40,7 +40,7 @@ const transactionSlice = createSlice({
         state.isLoading = true;
       },
       [getTransactions.fulfilled]: (state, action) => {
-        // console.log(action);
+        console.log(action);
         state.isLoading = false;
         state.transactions = action.payload;
       },

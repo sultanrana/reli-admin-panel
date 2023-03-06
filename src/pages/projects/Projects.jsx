@@ -20,23 +20,24 @@ import { getProjects } from '../../features/projects/projectSlice';
 import Loading from '../../components/Loading';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import { CSVLink } from 'react-csv';
+import moment from "moment/moment";
 
 const columns = [
   { id: '_id', label: 'Project ID', minWidth: 150, fontWeight: '600' },
   { id: 'name', label: 'Customers', minWidth: 150, fontWeight: '600' },
   { id: 'serviceType', label: 'ServiceType', minWidth: 140, fontWeight: '600' },
-  { id: 'company', label: 'Company', minWidth: 100, fontWeight: '600' },
-  { id: 'workersAssigned', label: 'Workers Assigned', minWidth: 100, fontWeight: '600' },
+  // { id: 'company', label: 'Company', minWidth: 100, fontWeight: '600' },
+  // { id: 'workersAssigned', label: 'Workers Assigned', minWidth: 100, fontWeight: '600' },
   { id: 'city', label: 'City', minWidth: 100, fontWeight: '600' },
   { id: 'state', label: 'State', minWidth: 100, fontWeight: '600' },  
-  { id: 'zip', label: 'Zip', minWidth: 100, fontWeight: '600' },
+  { id: 'zipCode', label: 'Zip', minWidth: 100, fontWeight: '600' },
   { id: 'dateOrdered', label: 'Date Ordered', minWidth: 200, fontWeight: '600' },
-  { id: 'dateScheduled', label: 'Date Scheduled', minWidth: 200, fontWeight: '600' },
-  { id: 'dateCompleted', label: 'Date Completed', minWidth: 200, fontWeight: '600' },
+  // { id: 'dateScheduled', label: 'Date Scheduled', minWidth: 200, fontWeight: '600' },
+  // { id: 'dateCompleted', label: 'Date Completed', minWidth: 200, fontWeight: '600' },
   { id: 'totalPaidByCustomer', label: 'Total Paid by Customer', minWidth: 200, fontWeight: '600' },
   { id: 'refundToCustomer', label: 'Refund To Customer', minWidth: 200, fontWeight: '600' },
-  { id: 'paidToContractor', label: 'Paid to Contractor', minWidth: 200, fontWeight: '600' },
-  { id: 'status', label: 'status', minWidth: 200, fontWeight: '600' },
+  // { id: 'paidToContractor', label: 'Paid to Contractor', minWidth: 200, fontWeight: '600' },
+  { id: 'status', label: 'status', minWidth: 200, fontWeight: '600', textTransform: 'capitalize' },
   { id: 'lastStatusUpdate', label: 'Last Status Update', minWidth: 200, fontWeight: '600' },
   // { id: 'actions', label: 'Actions', minWidth: 150, fontWeight: '600' },
 ];
@@ -422,7 +423,7 @@ if(isLoading){
                             {columns.map((column) => {
                             const value = row[column.id];
                             return (
-                                <StyledTableCell key={column.id} align={column.align}>
+                                <StyledTableCell key={column.id} align={column.align} style={{textTransform : column.textTransform}}>
                                 {(column.id === '_id') ? (
                                     <TableLink text={value} route={row._id} />
                                   ) : (column.id === 'name') ? (
@@ -431,9 +432,42 @@ if(isLoading){
                                     row.orderdetails.map((service, index) => {
                                       return (
                                         service.serviceName + (row.orderdetails.length - 1 === index ? '' : ', ')
+ 
                                       )
                                     })
-                                  ) : (column.format && typeof value === 'number'
+                                  ) : (column.id === 'city') ?(
+                                    row.orderdetails.map((service, index) => {
+                                      return (
+                                        service.property? service.property.city : ''
+                                      )
+                                    })
+                                  ) : (column.id === 'state') ?(
+                                    row.orderdetails.map((service, index) => {
+                                      return (
+                                        service.property? service.property.state : ''
+                                      )
+                                    })
+                                  ) : (column.id === 'zipCode') ?(
+                                    row.orderdetails.map((service, index) => {
+                                      return (
+                                        service.property? service.property.zipCode : ''
+                                      )
+                                    })
+                                  ) : (column.id === 'dateOrdered') ?(
+                                   row.dateSelection.map((date, index) => {
+                                    return (
+                                       moment(date).format('DD/MM/YY hh:mm:ss A') + (row.dateSelection.length - 1 === index ? '' : ', ')
+                                    )
+                                   })
+                                  ) : (column.id === 'totalPaidByCustomer') ?(
+                                    row.stripeRefundId? '$' + row.refundAmount.toFixed(2) : '$0.00' 
+                                   ) : (column.id === 'refundToCustomer') ?(
+                                    row.stripeRefundId? '$' + row.refundAmount.toFixed(2) : '$0.00' 
+                                   ) : (column.id === 'status') ?(
+                                       row.orderStatus
+                                   ) : (column.id === 'lastStatusUpdate') ?(
+                                    moment(row.updatedAt).format('DD/MM/YY hh:mm:ss A')
+                                   ) : (column.format && typeof value === 'number'
                                     ? column.format(value)
                                     : value)}
                                 </StyledTableCell>

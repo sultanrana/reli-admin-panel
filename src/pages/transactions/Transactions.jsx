@@ -28,6 +28,7 @@ import { getTransactions } from "../../features/transactions/transactionSlice";
 import Loading from "../../components/Loading";
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import { CSVLink, CSVDownload } from "react-csv";
+import moment from "moment/moment";
 
 const columns = [
   {
@@ -49,12 +50,12 @@ const columns = [
   { id: "city", label: "City", minWidth: 100, fontWeight: "600" },
   { id: "state", label: "State", minWidth: 100, fontWeight: "600" },
   { id: "zip", label: "Zip", minWidth: 100, fontWeight: "600" },
-  { id: "ordered", label: "Ordered", minWidth: 100, fontWeight: "600" },
-  { id: "scheduled", label: "Scheduled", minWidth: 100, fontWeight: "600" },
-  { id: "completed", label: "Completed", minWidth: 100, fontWeight: "600" },
+  { id: "ordered", label: "Ordered", minWidth: 160, fontWeight: "600" },
+  // { id: "scheduled", label: "Scheduled", minWidth: 100, fontWeight: "600" },
+  // { id: "completed", label: "Completed", minWidth: 100, fontWeight: "600" },
   { id: "totalAmount", label: "Amount", minWidth: 100, fontWeight: "600" },
-  { id: "couponCode", label: "CouponCode", minWidth: 100, fontWeight: "600" },
-  { id: "couponValue", label: "CouponValue", minWidth: 100, fontWeight: "600" },  
+  // { id: "couponCode", label: "CouponCode", minWidth: 100, fontWeight: "600" },
+  // { id: "couponValue", label: "CouponValue", minWidth: 100, fontWeight: "600" },  
   // { id: "actions", label: "Actions", minWidth: 150, fontWeight: '600' },
 ];
 
@@ -1299,7 +1300,37 @@ const Transactions = () => {
                                     service.serviceName + (row.orderdetails.length - 1 === index ? '' : ', ')
                                   )
                                 })
-                              ) : (column.format && typeof value === "number"
+                              ) : (column.id === 'city') ?(
+                                row.orderdetails.map((service, index) => {
+                                  return (
+                                    service.property? service.property.city : ''
+                                  )
+                                })
+                              ) : (column.id === 'state') ?(
+                                row.orderdetails.map((service, index) => {
+                                  return (
+                                    service.property? service.property.state : ''
+                                  )
+                                })
+                              ) : (column.id === 'zip') ?(
+                                row.orderdetails.map((service, index) => {
+                                  return (
+                                    service.property? service.property.zipCode : ''
+                                  )
+                                })
+                              ) : (column.id === 'ordered') ?(
+                                row.dateSelection.map((date, index) => {
+                                 return (
+                                    moment(date).format('DD/MM/YY hh:mm:ss A') + (row.dateSelection.length - 1 === index ? '' : ', ')
+                                 )
+                                })
+                               ) : (column.id === 'payeeType') ?(
+                                'Customer'
+                              ) : (column.id === 'transactionType') ?(
+                                  row.stripeRefundId ? 'Refund' : 'Customer'
+                              ) : (column.id === 'totalAmount') ?(
+                                row.totalAmount ? '$' + row.totalAmount.toFixed(2) : '$0.00'
+                            ) : (column.format && typeof value === "number"
                                 ? column.format(value)
                                 : value)}
                             </StyledTableCell>
