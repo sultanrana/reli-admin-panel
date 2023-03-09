@@ -162,7 +162,7 @@ if(isLoading){
                             label="Coupon Name"
                             variant="outlined"
                             error = {Boolean(errors.name) && Boolean(touched.name)}
-                            helperText = {Boolean(touched.name) && errors.name}
+                            // helperText = {Boolean(touched.name) && errors.name}
                           />
                           <Field as={TextField} sx={{
                             width: '100%',
@@ -176,7 +176,7 @@ if(isLoading){
                             rows={10}
                             variant="outlined"
                             error = {Boolean(errors.description) && Boolean(touched.description)}
-                            helperText = {Boolean(touched.description) && errors.description}
+                            // helperText = {Boolean(touched.description) && errors.description}
                           />
                           <FormControl fullWidth sx={{mb: 3}}>
                             <InputLabel id="service">Service</InputLabel>
@@ -211,7 +211,7 @@ if(isLoading){
                             label="Coupon Code"
                             variant="outlined"
                             error = {Boolean(errors.code) && Boolean(touched.code)}
-                            helperText = {Boolean(touched.code) && errors.code}
+                            // helperText = {Boolean(touched.code) && errors.code}
                           />
                         </CouponInnerBox>
                         <CouponInnerBox sx={{alignItems: 'center', minHeight: '482px', justifyContent: 'center'}}>
