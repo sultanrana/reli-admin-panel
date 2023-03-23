@@ -46,7 +46,7 @@ function App() {
               <Route path="/customers" element={<Customers />} />
               <Route path="/customers/:customerid" element={<CustomerDetails />} />
               <Route path="/projects" element={<Projects />} />
-              <Route path="/projects/:projectDetail" element={<ProjectDetails />} />
+              <Route path="/projects/:projectid" element={<ProjectDetails />} />
               <Route path="/transactions" element={<Transactions />} />
               <Route path="/coupons" element={<CouponLayout />}>
                 <Route path="" element={<Coupons />} />

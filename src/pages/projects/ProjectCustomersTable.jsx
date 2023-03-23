@@ -10,14 +10,15 @@ import { styled } from '@mui/material/styles';
 import { Box, Button, Card, IconButton, TextField, Table, TableContainer, Typography, DialogContentText, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import TableLink from '../../components/TableLink';
 import TableActions from '../../components/TableActions';
+import moment from 'moment';
 
 
 // active project
 const activeProjectColumns = [
     { id: 'transactionType', label: 'Transaction Type', minWidth: 100, fontWeight: '600' },
     { id: 'processed', label: 'Processed', minWidth: 100, fontWeight: '600' },
-    { id: 'couponCode', label: 'Coupon Code', minWidth: 100, fontWeight: '600' },
-    { id: 'couponValue', label: 'Coupon Value', minWidth: 170, fontWeight: '600' },
+    // { id: 'couponCode', label: 'Coupon Code', minWidth: 100, fontWeight: '600' },
+    // { id: 'couponValue', label: 'Coupon Value', minWidth: 170, fontWeight: '600' },
     { id: 'amount', label: 'Amount', minWidth: 100, fontWeight: '600' },
     { id: 'status', label: 'Amount', minWidth: 100, fontWeight: '600' },
     { id: 'actions', label: 'Actions', minWidth: 160, fontWeight: '600' },
@@ -72,7 +73,9 @@ const StyledTextField = styled(TextField)(({theme}) => ({
 }))
 
 
-const ProjectCustomersTable = () => {
+const ProjectCustomersTable = (props) => {
+  
+const {data} = props
 const [page, setPage] = React.useState(0);
 const [rowsPerPage, setRowsPerPage] = React.useState(10);
 const [isRefund, setIsRefund] = useState(false);
@@ -102,36 +105,49 @@ const activeProjectrows = [
               <Table stickyHeader aria-label="sticky table" sx={{}}>
               <TableHead>
                   <StyledTableRow>
-                  {activeProjectColumns.map((column) => (
-                      <StyledTableCell
-                      key={column.id}
-                      align={column.align}
-                      style={{ minWidth: column.minWidth, fontWeight: column.fontWeight }}
-                      >
-                      {column.label}
+                      <StyledTableCell>
+                        Transaction Type
                       </StyledTableCell>
-                  ))}
+                      <StyledTableCell>
+                        Processed
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        Amount
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        Status
+                      </StyledTableCell>
+                      {
+                        data?.stripeRefundId ? '' : (
+                          <StyledTableCell>
+                            Action
+                          </StyledTableCell>
+                        )
+                      }
                   </StyledTableRow>
               </TableHead>
               <TableBody>
-                  {activeProjectrows
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => {
-                      return (
-                      <StyledTableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                          {activeProjectColumns.map((column) => {
-                          const value = row[column.id];
-                          return (
-                              <StyledTableCell key={column.id} align={column.align}>
-                              {column.format && typeof value === 'number'
-                                  ? column.format(value)
-                                  : value}
-                              </StyledTableCell>
-                          );
-                          })}
-                      </StyledTableRow>
-                      );
-                  })}
+                <TableRow>
+                    <StyledTableCell>
+                      {data?.cardHolderName}
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      {moment(data?.createdAt).format('DD/MM/YY')}
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      {data?.totalAmount? '$' + data?.totalAmount.toFixed(2) : '$0.00'}
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      {data?.statusBit? 'Paid' : 'Unpaid'}
+                    </StyledTableCell>
+                    {
+                        data?.stripeRefundId ? '' : (
+                          <StyledTableCell>
+                            <Button variant='contained' onClick={handleRefundModal}>refund</Button>
+                          </StyledTableCell>
+                        )
+                      }
+                </TableRow>
               </TableBody>
               </Table>
           </TableContainer>

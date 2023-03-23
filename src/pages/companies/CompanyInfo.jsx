@@ -27,6 +27,7 @@ import AddUserModal from './AddUserModal';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import {  singleCompanyDetail } from '../../features/companies/companySlice';
 import Loading from '../../components/Loading';
+import Transactions from '../transactions/Transactions';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.gray,
