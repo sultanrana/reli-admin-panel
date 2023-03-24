@@ -86,7 +86,7 @@ const Services = () => {
           >
             {services.data?.map((service) => {
               return (
-                <Link to={service.id} key={service.id} {...service}>
+                <Link to={service.id} key={service.id} {...service} onClick={() => localStorage.setItem('serviceName', service.name)} >
                   <Card
                     sx={{
                       boxShadow:

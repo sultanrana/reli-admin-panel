@@ -44,7 +44,7 @@ const Forgot = () => {
     validate: (values) => {
       let errors = {};
       if (!values.email) {
-        errors.email = "Email is required";
+        errors.email = "Please enter your email address to reset your password";
       }else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)){
         errors.email = 'Invalid email format';
       }
@@ -116,14 +116,14 @@ const Forgot = () => {
             />
             <InputLabel htmlFor="outlined-adornment-email">Email</InputLabel>
             {formik.errors.email ? (
-              <Box sx={{ color: "red", pt: 1 }}>{formik.errors.email}</Box>
+              <Box sx={{ color: "red", pt: 1}}>{formik.errors.email}</Box>
             ) : (
               ""
             )}
           </FormControl>
           <Button
             type="submit"
-            sx={{ width: "100%", minHeight: "36px", mb: "30px" }}
+            sx={{ width: "100%", minHeight: "36px", mb: "30px", mt: formik.errors.email? '1rem': '' }}
             variant="contained"
             color="primary"
           >

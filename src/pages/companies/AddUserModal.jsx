@@ -129,8 +129,8 @@ const initialValues = {
         }}
         validationSchema= {object({
             name: Yup.string().required('Name is required.'),
-            email: Yup.string().required('Email is required.'),
-            phone: Yup.string().required('Phone is required.'),
+            email: Yup.string().required('Email is required.').email(),
+            phone: Yup.number().required('Phone is required.'),
         })}
     >
         {({errors, touched, isValid, dirty}) => (
@@ -185,6 +185,7 @@ const initialValues = {
                             >
                                 <MenuItem value='true'>Active</MenuItem>
                                 <MenuItem value='false'>Pending</MenuItem>
+                                <MenuItem value='rejected'>Rejected</MenuItem>
                             </Field>
                         </FormControl>
                         {/* <div className="group">

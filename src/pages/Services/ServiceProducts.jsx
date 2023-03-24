@@ -1,5 +1,5 @@
 import { Box, Table, TableContainer, Typography, IconButton, Button } from '@mui/material';
-import React from 'react'
+import React, { useState } from 'react'
 import BeardcrumNavigator from '../../components/BeardcrumNavigator'
 import Sidebar from '../../components/Sidebar'
 import Paper from '@mui/material/Paper';
@@ -11,12 +11,14 @@ import TableRow from '@mui/material/TableRow';
 import SearchBox from '../../components/SearchBox';
 import { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
-
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
 import { useSelector } from 'react-redux';
 import TableActions from '../../components/TableActions';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { CSVLink } from 'react-csv';
+
 const columns = [
   { id: 'productId', label: 'Product ID', minWidth: 100, fontWeight: '600' },
   { id: 'jobType', label: 'Job Type', minWidth: 100, fontWeight: '600' },
@@ -28,25 +30,25 @@ const columns = [
   { id: 'safetyGlass', label: 'Safety Glass', minWidth: 150, fontWeight: '600' },
   { id: 'dimensionClass', label: 'Dimension Class', minWidth: 100, fontWeight: '600' },
   { id: 'pricePerSqInch', label: 'Price Per Square Inch', minWidth: 150, fontWeight: '600' },
-  { id: 'actions', label: 'Actions', minWidth: 150, fontWeight: '600' },
+  // { id: 'actions', label: 'Actions', minWidth: 150, fontWeight: '600' },
 ];
 
 function createData(productId, jobType, color, grid, openType, temeredGlass, privacy, safetyGlass, dimensionClass, pricePerSqInch, actions) {
-  return { productId, jobType, color, grid, openType, temeredGlass, privacy, safetyGlass, dimensionClass, pricePerSqInch, actions};
+  return { productId, jobType, color, grid, openType, temeredGlass, privacy, safetyGlass, dimensionClass, pricePerSqInch};
 }
 
 const rows = [
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000`, <TableActions/> ),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000`, <TableActions/> ),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000`, <TableActions/> ),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000`, <TableActions/> ),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000`, <TableActions/> ),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000`, <TableActions/> ),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000`, <TableActions/> ),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000`, <TableActions/> ),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000`, <TableActions/> ),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000`, <TableActions/> ),
-  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000`, <TableActions/> ),
+  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000` ),
+  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000` ),
+  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000` ),
+  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000` ),
+  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000` ),
+  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000` ),
+  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000` ),
+  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000` ),
+  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000` ),
+  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000` ),
+  createData("W1", "New", "White", "None (aka 0)", "Single Hung", "Yes", "Yes", "Yes", "Standard", `$125.000` ),
 ];
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -71,6 +73,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 const ServiceProducts = () => {
 const {isDrawerOpen} = useSelector((store) => store.login)
 const param = useParams()
+const serviceName = localStorage.getItem('serviceName');
 const breadcrumbs = [
     <Typography key="3" color="text.primary" style={{
         fontStyle: 'normal',
@@ -80,7 +83,7 @@ const breadcrumbs = [
         color: '#000000',
         textTransform: 'capitalize'
     }}>
-        {param.serviceName}
+        {serviceName}
     </Typography>,
     <Typography key="3" color="text.primary" style={{
         fontStyle: 'normal',
@@ -95,7 +98,7 @@ const breadcrumbs = [
 console.log(window.location.pathname);
 const [page, setPage] = React.useState(0);
 const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
+const [searchValue, setSearchValue] = useState('');
 const handleChangePage = (event, newPage) => {
   setPage(newPage);
 };
@@ -105,6 +108,26 @@ const handleChangeRowsPerPage = (event) => {
   setPage(0);
 };
 
+const handleSearch = (searchedValue) => {
+  setSearchValue(searchedValue.toLowerCase())
+  // const filteredRows = rows?.filter((row) => {
+  //   if(row.firstName)
+  //     return row.firstName.toLowerCase().includes(searchedValue.toLowerCase());
+  //   else if(row.lastName)
+  //     return row.lastName.toLowerCase().includes(searchedValue.toLowerCase());
+  //   else if(row.email)
+  //     return row.email.toLowerCase().includes(searchedValue.toLowerCase());
+  //   else if(row.phoneNumber)
+  //     return row.phoneNumber.toString().toLowerCase().includes(searchedValue.toLowerCase());
+    
+  // });
+  // // console.log(filteredRows, searchedValue);
+  // if(searchedValue != '' && filteredRows.length > 0){
+  //   setRows(filteredRows)
+  // }else{
+  //   setRows(customers.data)
+  // }
+}
 
 
 
@@ -124,7 +147,9 @@ const handleChangeRowsPerPage = (event) => {
             alignItems: 'center',
             gap: '1rem'
           }}>
-            <Button variant="outlined" className="bc-btn-outline" color="primary">Export csv</Button>
+             <CSVLink data={rows ? rows : 'No data available yet'}>
+              <Button variant="outlined" className="bc-btn-outline" color="primary">Export csv</Button>
+             </CSVLink>
             <Button variant="outlined" className="bc-btn-outline" color="primary">Import csv</Button>
           </Box>
         </Box>
@@ -136,7 +161,24 @@ const handleChangeRowsPerPage = (event) => {
           mb: 3,
         }}>
           <Box component="div">
-              <SearchBox/>
+              {/* <SearchBox/> */}
+              <Box sx={{
+            background: '#FFFFFF',
+            boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+            borderRadius: '33px',
+            height: 50,
+            display: 'flex',
+            alignItems: 'center',
+            maxWidth: '245px',
+            border: '1px solid #ddd',
+            overflow: 'hidden'
+        }}>
+            <SearchRoundedIcon sx={{
+              width: '16%',
+              marginLeft: '6px'
+            }}/>
+            <input type="text" value={searchValue} placeholder='Search' className='search-input' onChange={(e) =>  handleSearch(e.target.value)} />
+        </Box>
           </Box>
           {/* <IconButton aria-label="filter-icon" size="large">
             <FilterListRoundedIcon />
@@ -159,8 +201,7 @@ const handleChangeRowsPerPage = (event) => {
                     </StyledTableRow>
                 </TableHead>
                 <TableBody>
-                    {rows
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    {rows.filter((data) => data.productId.toLowerCase().includes(searchValue) || data.jobType.toLowerCase().includes(searchValue) || data.color.toLowerCase().includes(searchValue) || data.grid.toLowerCase().includes(searchValue) || data.openType.toLowerCase().includes(searchValue) || data.temeredGlass.toLowerCase().includes(searchValue) || data.privacy.toLowerCase().includes(searchValue) || data.safetyGlass.toLowerCase().includes(searchValue) || data.dimensionClass.toLowerCase().includes(searchValue) || data.pricePerSqInch.toLowerCase().includes(searchValue))?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
                         return (
                         <StyledTableRow hover role="checkbox" tabIndex={-1} key={row.code}>

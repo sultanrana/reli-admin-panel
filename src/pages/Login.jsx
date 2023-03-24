@@ -45,13 +45,13 @@ const Login = () => {
       // console.log(values);
       let errors = {};
       if(!values.email){
-        errors.email = 'Email required';
+        errors.email = 'Email is required to login';
       }
       else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)){
         errors.email = 'Invalid email format';
       }
       else if(!values.password){
-        errors.password = 'Password required';
+        errors.password = 'Please enter your password';
       }
       return errors;
     },

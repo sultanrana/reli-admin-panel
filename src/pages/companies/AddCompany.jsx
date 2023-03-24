@@ -86,7 +86,10 @@ useEffect(() => {
         validationSchema= {object({
             companyName: Yup.string().required(),
             representativeName: Yup.string().required(),
-            representativeEmail: Yup.string().required(),
+            representativeEmail: Yup.string().required().email(),
+            addressOne: Yup.string().required(),
+            addressTwo: Yup.string().required(),
+            representativeNumber: Yup.number().required(),
         })}
     >
         {({errors, touched, isValid, dirty}) => (
@@ -144,6 +147,7 @@ useEffect(() => {
                             >
                                 <MenuItem value="enable">Enable</MenuItem>
                                 <MenuItem value="disable">Disable</MenuItem>
+                                <MenuItem value="pending">Pending</MenuItem>
                             </Field>
                         </FormControl>
                         <Field as={TextField} 
