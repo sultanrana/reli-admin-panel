@@ -78,7 +78,7 @@ export const getCompanies = createAsyncThunk(
     async (id, thunkAPI) => {
       try {
         const resp = await axios.get(
-          `http://34.236.149.254/api/admin/company/detail/${id}`,
+          `http://34.236.149.254/api/admin/company/companyDetail/${id}`,
           {
             headers: {
               "Content-Type": "multipart/form-data",

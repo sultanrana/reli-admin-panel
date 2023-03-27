@@ -33,6 +33,7 @@ import Alert  from "@mui/material/Alert";
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import { companyResponseClr } from "../../features/companies/companySlice";
 import CloseIcon from '@mui/icons-material/Close';
+import moment from "moment";
 
 
 const columns = [
@@ -62,13 +63,13 @@ const columns = [
     fontWeight: "600",
   },
   {
-    id: "projectsOpen",
+    id: "numberOfOpenProjects",
     label: "Projects Open",
     minWidth: 100,
     fontWeight: "600",
   },
   {
-    id: "projectsCompleted",
+    id: "numberOfCompletedProjects",
     label: "Projects Completed",
     minWidth: 100,
     fontWeight: "600",
@@ -369,7 +370,7 @@ if(isLoading){
                             >
                               {column.id === 'companyName'? (
                                 <TableLink text={value} route={row.id} />
-                              ): column.id === 'representativeNumber'? (<TableLink text={value} route={row.id} />) : column.id === 'representativeEmail'? (<TableLink text={value} route={row.id} />) : ( column.format && typeof value === "number"
+                              ): column.id === 'representativeNumber'? (<TableLink text={value} route={row.id} />) : column.id === 'representativeEmail'? (<TableLink text={value} route={row.id} />) : column.id === 'dateLastActive'? (moment(new Date()).format('DD/MM/YY hh:mm:ss A')) : ( column.format && typeof value === "number"
                               ? column.format(value)
                               : value) }
                             </StyledTableCell>

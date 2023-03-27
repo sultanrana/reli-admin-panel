@@ -39,233 +39,7 @@ function createData(projectId, projectStatus, customer, serviceType, scheduled, 
     };
 }
 // active project
-const activeProjectrows = [
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-  createData(
-  <TableLink text="PROJ58549"/>,
-   "Unassigned",
-    <TableLink text="John Smith"/>,
-    "Windows", 
-    "N/A", 
-    "$250.00",
-    // <TableActions/>
-  ),
-];
+const activeProjectrows = [];
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -345,6 +119,7 @@ const [page, setPage] = React.useState(0);
 const [rowsPerPage, setRowsPerPage] = React.useState(10);
 const [alertDialog, setAlertDialog] = React.useState(false);
 
+console.log(data?.findCompany);
 const handleChangePage = (event, newPage) => {
   setPage(newPage);
 };
@@ -409,7 +184,7 @@ if(isLoading){
             </IconButton>
           </Box>
           <div className='about_body'>
-            <div className="about_img_circle" style={{background: (data?.image?`url('https://images.pexels.com/photos/14932984/pexels-photo-14932984.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load')`: '#C4C4C4')}}>
+            <div className="about_img_circle" style={{background: (data?.findCompany.image?`url('https://images.pexels.com/photos/14932984/pexels-photo-14932984.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load')`: '#C4C4C4')}}>
 
             </div>
             <div className="about_body_card">
@@ -417,12 +192,12 @@ if(isLoading){
                 <h4>Construction Co</h4>
                 <p className="info_para" style={{
                   marginBottom: '8px'
-                }}>Travel Distance: {data?.distanceWillingTravel? data.distanceWillingTravel : '0'} miles</p>
+                }}>Travel Distance: {data?.findCompany.distanceWillingTravel? data?.findCompany.distanceWillingTravel : '0'} miles</p>
                 <p className="info_para" style={{
                   marginBottom: '8px'
-                }}>{data?.addressOne? data.addressOne: ''}, {data?.addressTwo? data.addressTwo: ''}</p>
+                }}>{data?.findCompany.addressOne? data.findCompany.addressOne: ''}, {data?.findCompany.addressTwo? data.findCompany.addressTwo: ''}</p>
 
-                <p className={data?.companyStatus? 'enabled' : 'disabled'}>{data?.companyStatus? 'Enabled' : 'Disabled'}</p>
+                <p className={data?.findCompany.companyStatus? 'enabled' : 'disabled'}>{data?.findCompany.companyStatus? 'Enabled' : 'Disabled'}</p>
               </div>
             </div>
             <div className="about_body_card">
@@ -432,13 +207,13 @@ if(isLoading){
                 }}>Primary Representative:</h4>
                 <p className="info_para" style={{
                   marginBottom: '8px'
-                }}>{data?.representativeName? data?.representativeName : ''}</p>
+                }}>{data?.findCompany.representativeName? data?.findCompany.representativeName : ''}</p>
                 <p className="info_para" style={{
                   marginBottom: '8px'
-                }}>{data?.representativeEmail? data?.representativeEmail : ''}</p>
+                }}>{data?.findCompany.representativeEmail? data?.findCompany.representativeEmail : ''}</p>
                 <p className="info_para" style={{
                   marginBottom: '8px'
-                }}>{data?.representativeNumber? data?.representativeNumber : ''}</p>
+                }}>{data?.findCompany.representativeNumber? data?.findCompany.representativeNumber : ''}</p>
               </div>
             </div>
           </div>
@@ -449,12 +224,11 @@ if(isLoading){
             }}>
                 Available Services
             </Typography>
-          {data?.services?.map((service, index) => {
+          {data?.findCompany.services?.map((service, index) => {
                 return (
                   <Box>
                     <Card
-                      key={index+'key'}
-                      {...data?.services}
+                      key={index+'findcomapny'}
                       sx={{
                         boxShadow:
                           "0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)",

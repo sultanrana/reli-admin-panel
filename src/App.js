@@ -40,7 +40,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout />} >
               <Route path="/services" element={<Services/>} />
-              <Route path="/services/:serviceName" element={<ServiceProducts/>} />
+              <Route path="/services/:serviceid" element={<ServiceProducts/>} />
               <Route path="/companies" element={<Companies />} />
               <Route path="/companies/:companyid" element={<CompanyInfo />} />
               <Route path="/customers" element={<Customers />} />

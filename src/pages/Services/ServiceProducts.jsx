@@ -1,5 +1,5 @@
 import { Box, Table, TableContainer, Typography, IconButton, Button } from '@mui/material';
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import BeardcrumNavigator from '../../components/BeardcrumNavigator'
 import Sidebar from '../../components/Sidebar'
 import Paper from '@mui/material/Paper';
@@ -13,23 +13,27 @@ import { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TableActions from '../../components/TableActions';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { CSVLink } from 'react-csv';
+import { serviceProductList, serviceResponseClr, uploadProductServiceCSV } from '../../features/services/serviceSlice';
+import Loading from '../../components/Loading';
+import CloseIcon from '@mui/icons-material/Close';
+import Alert  from "@mui/material/Alert";
 
 const columns = [
-  { id: 'productId', label: 'Product ID', minWidth: 100, fontWeight: '600' },
-  { id: 'jobType', label: 'Job Type', minWidth: 100, fontWeight: '600' },
-  { id: 'color', label: 'Color', minWidth: 100, fontWeight: '600' },
-  { id: 'grid', label: 'Grid', minWidth: 150, fontWeight: '600' },
-  { id: 'openType', label: 'Open Type', minWidth: 150, fontWeight: '600' },
-  { id: 'temeredGlass', label: 'Temered Glass(Fire)', minWidth: 100, fontWeight: '600' },
-  { id: 'privacy', label: 'Privacy', minWidth: 100, fontWeight: '600' },
-  { id: 'safetyGlass', label: 'Safety Glass', minWidth: 150, fontWeight: '600' },
-  { id: 'dimensionClass', label: 'Dimension Class', minWidth: 100, fontWeight: '600' },
-  { id: 'pricePerSqInch', label: 'Price Per Square Inch', minWidth: 150, fontWeight: '600' },
+  { id: 'product_id', label: 'Product ID', minWidth: 100, fontWeight: '600', textTransform: 'capitalize' },
+  { id: 'job_type', label: 'Job Type', minWidth: 100, fontWeight: '600', textTransform: 'capitalize' },
+  { id: 'color', label: 'Color', minWidth: 100, fontWeight: '600', textTransform: 'capitalize' },
+  { id: 'grid', label: 'Grid', minWidth: 150, fontWeight: '600', textTransform: 'capitalize' },
+  { id: 'open_type', label: 'Open Type', minWidth: 150, fontWeight: '600', textTransform: 'capitalize' },
+  { id: 'tempered_glass', label: 'Temered Glass(Fire)', minWidth: 100, fontWeight: '600', textTransform: 'capitalize' },
+  { id: 'privacy', label: 'Privacy', minWidth: 100, fontWeight: '600', textTransform: 'capitalize' },
+  { id: 'safety_glass', label: 'Safety Glass', minWidth: 150, fontWeight: '600', textTransform: 'capitalize' },
+  { id: 'dimension_class', label: 'Dimension Class', minWidth: 100, fontWeight: '600', textTransform: 'capitalize' },
+  { id: 'price', label: 'Price Per Square Inch', minWidth: 150, fontWeight: '600' },
   // { id: 'actions', label: 'Actions', minWidth: 150, fontWeight: '600' },
 ];
 
@@ -72,7 +76,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   }));
 const ServiceProducts = () => {
 const {isDrawerOpen} = useSelector((store) => store.login)
-const param = useParams()
+const {serviceDetail, isLoading, responseStatus, responseMsg, alert} = useSelector((store) => store.service)
+const param = useParams();
+const dispatch = useDispatch();
 const serviceName = localStorage.getItem('serviceName');
 const breadcrumbs = [
     <Typography key="3" color="text.primary" style={{
@@ -95,10 +101,12 @@ const breadcrumbs = [
         Products
     </Typography>,
 ];
-console.log(window.location.pathname);
+const importCsv = useRef();
 const [page, setPage] = React.useState(0);
 const [rowsPerPage, setRowsPerPage] = React.useState(10);
 const [searchValue, setSearchValue] = useState('');
+const [alertDialog, setAlertDialog] = React.useState(false);
+
 const handleChangePage = (event, newPage) => {
   setPage(newPage);
 };
@@ -129,7 +137,29 @@ const handleSearch = (searchedValue) => {
   // }
 }
 
+const handleImportCsv = () => {
+  importCsv.current.click();
+}
+const handleUploadCsv = (e) => {
+  let csvFile = {};
+  let serviceId = param.serviceid;
+  let file = e.target.files[0]; 
+  if(file){
+    csvFile = file;
+    dispatch(uploadProductServiceCSV({csvFile: csvFile, service: serviceId}))
+  }
+}
 
+
+useEffect(() => {
+  dispatch(serviceProductList(param.serviceid));
+}, [])
+
+if(isLoading){
+  return (
+    <Loading/>
+  )
+}
 
   return (
     <div className="page-section">
@@ -147,10 +177,11 @@ const handleSearch = (searchedValue) => {
             alignItems: 'center',
             gap: '1rem'
           }}>
-             <CSVLink data={rows ? rows : 'No data available yet'}>
+             <CSVLink data={serviceDetail?.data ? serviceDetail?.data : 'No data available yet'}>
               <Button variant="outlined" className="bc-btn-outline" color="primary">Export csv</Button>
              </CSVLink>
-            <Button variant="outlined" className="bc-btn-outline" color="primary">Import csv</Button>
+            <Button variant="outlined" className="bc-btn-outline" color="primary" onClick={handleImportCsv}>Import csv</Button>
+            <input type="file" name="importCsv" id="importCsv" style={{display: 'none'}} accept='text/csv' ref={importCsv}  onChange={(e) => handleUploadCsv(e)} />
           </Box>
         </Box>
         <Box component="div" sx={{
@@ -184,6 +215,28 @@ const handleSearch = (searchedValue) => {
             <FilterListRoundedIcon />
           </IconButton> */}
         </Box>
+        {
+              alert ? (
+                <Alert 
+                  severity={responseStatus}
+                  color={responseStatus} 
+                  sx={{mb: 3, width: '100%'}}
+                  action={
+                    <IconButton
+                      aria-label="close"
+                      color="inherit"
+                      size="small"
+                      onClick={() => {
+                        dispatch(serviceResponseClr(false));
+                        setAlertDialog(false)
+                      }}
+                    >
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                >{responseMsg}</Alert>
+              ) : null
+            }
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
             <TableContainer>
                 <Table stickyHeader aria-label="sticky table">
@@ -201,15 +254,15 @@ const handleSearch = (searchedValue) => {
                     </StyledTableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.filter((data) => data.productId.toLowerCase().includes(searchValue) || data.jobType.toLowerCase().includes(searchValue) || data.color.toLowerCase().includes(searchValue) || data.grid.toLowerCase().includes(searchValue) || data.openType.toLowerCase().includes(searchValue) || data.temeredGlass.toLowerCase().includes(searchValue) || data.privacy.toLowerCase().includes(searchValue) || data.safetyGlass.toLowerCase().includes(searchValue) || data.dimensionClass.toLowerCase().includes(searchValue) || data.pricePerSqInch.toLowerCase().includes(searchValue))?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    {serviceDetail.data?.filter((data) => data.product_id.toLowerCase().includes(searchValue) || data.job_type.toLowerCase().includes(searchValue) || data.color.toLowerCase().includes(searchValue) || data.grid.toLowerCase().includes(searchValue) || data.open_type.toLowerCase().includes(searchValue) || data.tempered_glass.toLowerCase().includes(searchValue) || data.privacy.toLowerCase().includes(searchValue) || data.safety_glass.toLowerCase().includes(searchValue) || data.dimension_class.toLowerCase().includes(searchValue) || data.price.toLowerCase().includes(searchValue))?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
                         return (
-                        <StyledTableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                        <StyledTableRow hover role="checkbox" tabIndex={-1} key={row._id}>
                             {columns.map((column) => {
                             const value = row[column.id];
                             return (
-                                <StyledTableCell key={column.id} align={column.align}>
-                                {column.format && typeof value === 'number'
+                                <StyledTableCell key={column.id} align={column.align} style={{ textTransform: column.textTransform}}>
+                                {column.id === 'price'? (value? '$' + parseInt(value).toFixed(2): '0') :column.format && typeof value === 'number'
                                     ? column.format(value)
                                     : value}
                                 </StyledTableCell>
