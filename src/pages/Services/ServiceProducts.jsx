@@ -153,7 +153,7 @@ const handleUploadCsv = (e) => {
 
 useEffect(() => {
   dispatch(serviceProductList(param.serviceid));
-}, [])
+}, [alert])
 
 if(isLoading){
   return (

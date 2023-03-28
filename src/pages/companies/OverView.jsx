@@ -119,7 +119,7 @@ const [page, setPage] = React.useState(0);
 const [rowsPerPage, setRowsPerPage] = React.useState(10);
 const [alertDialog, setAlertDialog] = React.useState(false);
 
-console.log(data?.findCompany);
+// console.log(data?.findCompany);
 const handleChangePage = (event, newPage) => {
   setPage(newPage);
 };

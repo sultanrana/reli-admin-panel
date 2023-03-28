@@ -29,8 +29,8 @@ const userInfoColumns = [
   { id: 'email', label: 'Email', minWidth: 150, fontWeight: '600' },
   { id: 'phone', label: 'Phone', minWidth: 150, fontWeight: '600' },
   { id: 'status', label: 'Status', minWidth: 80, fontWeight: '600' },
-  { id: 'approvedByReli', label: 'Approved by Reli', minWidth: 120, fontWeight: '600' },
-  { id: 'accountType', label: 'Type', minWidth: 100, fontWeight: '600' },
+  { id: 'approvedByReli', label: 'Approved by Reli', minWidth: 120, fontWeight: '600', textTransform: 'capitalize' },
+  { id: 'accountType', label: 'Type', minWidth: 100, fontWeight: '600', textTransform: 'capitalize' },
   { id: 'updatedAt', label: 'Last Active', minWidth: 200, fontWeight: '600' },
   // { id: 'actions', label: 'Actions', minWidth: 130, fontWeight: '600' },
 ];
@@ -629,8 +629,8 @@ if(isLoading){
                           {userInfoColumns.map((column) => {
                           const value = row[column.id];
                           return (
-                              <StyledTableCell key={column.id+'UserInfo'}  align={column.align}>
-                              {column.id === 'status'? value === true? 'Enable' : 'Disable' : column.id === 'approvedByReli'? value === true ? 'TRUE' : 'FALSE' : column.id === 'updatedAt' ? moment(value).format('DD/MM/YY hh:mm:ss A') : value}
+                              <StyledTableCell key={column.id+'UserInfo'}  align={column.align} style={{ textTransform: column.textTransform}}>
+                              {column.id === 'status'? value === true? 'Enable' : 'Disable' : column.id === 'accountType'? value === 'true' ? 'Admin' : 'Staff' : column.id === 'updatedAt' ? moment(value).format('DD/MM/YY hh:mm:ss A') : value}
                               </StyledTableCell>
                           );
                           })}

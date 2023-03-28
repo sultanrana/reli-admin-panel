@@ -24,7 +24,7 @@ const param = useParams();
 const [approvedByReli, setApprovedByReli] = useState(false)
 const [status, setStatus] = useState(false)
 const [accountType, setAccountType] = useState(false)
-
+// console.log(companyDetail.data?.findCompany.companyName);
 
 let imgInput = useRef(null)
 let imgRef = useRef(null)
@@ -111,7 +111,7 @@ const initialValues = {
             letterSpacing: '0.4px',
             color: '#000000'
         }}>
-            Company Name: {companyDetail?.data?.companyName} 
+            Company Name: {companyDetail.data?.findCompany.companyName} 
         </Typography>
     </Box>
     <Formik
@@ -183,8 +183,8 @@ const initialValues = {
                                 error = {Boolean(errors.approvedByReli) && Boolean(touched.approvedByReli)}
                                 // helperText = {Boolean(touched.approvedByReli) && errors.approvedByReli}
                             >
-                                <MenuItem value='true'>Active</MenuItem>
-                                <MenuItem value='false'>Pending</MenuItem>
+                                <MenuItem value='active'>Active</MenuItem>
+                                <MenuItem value='pending'>Pending</MenuItem>
                                 <MenuItem value='rejected'>Rejected</MenuItem>
                             </Field>
                         </FormControl>
