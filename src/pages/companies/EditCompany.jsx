@@ -53,12 +53,14 @@ function capitalizeFirstLetter(str) {
 }
 
 const initialValues ={
-    companyStatus: companyDetail?.data.companyStatus ? companyDetail?.data.companyStatus : '',
-    companyName: companyDetail?.data.companyName ? companyDetail?.data.companyName : '',
-    distanceWillingTravel: companyDetail?.data.distanceWillingTravel ? companyDetail?.data.distanceWillingTravel : '',
-    representativeName: companyDetail?.data.representativeName ? companyDetail?.data.representativeName : '',
-    representativeNumber: companyDetail?.data.representativeNumber ? companyDetail?.data.representativeNumber : '',
-    representativeEmail: companyDetail?.data.representativeEmail ? companyDetail?.data.representativeEmail : '',
+    companyStatus: companyDetail.data?.findCompany.companyStatus ? companyDetail.data?.findCompany.companyStatus : '',
+    companyName: companyDetail.data?.findCompany.companyName ? companyDetail.data?.findCompany.companyName : '',
+    distanceWillingTravel: companyDetail.data?.findCompany.distanceWillingTravel ? companyDetail.data?.findCompany.distanceWillingTravel : '',
+    representativeName: companyDetail.data?.findCompany.representativeName ? companyDetail.data?.findCompany.representativeName : '',
+    representativeNumber: companyDetail.data?.findCompany.representativeNumber ? companyDetail.data?.findCompany.representativeNumber : '',
+    representativeEmail: companyDetail.data?.findCompany.representativeEmail ? companyDetail.data?.findCompany.representativeEmail : '',
+    addressOne: companyDetail.data?.findCompany.addressOne ? companyDetail.data?.findCompany.addressOne : '',
+    addressTwo: companyDetail.data?.findCompany.addressTwo ? companyDetail.data?.findCompany.addressTwo : '',
 }
 
 useEffect(() => {
@@ -115,7 +117,10 @@ useEffect(() => {
         validationSchema= {object({
             companyName: Yup.string().required(),
             representativeName: Yup.string().required(),
-            representativeEmail: Yup.string().required(),
+            representativeEmail: Yup.string().required().email(),
+            addressOne: Yup.string().required(),
+            addressTwo: Yup.string().required(),
+            representativeNumber: Yup.number().required(),
         })}
     >
         {({errors, touched, isValid, dirty}) => (
@@ -141,10 +146,11 @@ useEffect(() => {
                                 name="companyStatus"
                                 label="Company status"
                                 error = {Boolean(errors.companyStatus) && Boolean(touched.companyStatus)}
-                                helperText = {Boolean(touched.companyStatus) && errors.companyStatus}
+                                // helperText = {Boolean(touched.companyStatus) && errors.companyStatus}
                             >
                                 <MenuItem value="enable">Enable</MenuItem>
                                 <MenuItem value="disable">Disable</MenuItem>
+                                <MenuItem value="pending">Pending</MenuItem>
                             </Field>
                         </FormControl>
                         <Field as={TextField} 
@@ -154,7 +160,7 @@ useEffect(() => {
                             label="Company Name"
                             variant="outlined" 
                             error = {Boolean(errors.companyName) && Boolean(touched.companyName)}
-                            helperText = {Boolean(touched.companyName) && errors.companyName}
+                            // helperText = {Boolean(touched.companyName) && errors.companyName}
                         />
                         <Field as={TextField}  
                             sx={{width: '100%', mb: 4}}
@@ -163,7 +169,7 @@ useEffect(() => {
                             label="Address Line 1"
                             variant="outlined"
                             error = {Boolean(errors.addressOne) && Boolean(touched.addressOne)}
-                            helperText = {Boolean(touched.addressOne) && errors.addressOne}
+                            // helperText = {Boolean(touched.addressOne) && errors.addressOne}
                         />
                         <Field as={TextField}
                             sx={{width: '100%', mb: 4}}
@@ -172,7 +178,7 @@ useEffect(() => {
                             label="Address Line 2"
                             variant="outlined" 
                             error = {Boolean(errors.addressTwo) && Boolean(touched.addressTwo)}
-                            helperText = {Boolean(touched.addressTwo) && errors.addressTwo}
+                            // helperText = {Boolean(touched.addressTwo) && errors.addressTwo}
                         />
                         <FormControl fullWidth sx={{ mb: 4 }}>
                             <InputLabel id="distanceWillingTravel">Distance willing to travel (in miles)</InputLabel>
@@ -182,7 +188,7 @@ useEffect(() => {
                                 name="distanceWillingTravel"
                                 label="Distance willing to travel (in miles)"
                                 error = {Boolean(errors.distanceWillingTravel) && Boolean(touched.distanceWillingTravel)}
-                                helperText = {Boolean(touched.distanceWillingTravel) && errors.distanceWillingTravel}
+                                // helperText = {Boolean(touched.distanceWillingTravel) && errors.distanceWillingTravel}
                             >
                                 <MenuItem value="100m">100m</MenuItem>
                                 <MenuItem value="200m">200m</MenuItem>
@@ -195,7 +201,7 @@ useEffect(() => {
                             label="Representative Name"
                             variant="outlined" 
                             error = {Boolean(errors.representativeName) && Boolean(touched.representativeName)}
-                            helperText = {Boolean(touched.representativeName) && errors.representativeName}
+                            // helperText = {Boolean(touched.representativeName) && errors.representativeName}
                         />
                         <Field as={TextField} 
                             sx={{width: '100%', mb: 4}}
@@ -204,7 +210,7 @@ useEffect(() => {
                             label="Representative Number"
                             variant="outlined" 
                             error = {Boolean(errors.representativeNumber) && Boolean(touched.representativeNumber)}
-                            helperText = {Boolean(touched.representativeNumber) && errors.representativeNumber}
+                            // helperText = {Boolean(touched.representativeNumber) && errors.representativeNumber}
                         />
                         <Field as ={TextField} 
                             sx={{width: '100%', mb: 4}}
@@ -213,7 +219,7 @@ useEffect(() => {
                             label="Representative Email"
                             variant="outlined" 
                             error = {Boolean(errors.representativeEmail) && Boolean(touched.representativeEmail)}
-                            helperText = {Boolean(touched.representativeEmail) && errors.representativeEmail}
+                            // helperText = {Boolean(touched.representativeEmail) && errors.representativeEmail}
                         />
                         <Box sx={{ pl: 5}}>
                             <Typography
