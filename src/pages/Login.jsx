@@ -15,7 +15,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { loginUser, responseCode, showError } from "../features/login/loginSlice";
+import { emptyToken, loginUser, responseCode, showError } from "../features/login/loginSlice";
 import AlertMessage from "../components/AlertMessage";
 import Header from "../components/Header";
 const Login = () => {
@@ -64,6 +64,11 @@ const Login = () => {
     dispatch(loginUser(userData))
     navigate('/services')
   }
+
+  useEffect(() => {
+    localStorage.removeItem('token');
+    dispatch(emptyToken());
+  }, []);
 
   return (
     <>

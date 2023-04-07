@@ -153,11 +153,13 @@ a{
   color:#1FBAD2;
   font-size: 20px;
   letter-spacing: 0.15px;
+  cursor: pointer;
 }
 .company_info .disabled{
   color:#D0347E;
   font-size: 20px;
   letter-spacing: 0.15px;
+  cursor: pointer;
 }
 .available_service_card{
   display: flex;

@@ -415,7 +415,7 @@ if(isLoading){
                     </StyledTableRow>
                 </TableHead>
                 <TableBody>
-                    {projects.data?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    {projects.data?.filter((data) => data.name.toLowerCase().includes(searchValue))?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
                         return (
                         <StyledTableRow hover role="checkbox" tabIndex={-1} key={parseInt(Date.now() * Math.random())}>

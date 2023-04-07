@@ -177,16 +177,16 @@ const EditCustomer = () => {
                   sx={{ width: "100%", mb: 4, mt: 5 }}
                   id="firstName"
                   name="firstName"
-                  label="firstName"
+                  label="Name"
                   variant="outlined"
                   {...formik.getFieldProps("firstName")}
                   error={
                     Boolean(formik.errors.firstName) &&
                     Boolean(formik.touched.firstName)
                   }
-                  helperText={
-                    Boolean(formik.touched.firstName) && formik.errors.firstName
-                  }
+                  // helperText={
+                  //   Boolean(formik.touched.firstName) && formik.errors.firstName
+                  // }
                 />
                 <TextField
                   sx={{ width: "100%", mb: 4 }}
@@ -200,9 +200,9 @@ const EditCustomer = () => {
                     Boolean(formik.errors.email) &&
                     Boolean(formik.touched.email)
                   }
-                  helperText={
-                    Boolean(formik.touched.email) && formik.errors.email
-                  }
+                  // helperText={
+                  //   Boolean(formik.touched.email) && formik.errors.email
+                  // }
                 />
               </Container>
             </DialogContentText>

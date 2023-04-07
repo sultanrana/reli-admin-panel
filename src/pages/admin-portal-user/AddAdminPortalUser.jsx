@@ -101,7 +101,7 @@ if(isLoading){
                     label="First Name"
                     {...formik.getFieldProps('firstName')}
                     error = {Boolean(formik.errors.firstName) && Boolean(formik.touched.firstName)}
-                    helperText = {Boolean(formik.touched.firstName) && formik.errors.firstName}
+                    // helperText = {Boolean(formik.touched.firstName) && formik.errors.firstName}
                 />
                 <TextField 
                     sx={{width: '100%', mb: 4}}
@@ -110,7 +110,7 @@ if(isLoading){
                     label="Last Name"
                     {...formik.getFieldProps('lastName')}
                     error = {Boolean(formik.errors.lastName) && Boolean(formik.touched.lastName)}
-                    helperText = {Boolean(formik.touched.lastName) && formik.errors.lastName}
+                    // helperText = {Boolean(formik.touched.lastName) && formik.errors.lastName}
                 />
                 <TextField 
                     sx={{width: '100%', mb: 4}}
@@ -119,7 +119,7 @@ if(isLoading){
                     label="Email"
                     {...formik.getFieldProps('email')}
                     error = {Boolean(formik.errors.email) && Boolean(formik.touched.email)}
-                    helperText = {Boolean(formik.touched.email) && formik.errors.email}
+                    // helperText = {Boolean(formik.touched.email) && formik.errors.email}
                 />
                 <FormControl fullWidth sx={{mb: 3}}>
                   <InputLabel id="userType">Role</InputLabel>

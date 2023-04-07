@@ -111,7 +111,7 @@ const customerSlice = createSlice({
       state.isLoading = true;
     },
     [getCutomerDetail.fulfilled]: (state, action) => {
-      // console.log(action.payload);
+      console.log(action.payload);
       state.isLoading = false;
       state.customerDetail = action.payload;
     },

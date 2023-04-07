@@ -33,13 +33,14 @@ import Loading from "../../components/Loading";
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import CloseIcon from '@mui/icons-material/Close';
 import { CSVLink, CSVDownload } from "react-csv";
+import moment from "moment";
 
 const columns = [
   { id: "firstName", label: "Name", minWidth: 100, fontWeight: '600' },
   { id: "email", label: "Email", minWidth: 100, fontWeight: '600' },
   { id: "userType", label: "Role", minWidth: 100, fontWeight: '600' },
   { id: "statusBit", label: "Status", minWidth: 150, fontWeight: '600' },
-  { id: "lastActive", label: "Last Active", minWidth: 150, fontWeight: '600' },
+  { id: "updatedAt", label: "Last Active", minWidth: 150, fontWeight: '600' },
   // { id: "actions", label: "Actions", minWidth: 150, fontWeight: '600' },
 ];
 
@@ -1266,7 +1267,7 @@ const AdminPortalUser = () => {
                               {/* {column.format && typeof value === "number"
                                 ? column.format(value)
                                 : value} */}
-                                {typeof value === 'boolean' ? (value === true ? 'Enaled' : 'Disabled') : value}
+                                {typeof value === 'boolean' ? (value === true ? 'Enaled' : 'Disabled') : column.id === 'updatedAt'? moment(value).format('DD/MM/YY hh:mm:ss A') : value}
                             </StyledTableCell>
                           );
                         })}

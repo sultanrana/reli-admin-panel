@@ -70,6 +70,39 @@ export const getServices = createAsyncThunk(
       return error.response;
     }
   })
+ 
+
+  export const updatePriceColumn = createAsyncThunk(
+    "service/updatePriceColumn",
+    async (values, thunkAPI) => {
+      // const formData = new FormData();
+      // formData.append('price', values.price);
+      // // for (let [key, value] of formData.entries()) {
+      // //   console.log(key + ': ' + value);
+      // // }
+      // // return
+      try {
+        const resp = await axios.post(
+          `http://34.236.149.254/api/admin/csv/update/${values.id}`,
+          {'price': values.price},
+          {
+            headers: {
+              // "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        // console.log(resp);
+        return resp.data;
+      } catch (error) {
+        console.log(error.response);
+        // return "something went wrong";
+        return error.response;
+      }
+    }
+  );
+
+
 
 
   const serviceSlice = createSlice({
@@ -83,7 +116,7 @@ export const getServices = createAsyncThunk(
         state.responseMsg = "";
         state.responseStatus = "";
         state.alert = false;
-      }
+      },
     },
     extraReducers: {
       [getServices.pending]: (state) => {
@@ -121,6 +154,22 @@ export const getServices = createAsyncThunk(
         state.isLoading = false;
       },
       [uploadProductServiceCSV.rejected]: (state) => {
+        state.isLoading = false;
+      },
+      [updatePriceColumn.pending]: (state) => {
+        state.isLoading = true;
+      },
+      [updatePriceColumn.fulfilled]: (state, action) => {
+        if(action.payload.message){
+          state.responseStatus = "success";
+        }else{
+          state.responseStatus = "error";
+        }
+        state.responseMsg = action.payload.message ? action.payload.message : action.payload.data.message;
+        state.alert = true;
+        state.isLoading = false;
+      },
+      [updatePriceColumn.rejected]: (state) => {
         state.isLoading = false;
       },
     }

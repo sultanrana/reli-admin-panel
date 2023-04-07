@@ -28,28 +28,36 @@ import Sidebar from "../../components/Sidebar";
 import PropertiesTable from "./PropertiesTable";
 import EditCustomer from "./EditCustomer";
 import BeardcrumNavigator from "../../components/BeardcrumNavigator";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { customerResponseClr, getCutomerDetail } from "../../features/customer/customerSlice";
 import Loading from "../../components/Loading";
 import CloseIcon from '@mui/icons-material/Close';
+import { updateCustomer } from "../../features/customer/customerSlice";
 // active project
 const activeProjectColumns = [
   { id: "_id", label: "Project ID", minWidth: 100, fontWeight: "600" },
   {
-    id: "orderStatus",
-    label: "Project Status",
+    id: "serviceType",
+    label: "Service Type",
     minWidth: 100,
     fontWeight: "600",
   },
-  { id: "name", label: "Customer", minWidth: 100, fontWeight: "600" },
+  { id: "company", label: "Company ", minWidth: 100, fontWeight: "600" },
   {
-    id: "serviceType",
-    label: "Service Type",
+    id: "workerAssigned",
+    label: "Worker Assigned",
     minWidth: 170,
     fontWeight: "600",
   },
+  { id: "city", label: "City", minWidth: 150, fontWeight: "600" },
+  { id: "state", label: "State", minWidth: 150, fontWeight: "600" },
+  { id: "zip", label: "Zip", minWidth: 150, fontWeight: "600" },
+  { id: "ordered", label: "Ordered", minWidth: 150, fontWeight: "600" },
   { id: "scheduled", label: "Scheduled", minWidth: 150, fontWeight: "600" },
+  { id: "completed", label: "Completed", minWidth: 150, fontWeight: "600" },
+  { id: "totalPaidByCustomer", label: "Total Paid by Customer", minWidth: 150, fontWeight: "600" },
   { id: "totalAmount", label: "Amount", minWidth: 100, fontWeight: "600" },
+  { id: "status", label: "Status", minWidth: 100, fontWeight: "600" },
   // { id: "actions", label: "Actions", minWidth: 160, fontWeight: "600" },
 ];
 // active project
@@ -683,6 +691,7 @@ const AboutCard = styled(Box)(({theme}) => ({
 const CustomerDetails = () => {
   const param = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { isEditCustomerModal, isDrawerOpen } = useSelector(
     (store) => store.login
@@ -702,13 +711,21 @@ const CustomerDetails = () => {
     setPage(0);
   };
 
+  const handleCustomerStatus = (status) => {
+    let values = {}
+
+    values.firstName = customerDetail.data?.firstName
+    values.lastName = customerDetail.data?.lastName
+    values.statusBit = !Boolean(status)
+    dispatch(updateCustomer(values));
+  }
 
 
 
   useEffect(() => {
     dispatch(getCutomerDetail(param.customerid));
     setAlertDialog(alert);
-  }, []);
+  }, [alert]);
 
 
   const breadcrumbs = [
@@ -832,7 +849,7 @@ const CustomerDetails = () => {
                       >
                         {customerDetail.data?.phoneNumber}
                       </p>
-                      <p className={Boolean(customerDetail.data?.statusBit) ? 'enabled' : 'disabled' }>{Boolean(customerDetail.data?.statusBit) ? 'Enabled' : 'Disabled' }</p>
+                      <p className={Boolean(customerDetail.data?.statusBit) ? 'enabled' : 'disabled' } onClick={() => handleCustomerStatus(Boolean(customerDetail.data?.statusBit))}>{Boolean(customerDetail.data?.statusBit) ? 'Enabled' : 'Disabled' }</p>
                     </div>
                   </div>
                 </div>

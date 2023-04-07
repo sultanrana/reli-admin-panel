@@ -35,8 +35,10 @@ const handleAddImg = (e) => {
     let file = e.target.files[0];
     let url = URL.createObjectURL(file);
     imgRef.current.src = url;
+    URL.revokeObjectURL(file);
 }
 const clearImgRef = () => {
+    imgInput.current.value = '';
     imgRef.current.src = '/images/circle-gray.png';
 }
 const handleApprovedByReli = () => {

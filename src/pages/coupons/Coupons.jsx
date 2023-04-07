@@ -161,7 +161,7 @@ if(isLoading){
                               const value = row[column.id];
                               return (
                                   <StyledTableCell key={column.id} align={column.align} style={{ textTransform: column.textTransform}}>
-                                    {typeof value === 'boolean' ? (value === true ? 'Y': 'N') : value}
+                                    {typeof value === 'boolean' ? (value === true ? 'Y': 'N') : column.id === 'name'? (<p className='tableLink'>{value}</p>) : value}
                                   </StyledTableCell>
                               );
                               })}

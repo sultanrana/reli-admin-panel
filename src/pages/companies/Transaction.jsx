@@ -20,29 +20,32 @@ import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import moment from "moment/moment";
 
 const columns = [
-  {
-    id: "stripePaymentId",
-    label: "Transaction ID",
-    minWidth: 100,
-    fontWeight: "600",
-  },
+  // {
+  //   id: "stripePaymentId",
+  //   label: "Transaction ID",
+  //   minWidth: 100,
+  //   fontWeight: "600",
+  // },
   { id: "_id", label: "Product ID", minWidth: 100, fontWeight: "600" },
-  { id: "name", label: "Name", minWidth: 100, fontWeight: "600" },
-  { id: "payeeType", label: "Payee Type", minWidth: 100, fontWeight: "600" },
+  { id: "name", label: "Customer", minWidth: 100, fontWeight: "600" },
+  // { id: "payeeType", label: "Payee Type", minWidth: 100, fontWeight: "600" },
   { id: "serviceType", label: "ServiceType", minWidth: 150, fontWeight: "600" },
   {
     id: "transactionType",
-    label: "Transaction Type",
+    label: "Payment Type",
     minWidth: 150,
     fontWeight: "600",
   },
-  { id: "city", label: "City", minWidth: 100, fontWeight: "600" },
-  { id: "state", label: "State", minWidth: 100, fontWeight: "600" },
-  { id: "zip", label: "Zip", minWidth: 100, fontWeight: "600" },
-  { id: "ordered", label: "Ordered", minWidth: 160, fontWeight: "600" },
-  // { id: "scheduled", label: "Scheduled", minWidth: 100, fontWeight: "600" },
-  // { id: "completed", label: "Completed", minWidth: 100, fontWeight: "600" },
+  // { id: "city", label: "City", minWidth: 100, fontWeight: "600" },
+  // { id: "state", label: "State", minWidth: 100, fontWeight: "600" },
+  // { id: "zip", label: "Zip", minWidth: 100, fontWeight: "600" },
+  // { id: "ordered", label: "Ordered", minWidth: 160, fontWeight: "600" },
+  { id: "scheduled", label: "Scheduled", minWidth: 100, fontWeight: "600" },
+  { id: "completed", label: "Completed", minWidth: 100, fontWeight: "600" },
   { id: "totalAmount", label: "Amount", minWidth: 100, fontWeight: "600" },
+  { id: "paidByCustomer", label: "Paid by Customer", minWidth: 160, fontWeight: "600" },
+  { id: "paidToContractor", label: "Paid to Contractor", minWidth: 160, fontWeight: "600" },
+  { id: "dueToContractor", label: "Due to Contractor", minWidth: 160, fontWeight: "600" },
   // { id: "couponCode", label: "CouponCode", minWidth: 100, fontWeight: "600" },
   // { id: "couponValue", label: "CouponValue", minWidth: 100, fontWeight: "600" },  
   // { id: "actions", label: "Actions", minWidth: 150, fontWeight: '600' },
@@ -1229,7 +1232,7 @@ if(isLoading){
                               align={column.align}
                             >
                               {column.id === '_id'?(
-                                <TableLink text={value} route={row._id} />
+                                <TableLink text={value} route={''} />
                               ) : (column.id === 'name') ? (
                                 <TableLink text={value} route={`/customers/` + row.user} />
                               ) : (column.id === 'serviceType') ?(

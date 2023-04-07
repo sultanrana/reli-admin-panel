@@ -350,7 +350,7 @@ const [rows, setRows] = useState();
                 </StyledTableRow>
               </TableHead>
               <TableBody>
-                {customers.data?.filter((data) => data.firstName.toLowerCase().includes(searchValue) || data.lastName.toLowerCase().includes(searchValue) || data.email.toLowerCase().includes(searchValue) || data.email.includes(searchValue))?.map((row) => (
+                {customers.data?.filter((data) => data.firstName.toLowerCase().includes(searchValue) || data.lastName.toLowerCase().includes(searchValue) || data.email.toLowerCase().includes(searchValue) || data.email.includes(searchValue) )?.map((row) => (
                   <StyledTableRow key={row.id}>
                     <StyledTableCell sx={{minWidth: 150}}>
                       <TableLink onClick={() => navigate(row.id)}>

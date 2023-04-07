@@ -49,9 +49,10 @@ import {
 } from "../../components/styles/ActivityBox.styles";
 import { useEffect } from "react";
 import { singleProjectDetail } from "../../features/projects/projectSlice";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Loading from "../../components/Loading";
 import moment from 'moment';
+import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 
 
 const OuterGrid = styled(Grid)(({ theme }) => ({
@@ -159,7 +160,7 @@ const ProjectDetails = () => {
         color: "#000000",
       }}
     >
-      Project Detail
+      <Link to={'/projects'} style={{'textDecoration': 'none', 'color' : 'black'}}><ArrowBackIosRoundedIcon style={{'marginRight': '1rem', 'cursor' : 'pointer'}} /></Link> {(projectDetail.data?.order_detail.length > 0 && projectDetail.data?.order_detail[0].service)? projectDetail.data?.order_detail[0].service.name : ''} {param.projectid}
     </Typography>,
   ];
   const [isReschedule, setIsReschedule] = useState(false);
@@ -657,140 +658,142 @@ const ProjectDetails = () => {
                       }
                   </Box>
                 </Box>
-                <Box
-                  sx={{
-                    display: "flex",
-                    gap: "8px",
-                    flexWrap: "wrap",
-                  }}
-                >
+                {projectDetail.data?.assigned_order.length > 0 ? (
                   <Box
-                    component="div"
                     sx={{
-                      background: "#E8E8E8",
-                      boxShadow:
-                        "0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)",
                       display: "flex",
-                      flexWrap: "wrap",
-                      flexDirection: "column",
-                      padding: "16px 16px 16px 16px",
                       gap: "8px",
-                      flex: "1",
+                      flexWrap: "wrap",
                     }}
                   >
                     <Box
+                      component="div"
                       sx={{
+                        background: "#E8E8E8",
+                        boxShadow:
+                          "0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)",
                         display: "flex",
-                        justifyContent: "space-between",
+                        flexWrap: "wrap",
+                        flexDirection: "column",
+                        padding: "16px 16px 16px 16px",
+                        gap: "8px",
+                        flex: "1",
                       }}
                     >
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            fontWeight: "500",
+                            fontSize: "20px",
+                            lineHeight: "24px",
+                            letterSpacing: "0.15px",
+                            textDecoration: "underline",
+                          }}
+                        >
+                          Primary Contract:
+                        </Typography>
+                      </Box>
                       <Typography
                         sx={{
                           fontWeight: "500",
                           fontSize: "20px",
                           lineHeight: "24px",
                           letterSpacing: "0.15px",
-                          textDecoration: "underline",
                         }}
                       >
-                        Primary Contract:
+                        {projectDetail.data?.assigned_order[0].userBy.firstName + ' ' + projectDetail.data?.assigned_order[0].userBy.lastName}
                       </Typography>
-                    </Box>
-                    <Typography
-                      sx={{
-                        fontWeight: "500",
-                        fontSize: "20px",
-                        lineHeight: "24px",
-                        letterSpacing: "0.15px",
-                      }}
-                    >
-                      {projectDetail.data?.assigned_order[0].userBy.firstName + ' ' + projectDetail.data?.assigned_order[0].userBy.lastName}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        fontWeight: "500",
-                        fontSize: "20px",
-                        lineHeight: "24px",
-                        letterSpacing: "0.15px",
-                      }}
-                    >
-                     {projectDetail.data?.assigned_order[0].userBy.email}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        fontWeight: "500",
-                        fontSize: "20px",
-                        lineHeight: "24px",
-                        letterSpacing: "0.15px",
-                      }}
-                    >
-                      {projectDetail.data?.assigned_order[0].userBy.phoneNumber}
-                    </Typography>
-                  </Box>
-                  <Box
-                    component="div"
-                    sx={{
-                      background: "#E8E8E8",
-                      boxShadow:
-                        "0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)",
-                      display: "flex",
-                      flexWrap: "wrap",
-                      flexDirection: "column",
-                      padding: "16px 16px 16px 16px",
-                      gap: "8px",
-                      flex: "1",
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                      }}
-                    >
                       <Typography
                         sx={{
                           fontWeight: "500",
                           fontSize: "20px",
                           lineHeight: "24px",
                           letterSpacing: "0.15px",
-                          textDecoration: "underline",
                         }}
                       >
-                        Staff Assigned:
+                      {projectDetail.data?.assigned_order[0].userBy.email}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          fontWeight: "500",
+                          fontSize: "20px",
+                          lineHeight: "24px",
+                          letterSpacing: "0.15px",
+                        }}
+                      >
+                        {projectDetail.data?.assigned_order[0].userBy.phoneNumber}
                       </Typography>
                     </Box>
-                    <Typography
+                    <Box
+                      component="div"
                       sx={{
-                        fontWeight: "500",
-                        fontSize: "20px",
-                        lineHeight: "24px",
-                        letterSpacing: "0.15px",
+                        background: "#E8E8E8",
+                        boxShadow:
+                          "0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)",
+                        display: "flex",
+                        flexWrap: "wrap",
+                        flexDirection: "column",
+                        padding: "16px 16px 16px 16px",
+                        gap: "8px",
+                        flex: "1",
                       }}
                     >
-                      {projectDetail.data?.assigned_order[0].userTo.firstName + ' ' + projectDetail.data?.assigned_order[0].userTo.lastName}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        fontWeight: "500",
-                        fontSize: "20px",
-                        lineHeight: "24px",
-                        letterSpacing: "0.15px",
-                      }}
-                    >
-                      {projectDetail.data?.assigned_order[0].userTo.email}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        fontWeight: "500",
-                        fontSize: "20px",
-                        lineHeight: "24px",
-                        letterSpacing: "0.15px",
-                      }}
-                    >
-                     {projectDetail.data?.assigned_order[0].userTo.phoneNumber}
-                    </Typography>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            fontWeight: "500",
+                            fontSize: "20px",
+                            lineHeight: "24px",
+                            letterSpacing: "0.15px",
+                            textDecoration: "underline",
+                          }}
+                        >
+                          Staff Assigned:
+                        </Typography>
+                      </Box>
+                      <Typography
+                        sx={{
+                          fontWeight: "500",
+                          fontSize: "20px",
+                          lineHeight: "24px",
+                          letterSpacing: "0.15px",
+                        }}
+                      >
+                        {projectDetail.data?.assigned_order[0].userTo.firstName + ' ' + projectDetail.data?.assigned_order[0].userTo.lastName}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          fontWeight: "500",
+                          fontSize: "20px",
+                          lineHeight: "24px",
+                          letterSpacing: "0.15px",
+                        }}
+                      >
+                        {projectDetail.data?.assigned_order[0].userTo.email}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          fontWeight: "500",
+                          fontSize: "20px",
+                          lineHeight: "24px",
+                          letterSpacing: "0.15px",
+                        }}
+                      >
+                      {projectDetail.data?.assigned_order[0].userTo.phoneNumber}
+                      </Typography>
+                    </Box>
                   </Box>
-                </Box>
+                ) : null}
               </Card>
             </AboutCard>
             <ActivityLogBox>

@@ -3,6 +3,7 @@ import React, { useRef, useState } from 'react'
 import BeardcrumNavigator from '../../components/BeardcrumNavigator'
 import Sidebar from '../../components/Sidebar'
 import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
@@ -18,10 +19,12 @@ import TableActions from '../../components/TableActions';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { CSVLink } from 'react-csv';
-import { serviceProductList, serviceResponseClr, uploadProductServiceCSV } from '../../features/services/serviceSlice';
+import { serviceProductList, serviceResponseClr, updatePriceColumn, uploadProductServiceCSV } from '../../features/services/serviceSlice';
 import Loading from '../../components/Loading';
 import CloseIcon from '@mui/icons-material/Close';
 import Alert  from "@mui/material/Alert";
+import ModeRoundedIcon from '@mui/icons-material/ModeRounded';
+import { useFormik } from 'formik';
 
 const columns = [
   { id: 'product_id', label: 'Product ID', minWidth: 100, fontWeight: '600', textTransform: 'capitalize' },
@@ -34,7 +37,7 @@ const columns = [
   { id: 'safety_glass', label: 'Safety Glass', minWidth: 150, fontWeight: '600', textTransform: 'capitalize' },
   { id: 'dimension_class', label: 'Dimension Class', minWidth: 100, fontWeight: '600', textTransform: 'capitalize' },
   { id: 'price', label: 'Price Per Square Inch', minWidth: 150, fontWeight: '600' },
-  // { id: 'actions', label: 'Actions', minWidth: 150, fontWeight: '600' },
+  { id: 'actions', label: 'Actions', minWidth: 100, fontWeight: '600' },
 ];
 
 function createData(productId, jobType, color, grid, openType, temeredGlass, privacy, safetyGlass, dimensionClass, pricePerSqInch, actions) {
@@ -106,6 +109,8 @@ const [page, setPage] = React.useState(0);
 const [rowsPerPage, setRowsPerPage] = React.useState(10);
 const [searchValue, setSearchValue] = useState('');
 const [alertDialog, setAlertDialog] = React.useState(false);
+const [columnEdit, setColumnEdit] = React.useState('');
+const [price, setPrice] = useState('');
 
 const handleChangePage = (event, newPage) => {
   setPage(newPage);
@@ -150,6 +155,18 @@ const handleUploadCsv = (e) => {
   }
 }
 
+const handlePriceEdit = (columnEdit) => {
+  setPrice('');
+  setColumnEdit(columnEdit);
+}
+const handleSubmit = (e, rowId) =>{
+  e.preventDefault();
+  let values = {}
+  values.price = price
+  values.id = rowId
+  dispatch(updatePriceColumn(values));
+  setColumnEdit('');
+}
 
 useEffect(() => {
   dispatch(serviceProductList(param.serviceid));
@@ -255,14 +272,22 @@ if(isLoading){
                 </TableHead>
                 <TableBody>
                     {serviceDetail.data?.filter((data) => data.product_id.toLowerCase().includes(searchValue) || data.job_type.toLowerCase().includes(searchValue) || data.color.toLowerCase().includes(searchValue) || data.grid.toLowerCase().includes(searchValue) || data.open_type.toLowerCase().includes(searchValue) || data.tempered_glass.toLowerCase().includes(searchValue) || data.privacy.toLowerCase().includes(searchValue) || data.safety_glass.toLowerCase().includes(searchValue) || data.dimension_class.toLowerCase().includes(searchValue) || data.price.toLowerCase().includes(searchValue))?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row) => {
+                    .map((row, index) => {
                         return (
                         <StyledTableRow hover role="checkbox" tabIndex={-1} key={row._id}>
                             {columns.map((column) => {
                             const value = row[column.id];
                             return (
                                 <StyledTableCell key={column.id} align={column.align} style={{ textTransform: column.textTransform}}>
-                                {column.id === 'price'? (value? '$' + parseInt(value).toFixed(2): '0') :column.format && typeof value === 'number'
+                                {(column.id === 'actions' && columnEdit === row._id)? (
+                                  <Button type='submit' onClick={(e) => handleSubmit(e, row._id)} variant="contained" >Save</Button>
+                                ) : column.id === 'actions' ? (
+                                  <IconButton onClick={() => handlePriceEdit(row._id)}>
+                                    <ModeRoundedIcon/>
+                                </IconButton>
+                                ) : (column.id === 'price' && columnEdit === row._id)? (
+                                  <TextField name="price" defaultValue={serviceDetail.data[index]['price']} onChange={(e) => setPrice(e.target.value)} />
+                                ):(column.id === 'price')? (value? '$' + parseInt(value).toFixed(2): '0') :column.format && typeof value === 'number'
                                     ? column.format(value)
                                     : value}
                                 </StyledTableCell>

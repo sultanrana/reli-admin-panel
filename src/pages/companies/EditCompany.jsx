@@ -44,6 +44,7 @@ const handleAddImg = (e) => {
     imgRef.current.src = url;
 }
 const clearImgRef = () => {
+    imgInput.current.value = '';
     imgRef.current.src = '/images/circle-gray.png';
 }
 function capitalizeFirstLetter(str) {
@@ -115,11 +116,35 @@ useEffect(() => {
             console.log("form values: ", values);
         }}
         validationSchema= {object({
-            companyName: Yup.string().required(),
-            representativeName: Yup.string().required(),
+            companyName: Yup.string().test('contains-only-spaces', 'Input cannot include only white spaces',     value => {
+                if (!value) {
+                  // if value is empty or undefined, allow it
+                  return true;
+                }
+                return /^\s*$/.test(value) === false;
+              }).required('Company Name is required'),
+            representativeName: Yup.string().test('contains-only-spaces', 'Input cannot include only white spaces',value => {
+                if (!value) {
+                  // if value is empty or undefined, allow it
+                  return true;
+                }
+                return /^\s*$/.test(value) === false;
+              }).required('Representative Name is required'),
             representativeEmail: Yup.string().required().email(),
-            addressOne: Yup.string().required(),
-            addressTwo: Yup.string().required(),
+            addressOne: Yup.string().test('contains-only-spaces', 'Input cannot include only white spaces',     value => {
+                if (!value) {
+                  // if value is empty or undefined, allow it
+                  return true;
+                }
+                return /^\s*$/.test(value) === false;
+              }).required('Address one is required'),
+            addressTwo: Yup.string().test('contains-only-spaces', 'Input cannot include only white spaces',     value => {
+                if (!value) {
+                  // if value is empty or undefined, allow it
+                  return true;
+                }
+                return /^\s*$/.test(value) === false;
+              }).required('Address two is required'),
             representativeNumber: Yup.number().required(),
         })}
     >

@@ -30,10 +30,32 @@ export const getCompanies = createAsyncThunk(
   export const addCompany = createAsyncThunk(
     "company/addCompany",
     async (values, thunkAPI) => {
+
+      // console.log('values: ', values);
+      const formData = new FormData();
+
+      formData.append('addressOne', values.addressOne);
+      formData.append('addressTwo', values.addressTwo);
+      formData.append('companyName', values.companyName);
+      formData.append('companyStatus', values.companyStatus);
+      formData.append('distanceWillingTravel', values.distanceWillingTravel);
+      formData.append('image', values.image);
+      formData.append('representativeEmail', values.representativeEmail);
+      formData.append('representativeName', values.representativeName);
+      formData.append('representativeNumber', values.representativeNumber);
+      values.services.map((item, index) => {
+        formData.append(`services[${index}]`, item);
+      });
+      // for show formdata in key value pair
+      // for (let [key, value] of formData.entries()) {
+      //   console.log(key + ': ' + value);
+      // }
+      // return 
+
       try {
         const resp = await axios.post(
           `http://34.236.149.254/api/admin/company/add`,
-          values,
+          formData,
           {
             headers: {
               "Content-Type": "multipart/form-data",
@@ -53,10 +75,24 @@ export const getCompanies = createAsyncThunk(
   export const updateCompany = createAsyncThunk(
     "company/updateCompany",
     async (values, thunkAPI) => {
+      const formData = new FormData();
+
+      formData.append('addressOne', values.addressOne);
+      formData.append('addressTwo', values.addressTwo);
+      formData.append('companyName', values.companyName);
+      formData.append('companyStatus', values.companyStatus);
+      formData.append('distanceWillingTravel', values.distanceWillingTravel);
+      formData.append('image', values.image);
+      formData.append('representativeEmail', values.representativeEmail);
+      formData.append('representativeName', values.representativeName);
+      formData.append('representativeNumber', values.representativeNumber);
+      values.services.map((item, index) => {
+        formData.append(`services[${index}]`, item);
+      });
       try {
         const resp = await axios.post(
           `http://34.236.149.254/api/admin/company/update/${values.id}`,
-          values,
+          formData,
           {
             headers: {
               "Content-Type": "multipart/form-data",

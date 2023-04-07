@@ -39,13 +39,13 @@ useEffect(() => {
 
 
 const validationSchema = Yup.object({
-    reliPortion: Yup.string().required(),
-    materialSurcharge: Yup.string().required(),
-    windowsPermitFee: Yup.string().required(),
-    windowsDeliveryFee: Yup.string().required(),
-    slidingGlassDoorPermitFee: Yup.string().required(),
-    slidingGlassDoorDeliveryFee: Yup.string().required(),
-    interiorDoorPermitFee: Yup.string().required(),
+    reliPortion: Yup.number().required(),
+    materialSurcharge: Yup.number().required(),
+    windowsPermitFee: Yup.number().required(),
+    windowsDeliveryFee: Yup.number().required(),
+    slidingGlassDoorPermitFee: Yup.number().required(),
+    slidingGlassDoorDeliveryFee: Yup.number().required(),
+    interiorDoorPermitFee: Yup.number().required(),
 });
 const formik = useFormik({
     initialValues: {
@@ -265,7 +265,7 @@ const breadcrumbs = [
                         
                     </Box>
                     <Box sx={{display: 'flex', justifyContent: 'end'}}>
-                        <Button type="submit" variant="contained">save</Button>
+                        <Button type="submit" variant="contained" disabled={!formik.dirty || !formik.isValid}>save</Button>
                     </Box>
                 </form>
             </Box>

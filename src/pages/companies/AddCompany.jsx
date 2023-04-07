@@ -11,7 +11,7 @@ import { Container, FormControl, FormControlLabel, InputLabel, MenuItem, Select,
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { useRef } from 'react';
-import { Field, Form, Formik, useFormikContext } from 'formik';
+import { Field, FieldArray, Form, Formik, useFormikContext } from 'formik';
 import { object } from 'yup';
 import * as Yup from "yup";
 import { useEffect } from 'react';
@@ -53,6 +53,7 @@ const initialValues ={
     companyStatus: status,
     companyName: "",
     distanceWillingTravel: distance,
+    services: []
 }
 // program to convert first letter of a string to uppercase
 function capitalizeFirstLetter(str) {
@@ -81,15 +82,39 @@ useEffect(() => {
             }
             dispatch(addCompany(values));
             dispatch(handleAddCompanyModal());
-            console.log("form values: ", values);
         }}
         validationSchema= {object({
-            companyName: Yup.string().required(),
-            representativeName: Yup.string().required(),
+            companyName: Yup.string().test('contains-only-spaces', 'Input cannot include only white spaces',     value => {
+                if (!value) {
+                  // if value is empty or undefined, allow it
+                  return true;
+                }
+                return /^\s*$/.test(value) === false;
+              }).required('Company Name is required'),
+            representativeName: Yup.string().test('contains-only-spaces', 'Input cannot include only white spaces',value => {
+                if (!value) {
+                  // if value is empty or undefined, allow it
+                  return true;
+                }
+                return /^\s*$/.test(value) === false;
+              }).required('Representative Name is required'),
             representativeEmail: Yup.string().required().email(),
-            addressOne: Yup.string().required(),
-            addressTwo: Yup.string().required(),
+            addressOne: Yup.string().test('contains-only-spaces', 'Input cannot include only white spaces',     value => {
+                if (!value) {
+                  // if value is empty or undefined, allow it
+                  return true;
+                }
+                return /^\s*$/.test(value) === false;
+              }).required('Address one is required'),
+            addressTwo: Yup.string().test('contains-only-spaces', 'Input cannot include only white spaces',     value => {
+                if (!value) {
+                  // if value is empty or undefined, allow it
+                  return true;
+                }
+                return /^\s*$/.test(value) === false;
+              }).required('Address two is required'),
             representativeNumber: Yup.number().required(),
+            services: Yup.array().of(Yup.string()).required("Atleast one service is required."),
         })}
     >
         {({errors, touched, isValid, dirty}) => (
@@ -235,7 +260,7 @@ useEffect(() => {
                                     return (
                                         <Field as={FormControlLabel}
                                         key={service.id}
-                                        name="services"
+                                        name={`services`}
                                         value={service.name}
                                         label={capitalizeFirstLetter(service.name)+ ':'}
                                         labelPlacement="start"
