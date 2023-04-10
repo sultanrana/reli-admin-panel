@@ -20,7 +20,7 @@ import { styled } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RowingSharp } from "@mui/icons-material";
 import Loading from "../../components/Loading";
 import { getCutomers } from "../../features/customer/customerSlice";
@@ -350,39 +350,39 @@ const [rows, setRows] = useState();
                 </StyledTableRow>
               </TableHead>
               <TableBody>
-                {customers.data?.filter((data) => data.firstName.toLowerCase().includes(searchValue) || data.lastName.toLowerCase().includes(searchValue) || data.email.toLowerCase().includes(searchValue) || data.email.includes(searchValue) )?.map((row) => (
-                  <StyledTableRow key={row.id}>
-                    <StyledTableCell sx={{minWidth: 150}}>
-                      <TableLink onClick={() => navigate(row.id)}>
-                        {row.firstName +' ' + row.lastName}
-                      </TableLink>
-                    </StyledTableCell>
-                    <StyledTableCell sx={{minWidth: 150}}>
-                      {row.email}
-                    </StyledTableCell>
-                    <StyledTableCell sx={{minWidth: 150}}>
-                      {row.phoneNumber}
-                    </StyledTableCell>
-                    <StyledTableCell sx={{minWidth: 150}}>
-                      {row.numberOfProperties}
-                    </StyledTableCell>
-                    <StyledTableCell sx={{minWidth: 150}}>
-                      {row.numberOfOpenProjects}
-                    </StyledTableCell>
-                    <StyledTableCell sx={{minWidth: 150}}>
-                      {row.numberOfCompletedProjects}
-                    </StyledTableCell>
-                    <StyledTableCell sx={{minWidth: 150}}>
-                      {'$'+row.totalPurchases.toFixed(2)}
-                    </StyledTableCell>
-                    <StyledTableCell sx={{minWidth: 150}}>
-                      {(Boolean(row.statusBit) === true ) ? 'Enabled' : 'Disabled' }
-                    </StyledTableCell>
-                    <StyledTableCell sx={{minWidth: 200}}>
-                      {moment(row.lastLoginAt).format('DD/MM/YY hh:mm:ss A')}
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
+                {customers.data?.filter((data) => data.firstName.toLowerCase().includes(searchValue) || data.lastName.toLowerCase().includes(searchValue) || data.email.toLowerCase().includes(searchValue) || data.email.includes(searchValue) )?.map((row) => {
+                  return(
+                      <StyledTableRow key={row.id}>
+                        <StyledTableCell sx={{minWidth: 150}}>
+                          <Link to={`/customers/` + row.id} className='tableLink'>{row.firstName +' ' + row.lastName}</Link>
+                        </StyledTableCell>
+                        <StyledTableCell sx={{minWidth: 150}}>
+                          <Typography className="tableLink">{row.email}</Typography>
+                        </StyledTableCell>
+                        <StyledTableCell sx={{minWidth: 150}}>
+                          <Typography className="tableLink">{row.phoneNumber}</Typography>
+                        </StyledTableCell>
+                        <StyledTableCell sx={{minWidth: 150}}>
+                          {row.numberOfProperties}
+                        </StyledTableCell>
+                        <StyledTableCell sx={{minWidth: 150}}>
+                          {row.numberOfOpenProjects}
+                        </StyledTableCell>
+                        <StyledTableCell sx={{minWidth: 150}}>
+                          {row.numberOfCompletedProjects}
+                        </StyledTableCell>
+                        <StyledTableCell sx={{minWidth: 150}}>
+                          {'$'+row.totalPurchases.toFixed(2)}
+                        </StyledTableCell>
+                        <StyledTableCell sx={{minWidth: 150}}>
+                          {(Boolean(row.statusBit) === true ) ? 'Enabled' : 'Disabled' }
+                        </StyledTableCell>
+                        <StyledTableCell sx={{minWidth: 200}}>
+                          {moment(row.lastLoginAt).format('DD/MM/YY hh:mm:ss A')}
+                        </StyledTableCell>
+                      </StyledTableRow>
+                  )
+                })}
               </TableBody>
             </Table>
           </TableContainer>

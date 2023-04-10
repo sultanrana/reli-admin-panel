@@ -48,12 +48,19 @@ import {
   AboutCard,
 } from "../../components/styles/ActivityBox.styles";
 import { useEffect } from "react";
-import { singleProjectDetail } from "../../features/projects/projectSlice";
+import { projectResponseClr, singleProjectDetail } from "../../features/projects/projectSlice";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../../components/Loading";
 import moment from 'moment';
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
-
+import Alert  from "@mui/material/Alert";
+import CloseIcon from '@mui/icons-material/Close';
+import { Form, Formik } from "formik";
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 const OuterGrid = styled(Grid)(({ theme }) => ({
   display: "flex",
@@ -144,7 +151,7 @@ const StatusBoxes = styled(Box)(({ theme }) => ({
 
 const ProjectDetails = () => {
   const { isDrawerOpen } = useSelector((store) => store.login);
-  const { projectDetail, isLoading } = useSelector((store) => store.project);
+  const { projectDetail, isLoading, responseStatus, alert, responseMsg } = useSelector((store) => store.project);
   const dispatch = useDispatch();
   const param = useParams();
 
@@ -165,6 +172,8 @@ const ProjectDetails = () => {
   ];
   const [isReschedule, setIsReschedule] = useState(false);
   const [isReassign, setIsReassign] = useState(false);
+  const [alertDialog, setAlertDialog] = React.useState(false);
+
   const handleRescheduleModal = () => {
     if (isReschedule) {
       setIsReschedule(false);
@@ -180,9 +189,17 @@ const ProjectDetails = () => {
     }
   };
 
+  const rescheduleInitialValues = {
+    date: new Date(),
+  }
+
+
+
+
+
   useEffect(() => {
     dispatch(singleProjectDetail(param.projectid));
-  }, []);
+  }, [alert]);
 
   if (isLoading) {
     return <Loading />;
@@ -211,6 +228,28 @@ const ProjectDetails = () => {
               breadcrumbs={breadcrumbs ? breadcrumbs : "Beardcrums"}
             />
           </Box>
+          {
+              alert ? (
+                <Alert
+                  severity={responseStatus}
+                  color={responseStatus} 
+                  sx={{mb: 3, width: '100%'}}
+                  action={
+                    <IconButton
+                      aria-label="close"
+                      color="inherit"
+                      size="small"
+                      onClick={() => {
+                        dispatch(projectResponseClr(false));
+                        setAlertDialog(false)
+                      }}
+                    >
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                >{responseMsg}</Alert>
+              ) : null
+            }
           <Box
             sx={{
               display: "flex",
@@ -538,7 +577,7 @@ const ProjectDetails = () => {
                         letterSpacing: "0.15px",
                       }}
                     >
-                      {projectDetail.data?.order_info.user.firstName + ' ' + projectDetail.data?.order_info.user.lastName}
+                      {projectDetail.data?.order_info.user?.firstName + ' ' + projectDetail.data?.order_info.user?.lastName}
                     </Typography>
                     <Typography
                       sx={{
@@ -548,7 +587,7 @@ const ProjectDetails = () => {
                         letterSpacing: "0.15px",
                       }}
                     >
-                      {projectDetail.data?.order_info.user.email}
+                      {projectDetail.data?.order_info.user?.email}
                     </Typography>
                     <Typography
                       sx={{
@@ -558,7 +597,7 @@ const ProjectDetails = () => {
                         letterSpacing: "0.15px",
                       }}
                     >
-                      {projectDetail.data?.order_info.user.phoneNumber}
+                      {projectDetail.data?.order_info.user?.phoneNumber}
                     </Typography>
                   </Box>
                   <Box
@@ -601,7 +640,7 @@ const ProjectDetails = () => {
                         letterSpacing: "0.15px",
                       }}
                     >
-                        {projectDetail.data?.order_detail[0].property.name}
+                        {projectDetail.data?.order_detail[0].property?.name}
                     </Typography>
                     <Typography
                       sx={{
@@ -611,7 +650,7 @@ const ProjectDetails = () => {
                         letterSpacing: "0.15px",
                       }}
                     >
-                      {projectDetail.data?.order_detail[0].property.addressOne}
+                      {projectDetail.data?.order_detail[0].property?.addressOne}
                     </Typography>
                     {/* <Typography
                       sx={{
@@ -648,7 +687,7 @@ const ProjectDetails = () => {
                       <OpenInNewRoundedIcon />
                     </IconButton>
                     {
-                        projectDetail?.data?.order_info.orderStatus === 'Completed' || projectDetail?.data?.order_info.orderStatus === 'completed' ?  ''
+                        projectDetail?.data?.order_info?.orderStatus === 'Completed' || projectDetail?.data?.order_info?.orderStatus === 'completed' ?  ''
                          : 
                         (
                           <Button variant="contained" onClick={handleReassignModal}>
@@ -706,7 +745,7 @@ const ProjectDetails = () => {
                           letterSpacing: "0.15px",
                         }}
                       >
-                        {projectDetail.data?.assigned_order[0].userBy.firstName + ' ' + projectDetail.data?.assigned_order[0].userBy.lastName}
+                        {projectDetail.data?.assigned_order[0].userBy?.firstName + ' ' + projectDetail.data?.assigned_order[0].userBy?.lastName}
                       </Typography>
                       <Typography
                         sx={{
@@ -716,7 +755,7 @@ const ProjectDetails = () => {
                           letterSpacing: "0.15px",
                         }}
                       >
-                      {projectDetail.data?.assigned_order[0].userBy.email}
+                      {projectDetail.data?.assigned_order[0].userBy?.email}
                       </Typography>
                       <Typography
                         sx={{
@@ -726,7 +765,7 @@ const ProjectDetails = () => {
                           letterSpacing: "0.15px",
                         }}
                       >
-                        {projectDetail.data?.assigned_order[0].userBy.phoneNumber}
+                        {projectDetail.data?.assigned_order[0].userBy?.phoneNumber}
                       </Typography>
                     </Box>
                     <Box
@@ -769,7 +808,7 @@ const ProjectDetails = () => {
                           letterSpacing: "0.15px",
                         }}
                       >
-                        {projectDetail.data?.assigned_order[0].userTo.firstName + ' ' + projectDetail.data?.assigned_order[0].userTo.lastName}
+                        {projectDetail.data?.assigned_order[0].userTo?.firstName + ' ' + projectDetail.data?.assigned_order[0].userTo?.lastName}
                       </Typography>
                       <Typography
                         sx={{
@@ -779,7 +818,7 @@ const ProjectDetails = () => {
                           letterSpacing: "0.15px",
                         }}
                       >
-                        {projectDetail.data?.assigned_order[0].userTo.email}
+                        {projectDetail.data?.assigned_order[0].userTo?.email}
                       </Typography>
                       <Typography
                         sx={{
@@ -789,7 +828,7 @@ const ProjectDetails = () => {
                           letterSpacing: "0.15px",
                         }}
                       >
-                      {projectDetail.data?.assigned_order[0].userTo.phoneNumber}
+                      {projectDetail.data?.assigned_order[0].userTo?.phoneNumber}
                       </Typography>
                     </Box>
                   </Box>
@@ -919,7 +958,7 @@ const ProjectDetails = () => {
               >
                 Customer:
               </Typography>
-              <ProjectCustomersTable data={projectDetail.data?.order_info} />
+              <ProjectCustomersTable />
             </Box>
             <Box
               component="div"
@@ -1698,32 +1737,42 @@ const ProjectDetails = () => {
             >
               Reschedule
             </DialogTitle>
-            <DialogContent
-              sx={{
-                p: 0,
-              }}
-            >
-              <DialogContentText id="scroll-dialog-description" tabIndex={-1}>
-                <RescheduleContainer>
-                  <ModalHeading>Project Detail</ModalHeading>
-                  <TextField
-                    sx={{ width: "100%", mb: 4 }}
-                    id="date"
-                    label="Date"
-                    variant="outlined"
-                    defaultValue="Input text"
-                  />
-                  <FormControl fullWidth>
-                    <InputLabel id="time">Time</InputLabel>
-                    <Select labelId="time" id="time" label="Time" value="t1">
-                      <MenuItem value="t1">time 1</MenuItem>
-                      <MenuItem value="t2">time 2</MenuItem>
-                      <MenuItem value="t3">time 3</MenuItem>
-                    </Select>
-                  </FormControl>
-                </RescheduleContainer>
-              </DialogContentText>
-            </DialogContent>
+            <Formik
+                initialValues={rescheduleInitialValues}
+              >
+                <Form>
+                  
+                </Form>
+
+              </Formik>
+            <RescheduleContainer>
+              <ModalHeading>Project Detail</ModalHeading>
+              {/* <TextField
+                sx={{ width: "100%", mb: 4 }}
+                id="date"
+                label="Date"
+                variant="outlined"
+                type="date"
+              /> */}
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={['DateTimePicker']} sx={{ width: "100%", mb: 4 }}>
+                  <DatePicker label="Select Date" />
+                </DemoContainer>
+              </LocalizationProvider>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={['DateTimePicker']}>
+                  <TimePicker label="Enter Time" name="timePicker"/>
+                </DemoContainer>
+              </LocalizationProvider>
+              {/* <FormControl fullWidth>
+                <InputLabel id="time">Time</InputLabel>
+                <Select labelId="time" id="time" label="Time" value="t1">
+                  <MenuItem value="t1">time 1</MenuItem>
+                  <MenuItem value="t2">time 2</MenuItem>
+                  <MenuItem value="t3">time 3</MenuItem>
+                </Select>
+              </FormControl> */}
+            </RescheduleContainer>
             <DialogActions>
               <Button variant="outlined" onClick={handleRescheduleModal}>
                 Cancel

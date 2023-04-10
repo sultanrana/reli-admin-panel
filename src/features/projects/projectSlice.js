@@ -5,6 +5,9 @@ const initialState = {
     projects: {},
     projectDetail: {},
     isLoading: false,
+    alert: false,
+    responseStatus: '',
+    responseMsg: '',
 };
 
 export const getProjects = createAsyncThunk(
@@ -54,11 +57,39 @@ export const getProjects = createAsyncThunk(
       }
     }
   );
+  export const refundTransaction = createAsyncThunk(
+    "project/refundTransaction",
+    async (values, thunkAPI) => {
+      try {
+        const resp = await axios.post(
+          `http://34.236.149.254/api/admin/transactions/refund-transaction`,
+          values,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        // console.log(resp);
+        return resp.data;
+      } catch (error) {
+        console.log(error.response);
+        // return "something went wrong";
+        return error.response;
+      }
+    }
+  );
 
 const projectSlice = createSlice({
     name: "project",
     initialState,
-    reducers: {},
+    reducers: {
+      projectResponseClr: (state, action) => {
+        state.responseMsg = "";
+        state.responseStatus = "";
+        state.alert = false;
+      }
+    },
     extraReducers: {
       [getProjects.pending]: (state) => {
         state.isLoading = true;
@@ -82,10 +113,26 @@ const projectSlice = createSlice({
       [singleProjectDetail.rejected]: (state) => {
         state.isLoading = false;
       },
+      [refundTransaction.pending]: (state) => {
+        state.isLoading = true;
+      },
+      [refundTransaction.fulfilled]: (state, action) => {
+        if(action.payload.message){
+          state.responseStatus = "success";
+        }else{
+          state.responseStatus = "error";
+        }
+        state.responseMsg = action.payload.message ? action.payload.message : action.payload.data.message;
+        state.alert = true;
+        state.isLoading = false;
+      },
+      [refundTransaction.rejected]: (state) => {
+        state.isLoading = false;
+      },
     },
   });
   
-  export const {  } = projectSlice.actions;
+  export const { projectResponseClr } = projectSlice.actions;
   
   export default projectSlice.reducer;
   

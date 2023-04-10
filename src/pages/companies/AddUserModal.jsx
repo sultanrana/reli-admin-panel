@@ -155,7 +155,7 @@ const initialValues = {
                             label="Name"
                             variant="outlined" 
                             error = {Boolean(errors.name) && Boolean(touched.name)}
-                            // helperText = {Boolean(touched.name) && errors.name}
+                            helperText = {Boolean(touched.name) && errors.name}
                         />
                         <Field as={TextField}  
                             sx={{width: '100%', mb: 4}}
@@ -164,7 +164,7 @@ const initialValues = {
                             label="Email"
                             variant="outlined" 
                             error = {Boolean(errors.email) && Boolean(touched.email)}
-                            // helperText = {Boolean(touched.email) && errors.email}
+                            helperText = {Boolean(touched.email) && errors.email}
                         />
                         <Field as={TextField}  
                             sx={{width: '100%', mb: 4}}
@@ -173,7 +173,7 @@ const initialValues = {
                             label="Phone"
                             variant="outlined" 
                             error = {Boolean(errors.phone) && Boolean(touched.phone)}
-                            // helperText = {Boolean(touched.phone) && errors.phone}
+                            helperText = {Boolean(touched.phone) && errors.phone}
                         />
                         <FormControl fullWidth sx={{ mb: 4 }}>
                             <InputLabel id="approvedByReli">Approved by Reli</InputLabel>
@@ -183,7 +183,7 @@ const initialValues = {
                                 name="approvedByReli"
                                 label="Approved by Reli"
                                 error = {Boolean(errors.approvedByReli) && Boolean(touched.approvedByReli)}
-                                // helperText = {Boolean(touched.approvedByReli) && errors.approvedByReli}
+                                helperText = {Boolean(touched.approvedByReli) && errors.approvedByReli}
                             >
                                 <MenuItem value='active'>Active</MenuItem>
                                 <MenuItem value='pending'>Pending</MenuItem>

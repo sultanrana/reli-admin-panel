@@ -630,7 +630,11 @@ if(isLoading){
                           const value = row[column.id];
                           return (
                               <StyledTableCell key={column.id+'UserInfo'}  align={column.align} style={{ textTransform: column.textTransform}}>
-                              {column.id === 'status'? value === true? 'Enable' : 'Disable' : column.id === 'accountType'? value === 'true' ? 'Admin' : 'Staff' : column.id === 'updatedAt' ? moment(value).format('DD/MM/YY hh:mm:ss A') : value}
+                              {column.id === 'status'? value === true? 'Enable' : 'Disable' : column.id === 'accountType'? value === 'true' ? 'Admin' : 'Staff' : column.id === 'updatedAt' ? moment(value).format('DD/MM/YY hh:mm:ss A') : column.id === 'email' ? (
+                                <Typography className='tableLink'>{value}</Typography>
+                              ) : column.id === 'phone' ? (
+                                <Typography className='tableLink'>{value}</Typography>
+                              ) : value}
                               </StyledTableCell>
                           );
                           })}

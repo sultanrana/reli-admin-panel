@@ -370,7 +370,7 @@ if(isLoading){
                             >
                               {column.id === 'companyName'? (
                                 <TableLink text={value} route={row.id} />
-                              ): column.id === 'representativeNumber'? (<TableLink text={value} route={row.id} />) : column.id === 'representativeEmail'? (<TableLink text={value} route={row.id} />) : column.id === 'dateLastActive'? (moment(new Date()).format('DD/MM/YY hh:mm:ss A')) : ( column.format && typeof value === "number"
+                              ): column.id === 'representativeNumber'? (<Typography className='tableLink'>{value}</Typography>) : column.id === 'representativeEmail'? (<Typography className="tableLink">{value}</Typography>) : column.id === 'dateLastActive'? (moment(new Date()).format('DD/MM/YY hh:mm:ss A')) : ( column.format && typeof value === "number"
                               ? column.format(value)
                               : value) }
                             </StyledTableCell>

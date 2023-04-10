@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const TableLink = (props) => {
   const {text, route} = props
-  // console.log(route);
+  // console.log('props: ', props);
   return (
     <Link to={route} className='tableLink'>{text}</Link>
   )

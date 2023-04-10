@@ -1,157 +1,145 @@
-import React, { useState } from 'react'
-import Paper from '@mui/material/Paper';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import { tableCellClasses } from '@mui/material/TableCell';
-import { styled } from '@mui/material/styles';
-import { Box, Button, Card, IconButton, TextField, Table, TableContainer, Typography, DialogContentText, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
-import TableLink from '../../components/TableLink';
-import TableActions from '../../components/TableActions';
-import moment from 'moment';
+import React, { useState } from "react";
+import Paper from "@mui/material/Paper";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import { tableCellClasses } from "@mui/material/TableCell";
+import { styled } from "@mui/material/styles";
+import {
+  Button,
+  TextField,
+  Table,
+  TableContainer,
+  Typography,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from "@mui/material";
+import moment from "moment";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { Field, Form, Formik } from "formik";
+import { object } from "yup";
+import * as Yup from "yup";
+import { refundTransaction } from "../../features/projects/projectSlice";
 
-
-// active project
-const activeProjectColumns = [
-    { id: 'transactionType', label: 'Transaction Type', minWidth: 100, fontWeight: '600' },
-    { id: 'processed', label: 'Processed', minWidth: 100, fontWeight: '600' },
-    // { id: 'couponCode', label: 'Coupon Code', minWidth: 100, fontWeight: '600' },
-    // { id: 'couponValue', label: 'Coupon Value', minWidth: 170, fontWeight: '600' },
-    { id: 'amount', label: 'Amount', minWidth: 100, fontWeight: '600' },
-    { id: 'status', label: 'Amount', minWidth: 100, fontWeight: '600' },
-    { id: 'actions', label: 'Actions', minWidth: 160, fontWeight: '600' },
-  ];
-  // active project
-  function createData(transactionType, processed, couponCode, couponValue, amount, status, actions) {
-    return { transactionType, processed, couponCode, couponValue, amount, status, actions };
-  }
-  // active project
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.gray,
-      color: theme.palette.common.black,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
-  
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    '&:last-child td, &:last-child th': {
-      border: 0,
-      backgroundColor: '#ddd',
-    },
-  }));
-
-const RefundContainer = styled(TableContainer)(({theme}) => ({
-  padding: '1rem',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '1rem',
-  [theme.breakpoints.down('md')] : {
-    width: '100%',
-  }, 
-  [theme.breakpoints.up('md')] : {
-    width: '475px',
-  }, 
-}))
-const StyledTextField = styled(TextField)(({theme}) => ({
-  height: '54px',
-  marginBottom: '7rem',
-  [theme.breakpoints.down('md')]: {
-    width: '100%'
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.gray,
+    color: theme.palette.common.black,
   },
-  [theme.breakpoints.up('md')]: {
-    width: '304px'
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
   },
-}))
+}));
 
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+    backgroundColor: "#ddd",
+  },
+}));
+
+const RefundContainer = styled(TableContainer)(({ theme }) => ({
+  padding: "1rem",
+  display: "flex",
+  flexDirection: "column",
+  gap: "1rem",
+  [theme.breakpoints.down("md")]: {
+    width: "100%",
+  },
+  [theme.breakpoints.up("md")]: {
+    width: "475px",
+  },
+}));
+const StyledTextField = styled(TextField)(({ theme }) => ({
+  height: "54px",
+  marginBottom: "7rem",
+  [theme.breakpoints.down("md")]: {
+    width: "100%",
+  },
+  [theme.breakpoints.up("md")]: {
+    width: "304px",
+  },
+}));
 
 const ProjectCustomersTable = (props) => {
-  
-const {data} = props
-const [page, setPage] = React.useState(0);
-const [rowsPerPage, setRowsPerPage] = React.useState(10);
-const [isRefund, setIsRefund] = useState(false);
-const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-};
+  const { projectDetail } = useSelector((store) => store.project);
+  const param = useParams();
+  const dispatch = useDispatch();
+  const [isRefund, setIsRefund] = useState(false);
 
-const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-};
-const handleRefundModal = () => {
-  if(isRefund){
-    setIsRefund(false)
-  }else{
-    setIsRefund(true)
-  }
-}
+  const handleRefundModal = () => {
+    if (isRefund) {
+      setIsRefund(false);
+    } else {
+      setIsRefund(true);
+    }
+  };
 
-const activeProjectrows = [
-  createData( "Initial Payment", "04/30/22", "20percentoff","$220.00", "$1,100.00", "Paid", <Button variant='contained' onClick={handleRefundModal}>refund</Button>),
-];
+  const initialValues = {
+    refundAmount: parseInt(0).toFixed(2),
+  };
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden', mb: 3 }}>
-          <TableContainer>
-              <Table stickyHeader aria-label="sticky table" sx={{}}>
-              <TableHead>
-                  <StyledTableRow>
-                      <StyledTableCell>
-                        Transaction Type
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        Processed
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        Amount
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        Status
-                      </StyledTableCell>
-                      {
-                        data?.stripeRefundId ? '' : (
-                          <StyledTableCell>
-                            Action
-                          </StyledTableCell>
-                        )
-                      }
-                  </StyledTableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow>
-                    <StyledTableCell>
-                      {data?.cardHolderName}
-                    </StyledTableCell>
-                    <StyledTableCell>
-                      {moment(data?.createdAt).format('DD/MM/YY')}
-                    </StyledTableCell>
-                    <StyledTableCell>
-                      {data?.totalAmount? '$' + data?.totalAmount.toFixed(2) : '$0.00'}
-                    </StyledTableCell>
-                    <StyledTableCell>
-                      {data?.statusBit? 'Paid' : 'Unpaid'}
-                    </StyledTableCell>
-                    {
-                        data?.stripeRefundId ? '' : (
-                          <StyledTableCell>
-                            <Button variant='contained' onClick={handleRefundModal}>refund</Button>
-                          </StyledTableCell>
-                        )
-                      }
-                </TableRow>
-              </TableBody>
-              </Table>
-          </TableContainer>
-          {/* <TablePagination
+    <>
+      <Paper sx={{ width: "100%", overflow: "hidden", mb: 3 }}>
+        <TableContainer>
+          <Table stickyHeader aria-label="sticky table" sx={{}}>
+            <TableHead>
+              <StyledTableRow>
+                <StyledTableCell>Transaction Type</StyledTableCell>
+                <StyledTableCell>Processed</StyledTableCell>
+                <StyledTableCell>Amount</StyledTableCell>
+                <StyledTableCell>Status</StyledTableCell>
+                {projectDetail.data?.order_info?.stripeRefundId ? (
+                  ""
+                ) : (
+                  <StyledTableCell>Action</StyledTableCell>
+                )}
+              </StyledTableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <StyledTableCell>
+                  {projectDetail.data?.order_info?.cardHolderName}
+                </StyledTableCell>
+                <StyledTableCell>
+                  {moment(projectDetail.data?.order_info?.createdAt).format(
+                    "DD/MM/YY"
+                  )}
+                </StyledTableCell>
+                <StyledTableCell>
+                  {projectDetail.data?.order_info?.totalAmount
+                    ? "$" +
+                      projectDetail.data?.order_info?.totalAmount.toFixed(2)
+                    : "$0.00"}
+                </StyledTableCell>
+                <StyledTableCell>
+                  {projectDetail.data?.order_info?.statusBit
+                    ? "Paid"
+                    : "Unpaid"}
+                </StyledTableCell>
+                {projectDetail.data?.order_info?.stripeRefundId ? (
+                  ""
+                ) : (
+                  <StyledTableCell>
+                    <Button variant="contained" onClick={handleRefundModal}>
+                      refund
+                    </Button>
+                  </StyledTableCell>
+                )}
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+        {/* <TablePagination
               rowsPerPageOptions={[10, 25, 100]}
               component="div"
               count={activeProjectrows.length}
@@ -160,101 +148,153 @@ const activeProjectrows = [
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
           /> */}
-
-            {isRefund ? (
-            <Dialog
-                open={isRefund}
-                scroll='body'
-                onClose={handleRefundModal}
-                aria-describedby="scroll-dialog-description"
-              >
-                <DialogTitle id="scroll-dialog-title" sx={{ 
-                    p: 1,
-                    fontStyle: 'normal',
-                    fontWeight: '400',
-                    fontSize: '24px',
-                    lineHeight: '24px',
-                    letterSpacing: '0.18px',
-                    color: '#000000'
-                }}>Refund</DialogTitle>
-                <DialogContent
-                    sx={{
-                        p: 0
-                    }}
-                >
-                  <DialogContentText
-                    id="scroll-dialog-description"
-                    tabIndex={-1}
-                  >
-                  <RefundContainer>
-                    <Typography sx={{
-                      fontWeight: '600',
-                      fontSize: '14px',
-                      color: '#000000',
-                    }}>
-                      Window PROJ94382
-                    </Typography>
-                    <Paper sx={{ width: '100%', overflow: 'hidden'}}>
-                      <TableContainer>
-                          <Table stickyHeader aria-label="sticky table" sx={{}}>
-                          <TableHead>
-                              <StyledTableRow>
-                                  <StyledTableCell sx={{fontSize: '12px', fontWeight: '600'}}>
-                                    Transaction Type
-                                  </StyledTableCell>
-                                  <StyledTableCell sx={{fontSize: '12px', fontWeight: '600'}}>
-                                    Date
-                                  </StyledTableCell>
-                                  <StyledTableCell sx={{fontSize: '12px', fontWeight: '600'}}>
-                                    Amount
-                                  </StyledTableCell>
-                                  <StyledTableCell sx={{fontSize: '12px', fontWeight: '600'}}>
-                                    Status
-                                  </StyledTableCell>
-                              </StyledTableRow>
-                          </TableHead>
-                          <TableBody>
-                                  <TableRow>
-                                      <StyledTableCell>
-                                        Initial Payment
-                                      </StyledTableCell>
-                                      <StyledTableCell>
-                                        04/30/22
-                                      </StyledTableCell>
-                                      <StyledTableCell>
-                                        $1,100.00
-                                      </StyledTableCell>
-                                      <StyledTableCell>
-                                        Paid
-                                      </StyledTableCell>
-                                  </TableRow>
-                          </TableBody>
-                          </Table>
-                      </TableContainer>
-                    </Paper>
-                    <StyledTextField 
-                        sx={{width: '100%',}}
-                        id="amount"
-                        label="Amount"
-                        variant="outlined" 
-                        defaultValue="$1,100.00"
-                        helperText="Max available for refund"
-                    />
-                  </RefundContainer>
-                    
-                  
-                  
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Button variant='outlined' onClick={handleRefundModal}>Cancel</Button>
-                  <Button variant='contained' onClick={handleRefundModal}>Save Changes</Button>
-                </DialogActions>
-            </Dialog>
-              
-            ) : null}
       </Paper>
-  )
-}
+      {isRefund ? (
+        <Dialog
+          open={isRefund}
+          scroll="body"
+          onClose={handleRefundModal}
+          aria-describedby="scroll-dialog-description"
+        >
+          <DialogTitle
+            id="scroll-dialog-title"
+            sx={{
+              p: 1,
+              fontStyle: "normal",
+              fontWeight: "400",
+              fontSize: "24px",
+              lineHeight: "24px",
+              letterSpacing: "0.18px",
+              color: "#000000",
+            }}
+          >
+            Refund
+          </DialogTitle>
+          <RefundContainer>
+            <Typography
+              sx={{
+                fontWeight: "600",
+                fontSize: "14px",
+                color: "#000000",
+              }}
+            >
+              {projectDetail.data?.order_detail.length > 0 &&
+              projectDetail.data?.order_detail[0].service
+                ? projectDetail.data?.order_detail[0].service.name
+                : ""}{" "}
+              {param.projectid}
+            </Typography>
+            <Paper sx={{ width: "100%", overflow: "hidden" }}>
+              <TableContainer>
+                <Table stickyHeader aria-label="sticky table" sx={{}}>
+                  <TableHead>
+                    <StyledTableRow>
+                      <StyledTableCell
+                        sx={{ fontSize: "12px", fontWeight: "600" }}
+                      >
+                        Transaction Type
+                      </StyledTableCell>
+                      <StyledTableCell
+                        sx={{ fontSize: "12px", fontWeight: "600" }}
+                      >
+                        Date
+                      </StyledTableCell>
+                      <StyledTableCell
+                        sx={{ fontSize: "12px", fontWeight: "600" }}
+                      >
+                        Amount
+                      </StyledTableCell>
+                      <StyledTableCell
+                        sx={{ fontSize: "12px", fontWeight: "600" }}
+                      >
+                        Status
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <StyledTableCell>
+                        {projectDetail.data?.order_info?.cardHolderName}
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        {moment(
+                          projectDetail.data?.order_info?.createdAt
+                        ).format("DD/MM/YY")}
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        {projectDetail.data?.order_info?.totalAmount
+                          ? "$" +
+                            projectDetail.data?.order_info?.totalAmount.toFixed(
+                              2
+                            )
+                          : "$0.00"}
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        {projectDetail.data?.order_info?.statusBit
+                          ? "Paid"
+                          : "Unpaid"}
+                      </StyledTableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Paper>
+            <Formik
+              initialValues={initialValues}
+              onSubmit={(values, formikHelpers) => {
+                values.orderId = projectDetail.data?.order_info?._id;
+                dispatch(refundTransaction(values));
+                console.log("values: ", values);
+              }}
+              validationSchema={object({
+                refundAmount: Yup.number()
+                  .required()
+                  .max(
+                    projectDetail.data?.order_info?.totalAmount,
+                    `Maximum refund value must less or equal to ${projectDetail.data?.order_info?.totalAmount.toFixed(
+                      2
+                    )}.`
+                  )
+                  .test(
+                    "not-only-zeroes",
+                    "Number cannot only contain zeroes",
+                    function (value) {
+                      if (value === null || value === undefined) {
+                        return true; // Don't validate null or undefined values
+                      }
+                      const stringValue = value.toString(); // Convert the number to a string
+                      return !/^0+$/.test(stringValue); // Return true if the string does not only contain zeroes
+                    }
+                  ),
+              })}
+            >
+              {({errors, touched, isValid, dirty}) => (
+                <Form>
+                  <Field as={StyledTextField}
+                    sx={{ width: "100%" }}
+                    id="refundAmount"
+                    name="refundAmount"
+                    label="Amount"
+                    variant="outlined"
+                    error = {Boolean(errors.refundAmount) && Boolean(touched.refundAmount)}
+                    helperText="Max available for refund"
+                  />
+                  <DialogActions>
+                    <Button variant="outlined" onClick={handleRefundModal}>
+                      Cancel
+                    </Button>
+                    <Button type="submit" variant="contained">
+                      Save Changes
+                    </Button>
+                  </DialogActions>
+                </Form>
+              )}
+            </Formik>
+          </RefundContainer>
+        </Dialog>
+      ) : null}
+    </>
+  );
+};
 
-export default ProjectCustomersTable
+export default ProjectCustomersTable;
