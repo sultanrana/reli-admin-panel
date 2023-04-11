@@ -30,12 +30,11 @@ const dispatch = useDispatch();
 const {isDrawerOpen} = useSelector((store) => store.login);
 const {variables, isLoading} = useSelector((store) => store.systemVariable);
 const matches = useMediaQuery('(max-width:600px)');
-const variablesData = JSON.parse(localStorage.getItem('variableDetials'));
-const [variableDetials, setVariableDetials] = useState(variablesData? variablesData : variables);
 
 useEffect(() => {
+    
     dispatch(getVariables());
-},[])
+},[dispatch])
 
 
 const validationSchema = Yup.object({
@@ -49,13 +48,13 @@ const validationSchema = Yup.object({
 });
 const formik = useFormik({
     initialValues: {
-      reliPortion: variableDetials?.data?.reliPortion,
-      materialSurcharge: variableDetials?.data?.materialSurcharge,
-      windowsPermitFee: variableDetials?.data?.windowsPermitFee,
-      windowsDeliveryFee: variableDetials?.data?.windowsDeliveryFee,
-      slidingGlassDoorPermitFee: variableDetials?.data?.slidingGlassDoorPermitFee,
-      slidingGlassDoorDeliveryFee: variableDetials?.data?.slidingGlassDoorDeliveryFee,
-      interiorDoorPermitFee: variableDetials?.data?.interiorDoorPermitFee,
+      reliPortion: variables.data?.reliPortion? variables.data?.reliPortion : 0.00,
+      materialSurcharge: variables.data?.materialSurcharge ? variables.data?.materialSurcharge : 0.00,
+      windowsPermitFee: variables.data?.windowsPermitFee ? variables.data?.windowsPermitFee : 0.00,
+      windowsDeliveryFee: variables.data?.windowsDeliveryFee ? variables.data?.windowsDeliveryFee : 0.00,
+      slidingGlassDoorPermitFee: variables.data?.slidingGlassDoorPermitFee ? variables.data?.slidingGlassDoorPermitFee : 0.00,
+      slidingGlassDoorDeliveryFee: variables.data?.slidingGlassDoorDeliveryFee ? variables.data?.slidingGlassDoorDeliveryFee : 0.00,
+      interiorDoorPermitFee: variables.data?.interiorDoorPermitFee ? variables.data?.interiorDoorPermitFee : 0.00,
     },
     onSubmit: (values) => {
       dispatch(updateVariable(values));

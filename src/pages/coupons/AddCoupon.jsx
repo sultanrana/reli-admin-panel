@@ -51,7 +51,7 @@ const CouponButton = styled(Button)(({theme}) => ({
 const initialValues ={
   name: '',
   description: '',
-  service: '',
+  service: 'Windows',
   image: '',
   code: '',
   statusBit: true
@@ -134,10 +134,10 @@ if(isLoading){
                   formikHelpers.resetForm();
                 }}
                 validationSchema= {object({
-                  name: Yup.string().min(3, 'Minimum 3 character are required').required(),
-                  description: Yup.string().required(),
+                  name: Yup.string().min(3, 'Minimum 3 character are required').required('Please enter the name of the coupon'),
+                  description: Yup.string().required('Please enter the description for the coupon'),
                   // service: Yup.string().required(),
-                  code: Yup.string().required(),
+                  code: Yup.string().required('Please input the value for this coupon'),
                   // image: Yup.mixed().required('File is required'),
                 })}
               >

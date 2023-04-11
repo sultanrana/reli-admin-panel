@@ -84,7 +84,6 @@ const systemVariableSlice = createSlice({
       console.log(action.payload);
       state.isLoading = false;
       state.variables = action.payload;
-      localStorage.setItem('variableDetials', JSON.stringify(state.variables));
     },
     [getVariables.rejected]: (state) => {
       state.isLoading = false;

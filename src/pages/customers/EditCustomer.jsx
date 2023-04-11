@@ -66,7 +66,7 @@ const EditCustomer = () => {
   }, []);
 
   const validationSchema = Yup.object({
-    firstName: Yup.string().required(),
+    firstName: Yup.string().required('Please enter a name'),
   });
   const formik = useFormik({
     initialValues: {

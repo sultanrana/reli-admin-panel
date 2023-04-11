@@ -1804,63 +1804,55 @@ const ProjectDetails = () => {
             >
               Reassign
             </DialogTitle>
-            <DialogContent
-              sx={{
-                p: 0,
-              }}
-            >
-              <DialogContentText id="scroll-dialog-description" tabIndex={-1}>
-                <RescheduleContainer sx={{ mb: 14 }}>
-                  <ModalHeading>Window PROJ94382</ModalHeading>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
+            <RescheduleContainer sx={{ mb: 14 }}>
+              <ModalHeading>{(projectDetail.data?.order_detail.length > 0 && projectDetail.data?.order_detail[0].service)? projectDetail.data?.order_detail[0].service.name : ''} {param.projectid}</ModalHeading>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <ReAssignBox>
+                  <Typography sx={{ fontWeight: "600", color: "#000000" }}>
+                    Bob Smith
+                  </Typography>
+                  <ReAssignRemove>Remove</ReAssignRemove>
+                </ReAssignBox>
+                <ReAssignBox>
+                  <Typography sx={{ fontWeight: "600", color: "#000000" }}>
+                    Ford Prefect
+                  </Typography>
+                  <ReAssignRemove>Remove</ReAssignRemove>
+                </ReAssignBox>
+                <ReAssignBox>
+                  <Typography sx={{ fontWeight: "600", color: "#000000" }}>
+                    Arthur Dent
+                  </Typography>
+                  <ReAssignRemove>Remove</ReAssignRemove>
+                </ReAssignBox>
+                <ReAssignBox>
+                  <select
+                    name="options"
+                    id="options"
+                    style={{
+                      background: "#FFFFFF",
+                      height: "30px",
+                      width: "184px",
+                      border: "none",
+                      outline: "none",
                     }}
                   >
-                    <ReAssignBox>
-                      <Typography sx={{ fontWeight: "600", color: "#000000" }}>
-                        Bob Smith
-                      </Typography>
-                      <ReAssignRemove>Remove</ReAssignRemove>
-                    </ReAssignBox>
-                    <ReAssignBox>
-                      <Typography sx={{ fontWeight: "600", color: "#000000" }}>
-                        Ford Prefect
-                      </Typography>
-                      <ReAssignRemove>Remove</ReAssignRemove>
-                    </ReAssignBox>
-                    <ReAssignBox>
-                      <Typography sx={{ fontWeight: "600", color: "#000000" }}>
-                        Arthur Dent
-                      </Typography>
-                      <ReAssignRemove>Remove</ReAssignRemove>
-                    </ReAssignBox>
-                    <ReAssignBox>
-                      <select
-                        name="options"
-                        id="options"
-                        style={{
-                          background: "#FFFFFF",
-                          height: "30px",
-                          width: "184px",
-                          border: "none",
-                          outline: "none",
-                        }}
-                      >
-                        <option value="opt1">Staff</option>
-                        <option value="opt1">Staff</option>
-                        <option value="opt1">Staff</option>
-                        <option value="opt1">Staff</option>
-                      </select>
-                      <ReAssignRemove sx={{ background: "#019EB2" }}>
-                        assign
-                      </ReAssignRemove>
-                    </ReAssignBox>
-                  </Box>
-                </RescheduleContainer>
-              </DialogContentText>
-            </DialogContent>
+                    <option value="opt1">Staff</option>
+                    <option value="opt1">Staff</option>
+                    <option value="opt1">Staff</option>
+                    <option value="opt1">Staff</option>
+                  </select>
+                  <ReAssignRemove sx={{ background: "#019EB2" }}>
+                    assign
+                  </ReAssignRemove>
+                </ReAssignBox>
+              </Box>
+            </RescheduleContainer>
             <DialogActions>
               <Button variant="outlined" onClick={handleReassignModal}>
                 Cancel

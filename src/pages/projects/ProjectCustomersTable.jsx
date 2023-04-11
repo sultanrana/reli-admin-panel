@@ -248,7 +248,7 @@ const ProjectCustomersTable = (props) => {
               }}
               validationSchema={object({
                 refundAmount: Yup.number()
-                  .required()
+                  .required('Please enter an amount to refund')
                   .max(
                     projectDetail.data?.order_info?.totalAmount,
                     `Maximum refund value must less or equal to ${projectDetail.data?.order_info?.totalAmount.toFixed(
@@ -277,7 +277,8 @@ const ProjectCustomersTable = (props) => {
                     label="Amount"
                     variant="outlined"
                     error = {Boolean(errors.refundAmount) && Boolean(touched.refundAmount)}
-                    helperText="Max available for refund"
+                    // helperText="Max available for refund"
+                    helperText={errors.refundAmount ? Boolean(touched.refundAmount) && errors.refundAmount : 'Max available for refund'}
                   />
                   <DialogActions>
                     <Button variant="outlined" onClick={handleRefundModal}>

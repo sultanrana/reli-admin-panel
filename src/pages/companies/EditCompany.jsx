@@ -122,30 +122,30 @@ useEffect(() => {
                   return true;
                 }
                 return /^\s*$/.test(value) === false;
-              }).required('Company Name is required'),
+              }).required('Please enter a name'),
             representativeName: Yup.string().test('contains-only-spaces', 'Input cannot include only white spaces',value => {
                 if (!value) {
                   // if value is empty or undefined, allow it
                   return true;
                 }
                 return /^\s*$/.test(value) === false;
-              }).required('Representative Name is required'),
-            representativeEmail: Yup.string().required().email(),
+              }).required('Please enter a contact name'),
+            representativeEmail: Yup.string().required('Please enter a contact email address').email(),
             addressOne: Yup.string().test('contains-only-spaces', 'Input cannot include only white spaces',     value => {
                 if (!value) {
                   // if value is empty or undefined, allow it
                   return true;
                 }
                 return /^\s*$/.test(value) === false;
-              }).required('Address one is required'),
+              }).required('Please enter the company address'),
             addressTwo: Yup.string().test('contains-only-spaces', 'Input cannot include only white spaces',     value => {
                 if (!value) {
                   // if value is empty or undefined, allow it
                   return true;
                 }
                 return /^\s*$/.test(value) === false;
-              }).required('Address two is required'),
-            representativeNumber: Yup.number().required(),
+              }).required('Please enter the company address'),
+            representativeNumber: Yup.number().required('Please enter a contact phone number'),
         })}
     >
         {({errors, touched, isValid, dirty}) => (
@@ -260,6 +260,8 @@ useEffect(() => {
                             </Typography>
                             <Box>
                                 {services.data?.map((service, index) => {
+                                    // console.log('companyDetail.data?.findCompany.services: ', companyDetail.data?.findCompany.services);
+                                    // console.log('service: ', service);
                                     return (
                                         <Field as={FormControlLabel}
                                         key={service + index}

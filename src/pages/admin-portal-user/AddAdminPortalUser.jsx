@@ -38,9 +38,9 @@ const handleStatus = () => {
 
 
 const validationSchema = Yup.object({
-  firstName: Yup.string().required(),
-  lastName: Yup.string().required(),
-  email: Yup.string().email().required(),
+  firstName: Yup.string().required('Please enter a first name'),
+  lastName: Yup.string().required('Please enter a last name'),
+  email: Yup.string().email().required('Please enter an email address'),
 });
 const formik = useFormik({
   initialValues: {

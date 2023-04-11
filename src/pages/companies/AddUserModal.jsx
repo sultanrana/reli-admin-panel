@@ -21,7 +21,7 @@ const {companyDetail} = useSelector((store) => store.company)
 const dispatch = useDispatch();
 const navigate = useNavigate();
 const param = useParams();
-const [approvedByReli, setApprovedByReli] = useState(false)
+const [approvedByReli, setApprovedByReli] = useState('active')
 const [status, setStatus] = useState(false)
 const [accountType, setAccountType] = useState(false)
 // console.log(companyDetail.data?.findCompany.companyName);
@@ -66,6 +66,7 @@ const initialValues = {
     name: '',
     email: '',
     phone: '',
+    approvedByReli: 'active',
 }
 
 
@@ -130,9 +131,9 @@ const initialValues = {
             dispatch(getUsers(param.companyid));
         }}
         validationSchema= {object({
-            name: Yup.string().required('Name is required.'),
-            email: Yup.string().required('Email is required.').email(),
-            phone: Yup.number().required('Phone is required.'),
+            name: Yup.string().required('Please enter the contractor name'),
+            email: Yup.string().required('Please enter an email address').email(),
+            phone: Yup.number().required('Please enter a phone number'),
         })}
     >
         {({errors, touched, isValid, dirty}) => (
@@ -185,7 +186,7 @@ const initialValues = {
                                 error = {Boolean(errors.approvedByReli) && Boolean(touched.approvedByReli)}
                                 helperText = {Boolean(touched.approvedByReli) && errors.approvedByReli}
                             >
-                                <MenuItem value='active'>Active</MenuItem>
+                                <MenuItem value='active' selected={true}>Active</MenuItem>
                                 <MenuItem value='pending'>Pending</MenuItem>
                                 <MenuItem value='rejected'>Rejected</MenuItem>
                             </Field>
