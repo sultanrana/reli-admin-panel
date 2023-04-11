@@ -1273,7 +1273,7 @@ const Transactions = () => {
                 </StyledTableRow>
               </TableHead>
               <TableBody>
-                {transactions.data?.filter((data) => data.name.toLowerCase().includes(searchValue))
+                {transactions.data?.filter((data) => data.name?.toLowerCase().includes(searchValue))
                   ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
                     return (
@@ -1291,35 +1291,35 @@ const Transactions = () => {
                               align={column.align}
                             >
                               {column.id === '_id'?(
-                                <TableLink text={value} route={row._id} />
+                                <TableLink text={value} route={`/projects/` + row._id} />
                               ) : (column.id === 'name') ? (
                                 <TableLink text={value} route={`/customers/` + row.user} />
                               ) : (column.id === 'serviceType') ?(
-                                row.orderdetails.map((service, index) => {
+                                row.orderdetails?.map((service, index) => {
                                   return (
                                     service.serviceName + (row.orderdetails.length - 1 === index ? '' : ', ')
                                   )
                                 })
                               ) : (column.id === 'city') ?(
-                                row.orderdetails.map((service, index) => {
+                                row.orderdetails?.map((service, index) => {
                                   return (
                                     service.property? service.property.city : ''
                                   )
                                 })
                               ) : (column.id === 'state') ?(
-                                row.orderdetails.map((service, index) => {
+                                row.orderdetails?.map((service, index) => {
                                   return (
                                     service.property? service.property.state : ''
                                   )
                                 })
                               ) : (column.id === 'zip') ?(
-                                row.orderdetails.map((service, index) => {
+                                row.orderdetails?.map((service, index) => {
                                   return (
                                     service.property? service.property.zipCode : ''
                                   )
                                 })
                               ) : (column.id === 'ordered') ?(
-                                row.dateSelection.map((date, index) => {
+                                row.dateSelection?.map((date, index) => {
                                  return (
                                     moment(date).format('DD/MM/YY hh:mm:ss A') + (row.dateSelection.length - 1 === index ? '' : ', ')
                                  )

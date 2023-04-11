@@ -1264,10 +1264,11 @@ const AdminPortalUser = () => {
                               key={column.id}
                               align={column.align}
                             >
-                              {/* {column.format && typeof value === "number"
-                                ? column.format(value)
-                                : value} */}
-                                {typeof value === 'boolean' ? (value === true ? 'Enaled' : 'Disabled') : column.id === 'updatedAt'? moment(value).format('DD/MM/YY hh:mm:ss A') : value}
+                                {column.id === 'email' ? (
+                                <Typography className="tableLink">{value}</Typography>
+                                ) : column.id === 'firstName' ? (
+                                  <Typography className="tableLink">{value}</Typography>
+                                ) : typeof value === 'boolean' ? (value === true ? 'Enaled' : 'Disabled') : column.id === 'updatedAt'? moment(value).format('DD/MM/YY hh:mm:ss A') : value}
                             </StyledTableCell>
                           );
                         })}

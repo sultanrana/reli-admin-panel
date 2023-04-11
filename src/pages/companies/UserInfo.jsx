@@ -622,7 +622,7 @@ if(isLoading){
                   </StyledTableRow>
               </TableHead>
               <TableBody>
-                  {users.data?.filter((data) => data.name.toLowerCase().includes(searchValue) || data.email.toLowerCase().includes(searchValue) || data.phone.toLowerCase().includes(searchValue))?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  {users.data?.filter((data) => data.name?.toLowerCase().includes(searchValue) || data.email?.toLowerCase().includes(searchValue) || data.phone?.toLowerCase().includes(searchValue))?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
                       return (
                       <StyledTableRow hover role="checkbox" tabIndex={-1} key={row.code}>

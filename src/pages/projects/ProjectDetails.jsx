@@ -48,19 +48,23 @@ import {
   AboutCard,
 } from "../../components/styles/ActivityBox.styles";
 import { useEffect } from "react";
-import { projectResponseClr, singleProjectDetail } from "../../features/projects/projectSlice";
+import { cancelProject, projectResponseClr, reassignProject, reassignProjectStaff, rescheduleProject, singleProjectDetail } from "../../features/projects/projectSlice";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../../components/Loading";
 import moment from 'moment';
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import Alert  from "@mui/material/Alert";
 import CloseIcon from '@mui/icons-material/Close';
-import { Form, Formik } from "formik";
+import { Form, Formik  } from "formik";
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { object } from "yup";
+import * as Yup from "yup";
+import dayjs from 'dayjs';
+import { current } from "@reduxjs/toolkit";
 
 const OuterGrid = styled(Grid)(({ theme }) => ({
   display: "flex",
@@ -154,6 +158,8 @@ const ProjectDetails = () => {
   const { projectDetail, isLoading, responseStatus, alert, responseMsg } = useSelector((store) => store.project);
   const dispatch = useDispatch();
   const param = useParams();
+  const today = dayjs();
+  const currentTime = dayjs().format('HH:mm:ss');
 
   const breadcrumbs = [
     <Typography
@@ -189,17 +195,26 @@ const ProjectDetails = () => {
     }
   };
 
+
+
   const rescheduleInitialValues = {
-    date: new Date(),
+    orderStatusDate: today,
+    orderStatusTime: currentTime,
   }
 
-
+const handleCancelProject = (e) => {
+  let values = {};
+  values.orderStatusDate = new Date();
+  values.orderStatus = 'Cancelled';
+  dispatch(cancelProject(values));
+}
 
 
 
   useEffect(() => {
     dispatch(singleProjectDetail(param.projectid));
-  }, [alert]);
+  }, [param.projectid, dispatch]);
+  
 
   if (isLoading) {
     return <Loading />;
@@ -483,7 +498,7 @@ const ProjectDetails = () => {
                 </Box>
                 {
                   projectDetail?.data?.order_info.orderStatus === 'Completed' || projectDetail?.data?.order_info.orderStatus === 'completed' ? ''
-                  : (
+                  : (projectDetail?.data?.order_info.orderStatus !== 'Cancelled')? (
                     <Box
                       sx={{
                         display: "flex",
@@ -509,9 +524,9 @@ const ProjectDetails = () => {
                       >
                         Project Cancelation:
                       </Typography>
-                      <Button variant="outlined">Cancel Project</Button>
+                      <Button variant="outlined" onClick={handleCancelProject}>Cancel Project</Button>
                     </Box>
-                  )
+                  ) : null
                 }
                 
               </Card>
@@ -1739,48 +1754,73 @@ const ProjectDetails = () => {
             </DialogTitle>
             <Formik
                 initialValues={rescheduleInitialValues}
+                onSubmit={(values, formikHelpers) => {
+                  values.orderStatusDate = dayjs(values.orderStatusDate).format('YYYY-MM-DD');
+                  values.orderStatus  = 'Scheduled';
+                  dispatch(rescheduleProject(values));
+                  handleRescheduleModal();
+                  console.log('values: ', values);
+                }}
+                validationSchema={object({
+                  orderStatusDate: Yup.date().required(),
+                  orderStatusTime: Yup.date().required()
+                })}
               >
-                <Form>
-                  
-                </Form>
-
+                {({ errors, touched, isValid, dirty, values, setFieldValue }) => (
+                  <Form>
+                    <RescheduleContainer>
+                      <ModalHeading>{(projectDetail.data?.order_detail.length > 0 && projectDetail.data?.order_detail[0].service)? projectDetail.data?.order_detail[0].service.name : ''} {param.projectid}</ModalHeading>
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DemoContainer components={['DateTimePicker']} sx={{ width: "100%", mb: 4 }}>
+                          <DatePicker
+                            disablePast
+                            value={values.orderStatusDate}
+                            onChange={(newValue) => setFieldValue("orderStatusDate", newValue)}
+                            renderInput={(params) => (
+                              <TextField
+                                error={Boolean(touched.orderStatusDate && errors.orderStatusDate)}
+                                helperText={touched.orderStatusDate && errors.orderStatusDate}
+                                label="Select Date"
+                                name="orderStatusDate"
+                                variant="outlined"
+                                fullWidth
+                                {...params}
+                              />
+                            )}
+                          />
+                        </DemoContainer>
+                      </LocalizationProvider>
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DemoContainer components={['DateTimePicker']}>
+                          <TimePicker 
+                            value={values.orderStatusTime}
+                            onChange={(newValue) => setFieldValue("orderStatusTime", newValue)}
+                            renderInput={(params) => (
+                              <TextField
+                                error={Boolean(touched.orderStatusTime && errors.orderStatusTime)}
+                                helperText={touched.orderStatusTime && errors.orderStatusTime}
+                                label="Enter Time"
+                                name="orderStatusTime"
+                                variant="outlined"
+                                fullWidth
+                                {...params}
+                              />
+                            )}
+                          />
+                        </DemoContainer>
+                      </LocalizationProvider>
+                    </RescheduleContainer>
+                    <DialogActions>
+                      <Button variant="outlined" onClick={handleRescheduleModal}>
+                        Cancel
+                      </Button>
+                      <Button disabled={!dirty || !isValid} type='submit' variant="contained">
+                        Reschedule
+                      </Button>
+                    </DialogActions>
+                  </Form>
+                )}
               </Formik>
-            <RescheduleContainer>
-              <ModalHeading>Project Detail</ModalHeading>
-              {/* <TextField
-                sx={{ width: "100%", mb: 4 }}
-                id="date"
-                label="Date"
-                variant="outlined"
-                type="date"
-              /> */}
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={['DateTimePicker']} sx={{ width: "100%", mb: 4 }}>
-                  <DatePicker label="Select Date" />
-                </DemoContainer>
-              </LocalizationProvider>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={['DateTimePicker']}>
-                  <TimePicker label="Enter Time" name="timePicker"/>
-                </DemoContainer>
-              </LocalizationProvider>
-              {/* <FormControl fullWidth>
-                <InputLabel id="time">Time</InputLabel>
-                <Select labelId="time" id="time" label="Time" value="t1">
-                  <MenuItem value="t1">time 1</MenuItem>
-                  <MenuItem value="t2">time 2</MenuItem>
-                  <MenuItem value="t3">time 3</MenuItem>
-                </Select>
-              </FormControl> */}
-            </RescheduleContainer>
-            <DialogActions>
-              <Button variant="outlined" onClick={handleRescheduleModal}>
-                Cancel
-              </Button>
-              <Button variant="contained" onClick={handleRescheduleModal}>
-                Reschedule
-              </Button>
-            </DialogActions>
           </Dialog>
         ) : null}
         {isReassign ? (

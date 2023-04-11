@@ -963,9 +963,11 @@ const CustomerDetails = () => {
                                 key={column.id}
                                 align={column.align}
                               >
-                                {column.format && typeof value === "number"
-                                  ? column.format(value)
-                                  : value}
+                                {
+                                  column.id === '_id' ? (
+                                    <TableLink text={value} route={'/projects/' + row._id} />
+                                   ) : value
+                                }
                               </StyledTableCell>
                             );
                           })}
