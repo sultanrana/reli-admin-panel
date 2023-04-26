@@ -65,6 +65,7 @@ import { object } from "yup";
 import * as Yup from "yup";
 import dayjs from 'dayjs';
 import { current } from "@reduxjs/toolkit";
+import { getActivityLog } from "../../features/activity-log/activityLogSlice";
 
 const OuterGrid = styled(Grid)(({ theme }) => ({
   display: "flex",
@@ -156,6 +157,8 @@ const StatusBoxes = styled(Box)(({ theme }) => ({
 const ProjectDetails = () => {
   const { isDrawerOpen } = useSelector((store) => store.login);
   const { projectDetail, isLoading, responseStatus, alert, responseMsg } = useSelector((store) => store.project);
+  const { activityList , activityAlert } = useSelector((store) => store.activityLog);
+
   const dispatch = useDispatch();
   const param = useParams();
   const today = dayjs();
@@ -213,15 +216,21 @@ const handleCancelProject = (e) => {
 
   useEffect(() => {
     dispatch(singleProjectDetail(param.projectid));
+    
   }, [param.projectid, dispatch]);
-  
+  useEffect(() => {
+    console.log('-------------')
+    dispatch(getActivityLog(param.projectid));
+  }, [alert])
 
   if (isLoading) {
     return <Loading />;
   }
 
   return (
+    
     <>
+    {console.log('activityList==============',activityList)}
       <div className="page-section">
         <Sidebar />
         <Box
@@ -852,6 +861,8 @@ const handleCancelProject = (e) => {
             </AboutCard>
             <ActivityLogBox>
               <ActivityLogText>Activity log</ActivityLogText>
+              {activityList?.data?.map(item=>{
+              return<>
               <Box
                 sx={{
                   display: "flex",
@@ -864,9 +875,9 @@ const handleCancelProject = (e) => {
                   <ActivityLogText
                     sx={{ fontWeight: "500", color: "rgba(0, 0, 0, 0.6)" }}
                   >
-                    Title
+                    {item.title}
                   </ActivityLogText>
-                  <ActivityLogText>Message</ActivityLogText>
+                  <ActivityLogText>{item.message}</ActivityLogText>
                   <ActivityLogText
                     sx={{
                       fontSize: "10px",
@@ -874,65 +885,19 @@ const handleCancelProject = (e) => {
                       color: "rgba(0, 0, 0, 0.6)",
                     }}
                   >
-                    Timestamp
+                    {item.createdAt}
                   </ActivityLogText>
                 </PostBox>
-                <PostBox>
-                  <ActivityLogText
-                    sx={{ fontWeight: "500", color: "rgba(0, 0, 0, 0.6)" }}
-                  >
-                    Title
-                  </ActivityLogText>
-                  <ActivityLogText>Message</ActivityLogText>
-                  <ActivityLogText
-                    sx={{
-                      fontSize: "10px",
-                      fontWeight: "500",
-                      color: "rgba(0, 0, 0, 0.6)",
-                    }}
-                  >
-                    Timestamp
-                  </ActivityLogText>
-                </PostBox>
-                <PostBox>
-                  <ActivityLogText
-                    sx={{ fontWeight: "500", color: "rgba(0, 0, 0, 0.6)" }}
-                  >
-                    Title
-                  </ActivityLogText>
-                  <ActivityLogText>Message</ActivityLogText>
-                  <ActivityLogText
-                    sx={{
-                      fontSize: "10px",
-                      fontWeight: "500",
-                      color: "rgba(0, 0, 0, 0.6)",
-                    }}
-                  >
-                    Timestamp
-                  </ActivityLogText>
-                </PostBox>
-                <PostBox>
-                  <ActivityLogText
-                    sx={{ fontWeight: "500", color: "rgba(0, 0, 0, 0.6)" }}
-                  >
-                    Title
-                  </ActivityLogText>
-                  <ActivityLogText>Message</ActivityLogText>
-                  <ActivityLogText
-                    sx={{
-                      fontSize: "10px",
-                      fontWeight: "500",
-                      color: "rgba(0, 0, 0, 0.6)",
-                    }}
-                  >
-                    Timestamp
-                  </ActivityLogText>
-                </PostBox>
-                <PostSearch>
+                
+               
+              </Box>
+              
+              </>
+              })}
+              <PostSearch>
                   <PostSearchInput defaultValue="Add note here"></PostSearchInput>
                   <PostSearchButton variant="contained">Post</PostSearchButton>
                 </PostSearch>
-              </Box>
             </ActivityLogBox>
           </Box>
 
