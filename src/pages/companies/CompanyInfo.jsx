@@ -63,7 +63,8 @@ const breadcrumbs = [
         lineHeight: '36px',
         color: '#000000'
     }}>
-        <Link to={'/companies'} style={{'textDecoration': 'none', 'color' : 'black'}}><ArrowBackIosRoundedIcon style={{'marginRight': '1rem', 'cursor' : 'pointer'}} /></Link> {companyDetail.data?.findCompany.companyName}
+        <Link to={'/companies'} style={{'textDecoration': 'none', 'color' : 'black'}}><ArrowBackIosRoundedIcon style={{'marginRight': '1rem', 'cursor' : 'pointer'}} /></Link>
+          {companyDetail.data?.findCompany.companyName}
     </Typography>
 ];
 const [page, setPage] = React.useState(0);

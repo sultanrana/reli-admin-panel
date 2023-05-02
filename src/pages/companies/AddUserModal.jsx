@@ -186,7 +186,7 @@ const initialValues = {
                                 error = {Boolean(errors.approvedByReli) && Boolean(touched.approvedByReli)}
                                 helperText = {Boolean(touched.approvedByReli) && errors.approvedByReli}
                             >
-                                <MenuItem value='active' selected={true}>Active</MenuItem>
+                                <MenuItem value='active' selected={true}>Accepted</MenuItem>
                                 <MenuItem value='pending'>Pending</MenuItem>
                                 <MenuItem value='rejected'>Rejected</MenuItem>
                             </Field>

@@ -127,6 +127,7 @@ const breadcrumbs = [
                             <TextField
                                 id="reliPortion"
                                 name="reliPortion"
+                                type="number"
                                 label="Reli Portion"
                                 {...formik.getFieldProps('reliPortion')}
                                 error = {Boolean(formik.errors.reliPortion) && Boolean(formik.touched.reliPortion)}
@@ -140,6 +141,7 @@ const breadcrumbs = [
                         <div style={{width : matches? '100%' : 'auto'}}>
                             <TextField
                                 id="materialSurcharge"
+                                type="number"
                                 name="materialSurcharge"
                                 label="Materials Surcharge"
                                 {...formik.getFieldProps('materialSurcharge')}
@@ -169,6 +171,7 @@ const breadcrumbs = [
                                 id="windowsPermitFee"
                                 name="windowsPermitFee"
                                 label="Permit Fee"
+                                type="number"
                                 {...formik.getFieldProps('windowsPermitFee')}
                                 error = {Boolean(formik.errors.windowsPermitFee) && Boolean(formik.touched.windowsPermitFee)}
                                 // helperText = {Boolean(formik.touched.windowsPermitFee) && formik.errors.windowsPermitFee}
@@ -184,6 +187,7 @@ const breadcrumbs = [
                                 id="windowsDeliveryFee"
                                 name="windowsDeliveryFee"
                                 label="Delivery Fee"
+                                type="number"
                                 {...formik.getFieldProps('windowsDeliveryFee')}
                                 error = {Boolean(formik.errors.windowsDeliveryFee) && Boolean(formik.touched.windowsDeliveryFee)}
                                 // helperText = {Boolean(formik.touched.windowsDeliveryFee) && formik.errors.windowsDeliveryFee}
@@ -211,6 +215,7 @@ const breadcrumbs = [
                                 id="slidingGlassDoorPermitFee"
                                 name="slidingGlassDoorPermitFee"
                                 label="Permit Fee"
+                                type="number"
                                 {...formik.getFieldProps('slidingGlassDoorPermitFee')}
                                 error = {Boolean(formik.errors.slidingGlassDoorPermitFee) && Boolean(formik.touched.slidingGlassDoorPermitFee)}
                                 // helperText = {Boolean(formik.touched.slidingGlassDoorPermitFee) && formik.errors.slidingGlassDoorPermitFee}
@@ -225,6 +230,7 @@ const breadcrumbs = [
                                 id="slidingGlassDoorDeliveryFee"
                                 name="slidingGlassDoorDeliveryFee"
                                 label="Delivery Fee"
+                                type="number"
                                 {...formik.getFieldProps('slidingGlassDoorDeliveryFee')}
                                 error = {Boolean(formik.errors.slidingGlassDoorDeliveryFee) && Boolean(formik.touched.slidingGlassDoorDeliveryFee)}
                                 // helperText = {Boolean(formik.touched.slidingGlassDoorDeliveryFee) && formik.errors.slidingGlassDoorDeliveryFee}
@@ -251,7 +257,8 @@ const breadcrumbs = [
                             <TextField
                                 id="interiorDoorPermitFee"
                                 name="interiorDoorPermitFee"
-                                label="Permit Fee"
+                                label="Delivery Fee"
+                                type="number"
                                 {...formik.getFieldProps('interiorDoorPermitFee')}
                                 error = {Boolean(formik.errors.interiorDoorPermitFee) && Boolean(formik.touched.interiorDoorPermitFee)}
                                 // helperText = {Boolean(formik.touched.interiorDoorPermitFee) && formik.errors.interiorDoorPermitFee}

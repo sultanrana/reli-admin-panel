@@ -266,7 +266,7 @@ if(isLoading){
         </AboutCard>
         <ActivityLogBox>
           <ActivityLogText>
-            Activity log
+            Activity logss
           </ActivityLogText>
           <Box sx={{display: 'flex', flexDirection: 'column', gap: '10px', my: 1}}>
             <PostBox>

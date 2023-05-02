@@ -864,7 +864,7 @@ const CustomerDetails = () => {
             </AboutCard>
             <ActivityLogBox>
             <ActivityLogText>
-              Activity log
+              Activity logs
             </ActivityLogText>
               <Box sx={{display: 'flex', flexDirection: 'column', gap: '10px', my: 1}}>
                 <PostBox>
