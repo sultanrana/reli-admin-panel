@@ -184,7 +184,7 @@ if(isLoading){
             </IconButton>
           </Box>
           <div className='about_body'>
-            <div className="about_img_circle" style={{background: (data?.findCompany.image?`url('https://images.pexels.com/photos/14932984/pexels-photo-14932984.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load')`: '#C4C4C4')}}>
+            <div className="about_img_circle" style={{background: (data?.findCompany.image?`url('http://34.236.149.254/src/uploads/images/couponImage/${data?.findCompany.image}')`: '#C4C4C4')}}>
 
             </div>
             <div className="about_body_card">
@@ -266,7 +266,7 @@ if(isLoading){
         </AboutCard>
         <ActivityLogBox>
           <ActivityLogText>
-            Activity logss
+            Activity log
           </ActivityLogText>
           <Box sx={{display: 'flex', flexDirection: 'column', gap: '10px', my: 1}}>
             <PostBox>

@@ -4,14 +4,15 @@ import axios from "axios";
 const initialState = {
     projects: {},
     projectDetail: {},
-    staffReassignList: {},
+    staffReassignedList: {},
+    listofAssignStaff: {},
     isLoading: false,
     alert: false,
     responseStatus: '',
     responseMsg: '',
 };
 
-export const getProjects = createAsyncThunk(
+  export const getProjects = createAsyncThunk(
     "project/getProjects",
     async (thunkAPI) => {
       try {
@@ -21,6 +22,47 @@ export const getProjects = createAsyncThunk(
         // thunkAPI.dispatch(openModal());
         const resp = await axios(
           "http://34.236.149.254/api/admin/projects/listing",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        // console.log(resp);
+        return resp.data;
+      } catch (error) {
+        // console.log(error.response);
+        return thunkAPI.rejectWithValue("something went wrong");
+      }
+    }
+  );
+  export const getAssignedProject = createAsyncThunk(
+    "project/getAssignedProject",
+    async (id, thunkAPI) => {
+      try {
+        const resp = await axios.get(
+          `http://34.236.149.254/api/admin/staff/assignStaff/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        // console.log(resp);
+        return resp.data;
+      } catch (error) {
+        // console.log(error.response);
+        return thunkAPI.rejectWithValue("something went wrong");
+      }
+    }
+  );
+
+  export const getStaffForAssign = createAsyncThunk(
+    "project/getStaffForAssign",
+    async (id, thunkAPI) => {
+      try {
+        const resp = await axios.get(
+          `http://34.236.149.254/api/admin/staff/listofAssignStaff`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -66,6 +108,29 @@ export const getProjects = createAsyncThunk(
       try {
         const resp = await axios.post(
           `http://34.236.149.254/api/admin/projects/changeProjectStatus/${id}`,
+          values,
+          {
+            headers: {
+              // "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        // console.log(resp);
+        return resp.data;
+      } catch (error) {
+        // console.log(error.response);
+        // return "something went wrong";
+        return error.response;
+      }
+    }
+  );
+  export const assignProjectToUser = createAsyncThunk(
+    "project/assignProjectToUser",
+    async (values, thunkAPI) => {
+      try {
+        const resp = await axios.post(
+          `http://34.236.149.254/api/admin/projects/assignProjectToUser`,
           values,
           {
             headers: {
@@ -155,6 +220,27 @@ export const getProjects = createAsyncThunk(
       }
     }
   );
+  export const deleteAssignStaff = createAsyncThunk(
+    "project/deleteAssignStaff",
+    async (id, thunkAPI) => {
+      try {
+        const resp = await axios.delete(
+          `http://34.236.149.254/api/admin/staff/deleteAssignStaff/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        // console.log(resp);
+        return resp.data;
+      } catch (error) {
+        console.log(error.response);
+        // return "something went wrong";
+        return error.response;
+      }
+    }
+  );
 
 const projectSlice = createSlice({
     name: "project",
@@ -176,6 +262,28 @@ const projectSlice = createSlice({
         state.projects = action.payload;
       },
       [getProjects.rejected]: (state) => {
+        state.isLoading = false;
+      },
+      [getAssignedProject.pending]: (state) => {
+        state.isLoading = true;
+      },
+      [getAssignedProject.fulfilled]: (state, action) => {
+        console.log(action);
+        state.isLoading = false;
+        state.staffReassignedList = action.payload;
+      },
+      [getAssignedProject.rejected]: (state) => {
+        state.isLoading = false;
+      },
+      [getStaffForAssign.pending]: (state) => {
+        state.isLoading = true;
+      },
+      [getStaffForAssign.fulfilled]: (state, action) => {
+        console.log(action);
+        state.isLoading = false;
+        state.listofAssignStaff = action.payload;
+      },
+      [getStaffForAssign.rejected]: (state) => {
         state.isLoading = false;
       },
       [singleProjectDetail.pending]: (state) => {
@@ -252,6 +360,40 @@ const projectSlice = createSlice({
         state.isLoading = false;
       },
       [reassignProjectStaff.rejected]: (state) => {
+        state.isLoading = false;
+      },
+      [assignProjectToUser.pending]: (state) => {
+        state.isLoading = true;
+      },
+      [assignProjectToUser.fulfilled]: (state, action) => {
+        console.log(action);
+        if(action.payload.message){
+          state.responseStatus = "success";
+        }else{
+          state.responseStatus = "error";
+        }
+        state.responseMsg = action.payload.message ? action.payload.message : action.payload.data.message;
+        state.alert = true;
+        state.isLoading = false;
+      },
+      [assignProjectToUser.rejected]: (state) => {
+        state.isLoading = false;
+      },
+      [deleteAssignStaff.pending]: (state) => {
+        state.isLoading = true;
+      },
+      [deleteAssignStaff.fulfilled]: (state, action) => {
+        console.log(action);
+        if(action.payload.message){
+          state.responseStatus = "success";
+        }else{
+          state.responseStatus = "error";
+        }
+        state.responseMsg = action.payload.message ? action.payload.message : action.payload.data.message;
+        state.alert = true;
+        state.isLoading = false;
+      },
+      [deleteAssignStaff.rejected]: (state) => {
         state.isLoading = false;
       },
     },

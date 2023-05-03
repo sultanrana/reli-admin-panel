@@ -20,7 +20,7 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Paper from "@mui/material/Paper";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -48,14 +48,14 @@ import {
   AboutCard,
 } from "../../components/styles/ActivityBox.styles";
 import { useEffect } from "react";
-import { cancelProject, projectResponseClr, reassignProject, reassignProjectStaff, rescheduleProject, singleProjectDetail } from "../../features/projects/projectSlice";
+import { assignProjectToUser, cancelProject, deleteAssignStaff, getAssignedProject, getStaffForAssign, projectResponseClr, reassignProject, reassignProjectStaff, rescheduleProject, singleProjectDetail } from "../../features/projects/projectSlice";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../../components/Loading";
 import moment from 'moment';
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import Alert  from "@mui/material/Alert";
 import CloseIcon from '@mui/icons-material/Close';
-import { Form, Formik  } from "formik";
+import { Field, Form, Formik  } from "formik";
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -65,7 +65,7 @@ import { object } from "yup";
 import * as Yup from "yup";
 import dayjs from 'dayjs';
 import { current } from "@reduxjs/toolkit";
-import { getActivityLog } from "../../features/activity-log/activityLogSlice";
+import ActivityLog from "../../components/ActivityLog";
 
 const OuterGrid = styled(Grid)(({ theme }) => ({
   display: "flex",
@@ -109,11 +109,11 @@ const WarrantyCard = styled(Box)(({ theme }) => ({
 
 const RescheduleContainer = styled(Box)(({ theme }) => ({
   padding: "3rem 4rem",
-  [theme.breakpoints.down("md")]: {
+  [theme.breakpoints.down("lg")]: {
     width: "100%",
   },
   [theme.breakpoints.up("md")]: {
-    width: "475px",
+    width: "600px",
   },
 }));
 const ModalHeading = styled(Typography)(({ theme }) => ({
@@ -122,6 +122,7 @@ const ModalHeading = styled(Typography)(({ theme }) => ({
   lineHeight: "36px",
   color: "#000000",
   marginBottom: ".7rem",
+  width: '100%'
 }));
 const ReAssignBox = styled(Box)(({ theme }) => ({
   background: "#D9D9D9",
@@ -156,9 +157,7 @@ const StatusBoxes = styled(Box)(({ theme }) => ({
 
 const ProjectDetails = () => {
   const { isDrawerOpen } = useSelector((store) => store.login);
-  const { projectDetail, isLoading, responseStatus, alert, responseMsg } = useSelector((store) => store.project);
-  const { activityList , activityAlert } = useSelector((store) => store.activityLog);
-
+  const { projectDetail, isLoading, responseStatus, alert, responseMsg, staffReassignedList, listofAssignStaff } = useSelector((store) => store.project);
   const dispatch = useDispatch();
   const param = useParams();
   const today = dayjs();
@@ -182,7 +181,7 @@ const ProjectDetails = () => {
   const [isReschedule, setIsReschedule] = useState(false);
   const [isReassign, setIsReassign] = useState(false);
   const [alertDialog, setAlertDialog] = React.useState(false);
-
+  const selectRef = useRef();
   const handleRescheduleModal = () => {
     if (isReschedule) {
       setIsReschedule(false);
@@ -194,15 +193,18 @@ const ProjectDetails = () => {
     if (isReassign) {
       setIsReassign(false);
     } else {
+      dispatch(getAssignedProject(param.projectid));
+      dispatch(getStaffForAssign());
       setIsReassign(true);
     }
   };
 
-
-
   const rescheduleInitialValues = {
     orderStatusDate: today,
     orderStatusTime: currentTime,
+  }
+  const reassginInitialValues = {
+    userTo: '',
   }
 
 const handleCancelProject = (e) => {
@@ -212,25 +214,24 @@ const handleCancelProject = (e) => {
   dispatch(cancelProject(values));
 }
 
+const handleDeleteAssignStaff = (id) => {
+  dispatch(deleteAssignStaff(id)).then(() => {
+    handleReassignModal();
+  });
+}
 
 
   useEffect(() => {
     dispatch(singleProjectDetail(param.projectid));
-    
   }, [param.projectid, dispatch]);
-  useEffect(() => {
-    console.log('-------------')
-    dispatch(getActivityLog(param.projectid));
-  }, [alert])
+  
 
   if (isLoading) {
     return <Loading />;
   }
 
   return (
-    
     <>
-    {console.log('activityList==============',activityList)}
       <div className="page-section">
         <Sidebar />
         <Box
@@ -859,46 +860,7 @@ const handleCancelProject = (e) => {
                 ) : null}
               </Card>
             </AboutCard>
-            <ActivityLogBox>
-              <ActivityLogText>Activity log</ActivityLogText>
-              {activityList?.data?.map(item=>{
-              return<>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "10px",
-                  my: 1,
-                }}
-              >
-                <PostBox>
-                  <ActivityLogText
-                    sx={{ fontWeight: "500", color: "rgba(0, 0, 0, 0.6)" }}
-                  >
-                    {item.title}
-                  </ActivityLogText>
-                  <ActivityLogText>{item.message}</ActivityLogText>
-                  <ActivityLogText
-                    sx={{
-                      fontSize: "10px",
-                      fontWeight: "500",
-                      color: "rgba(0, 0, 0, 0.6)",
-                    }}
-                  >
-                    {item.createdAt}
-                  </ActivityLogText>
-                </PostBox>
-                
-               
-              </Box>
-              
-              </>
-              })}
-              <PostSearch>
-                  <PostSearchInput defaultValue="Add note here"></PostSearchInput>
-                  <PostSearchButton variant="contained">Post</PostSearchButton>
-                </PostSearch>
-            </ActivityLogBox>
+            <ActivityLog />
           </Box>
 
           <Card
@@ -1809,63 +1771,79 @@ const handleCancelProject = (e) => {
             >
               Reassign
             </DialogTitle>
-            <RescheduleContainer sx={{ mb: 14 }}>
-              <ModalHeading>{(projectDetail.data?.order_detail.length > 0 && projectDetail.data?.order_detail[0].service)? projectDetail.data?.order_detail[0].service.name : ''} {param.projectid}</ModalHeading>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
+            <Formik
+                initialValues={reassginInitialValues}
+                onSubmit={(values, formikHelpers) => {
+                  values.userTo =  selectRef.current.value;
+                  values.order =  param.projectid;
+                  values.assignedDate =  dayjs().format('YYYY-MM-DD');
+                  dispatch(assignProjectToUser(values));
+                  handleReassignModal();
+                  console.log('values: ', values);
                 }}
+                validationSchema={object({
+                })}
               >
-                <ReAssignBox>
-                  <Typography sx={{ fontWeight: "600", color: "#000000" }}>
-                    Bob Smith
-                  </Typography>
-                  <ReAssignRemove>Remove</ReAssignRemove>
-                </ReAssignBox>
-                <ReAssignBox>
-                  <Typography sx={{ fontWeight: "600", color: "#000000" }}>
-                    Ford Prefect
-                  </Typography>
-                  <ReAssignRemove>Remove</ReAssignRemove>
-                </ReAssignBox>
-                <ReAssignBox>
-                  <Typography sx={{ fontWeight: "600", color: "#000000" }}>
-                    Arthur Dent
-                  </Typography>
-                  <ReAssignRemove>Remove</ReAssignRemove>
-                </ReAssignBox>
-                <ReAssignBox>
-                  <select
-                    name="options"
-                    id="options"
-                    style={{
-                      background: "#FFFFFF",
-                      height: "30px",
-                      width: "184px",
-                      border: "none",
-                      outline: "none",
-                    }}
-                  >
-                    <option value="opt1">Staff</option>
-                    <option value="opt1">Staff</option>
-                    <option value="opt1">Staff</option>
-                    <option value="opt1">Staff</option>
-                  </select>
-                  <ReAssignRemove sx={{ background: "#019EB2" }}>
-                    assign
-                  </ReAssignRemove>
-                </ReAssignBox>
-              </Box>
-            </RescheduleContainer>
-            <DialogActions>
-              <Button variant="outlined" onClick={handleReassignModal}>
-                Cancel
-              </Button>
-              <Button variant="contained" onClick={handleReassignModal}>
-                Save Changes
-              </Button>
-            </DialogActions>
+                {({ errors, touched, isValid, dirty, values, setFieldValue }) => (
+                  <Form>
+                    <RescheduleContainer sx={{ mb: 14 }}>
+                      <ModalHeading>{(projectDetail.data?.order_detail.length > 0 && projectDetail.data?.order_detail[0].service)? projectDetail.data?.order_detail[0].service.name : ''} {param.projectid}</ModalHeading>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                        }}
+                      >
+                        {
+                          staffReassignedList.data?.map((assignedStaff) => {
+                            const { firstName, lastName, _id} = assignedStaff.userTo
+                            return (
+                              <ReAssignBox key={_id + 'assignedStaff'}>
+                                <Typography sx={{ fontWeight: "600", color: "#000000" }}>
+                                  { firstName + ' ' + lastName}
+                                </Typography>
+                                <ReAssignRemove type="button" onClick={() => handleDeleteAssignStaff(assignedStaff?._id)}>Remove</ReAssignRemove>
+                              </ReAssignBox>
+                            )
+                          })
+                        }
+                        <ReAssignBox>
+                          <select
+                            name="userTo"
+                            id="userTo"
+                            style={{
+                              background: "#FFFFFF",
+                              height: "30px",
+                              width: "184px",
+                              outline: "none",
+                              border: 'none',
+                            }}
+                            ref={selectRef}
+                          >
+                            {listofAssignStaff.data?.map((assignStaff, index) => {
+                              const { firstName, lastName, _id} = assignStaff
+                              return (
+                                <option value={_id} key={_id + 'assignStaff'}>{firstName + ' ' + lastName}</option>
+                              )
+                            })}
+                          </select>
+                          <ReAssignRemove type="submit" sx={{ background: "#019EB2" }}>
+                            assign
+                          </ReAssignRemove>
+                        </ReAssignBox>
+                      </Box>
+                    </RescheduleContainer>
+                    <DialogActions>
+                      <Button variant="outlined" onClick={handleReassignModal}>
+                        Cancel
+                      </Button>
+                      <Button type="submit" variant="contained">
+                        Save Changes
+                      </Button>
+                    </DialogActions>
+                  </Form>
+                )}
+            </Formik>
           </Dialog>
         ) : null}
       </div>

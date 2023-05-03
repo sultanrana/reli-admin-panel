@@ -57,16 +57,18 @@ const Login = () => {
     },
   });
   const storeToken = (userData) => {
-    console.log(userData);
+    // console.log(userData);
     const token = userData.data.token;
     localStorage.setItem('token', token)
-    console.log(token);
+    localStorage.setItem('userData', JSON.stringify(userData.data))
+    // console.log(token);
     dispatch(loginUser(userData))
     navigate('/services')
   }
 
   useEffect(() => {
     localStorage.removeItem('token');
+    localStorage.removeItem('userData');
     dispatch(emptyToken());
   }, []);
 

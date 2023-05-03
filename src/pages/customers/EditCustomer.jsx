@@ -125,7 +125,7 @@ const EditCustomer = () => {
           >
             <Box component="div" className="addImg">
               <img
-                src="/images/circle-gray.png"
+                src={customerDetail.data?.profileImage ? `http://34.236.149.254/src/uploads/images/userImage/${customerDetail.data?.profileImage}` : "/images/circle-gray.png"}
                 alt="addCompanyImg"
                 ref={imgRef}
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}

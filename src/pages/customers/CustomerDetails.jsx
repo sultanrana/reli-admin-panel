@@ -829,7 +829,7 @@ const CustomerDetails = () => {
                   </IconButton>
                 </Box>
                 <div className="about_body">
-                  <div className="about_img_circle" style={{background: (customerDetail.data?.profileImage ?`url('https://images.pexels.com/photos/14932984/pexels-photo-14932984.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load')`: '#C4C4C4')}}></div>
+                  <div className="about_img_circle" style={{background: (customerDetail.data?.profileImage ?`url('http://34.236.149.254/src/uploads/images/userImage/${customerDetail.data?.profileImage}')`: '#C4C4C4')}}></div>
                   <div className="about_body_card">
                     <div className="company_info">
                       <h4>{customerDetail.data?.firstName + ' ' + customerDetail.data?.lastName}</h4>
@@ -864,7 +864,7 @@ const CustomerDetails = () => {
             </AboutCard>
             <ActivityLogBox>
             <ActivityLogText>
-              Activity logs
+              Activity log
             </ActivityLogText>
               <Box sx={{display: 'flex', flexDirection: 'column', gap: '10px', my: 1}}>
                 <PostBox>

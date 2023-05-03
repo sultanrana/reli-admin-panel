@@ -92,7 +92,7 @@ useEffect(() => {
         alignItems: 'center'
     }}>
         <Box component="div" className='addImg'>
-            <img src="/images/circle-gray.png" alt="addCompanyImg" ref={imgRef} style={{width: '100%', height: '100%', objectFit: 'cover'}}/>
+            <img src={companyDetail.data?.findCompany.image? `http://34.236.149.254/src/uploads/images/couponImage/${companyDetail.data?.findCompany.image}` : "/images/circle-gray.png"} alt="addCompanyImg" ref={imgRef} style={{width: '100%', height: '100%', objectFit: 'cover'}}/>
             <input type="file" hidden id="getImg" ref={imgInput} onChange={(e) => handleAddImg(e)}/>
         </Box>
         <Box component="div">
