@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Forgot from "./pages/Forgot";
 import Confirmation from "./pages/Confirmation";
@@ -60,6 +60,7 @@ function App() {
               <Route path="/confirm-password" element={<Confirmation />} />
               <Route path="/set-password" element={<SetPassword />} />
               <Route path="/login" element={<Login />} />
+              <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
@@ -68,3 +69,14 @@ function App() {
 }
 
 export default App;
+
+
+function NotFound () {
+  const navigate = useNavigate();
+  return (
+    <>
+      <h1>Page not Found</h1>
+      <button onClick={() => navigate(-1)}>Go back</button>
+    </>
+  )
+}

@@ -240,7 +240,7 @@ if(isLoading){
                         height: '200px'
                       }}
                     >
-                      <img src={service === 'window' ? "/images/service1.png": service === 'door' ? '/images/service2.png': service === 'slidingGlassDoor' ? '/images/service3.png' : null} alt="" style={{ width: "" }} />
+                      <img src={service === 'Windows' ? "/images/service1.png": service === 'Interior Doors' ? '/images/service2.png': service === 'Sliding Glass Doors' ? '/images/service3.png' : null} alt="" style={{ width: "" }} />
                       <Typography
                         variant="h3"
                         component="h1"
