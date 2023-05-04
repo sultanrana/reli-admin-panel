@@ -114,7 +114,7 @@ useEffect(() => {
                 return /^\s*$/.test(value) === false;
               }).required('Please enter the company address'),
             representativeNumber: Yup.number().required('Please enter a contact phone number'),
-            services: Yup.array().of(Yup.string()).required("Atleast one service is required."),
+            services: Yup.array().min(1, 'Select at least one service'),
         })}
     >
         {({errors, touched, isValid, dirty}) => (
@@ -259,19 +259,20 @@ useEffect(() => {
                                 {services.data?.map((service) => {
                                     return (
                                         <Field as={FormControlLabel}
-                                        key={service.id}
-                                        name={`services`}
-                                        value={service.name}
-                                        label={capitalizeFirstLetter(service.name)+ ':'}
-                                        labelPlacement="start"
-                                        sx={{
-                                            color: '#000000',
-                                            display: 'flex',
-                                            justifyContent: 'space-between',
-                                            width: '250px'
-                                        }}
-                                        control={<Checkbox color="black"/>}
-                                        // checked={values.services.includes(service.name)}
+                                            key={service.id}
+                                            name={`services`}
+                                            value={service.name}
+                                            label={capitalizeFirstLetter(service.name)+ ':'}
+                                            labelPlacement="start"
+                                            sx={{
+                                                color: '#000000',
+                                                display: 'flex',
+                                                justifyContent: 'space-between',
+                                                width: '250px'
+                                            }}
+                                            control={<Checkbox color="black"/>}
+                                            error = {Boolean(errors.services) && Boolean(touched.services)}
+                                            helperText = {Boolean(touched.services) && errors.services}
                                         />
                                     )
                                 } )}

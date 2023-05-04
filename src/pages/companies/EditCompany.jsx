@@ -62,6 +62,7 @@ const initialValues ={
     representativeEmail: companyDetail.data?.findCompany.representativeEmail ? companyDetail.data?.findCompany.representativeEmail : '',
     addressOne: companyDetail.data?.findCompany.addressOne ? companyDetail.data?.findCompany.addressOne : '',
     addressTwo: companyDetail.data?.findCompany.addressTwo ? companyDetail.data?.findCompany.addressTwo : '',
+    services: companyDetail.data?.findCompany.services ? companyDetail.data?.findCompany.services : '',
 }
 
 useEffect(() => {
@@ -146,9 +147,10 @@ useEffect(() => {
                 return /^\s*$/.test(value) === false;
               }).required('Please enter the company address'),
             representativeNumber: Yup.number().required('Please enter a contact phone number'),
+            services: Yup.array().min(1, 'Select at least one service'),
         })}
     >
-        {({errors, touched, isValid, dirty}) => (
+        {({errors, touched, isValid, dirty, values}) => (
             <Form>
                 <DialogContent
                     sx={{
@@ -259,24 +261,24 @@ useEffect(() => {
                                 Services Available
                             </Typography>
                             <Box>
-                                {services.data?.map((service, index) => {
-                                    // console.log('companyDetail.data?.findCompany.services: ', companyDetail.data?.findCompany.services);
-                                    // console.log('service: ', service);
+                                {services.data?.map((service) => {
                                     return (
                                         <Field as={FormControlLabel}
-                                        key={service + index}
-                                        name="services"
-                                        value={service.name}
-                                        label={capitalizeFirstLetter(service.name)+ ':'}
-                                        labelPlacement="start"
-                                        sx={{
-                                            color: '#000000',
-                                            display: 'flex',
-                                            justifyContent: 'space-between',
-                                            width: '250px'
-                                        }}
-                                        control={<Checkbox color="black"/>}
-                                        checked={companyDetail.data?.findCompany.services.includes(service.name)}
+                                            key={service.id}
+                                            name={`services`}
+                                            value={service.name}
+                                            checked={values.services.includes(service.name)}
+                                            label={capitalizeFirstLetter(service.name)+ ':'}
+                                            labelPlacement="start"
+                                            sx={{
+                                                color: '#000000',
+                                                display: 'flex',
+                                                justifyContent: 'space-between',
+                                                width: '250px'
+                                            }}
+                                            control={<Checkbox color="black"/>}
+                                            error = {Boolean(errors.services) && Boolean(touched.services)}
+                                            helperText = {Boolean(touched.services) && errors.services}
                                         />
                                     )
                                 } )}
@@ -289,7 +291,7 @@ useEffect(() => {
                 <DialogActions>
                 <Button variant='outlined' onClick={() => dispatch(handleEditCompanyModal())}>Cancel</Button>
                 {/* <Button variant='contained' onClick={() => dispatch(handleEditCompanyModal())}>Save</Button> */}
-                <Button disabled={!dirty || !isValid} type='submit' variant='contained'>Save</Button>
+                <Button disabled={!isValid} type='submit' variant='contained'>Save</Button>
                 </DialogActions>
             </Form>
         )}
