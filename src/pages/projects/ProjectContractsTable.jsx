@@ -20,7 +20,9 @@ import TableLink from "../../components/TableLink";
 import TableActions from "../../components/TableActions";
 import moment from "moment";
 import { useDispatch } from "react-redux";
-import { changeProjectStatus } from "../../features/projects/projectSlice";
+import { changeProjectStatus  , singleProjectDetail } from "../../features/projects/projectSlice";
+import { Link, useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 // active project
 const activeProjectColumns = [
@@ -103,13 +105,19 @@ const ProjectContractsTable = (props) => {
   };
 
   const dispatch = useDispatch()
+  const param = useParams();
 
   const logPayment = () => {
     const obj = {
       'orderStatus' : 'Paid'
     }
-    dispatch(changeProjectStatus(obj))
+    dispatch(changeProjectStatus(obj)).then(() => {
+      dispatch(singleProjectDetail(param.projectid));
+    });
+
   }
+
+  
 
   return (
     <Root>
