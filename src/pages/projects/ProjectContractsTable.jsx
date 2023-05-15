@@ -19,6 +19,8 @@ import {
 import TableLink from "../../components/TableLink";
 import TableActions from "../../components/TableActions";
 import moment from "moment";
+import { useDispatch } from "react-redux";
+import { changeProjectStatus } from "../../features/projects/projectSlice";
 
 // active project
 const activeProjectColumns = [
@@ -100,6 +102,15 @@ const ProjectContractsTable = (props) => {
     setPage(0);
   };
 
+  const dispatch = useDispatch()
+
+  const logPayment = () => {
+    const obj = {
+      'orderStatus' : 'Paid'
+    }
+    dispatch(changeProjectStatus(obj))
+  }
+
   return (
     <Root>
       <Paper sx={{ width: "100%", overflow: "hidden", mb: 3 }}>
@@ -108,7 +119,7 @@ const ProjectContractsTable = (props) => {
             <TableHead>
               <StyledTableRow>
                 <StyledTableCell>
-                  Transaction Type
+                  Transaction Type 
                 </StyledTableCell>
                 <StyledTableCell>
                   Date
@@ -139,7 +150,9 @@ const ProjectContractsTable = (props) => {
                   {data?.totalAmount? '$' + data?.totalAmount.toFixed(2) : '$0.00'}
                 </StyledTableCell>
                 <StyledTableCell>
-                  {data?.stripeRefundId? 'Refund' : 'Paid'}
+                  {data?.orderStatus == 'Completed' ? 
+                    <Button variant="contained" onClick={()=>logPayment()}>Log Payment</Button>
+                  : data?.orderStatus} 
                 </StyledTableCell>
               </TableRow>
             </TableBody>

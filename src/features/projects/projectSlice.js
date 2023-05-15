@@ -220,6 +220,33 @@ const initialState = {
       }
     }
   );
+
+  export const changeProjectStatus = createAsyncThunk(
+    "project/changeProjectStatus",
+    async (values, thunkAPI) => {
+      let id = thunkAPI.getState().project.projectDetail.data.order_info._id;
+      try {
+        const resp = await axios.post(
+          `http://34.236.149.254/api/admin/projects/changeProjectStatus/${id}`,
+          values,
+          {
+            headers: {
+              // "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        // console.log(resp);
+        // window.location.redirect()
+        return resp.data;
+      } catch (error) {
+        // console.log(error.response);
+        // return "something went wrong";
+        return error.response;
+      }
+    }
+  );
+
   export const deleteAssignStaff = createAsyncThunk(
     "project/deleteAssignStaff",
     async (id, thunkAPI) => {
@@ -300,6 +327,19 @@ const projectSlice = createSlice({
       [refundTransaction.pending]: (state) => {
         state.isLoading = true;
       },
+      [changeProjectStatus.pending]: (state) => {
+        state.isLoading = true;
+      },
+      [changeProjectStatus.fulfilled]: (state, action) => {
+        if(action.payload.message){
+          state.responseStatus = "success";
+        }else{
+          state.responseStatus = "error";
+        }
+        state.responseMsg = action.payload.message ? action.payload.message : action.payload.data.message;
+        state.alert = true;
+        state.isLoading = false;
+      },
       [refundTransaction.fulfilled]: (state, action) => {
         if(action.payload.message){
           state.responseStatus = "success";
@@ -311,6 +351,9 @@ const projectSlice = createSlice({
         state.isLoading = false;
       },
       [refundTransaction.rejected]: (state) => {
+        state.isLoading = false;
+      },
+      [changeProjectStatus.rejected]: (state) => {
         state.isLoading = false;
       },
       [rescheduleProject.pending]: (state) => {
