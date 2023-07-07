@@ -233,6 +233,7 @@ const FetchChats = async (id) => {
 
     const chatsData = querySnapshot.docs.map((doc) => doc.data().MessageRoomDetails);
     setChatsData(chatsData)
+    console.log("chatsData: ",chatsData);
     // Update the state or perform any other actions with the filtered data
   } catch (error) {
     console.error('Error fetching chats:', error);
