@@ -66,6 +66,10 @@ import * as Yup from "yup";
 import dayjs from 'dayjs';
 import { current } from "@reduxjs/toolkit";
 import ActivityLog from "../../components/ActivityLog";
+import { db } from "../../firebase";
+import { collection, getDocs, query, where } from "firebase/firestore";
+
+
 
 const OuterGrid = styled(Grid)(({ theme }) => ({
   display: "flex",
@@ -181,6 +185,7 @@ const ProjectDetails = () => {
   const [isReschedule, setIsReschedule] = useState(false);
   const [isReassign, setIsReassign] = useState(false);
   const [alertDialog, setAlertDialog] = React.useState(false);
+  const [chatsData, setChatsData] = useState([]);
   const selectRef = useRef();
   const handleRescheduleModal = () => {
     if (isReschedule) {
@@ -220,9 +225,24 @@ const handleDeleteAssignStaff = (id) => {
   });
 }
 
+const FetchChats = async (id) => {
+  try {
+    const querySnapshot = await getDocs(
+      query(collection(db, 'Chats-test'), where('MessageRoomDetails.ProjectID', '==', id))
+    );
+
+    const chatsData = querySnapshot.docs.map((doc) => doc.data().MessageRoomDetails);
+    setChatsData(chatsData)
+    // Update the state or perform any other actions with the filtered data
+  } catch (error) {
+    console.error('Error fetching chats:', error);
+  }
+}
 
   useEffect(() => {
     dispatch(singleProjectDetail(param.projectid));
+
+    FetchChats(param.projectid);
   }, [param.projectid, dispatch]);
   
 
@@ -970,29 +990,46 @@ const handleDeleteAssignStaff = (id) => {
             }}
           >
             <Typography variant="h4">Conversation</Typography>
-            <Box
-              component="div"
-              sx={{
-                background: "#E8E8E8",
-                boxShadow:
-                  "0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)",
-                display: "flex",
-                flexDirection: "column",
-                gap: "4px",
-                width: "fit-content",
-                p: "8px",
-                borderRadius: "4px",
-              }}
-            >
-              <Typography sx={{ fontSize: "18px", fontWeight: "600" }}>
-                Joel (contractor):
-              </Typography>
-              <Typography sx={{ fontSize: "14px" }}>
-                Hi Josh, when can we stop by to confirm the measurements?
-              </Typography>
-              <Typography sx={{ fontSize: "10px" }}>2 hours ago</Typography>
-            </Box>
-            <Box
+            {
+              chatsData?.map((chat) => {
+                const {Messages, Contractor, Customer} = chat
+                
+                const { seconds } = Messages[0]?.MessageDetails.DateTime;
+                const timestamp = moment.unix(seconds);
+                
+                const timeAgo = moment(timestamp).fromNow();
+
+                const person = Contractor.ID ? 'Contractor' : Customer.ID ? 'Customer' : '';
+
+                
+                return (
+                  <Box
+                    component="div"
+                    key={chat.ProjectID}
+                    sx={{
+                      background: "#E8E8E8",
+                      boxShadow:
+                        "0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2)",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "4px",
+                      width: "fit-content",
+                      p: "8px",
+                      borderRadius: "4px",
+                    }}
+                  >
+                    <Typography sx={{ fontSize: "18px", fontWeight: "600" }}>
+                      Joel ({person}):
+                    </Typography>
+                    <Typography sx={{ fontSize: "14px" }}>
+                      {Messages[0]?.MessageDetails.Body}
+                    </Typography>
+                    <Typography sx={{ fontSize: "10px" }}>{timeAgo}</Typography>
+                  </Box>
+                )
+              })
+            }
+            {/* <Box
               component="div"
               sx={{
                 background: "#E8E8E8",
@@ -1036,7 +1073,7 @@ const handleDeleteAssignStaff = (id) => {
                 are leashed when we enter the premeses.
               </Typography>
               <Typography sx={{ fontSize: "10px" }}>30 min ago</Typography>
-            </Box>
+            </Box> */}
           </Card>
 
           <Card

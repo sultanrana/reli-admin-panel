@@ -19,10 +19,6 @@ import {
 import TableLink from "../../components/TableLink";
 import TableActions from "../../components/TableActions";
 import moment from "moment";
-import { useDispatch } from "react-redux";
-import { changeProjectStatus  , singleProjectDetail } from "../../features/projects/projectSlice";
-import { Link, useParams } from "react-router-dom";
-import { useEffect } from "react";
 
 // active project
 const activeProjectColumns = [
@@ -104,21 +100,6 @@ const ProjectContractsTable = (props) => {
     setPage(0);
   };
 
-  const dispatch = useDispatch()
-  const param = useParams();
-
-  const logPayment = () => {
-    const obj = {
-      'orderStatus' : 'Paid'
-    }
-    dispatch(changeProjectStatus(obj)).then(() => {
-      dispatch(singleProjectDetail(param.projectid));
-    });
-
-  }
-
-  
-
   return (
     <Root>
       <Paper sx={{ width: "100%", overflow: "hidden", mb: 3 }}>
@@ -127,7 +108,7 @@ const ProjectContractsTable = (props) => {
             <TableHead>
               <StyledTableRow>
                 <StyledTableCell>
-                  Transaction Type 
+                  Transaction Type
                 </StyledTableCell>
                 <StyledTableCell>
                   Date
@@ -158,9 +139,7 @@ const ProjectContractsTable = (props) => {
                   {data?.totalAmount? '$' + data?.totalAmount.toFixed(2) : '$0.00'}
                 </StyledTableCell>
                 <StyledTableCell>
-                  {data?.orderStatus == 'Completed' ? 
-                    <Button variant="contained" onClick={()=>logPayment()}>Log Payment</Button>
-                  : data?.orderStatus} 
+                  {data?.stripeRefundId? 'Refund' : 'Paid'}
                 </StyledTableCell>
               </TableRow>
             </TableBody>
