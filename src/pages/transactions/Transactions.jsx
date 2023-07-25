@@ -1249,7 +1249,7 @@ const Transactions = () => {
               width: '16%',
               marginLeft: '6px'
             }}/>
-            <input type="text" value={searchValue} placeholder='Search' className='search-input' onChange={(e) =>  handleSearch(e.target.value.toLowerCase())} />
+            <input type="text" value={searchValue} placeholder='Search Transactions' className='search-input' onChange={(e) =>  handleSearch(e.target.value.toLowerCase())} />
         </Box>
           </Box>
           {/* <IconButton aria-label="filter-icon" size="large">

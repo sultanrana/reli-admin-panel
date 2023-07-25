@@ -89,7 +89,7 @@ const AdminPortalUser = () => {
         color: "#000000",
       }}
     >
-      Admin Portal User
+      Admin Portal Users
     </Typography>,
   ];
   // const rows = [

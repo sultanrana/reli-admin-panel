@@ -39,7 +39,7 @@ const links = [
     },
     {
         id: 6,
-        text: 'Admin Portal User',
+        text: 'Admin Portal Users',
         route: '/admin-portal-user',
         icon: <VerifiedUserRoundedIcon/>
     },
