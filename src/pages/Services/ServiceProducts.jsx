@@ -122,7 +122,7 @@ const handleChangeRowsPerPage = (event) => {
 };
 
 const handleSearch = (searchedValue) => {
-  setSearchValue(searchedValue.toLowerCase())
+  setSearchValue(searchedValue?.toLowerCase())
   // const filteredRows = rows?.filter((row) => {
   //   if(row.firstName)
   //     return row.firstName.toLowerCase().includes(searchedValue.toLowerCase());
@@ -272,7 +272,7 @@ if(isLoading){
                     </StyledTableRow>
                 </TableHead>
                 <TableBody>
-                    {serviceDetail.data?.filter((data) => data.product_id.toLowerCase().includes(searchValue) || data.job_type.toLowerCase().includes(searchValue) || data.color.toLowerCase().includes(searchValue) || data.grid.toLowerCase().includes(searchValue) || data.open_type.toLowerCase().includes(searchValue) || data.tempered_glass.toLowerCase().includes(searchValue) || data.privacy.toLowerCase().includes(searchValue) || data.safety_glass.toLowerCase().includes(searchValue) || data.dimension_class.toLowerCase().includes(searchValue) || data.price.toLowerCase().includes(searchValue))?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    {serviceDetail.data?.filter((data) => data?.product_id?.toLowerCase().includes(searchValue) || data?.job_type?.toLowerCase().includes(searchValue) || data?.color?.toLowerCase().includes(searchValue) || data?.grid?.toLowerCase().includes(searchValue) || data?.open_type?.toLowerCase().includes(searchValue) || data?.tempered_glass?.toLowerCase().includes(searchValue) || data?.privacy?.toLowerCase().includes(searchValue) || data?.safety_glass?.toLowerCase().includes(searchValue) || data?.dimension_class?.toLowerCase().includes(searchValue) || data.price.toLowerCase().includes(searchValue))?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row, index) => {
                         return (
                         <StyledTableRow hover role="checkbox" tabIndex={-1} key={row._id}>

@@ -204,7 +204,7 @@ if(isLoading){
               <div className="company_info">
                 <h4 style={{
                   fontSize: '20px',
-                }}>Primary Representative:</h4>
+                }}>Primary Contact:</h4>
                 <p className="info_para" style={{
                   marginBottom: '8px'
                 }}>{data?.findCompany.representativeName? data?.findCompany.representativeName : ''}</p>

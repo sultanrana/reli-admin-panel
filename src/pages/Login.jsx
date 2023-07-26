@@ -22,8 +22,8 @@ const Login = () => {
   const { baseUrl, code } = useSelector((store) => store.login)
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [showEmailIcon, setShowEmailIcon] = useState(false);
-  const [showPasswordIcon, setShowPasswordIcon] = useState(false);
+  const [showEmailIcon, setShowEmailIcon] = useState(true);
+  const [showPasswordIcon, setShowPasswordIcon] = useState(true);
   const [isError, setIsError] = useState();
   const formik = useFormik({
     initialValues: {
@@ -119,7 +119,7 @@ const Login = () => {
                     formik.errors = {};
                     setShowEmailIcon(true);
                   }}
-                  onBlur={() => setShowEmailIcon(false)}
+                  onBlur={() => setShowEmailIcon(true)}
                   startAdornment={
                     showEmailIcon ? (
                       <InputAdornment position="end">
@@ -135,7 +135,7 @@ const Login = () => {
                 />
                 <InputLabel htmlFor="outlined-adornment-email">Email</InputLabel>
                 {formik.errors.email ? (
-                  <Box sx={{ color: "red", pt: 1 }}>{formik.errors.email}</Box>
+                  <Box sx={{ color: "red", pt: 1 , fontSize:12 }}>{formik.errors.email}</Box>
                 ) : (
                   ""
                 )}
@@ -152,7 +152,7 @@ const Login = () => {
                     formik.errors = {}
                     setShowPasswordIcon(true)
                   }}
-                  onBlur={() => setShowPasswordIcon(false)}
+                  onBlur={() => setShowPasswordIcon(true)}
                   startAdornment={
                     showPasswordIcon ? (
                       <InputAdornment position="end">

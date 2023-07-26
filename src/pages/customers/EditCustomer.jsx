@@ -204,6 +204,21 @@ const EditCustomer = () => {
                     Boolean(formik.touched.email) && formik.errors.email
                   }
                 />
+                <TextField
+                  sx={{ width: "100%", mb: 4 }}
+                  id="phone"
+                  name="phone"
+                  label="Phone"
+                  variant="outlined"
+                  {...formik.getFieldProps("phone")}
+                  error={
+                    Boolean(formik.errors.phone) &&
+                    Boolean(formik.touched.phone)
+                  }
+                  helperText={
+                    Boolean(formik.touched.phone) && formik.errors.phone
+                  }
+                />
               </Container>
             </DialogContentText>
           </DialogContent>

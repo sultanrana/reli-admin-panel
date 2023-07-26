@@ -116,7 +116,7 @@ const Forgot = () => {
             />
             <InputLabel htmlFor="outlined-adornment-email">Email</InputLabel>
             {formik.errors.email ? (
-              <Box sx={{ color: "red", pt: 1}}>{formik.errors.email}</Box>
+              <Box sx={{ color: "red", pt: 1 , fontSize:12}}>{formik.errors.email}</Box>
             ) : (
               ""
             )}

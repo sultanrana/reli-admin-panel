@@ -849,7 +849,7 @@ const CustomerDetails = () => {
                       >
                         {customerDetail.data?.phoneNumber}
                       </p>
-                      <p className={Boolean(customerDetail.data?.statusBit) ? 'enabled' : 'disabled' } onClick={() => handleCustomerStatus(Boolean(customerDetail.data?.statusBit))}>{Boolean(customerDetail.data?.statusBit) ? 'Enabled' : 'Disabled' }</p>
+                      <p className={Boolean(customerDetail.data?.statusBit) ? 'enabled' : 'disabled' }>{Boolean(customerDetail.data?.statusBit) ? 'Enabled' : 'Disabled' }</p>
                     </div>
                   </div>
                 </div>
