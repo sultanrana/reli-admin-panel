@@ -175,8 +175,8 @@ useEffect(() => {
                                 error = {Boolean(errors.companyStatus) && Boolean(touched.companyStatus)}
                                 helperText = {Boolean(touched.companyStatus) && errors.companyStatus}
                             >
-                                <MenuItem value="enable">Enable</MenuItem>
-                                <MenuItem value="disable">Disable</MenuItem>
+                                <MenuItem value="enable">Enabled</MenuItem>
+                                <MenuItem value="disable">Disabled</MenuItem>
                                 <MenuItem value="pending">Pending</MenuItem>
                             </Field>
                         </FormControl>

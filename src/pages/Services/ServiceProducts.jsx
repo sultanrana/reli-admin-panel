@@ -80,6 +80,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 const ServiceProducts = () => {
 const {isDrawerOpen} = useSelector((store) => store.login)
 const {serviceDetail, isLoading, responseStatus, responseMsg, alert} = useSelector((store) => store.service)
+console.log('alert',alert);
 const param = useParams();
 const dispatch = useDispatch();
 const serviceName = localStorage.getItem('serviceName');
@@ -111,6 +112,7 @@ const [searchValue, setSearchValue] = useState('');
 const [alertDialog, setAlertDialog] = React.useState(false);
 const [columnEdit, setColumnEdit] = React.useState('');
 const [price, setPrice] = useState('');
+const [hasRenderedLoader, setHasRenderedLoader] = useState(false);
 
 const handleChangePage = (event, newPage) => {
   setPage(newPage);
@@ -287,8 +289,8 @@ if(isLoading){
                                     <ModeRoundedIcon/>
                                 </IconButton>
                                 ) : (column.id === 'price' && columnEdit === row._id)? (
-                                  <TextField name="price" defaultValue={value} onChange={(e) => setPrice(e.target.value)} />
-                                ):(column.id === 'price')? (value? '$' + parseInt(value).toFixed(2): '0') :column.format && typeof value === 'number'
+                                  <TextField name="price" type='number' defaultValue={value} onChange={(e) => setPrice(e.target.value)} />
+                                ):(column.id === 'price')? (value? '$' + parseFloat(value).toFixed(2): '0') :column.format && typeof value === 'number'
                                     ? column.format(value)
                                     : value}
                                 </StyledTableCell>

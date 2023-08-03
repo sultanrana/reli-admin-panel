@@ -197,7 +197,7 @@ if(isLoading){
                   marginBottom: '8px'
                 }}>{data?.findCompany.addressOne? data.findCompany.addressOne: ''}, {data?.findCompany.addressTwo? data.findCompany.addressTwo: ''}</p>
 
-                <p className={data?.findCompany.companyStatus? 'enabled' : 'disabled'}>{data?.findCompany.companyStatus? 'Enabled' : 'Disabled'}</p>
+                <p className={data?.findCompany.companyStatus == 'enable' ? 'enabled' : 'disabled'}>{data?.findCompany.companyStatus == 'disable' ? 'Disabled' : 'Enabled'}</p>
               </div>
             </div>
             <div className="about_body_card">

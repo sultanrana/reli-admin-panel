@@ -136,6 +136,7 @@ export const getServices = createAsyncThunk(
         state.isLoading = false;
         console.log(action.payload);
         state.serviceDetail = action.payload;
+        state.alert = true;
       },
       [serviceProductList.rejected]: (state) => {
         state.isLoading = false;
@@ -158,6 +159,8 @@ export const getServices = createAsyncThunk(
       },
       [updatePriceColumn.pending]: (state) => {
         state.isLoading = true;
+        state.alert = false;
+
       },
       [updatePriceColumn.fulfilled]: (state, action) => {
         if(action.payload.message){

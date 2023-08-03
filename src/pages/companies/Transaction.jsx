@@ -29,7 +29,7 @@ const columns = [
   { id: "_id", label: "Product ID", minWidth: 100, fontWeight: "600" },
   { id: "name", label: "Customer", minWidth: 100, fontWeight: "600" },
   // { id: "payeeType", label: "Payee Type", minWidth: 100, fontWeight: "600" },
-  { id: "serviceType", label: "ServiceType", minWidth: 150, fontWeight: "600" },
+  { id: "serviceType", label: "Service Type", minWidth: 150, fontWeight: "600" },
   {
     id: "transactionType",
     label: "Payment Type",

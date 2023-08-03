@@ -172,12 +172,12 @@ const companySlice = createSlice({
             state.isLoading = false;
         },
         [singleCompanyDetail.pending]: (state) => {
-            state.isLoading = false;
+            state.isLoading = true;
         },
         [singleCompanyDetail.fulfilled]: (state, action) => {
           state.companyDetail = {};
-          state.isLoading = false;
           state.companyDetail = action.payload;
+          state.isLoading = false;
         },
         [singleCompanyDetail.rejected]: (state) => {
             state.isLoading = false;

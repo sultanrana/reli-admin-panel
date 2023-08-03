@@ -1268,7 +1268,7 @@ const AdminPortalUser = () => {
                                 <Typography className="tableLink">{value}</Typography>
                                 ) : column.id === 'firstName' ? (
                                   <Typography className="tableLink">{value}</Typography>
-                                ) : typeof value === 'boolean' ? (value === true ? 'Enaled' : 'Disabled') : column.id === 'updatedAt'? moment(value).format('DD/MM/YY hh:mm:ss A') : value}
+                                ) : typeof value === 'boolean' ? (value === true ? 'Enabled' : 'Disabled') : column.id === 'updatedAt'? moment(value).format('DD/MM/YY hh:mm:ss A') : value}
                             </StyledTableCell>
                           );
                         })}

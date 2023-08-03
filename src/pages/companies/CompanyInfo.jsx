@@ -52,11 +52,15 @@ const CompanyInfo = () => {
 const navigate = useNavigate();
 const dispatch = useDispatch();
 const param = useParams();
+const [hasRenderedLoader, setHasRenderedLoader] = useState(false);
+
 const {isDrawerOpen, addUserModal} = useSelector((store) => store.login)
 const {alert, isLoading, responseStatus, responseMsg, companyDetail} = useSelector((store) => store.company)
+console.log('isloading', isLoading , alert);
 const [tab, setTab] = useState('overview');
 const breadcrumbs = [
-    <Typography key="3" color="text.primary" style={{
+  
+  <Typography key="3" color="text.primary" style={{
         fontStyle: 'normal',
         fontWeight: '400',
         fontSize: '34px',
@@ -65,6 +69,7 @@ const breadcrumbs = [
     }}>
         <Link to={'/companies'} style={{'textDecoration': 'none', 'color' : 'black'}}><ArrowBackIosRoundedIcon style={{'marginRight': '1rem', 'cursor' : 'pointer'}} /></Link> {companyDetail.data?.findCompany.companyName}
     </Typography>
+
 ];
 const [page, setPage] = React.useState(0);
 const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -80,9 +85,10 @@ const handleChangeRowsPerPage = (event) => {
 
 useEffect(() => {
   dispatch(singleCompanyDetail(param.companyid));
-}, [])
+}, [alert])
 
-if(isLoading){
+if(isLoading && !hasRenderedLoader){
+  setHasRenderedLoader(true);
   return (
     <Loading/>
   )
@@ -98,8 +104,9 @@ if(isLoading){
           alignItems: 'center',
           mb: 3
         }}>
-          <BeardcrumNavigator breadcrumbs={breadcrumbs ? breadcrumbs : "Beardcrums"}/>
+          {!isLoading && <BeardcrumNavigator breadcrumbs={breadcrumbs ? breadcrumbs : "Beardcrums"}/> }
         </Box>
+        {!isLoading &&
         <Box component="div" className='tab_btns' sx={{mb: 3}}>
             <Button variant='outlined' size='large' className={tab === 'overview'? 'active': ''}
               onClick={() => setTab('overview')}
@@ -111,6 +118,7 @@ if(isLoading){
               onClick={() => setTab('transaction')}
             >Transactions</Button>
         </Box>
+}
 
         {tab === "overview" ? (
          <OverView data={companyDetail.data}/>

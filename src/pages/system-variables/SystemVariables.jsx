@@ -130,7 +130,8 @@ const breadcrumbs = [
                                 label="Reli Portion"
                                 {...formik.getFieldProps('reliPortion')}
                                 error = {Boolean(formik.errors.reliPortion) && Boolean(formik.touched.reliPortion)}
-                                // helperText = {Boolean(formik.touched.reliPortion) && formik.errors.reliPortion}
+                                helperText = {Boolean(formik.touched.reliPortion) && 
+                                'Please enter a Percentage'}
                                 sx={{
                                     width: matches? '100%': '400px',
                                 }}
@@ -144,7 +145,7 @@ const breadcrumbs = [
                                 label="Materials Surcharge"
                                 {...formik.getFieldProps('materialSurcharge')}
                                 error = {Boolean(formik.errors.materialSurcharge) && Boolean(formik.touched.materialSurcharge)}
-                                // helperText = {Boolean(formik.touched.materialSurcharge) && formik.errors.materialSurcharge}
+                                helperText = {Boolean(formik.touched.materialSurcharge) && 'Please enter a Percentage'}
                                 sx={{
                                     width: matches? '100%': '400px',
                                 }}
@@ -171,7 +172,7 @@ const breadcrumbs = [
                                 label="Permit Fee"
                                 {...formik.getFieldProps('windowsPermitFee')}
                                 error = {Boolean(formik.errors.windowsPermitFee) && Boolean(formik.touched.windowsPermitFee)}
-                                // helperText = {Boolean(formik.touched.windowsPermitFee) && formik.errors.windowsPermitFee}
+                                helperText = {Boolean(formik.touched.windowsPermitFee) && 'Please enter the permit fee'}
                                 sx={{
                                     width: matches? '100%': '400px',
                                 }}
@@ -186,7 +187,7 @@ const breadcrumbs = [
                                 label="Delivery Fee"
                                 {...formik.getFieldProps('windowsDeliveryFee')}
                                 error = {Boolean(formik.errors.windowsDeliveryFee) && Boolean(formik.touched.windowsDeliveryFee)}
-                                // helperText = {Boolean(formik.touched.windowsDeliveryFee) && formik.errors.windowsDeliveryFee}
+                                helperText = {Boolean(formik.touched.windowsDeliveryFee) && 'Please enter the delivery fee'}
                                 sx={{
                                     width: matches? '100%': '400px',
                                 }}
@@ -213,7 +214,8 @@ const breadcrumbs = [
                                 label="Permit Fee"
                                 {...formik.getFieldProps('slidingGlassDoorPermitFee')}
                                 error = {Boolean(formik.errors.slidingGlassDoorPermitFee) && Boolean(formik.touched.slidingGlassDoorPermitFee)}
-                                // helperText = {Boolean(formik.touched.slidingGlassDoorPermitFee) && formik.errors.slidingGlassDoorPermitFee}
+                                helperText = {Boolean(formik.touched.slidingGlassDoorPermitFee) && 
+                                'Please enter the permit fee'}
                                 sx={{
                                     width: matches? '100%': '400px',
                                 }}
@@ -227,7 +229,8 @@ const breadcrumbs = [
                                 label="Delivery Fee"
                                 {...formik.getFieldProps('slidingGlassDoorDeliveryFee')}
                                 error = {Boolean(formik.errors.slidingGlassDoorDeliveryFee) && Boolean(formik.touched.slidingGlassDoorDeliveryFee)}
-                                // helperText = {Boolean(formik.touched.slidingGlassDoorDeliveryFee) && formik.errors.slidingGlassDoorDeliveryFee}
+                                helperText = {Boolean(formik.touched.slidingGlassDoorDeliveryFee) && 
+                                'Please enter the delivery fee'}
                                 sx={{
                                     width: matches? '100%': '400px',
                                 }}
@@ -251,10 +254,10 @@ const breadcrumbs = [
                             <TextField
                                 id="interiorDoorPermitFee"
                                 name="interiorDoorPermitFee"
-                                label="Permit Fee"
+                                label="Delivery Fee"
                                 {...formik.getFieldProps('interiorDoorPermitFee')}
                                 error = {Boolean(formik.errors.interiorDoorPermitFee) && Boolean(formik.touched.interiorDoorPermitFee)}
-                                // helperText = {Boolean(formik.touched.interiorDoorPermitFee) && formik.errors.interiorDoorPermitFee}
+                                helperText = {Boolean(formik.touched.interiorDoorPermitFee) && 'Please enter the permit fee'}
                                 sx={{
                                     width: matches? '100%': '400px',
                                 }}
