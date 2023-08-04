@@ -177,7 +177,7 @@ const breadcrumbs = [
                                     width: matches? '100%': '400px',
                                 }}
                             />
-                            <div className="variable-input-require">This is applied to each Windows</div>
+                            <div className="variable-input-require">This is applied to each Window</div>
                         </div>
                         <div style={{width : matches? '100%' : 'auto'}}>
                             <TextField
@@ -192,7 +192,7 @@ const breadcrumbs = [
                                     width: matches? '100%': '400px',
                                 }}
                             />
-                            <div className="variable-input-require">This is applied to each Windows</div>
+                            <div className="variable-input-require">This is applied to each Window</div>
                         </div>
                     </Box>
                     <Typography sx={{
